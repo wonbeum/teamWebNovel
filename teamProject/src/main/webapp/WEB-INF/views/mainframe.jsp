@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +33,23 @@
         <a class="link-secondary" href="#" aria-label="Search">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
         </a>
-        <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+        <c:if test="${signIn == null}">
+        	<a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+        </c:if>
+        <c:if test="${signIn != null}">
+        	<div class="dropdown text-end">
+        		<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        			<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+        		</a>
+        		<ul class="dropdown-menu text-small">
+        			<li><a class="dropdown-item" href="#">New project...</a></li>
+        			<li><a class="dropdown-item" href="#">Settings</a></li>
+        			<li><a class="dropdown-item" href="#">Profile</a></li>
+        			<li><hr class="dropdown-divider"></li>
+        			<li><a class="dropdown-item" href="#">Sign out</a></li>
+        		</ul>
+        	</div>
+        </c:if>
       </div>
     </div>
   </header>

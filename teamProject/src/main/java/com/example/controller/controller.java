@@ -14,4 +14,12 @@ public class controller {
 	public ModelAndView adminframe() {
 		return new ModelAndView( "adminframe" );
 	}
+	@RequestMapping("login.do")
+	public ModelAndView login() {
+		return new ModelAndView( "login" );
+	}
+	@RequestMapping("test.do")
+	public ModelAndView test() {
+		return new ModelAndView( "test" );
+	}
 }
