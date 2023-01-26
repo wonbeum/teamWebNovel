@@ -1,14 +1,41 @@
 package com.example.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class requestTO {
 	private String request_seq;
 	private String request_title;
 	private String request_category;
 	private String free_like;
 	private String user_email;
+	public String getRequest_seq() {
+		return request_seq;
+	}
+	public void setRequest_seq(String request_seq) {
+		this.request_seq = request_seq;
+	}
+	public String getRequest_title() {
+		return request_title;
+	}
+	public void setRequest_title(String request_title) {
+		this.request_title = request_title;
+	}
+	public String getRequest_category() {
+		return request_category;
+	}
+	public void setRequest_category(String request_category) {
+		this.request_category = request_category;
+	}
+	public String getFree_like() {
+		return free_like;
+	}
+	public void setFree_like(String free_like) {
+		this.free_like = free_like;
+	}
+	public String getUser_email() {
+		return user_email;
+	}
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+	
+	
 }

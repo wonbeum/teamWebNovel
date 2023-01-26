@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,9 @@
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
 <style type="text/css">
-.nav-scroller { border: 1px solid black; }
+	.nav-scroller{
+		border: 1px solid black ;
+	}
 </style>
 </head>
 <body>
@@ -63,82 +65,8 @@
   </div>
 </div>
 
-	<!-- 본문 -->
-
-	<div class="container">
-		<ul class="nav nav-pills nav-justified">
-			<li class="nav-item"><a class="nav-link active"
-				data-bs-toggle="pill" href="#login">login</a></li>
-			<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-				href="#admin">admin</a></li>
-		</ul>
-
-		<div class="tab-content">
-			<div id="login" class="tab-pane fade show active">
-				<form action="./login_ok.do" method="post" >
-					<div class="text-center mb-3">
-						<p>로그인</p>
-					</div>
-
-					<!-- Email input -->
-					<div class="form-outline mb-4">
-						<label class="form-label" for="loginName">이메일 주소 *</label> <input
-							 id="loginName" class="form-control" name="user_email" />
-					</div>
-
-					<!-- Password input -->
-					<div class="form-outline mb-4">
-						<label class="form-label" for="loginPassword">비밀 번호 *</label> <input
-							type="password" id="loginPassword" class="form-control" name="user_password"  />
-					</div>
-
-					<!-- Submit button -->
-					<button type="submit" class="btn btn-primary btn-block mb-4" >로그인</button>
-					<!-- 수정 필요 -->
-					<div class="row mb-4">
-
-						<!-- Register buttons -->
-						<div class="text-center">
-							<p>
-								계정이 없으신가요?<a href="./register.do">회원가입</a>
-							</p>
-						</div>
-
-						<div class="text-center mb-3">
-							<!-- Simple link -->
-							<p>
-								비밀번호를 잊으셨나요?<a href="#!">비밀번호 찾기</a>
-							</p>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div id="admin" class="tab-pane fade">
-				<form>
-					<div class="text-center mb-3">
-						<p>관리자 로그인</p>
-					</div>
-
-					<!-- Email input -->
-					<div class="form-outline mb-4">
-						<input type="email" id="registerEmail" class="form-control" /> <label
-							class="form-label" for="registerEmail">Email</label>
-					</div>
-
-					<!-- Password input -->
-					<div class="form-outline mb-4">
-						<input type="password" id="registerPassword" class="form-control" />
-						<label class="form-label" for="registerPassword">Password</label>
-					</div>
-
-					<!-- Submit button -->
-					<button type="submit" class="btn btn-primary btn-block mb-3">관리자
-						로그인</button>
-				</form>
-			</div>
-		</div>
-	</div>
-
+<!-- 본문 -->
+rank
 
 
 <hr class="footer-div">
