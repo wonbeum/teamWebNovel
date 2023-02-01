@@ -66,8 +66,7 @@
 </div>
 
 <!-- 본문 -->
-review
-<!-- test -->
+main
 
 
 <hr class="footer-div">

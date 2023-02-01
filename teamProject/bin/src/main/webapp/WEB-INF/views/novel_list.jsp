@@ -66,8 +66,7 @@
 </div>
 
 <!-- 본문 -->
-review
-<!-- test -->
+novel
 
 
 <hr class="footer-div">

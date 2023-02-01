@@ -66,8 +66,7 @@
 </div>
 
 <!-- 본문 -->
-review
-<!-- test -->
+rank
 
 
 <hr class="footer-div">

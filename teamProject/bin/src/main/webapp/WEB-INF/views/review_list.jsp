@@ -67,7 +67,6 @@
 
 <!-- 본문 -->
 review
-<!-- test -->
 
 
 <hr class="footer-div">

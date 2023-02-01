@@ -66,9 +66,8 @@
 </div>
 
 <!-- 본문 -->
-review
-<!-- test -->
 
+origin
 
 <hr class="footer-div">
 
