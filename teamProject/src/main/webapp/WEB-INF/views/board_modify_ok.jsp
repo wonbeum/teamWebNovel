@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <%
-
+	//수정 테스트 중
 	int flag = (Integer)request.getAttribute( "flag" );
 
 	out.println( "<script type='text/javascript'>" );
