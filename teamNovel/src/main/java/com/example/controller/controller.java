@@ -257,11 +257,25 @@ public class controller {
 		modelAndView.addObject( "flag", flag );
 		return modelAndView;
 	}
+
+	@RequestMapping("admin_board_list.do")
+	public ModelAndView admin_board_list() {
+		return new ModelAndView( "admin_board_list" );
+	}
+
+	@RequestMapping("admin_board_view.do")
+	public ModelAndView admin_board_view() {
+		return new ModelAndView( "admin_board_view" );
+	}
+
+	@RequestMapping("admin_board_write.do")
+	public ModelAndView admin_board_write() {
+		return new ModelAndView( "admin_board_write" );
+	}
 	
 	@RequestMapping("test.do")
 	public ModelAndView test() {
 		insertdao.novelInsert();
-//		kakao_rank.kakao_romance();
 		return new ModelAndView( "test" );
 	}
 	
