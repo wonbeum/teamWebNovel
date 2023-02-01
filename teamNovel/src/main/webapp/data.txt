@@ -1,0 +1,80 @@
+create table novel_user_information(
+user_email varchar(50) ,
+user_nickname varchar(30) ,
+user_password varchar(30) not null,
+user_gender char(2),
+user_birth varchar(10) not null,
+user_cdate datetime,
+user_grade varchar(10) not null,
+PRIMARY KEY ( user_email, user_nickname )
+);
+
+create table novel_information(
+novel_title varchar(100) primary key,
+novel_genre varchar(20),
+novel_writer varchar(20),
+novel_img varchar(500),
+novel_content varchar(2000),
+novel_series varchar(500),
+novel_kakao varchar(500),
+novel_ridi varchar(500)
+);
+
+create table novel_review_board(
+review_seq int auto_increment primary key,
+review_content varchar(2000),
+review_date datetime,
+review_ip varchar(15),
+review_star_grade int not null,
+user_email varchar(50),
+novel_title varchar(100),
+user_nickname varchar(30) ,
+foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname),
+foreign key (novel_title) references novel_information(novel_title)
+);
+
+create table novel_free_board(
+free_seq int auto_increment primary key,
+free_category varchar(20),
+free_subject varchar(50),
+free_content varchar(2000),
+free_date datetime,
+free_ip varchar(15),
+free_hit int,
+free_like int,
+user_email varchar(50),
+user_nickname varchar(30) ,
+foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname)
+);
+
+create table novel_free_comment(
+cmt_seq int auto_increment primary key,
+cmt_content varchar(1000),
+cmt_date datetime,
+cmt_status varchar(8),
+user_email varchar(50),
+free_seq int,
+user_nickname varchar(30) ,
+foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname),
+foreign key (free_seq) references novel_free_board(free_seq)
+);
+
+create table novel_origin_request(
+request_seq int auto_increment primary key,
+request_title varchar(100),
+request_category varchar(20),
+free_like int,
+user_email varchar(50),
+user_nickname varchar(30) ,
+foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname)
+);
+
+create table novel_origin_list(
+novel_title varchar(100),
+origin_webtoon char(2),
+origin_drama char(2),
+origin_movie char(2),
+foreign key (novel_title) references novel_information(novel_title)
+);
+
+insert into novel_user_information values ( 'root', '관리자', 'root', '' , '000000', now(), 'master' );
