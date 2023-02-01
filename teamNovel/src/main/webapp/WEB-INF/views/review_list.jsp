@@ -82,33 +82,197 @@
   <script type="text/javascript" src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   <script type="text/javascript">
   $(document).ready(function() {
-		
+		       
 		$("#tab1").click(function() {
 		
-		$.ajax({
-			type: "get", // get 타입
-			url: "./data/novel_list_all.jsp", // 호출을 받을 서블릿 url
-			data: {	
-				novel_img: $('#a_novel_img').val(),
-				novel_genre: $('#a_novel_genre').val(),
-				novel_title: $('#a_novel_title').val(),
-				novel_writer: $('#a_novel_writer').val(),
-				novel_review_star_grade: $('#a_novel_review_star_grade').val(),
-				novel_content: $('#a_novel_content').val(),
-				user_nickname: $('#a_user_nickname').val(),
-				review_date: $('#a_review_date').val(),
-				review_content: $('#a_review_content').val(),
+			$.ajax({
+				url : 'reviewListAll.jsp',
+				type : 'get',
+				dataType : 'json',
+				success : function(jsonData){
+					//console.log("성공");
+					$('#reviewlistall').html('');
 					
-			},
-			dataType: 'json',
-			success: function(json) {
-				console.log("성공");
-				$("#novellist").html(data);
-			}
+					for(let i=0; i<jsonData.length; i++){	
+					
+						div = `
+							
+							<div class="container">
+							<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
+								<div class="row g-0">
+									<div class="col">
+										<a href="#"> <img src="${jsonData[i].novel_img}" class="img" width="100%"
+											height="225" role="img">
+										</a>
+										<div class="card-body">
+											<p class="card-text">${jsonData[i].user_nickname}</p>
+											<p class="card-text">${jsonData[i].review_date}</p>
+											<p class="card-text">${jsonData[i].review_content}</p>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="card-body">
+											<p class="card-text">${jsonData[i].novel_genre}</p>
+											<h5 class="card-text">${jsonData[i].novel_title}/${jsonData[i].nove_writer}</h5>
+											<p class="card-text">${jsonData[i].review_star_grade}/평점</p>
+											<p class="card-text">${jsonData[i].novel_content}</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						`
+						$('#reviewlistall').append(div);
+					}
+				},
+				error : function(e) {
+					alert("error !");
+				}
+			});
 			
-		})
-				
-	})
+			$.ajax({
+				url : 'reviewListRomace.jsp',
+				type : 'get',
+				dataType : 'json',
+				success : function(jsonData){
+					//console.log("성공");
+					$('#reviewlistall').html('');
+					
+					for(let i=0; i<jsonData.length; i++){	
+					
+						div = `
+							
+							<div class="container">
+							<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
+								<div class="row g-0">
+									<div class="col">
+										<a href="#"> <img src="${jsonData[i].novel_img}" class="img" width="100%"
+											height="225" role="img">
+										</a>
+										<div class="card-body">
+											<p class="card-text">${jsonData[i].user_nickname}</p>
+											<p class="card-text">${jsonData[i].review_date}</p>
+											<p class="card-text">${jsonData[i].review_content}</p>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="card-body">
+											<p class="card-text">${jsonData[i].novel_genre}</p>
+											<h5 class="card-text">${jsonData[i].novel_title}/${jsonData[i].nove_writer}</h5>
+											<p class="card-text">${jsonData[i].review_star_grade}/평점</p>
+											<p class="card-text">${jsonData[i].novel_content}</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						`
+						$('#reviewListRomace').append(div);
+					}
+				},
+				error : function(e) {
+					alert("error !");
+				}
+			});
+			
+			$.ajax({
+				url : 'reviewListRomaceFantasy.jsp',
+				type : 'get',
+				dataType : 'json',
+				success : function(jsonData){
+					//console.log("성공");
+					$('#reviewRomanceFantasy').html('');
+					
+					for(let i=0; i<jsonData.length; i++){	
+					
+						div = `
+							
+							<div class="container">
+							<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
+								<div class="row g-0">
+									<div class="col">
+										<a href="#"> <img src="${jsonData[i].novel_img}" class="img" width="100%"
+											height="225" role="img">
+										</a>
+										<div class="card-body">
+											<p class="card-text">${jsonData[i].user_nickname}</p>
+											<p class="card-text">${jsonData[i].review_date}</p>
+											<p class="card-text">${jsonData[i].review_content}</p>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="card-body">
+											<p class="card-text">${jsonData[i].novel_genre}</p>
+											<h5 class="card-text">${jsonData[i].novel_title}/${jsonData[i].nove_writer}</h5>
+											<p class="card-text">${jsonData[i].review_star_grade}/평점</p>
+											<p class="card-text">${jsonData[i].novel_content}</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						`
+						$('#reviewListRomaceFantasy').append(div);
+					}
+				},
+				error : function(e) {
+					alert("error !");
+				}
+			});
+			
+			$.ajax({
+				url : 'reviewListFantasy.jsp',
+				type : 'get',
+				dataType : 'json',
+				success : function(jsonData){
+					//console.log("성공");
+					$('#reviewlistFantasy').html('');
+					
+					for(let i=0; i<jsonData.length; i++){	
+					
+						div = `
+							
+							<div class="container">
+							<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
+								<div class="row g-0">
+									<div class="col">
+										<a href="#"> <img src="${jsonData[i].novel_img}" class="img" width="100%"
+											height="225" role="img">
+										</a>
+										<div class="card-body">
+											<p class="card-text">${jsonData[i].user_nickname}</p>
+											<p class="card-text">${jsonData[i].review_date}</p>
+											<p class="card-text">${jsonData[i].review_content}</p>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="card-body">
+											<p class="card-text">${jsonData[i].novel_genre}</p>
+											<h5 class="card-text">${jsonData[i].novel_title}/${jsonData[i].nove_writer}</h5>
+											<p class="card-text">${jsonData[i].review_star_grade}/평점</p>
+											<p class="card-text">${jsonData[i].novel_content}</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						`
+						$('#reviewListFantasy').append(div);
+					}
+				},
+				error : function(e) {
+					alert("error !");
+				}
+			});
+	});
 
   </script>
 	<!-- 본문 -->
@@ -145,6 +309,10 @@
          </div>
       </div>
    </div>
+   
+   <tbody class="text-center" id="reviewlistall">
+   
+<!-- 
 
 	<div class="container">
 		<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
@@ -171,7 +339,8 @@
 			</div>
 		</div>
 	</div>
-
+ -->
+ </tbody>
 </body>
 
 <hr class="footer-div">
