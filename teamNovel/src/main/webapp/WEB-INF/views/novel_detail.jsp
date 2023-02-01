@@ -98,7 +98,7 @@
 			<div class="card p-3">
 				<figure class="p-3 mb-0">
 					<blockquote class="blockquote">
-						<p>평균 ★ 평균별점</p>
+						<p>평균 ★★ 평균별점</p>
 					</blockquote>
 					<!-- 리뷰 별점 -->
 
