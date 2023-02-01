@@ -125,7 +125,7 @@
 					<td scope="col">1</td>
 					<td scope="col">test</td>
 					<td scope="col">10</td>
-					<td scope="col"><a href="admin_review_view.jsp">content</a></td>
+					<td scope="col"><a href="admin_review_view.do">content</a></td>
 					<td scope="col">test@test</td>
 					<td scope="col">20230126</td>
 					<td scope="col"><input type="button" value="삭제" data-bs-toggle="modal" data-bs-target="#dmodal" /></td>

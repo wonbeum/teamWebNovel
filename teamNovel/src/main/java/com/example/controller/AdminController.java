@@ -77,4 +77,18 @@ public class AdminController {
 		return new ModelAndView( "admin_board_write" );
 	}
 	
+	@RequestMapping("admin_review_list.do")
+	public ModelAndView admin_review_list() {
+		return new ModelAndView( "admin_review_list" );
+	}
+	
+	@RequestMapping("admin_review_view.do")
+	public ModelAndView admin_review_view() {
+		return new ModelAndView( "admin_review_view" );
+	}
+	
+	@RequestMapping("admin_review_delete_ok.do")
+	public ModelAndView admin_review_delete_ok() {
+		return new ModelAndView( "admin_review_delete_ok" );
+	}
 }

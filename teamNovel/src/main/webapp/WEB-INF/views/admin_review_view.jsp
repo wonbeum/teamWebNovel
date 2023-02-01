@@ -99,9 +99,9 @@
 						</table>
 					</form>
 					<textarea class="form-control" name="content" rows="8" readonly>내용이 들어가는 부분입니다</textarea>
-					<a class="btn btn-outline-dark mt-3" href="./admin_review_list.jsp"
+					<a class="btn btn-outline-dark mt-3" href="./admin_review_list.do"
 						role="button">목록</a>
-					<button type="submit" id="dbtn" class="btn btn-secondary mt-3">삭제</button>
+					<button type="submit" id="dbtn" class="btn btn-secondary mt-3"><a href="./admin_review_delete_ok.do">삭제</button>
 				</div>
 			</div>
 	</main>

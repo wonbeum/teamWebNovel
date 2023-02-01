@@ -28,14 +28,13 @@ public class CommentDAO {
 			conn = dataSource.getConnection();
 			
 			String sql = "insert into novel_free_comment (cmt_seq, cmt_content, cmt_date, cmt_status, user_email, free_seq, user_nickname) "
-					+ "value (0, ?, now(), ?, ?, ?, ?)";
+					+ "value (0, ?, now(), '기본', ?, ?, ?)";
 			
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, to.getCmt_content() );
-			pstmt.setString( 2, to.getCmt_status() );
-			pstmt.setString( 3, to.getUser_email() );
-			pstmt.setString( 4, to.getFree_seq() );
-			pstmt.setString( 5, to.getUser_nickname() );		
+			pstmt.setString( 2, to.getUser_email() );
+			pstmt.setString( 3, to.getFree_seq() );
+			pstmt.setString( 4, to.getUser_nickname() );		
 			
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
