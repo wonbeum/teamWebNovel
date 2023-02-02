@@ -27,8 +27,7 @@ public class CommentDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "insert into novel_free_comment (cmt_seq, cmt_content, cmt_date, cmt_status, user_email, free_seq, user_nickname) "
-					+ "value (0, ?, now(), '기본', ?, ?, ?)";
+			String sql = "insert into novel_free_comment values (0, ?, now(), '공개', ?, ?, ?)";
 			
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, to.getCmt_content() );
@@ -38,6 +37,7 @@ public class CommentDAO {
 			
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
+				System.out.println("insert 성공");
 				flag = 0;
 			}
 			
@@ -55,35 +55,30 @@ public class CommentDAO {
 
 	
 	// 전체 댓글 list
-	public ArrayList<freeboardTO> FreeBoard_list() {
+	public ArrayList<commentTO> Comment_list(String free_seq) {
 		 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		ArrayList<freeboardTO> boardlists = new ArrayList<freeboardTO>();
+		ArrayList<commentTO> commentlists = new ArrayList<commentTO>();
 		
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "select free_seq, free_category, free_subject, user_nickname, "
-					+ "date_format(free_date,'%y-%m-%d') free_date, free_hit, free_like "
-					+ "from novel_free_board order by free_seq desc";
+			String sql = "select cmt_content, date_format(cmt_date,'%y-%m-%d') cmt_date, user_nickname from novel_free_comment where free_seq = ? and cmt_status = '공개' order by free_seq desc";
 			
 			pstmt = conn.prepareStatement( sql );
+			pstmt.setString( 1,  free_seq );
 			
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
-				freeboardTO to = new freeboardTO();
-				to.setFree_seq( rs.getString( "free_seq" ) );
-				to.setFree_category( rs.getString( "free_category" ) );
-				to.setFree_subject( rs.getString( "free_subject" ) );
+				commentTO to = new commentTO();
+				to.setCmt_content( rs.getString( "cmt_content" ) );
+				to.setCmt_date( rs.getString( "cmt_date" ) );
 				to.setUser_nickname( rs.getString( "user_nickname" ) );
-				to.setFree_date( rs.getString( "free_date" ) );
-				to.setFree_hit( rs.getString( "free_hit" ) );
-				to.setFree_like( rs.getString( "free_like" ) );
 				
-				boardlists.add( to );
+				commentlists.add( to );
 			}
 			
 		} catch (SQLException e) {
@@ -95,11 +90,11 @@ public class CommentDAO {
 			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 		}	
 		
-		return boardlists;
+		return commentlists;
 	}
 
 	
-	// 내가 쓴 댓글 delete_ok
+	///댓글 delete_ok
 	public int FreeBoard_Delete_Ok( freeboardTO to ) {
 		 
 		Connection conn = null;

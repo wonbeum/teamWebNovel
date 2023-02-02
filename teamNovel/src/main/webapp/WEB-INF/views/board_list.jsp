@@ -24,7 +24,8 @@
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
+
+$(document).ready(function(){
 		$('#wbtn').click(function(){
 			if(${signIn == null}) {
 				alert("로그인후 글쓰기가 가능합니다.");
@@ -32,36 +33,36 @@
 			}
 		});	
 			
-			$.ajax({
-				url : 'BoardListAjax.do',
-				type : 'get',
-				dataType : 'json',
-				success : function(jsonData){
-					//console.log("성공");
-					$('#insertList').html('');
-					
-					for(let i=0; i<jsonData.length; i++){	
-						tr = `
-							<tr> 
-							<td>\${jsonData[i].free_seq}</td>
-							<td>\${jsonData[i].free_category}</td>
-							<td class='text-start'><a href='board_view.do?seq=\${jsonData[i].free_seq}'>
-								\${jsonData[i].free_subject}</a></td>
-							<td>\${jsonData[i].user_nickname}</td>
-							<td>\${jsonData[i].free_date}</td>
-							<td>\${jsonData[i].free_hit}</td>
-							<td>\${jsonData[i].free_like}</td>
-							</tr>
-						`
-						$('#insertList').append(tr);
-					}
-				},
-				error : function(e) {
-					alert("error !");
-				}
-			});
-		
+	$.ajax({
+		url : 'BoardListAjax.do',
+		type : 'get',
+		dataType : 'json',
+		success : function(jsonData){
+			//console.log("성공");
+			$('#insertList').html('');
+			
+			for(let i=0; i<jsonData.length; i++){	
+				tr = `
+					<tr> 
+					<td>\${jsonData[i].free_seq}</td>
+					<td>\${jsonData[i].free_category}</td>
+					<td class='text-start'><a href='board_view.do?seq=\${jsonData[i].free_seq}'>
+						\${jsonData[i].free_subject}</a></td>
+					<td>\${jsonData[i].user_nickname}</td>
+					<td>\${jsonData[i].free_date}</td>
+					<td>\${jsonData[i].free_hit}</td>
+					<td>\${jsonData[i].free_like}</td>
+					</tr>
+				`
+				$('#insertList').append(tr);
+			}
+		},
+		error : function(e) {
+			alert("error !");
+		}
 	});
+		
+});
 
 </script>
 </head>

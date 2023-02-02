@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.model.CommentDAO;
 import com.example.model.FreeBoardDAO;
 import com.example.model.RegisterDAO;
+import com.example.model.commentTO;
 import com.example.model.freeboardTO;
 import com.example.model.kakao_rank;
 import com.example.model.loginDAO;
@@ -28,7 +30,10 @@ public class FreeBoardController {
 	@Autowired
 	private FreeBoardDAO fdao;
 	
+	@Autowired
+	private CommentDAO cdao;
 
+	
 	@RequestMapping("board_list.do")
 	public ModelAndView board_list() {
 		return new ModelAndView( "board_list" );
@@ -68,7 +73,7 @@ public class FreeBoardController {
 		modelAndView.addObject( "flag", flag );
 		return modelAndView;
 	}
-
+	
 	@RequestMapping( "board_view.do" )
 	public ModelAndView board_view(HttpServletRequest request) {
 		freeboardTO to = new freeboardTO();
@@ -80,6 +85,38 @@ public class FreeBoardController {
 		modelAndView.addObject("to", to);
 		return modelAndView;
 	}
+
+	// 댓글 작성 ajax
+	@RequestMapping("CommentWriteAjax.do")
+	public int CommentWriteAjax(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		String cmt_content = request.getParameter("cmt_content");
+		String free_seq = request.getParameter("free_seq");
+		
+		userInfoTO to = (userInfoTO)session.getAttribute("signIn");
+		String user_email = to.getUser_email();
+		String user_nickname = to.getUser_nickname();
+		
+		commentTO cto = new commentTO();
+		cto.setCmt_content(cmt_content);
+		cto.setUser_email(user_email);
+		cto.setFree_seq(free_seq);
+		cto.setUser_nickname(user_nickname);
+		
+		int flag = cdao.Comment_Write_Ok(cto);
+		
+		return flag;
+	}
+	
+	// ajax 리스트 가져오기
+	@RequestMapping("CommentListAjax.do")
+	public ArrayList<commentTO> CommentListAjax(HttpServletRequest request) {
+		String free_seq = request.getParameter("free_seq");
+		ArrayList<commentTO> commentList = cdao.Comment_list(free_seq);
+		
+		return commentList;
+	}
+	
+
 	
 	@RequestMapping("board_modify.do")
 	public ModelAndView board_modify(HttpServletRequest request) {	

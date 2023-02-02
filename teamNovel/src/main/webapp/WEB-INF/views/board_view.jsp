@@ -36,13 +36,47 @@
 // 자기가 쓴 글을 볼때만 취소 삭제 버튼 나타남
 	const board_nickname = "<%=user_nickname%>";
 	$(document).ready(function(){
-		if(${signIn.user_nickname} == board_nickname) {
+		if("${signIn.user_nickname}" == board_nickname) {
 			$('#likebtn').remove();
 			$('#btnarea').append('<a class="btn btn-outline-secondary mt-3" href="./board_modify.do?seq=<%=free_seq%>" role="button">수정</a>')
 			$('#btnarea').append('<a class="btn btn-outline-secondary mt-3" data-bs-toggle="modal" data-bs-target="#myModal" href="#" role="button">삭제</a>')
 		} 
 		//console.log(${signIn.user_nickname});
 		//console.log(board_nickname);
+	$(function(){
+		commentList();
+		setInterval(commentList, 1000);
+		commentList();
+	});
+		
+	
+		
+		// 댓글 작성
+		$('#cmtbtn').click(function(){
+			if(${signIn.user_nickname != null}){
+				$.ajax({
+					url : 'CommentWriteAjax.do',
+					type : 'get',
+					data : {
+						cmt_content : $("#cmt_content").val(),
+						free_seq : "<%=free_seq%>"
+					},
+					dataType : 'json',
+					success : function(jsonData){
+						alert("댓글작성완료");
+						//console.log(jsonData)
+						$("#cmt_content").val("");
+					},
+					error : function(e) {
+						alert("error !");
+					}
+				});
+				
+			} else {
+				alert('로그인후 댓글을 입력해주세요');
+			}
+	
+	
 	});
 	
 	// 삭제
@@ -51,7 +85,45 @@
 		formName.method = "post";
 		formName.submit();
 	}
+});
 	
+	// 댓글 가져오기
+	function commentList() {
+		$.ajax({
+			url : 'CommentListAjax.do',
+			type : 'get',
+			data : {
+				free_seq : "<%=free_seq%>"
+			},
+			dataType : 'json',
+			success : function(jsonData){
+			//alert("성공");
+					
+				$('#cmt_area').html('');
+				
+				for(let i=0; i<jsonData.length; i++){	
+					const result = `
+						<li>
+							<div>
+								<span><strong>\${jsonData[i].user_nickname}</strong></span> <span class='fw-lighter'>\${jsonData[i].cmt_date}</span>
+								<span class='fw-lighter'>수정</span>
+								<span class='fw-lighter'>삭제</span>
+							</div>
+							<div>
+								<p>\${jsonData[i].cmt_content}</p>
+							</div>
+						</li>
+					`
+					$('#cmt_area').append(result);
+				}
+			
+			},
+			error : function(e) {
+				alert("error !");
+			}
+	});
+}
+
 </script>
 
 </head>
@@ -173,59 +245,27 @@
 								<th class="subject"><h4>댓글</h4></th>
 						</tbody>
 					</table>
-					<ul class="list-unstyled">
+					<ul class="list-unstyled" id="cmt_area">
+						<!-- 
 						<li>
 							<div>
 								<span><strong>닉네임10</strong></span> <span class="fw-lighter">(23.01.28)</span>
+								<span class="fw-lighter">수정</span>
+								<span class="fw-lighter">삭제</span>
 							</div>
 							<div>
 								<p>왓챠처럼 예상별점 보여주기는 아무래도 좀 어려울까요? 현재 평균별점에 개인의 연령대, 성별, 선호장르,
 									선호작가 등으로 가감하면 예상별점이 산출될 수 있을 것 같은데요. 웹소설 분야의 왓챠가 되면 좋겠네요</p>
 							</div>
 						</li>
-						<li>
-							<div>
-								<span><strong>닉네임10</strong></span> <span class="fw-lighter">(23.01.28)</span>
-							</div>
-							<div>
-								<p>왓챠처럼 예상별점 보여주기는 아무래도 좀 어려울까요? 현재 평균별점에 개인의 연령대, 성별, 선호장르,
-									선호작가 등으로 가감하면 예상별점이 산출될 수 있을 것 같은데요. 웹소설 분야의 왓챠가 되면 좋겠네요</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span><strong>닉네임10</strong></span> <span class="fw-lighter">(23.01.28)</span>
-							</div>
-							<div>
-								<p>왓챠처럼 예상별점 보여주기는 아무래도 좀 어려울까요? 현재 평균별점에 개인의 연령대, 성별, 선호장르,
-									선호작가 등으로 가감하면 예상별점이 산출될 수 있을 것 같은데요. 웹소설 분야의 왓챠가 되면 좋겠네요</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span><strong>닉네임2</strong></span> <span class="fw-lighter">(23.01.28)</span>
-							</div>
-							<div>
-								<p>내용입니다</p>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span><strong>닉네임3</strong></span> <span class="fw-lighter">(23.01.28)</span>
-							</div>
-							<div>
-								<p>반갑습니다 저는 지금 댓글 수준도 괜찮다고 생각합니다. 새로운 운영진 합류로 사이트 활성화되었으면
-									좋겠네요~</p>
-							</div>
-						</li>
-						<li></li>
+						 -->						 
 					</ul>
 
 					<div class="container">
 						<div class="row">
-							<textarea class="col form-control pr-5" name="content" rows="3"
+							<textarea class="col form-control pr-5" name="cmt_content" id="cmt_content" rows="3"
 								placeholder="댓글을 입력해보세요"></textarea>
-							<button type="submit" class="col-2 btn btn-outline-secondary">등록</button>
+							<button type="submit" id="cmtbtn" class="col-2 btn btn-outline-secondary">등록</button>
 						</div>
 					</div>
 				</div>

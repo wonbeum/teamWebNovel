@@ -55,11 +55,11 @@ public class AdminController {
 		
 		return modelAndView;
 	}
-	@RequestMapping("admin_orgin_request_list.do")
+	@RequestMapping("admin_origin_request_list.do")
 	public ModelAndView admin_orgin_request_list() {
-		return new ModelAndView( "admin_orgin_request_list" );
+		return new ModelAndView( "admin_origin_request_list" );
 	}
-	@RequestMapping("admin_orgin_request_list_delete_ok.do")
+	@RequestMapping("admin_origin_request_list_delete_ok.do")
 	public ModelAndView admin_orgin_request_list_delete_ok(HttpServletRequest request) {
 		
 		admin_origin_requestTO to = new admin_origin_requestTO();

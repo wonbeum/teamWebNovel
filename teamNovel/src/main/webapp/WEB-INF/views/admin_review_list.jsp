@@ -36,7 +36,7 @@
 		});
 		
 		// 선택 삭제 버튼
-		conet list = 
+		const list = 
 		$("#selectalldbtn").click(function(){
 			//for(let i = 0; i < )
 		});
@@ -65,11 +65,11 @@
 		</header>
 
 		<div class="nav-scroller py-1 mb-2">
-			<nav class="nav d-flex justify-content-between">
-				<a class="p-2 link-secondary" href="#">회원 관리</a> <a
-					class="p-2 link-secondary" href="#">게시물 관리</a> <a
-					class="p-2 link-secondary" href="#">리뷰 관리</a> <a
-					class="p-2 link-secondary" href="#">요청 리스트</a>
+						<nav class="nav d-flex justify-content-between">
+				<a class="p-2 link-secondary" href="./admin_member_list.do">회원 관리</a> <a
+					class="p-2 link-secondary" href="./admin_board_list.do">게시물 관리</a> <a
+					class="p-2 link-secondary" href="./admin_review_list.do">리뷰 관리</a> <a
+					class="p-2 link-secondary" href="./admin_origin_request_list.do">요청 리스트</a>
 			</nav>
 		</div>
 	</div>
