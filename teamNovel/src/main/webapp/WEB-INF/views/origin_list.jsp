@@ -16,6 +16,44 @@
 	.nav-scroller{
 		border: 1px solid black ;
 	}
+	
+	
+	.card-imgs{
+	  position: relative;
+	  width: 350px;
+	  height: 350px;
+	}
+	.card-imgs img{
+	  position:absolute;
+	  width: 100%;
+	  height: 100%;
+	}
+	.card-imgs img.img-hover{
+	  display:none;
+	}
+	.card-imgs:hover img.img{
+	  display:block;
+	  transition: 1s ease-out;
+	  opacity: 0;
+	}
+	.card-imgs:hover img.img-hover{
+	  display:block;
+	  transition: 1s ease-out;
+	  opacity : 0.6;
+	}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#rqbtn').click(function(){
+			if(true) {
+				alert("로그인 후 요청이 가능합니다!");
+				return false;
+			}
+		});
+	});
+
+</script>
 </style>
 </head>
 <body>
@@ -67,7 +105,416 @@
 
 <!-- 본문 -->
 
-origin
+
+<div class="container w-75">
+	<!-- Nav pills -->
+	<ul class="nav justify-content-center bg-light" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" data-bs-toggle="pill" href="#weptoon">웹툰</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-bs-toggle="pill" href="#drama">드라마</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-bs-toggle="pill" href="#movie">영화</a>
+		</li>
+	</ul>
+</div>
+
+<!-- 요청하기 버튼 -->
+<div class="container w-75">
+	<div class="row">
+		<div align="right">
+		  	<a class="btn btn-outline-dark" href=#" id="rqbtn" role="button">요청하기</a>
+		</div>
+	</div>
+</div>
+
+<!-- Tab panes -->
+<div class="tab-content">
+
+
+	<!-- 웹툰 리스트 -->
+	<div class="container tab-pane show active w-75" id="webtoon" role="tabpanel"><br />	
+	<h5>웹툰</h5>
+	<div class="container">
+		<div class="card-group">
+	  		<div class="card">
+	  			<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/adb6e88ef6dafc5c0470e9371d24f4b89072d6f66d8089f4f6a3a896c80c7488762637567665a2ce3246de4f23a746b6a2c2563153be38ca2657c75402484f073e733bf8748c4efaee1f582a40ce34255f4262e9e8b9db3ca7d453faf3d51237d5a25131f3c3bf8a7f655dbf9ae45e53" class="card-img-top" alt="재벌집 막내아들">
+	    			<img class="img-hover" src="https://comicthumb-phinf.pstatic.net/20221109_73/pocket_1667985002959I8coF_JPEG/%C0%E7%B9%FA%C1%FD_%B8%B7%B3%BB%BE%C6%B5%E9.jpg?type=m260" class="card-img-top" alt="재벌집 막내아들">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">재벌집 막내아들</h5>
+				   	<p class="card-text">원작: 산경(山景)</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/53230180" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=4340987" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+				</div>
+			</div>
+			<div class="card">
+	  			<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/adb6e88ef6dafc5c0470e9371d24f4b89072d6f66d8089f4f6a3a896c80c7488762637567665a2ce3246de4f23a746b6a2c2563153be38ca2657c75402484f073e733bf8748c4efaee1f582a40ce34255f4262e9e8b9db3ca7d453faf3d51237d5a25131f3c3bf8a7f655dbf9ae45e53" class="card-img-top" alt="재벌집 막내아들">
+	    			<img class="img-hover" src="https://comicthumb-phinf.pstatic.net/20221109_73/pocket_1667985002959I8coF_JPEG/%C0%E7%B9%FA%C1%FD_%B8%B7%B3%BB%BE%C6%B5%E9.jpg?type=m260" class="card-img-top" alt="재벌집 막내아들">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">재벌집 막내아들</h5>
+				   	<p class="card-text">원작: 산경(山景)</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/53230180" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=4340987" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+				</div>
+			</div>
+			<div class="card">
+	  			<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/adb6e88ef6dafc5c0470e9371d24f4b89072d6f66d8089f4f6a3a896c80c7488762637567665a2ce3246de4f23a746b6a2c2563153be38ca2657c75402484f073e733bf8748c4efaee1f582a40ce34255f4262e9e8b9db3ca7d453faf3d51237d5a25131f3c3bf8a7f655dbf9ae45e53" class="card-img-top" alt="재벌집 막내아들">
+	    			<img class="img-hover" src="https://comicthumb-phinf.pstatic.net/20221109_73/pocket_1667985002959I8coF_JPEG/%C0%E7%B9%FA%C1%FD_%B8%B7%B3%BB%BE%C6%B5%E9.jpg?type=m260" class="card-img-top" alt="재벌집 막내아들">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">재벌집 막내아들</h5>
+				   	<p class="card-text">원작: 산경(山景)</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/53230180" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=4340987" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+				</div>
+			</div>
+	</div>
+	<div class="container">
+	<div class="card-group">
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+	</div>
+	</div>
+	<div class="container">
+	<div class="card-group">
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+	</div>
+	</div>
+	</div>
+<!-- paging -->
+	<nav aria-label="Page navigation example">	
+  	<ul class="pagination justify-content-center">
+    	<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
+    	<span aria-hidden="true">&laquo;</span></a></li>
+      	<li class="page-item"><a class="page-link" href="#">1</a></li>
+      	<li class="page-item"><a class="page-link" href="#">2</a></li>
+      	<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item"><a class="page-link" href="#" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span></a></li>
+      </ul>
+	</nav>
+</div>
+
+	<!-- 드라마 리스트 -->
+	<div class="container tab-pane fade w-75" id="drama" role="tabpanel"><br />
+	<h5>드라마</h5>
+	<div class="container">
+		<div class="card-group">
+	  		<div class="card">
+	  			<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/adb6e88ef6dafc5c0470e9371d24f4b89072d6f66d8089f4f6a3a896c80c7488762637567665a2ce3246de4f23a746b6a2c2563153be38ca2657c75402484f073e733bf8748c4efaee1f582a40ce34255f4262e9e8b9db3ca7d453faf3d51237d5a25131f3c3bf8a7f655dbf9ae45e53" class="card-img-top" alt="재벌집 막내아들">
+	    			<img class="img-hover" src="https://comicthumb-phinf.pstatic.net/20221109_73/pocket_1667985002959I8coF_JPEG/%C0%E7%B9%FA%C1%FD_%B8%B7%B3%BB%BE%C6%B5%E9.jpg?type=m260" class="card-img-top" alt="재벌집 막내아들">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">재벌집 막내아들</h5>
+				   	<p class="card-text">원작: 산경(山景)</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/53230180" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=4340987" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+				</div>
+			</div>
+			<div class="card">
+	  			<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/adb6e88ef6dafc5c0470e9371d24f4b89072d6f66d8089f4f6a3a896c80c7488762637567665a2ce3246de4f23a746b6a2c2563153be38ca2657c75402484f073e733bf8748c4efaee1f582a40ce34255f4262e9e8b9db3ca7d453faf3d51237d5a25131f3c3bf8a7f655dbf9ae45e53" class="card-img-top" alt="재벌집 막내아들">
+	    			<img class="img-hover" src="https://comicthumb-phinf.pstatic.net/20221109_73/pocket_1667985002959I8coF_JPEG/%C0%E7%B9%FA%C1%FD_%B8%B7%B3%BB%BE%C6%B5%E9.jpg?type=m260" class="card-img-top" alt="재벌집 막내아들">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">재벌집 막내아들</h5>
+				   	<p class="card-text">원작: 산경(山景)</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/53230180" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=4340987" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+				</div>
+			</div>
+			<div class="card">
+	  			<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/adb6e88ef6dafc5c0470e9371d24f4b89072d6f66d8089f4f6a3a896c80c7488762637567665a2ce3246de4f23a746b6a2c2563153be38ca2657c75402484f073e733bf8748c4efaee1f582a40ce34255f4262e9e8b9db3ca7d453faf3d51237d5a25131f3c3bf8a7f655dbf9ae45e53" class="card-img-top" alt="재벌집 막내아들">
+	    			<img class="img-hover" src="https://comicthumb-phinf.pstatic.net/20221109_73/pocket_1667985002959I8coF_JPEG/%C0%E7%B9%FA%C1%FD_%B8%B7%B3%BB%BE%C6%B5%E9.jpg?type=m260" class="card-img-top" alt="재벌집 막내아들">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">재벌집 막내아들</h5>
+				   	<p class="card-text">원작: 산경(山景)</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/53230180" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=4340987" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+				</div>
+			</div>
+	</div>
+	<div class="container w-75">
+	<div class="card-group">
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+	</div>
+	</div>
+	<div class="container w-75">
+	<div class="card-group">
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+	</div>
+	</div>
+	</div>
+<!-- paging -->
+	<nav aria-label="Page navigation example">	
+  	<ul class="pagination justify-content-center">
+    	<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
+    	<span aria-hidden="true">&laquo;</span></a></li>
+      	<li class="page-item"><a class="page-link" href="#">1</a></li>
+      	<li class="page-item"><a class="page-link" href="#">2</a></li>
+      	<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item"><a class="page-link" href="#" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span></a></li>
+      </ul>
+	</nav>
+	</div>
+
+	<!-- 영화 리스트 -->
+	<div class="container tab-pane fade w-75" id="movie" role="tabpanel"><br />
+	<h5>영화</h5>
+	<div class="container">
+		<div class="card-group">
+	  		<div class="card">
+	  			<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/adb6e88ef6dafc5c0470e9371d24f4b89072d6f66d8089f4f6a3a896c80c7488762637567665a2ce3246de4f23a746b6a2c2563153be38ca2657c75402484f073e733bf8748c4efaee1f582a40ce34255f4262e9e8b9db3ca7d453faf3d51237d5a25131f3c3bf8a7f655dbf9ae45e53" class="card-img-top" alt="재벌집 막내아들">
+	    			<img class="img-hover" src="https://comicthumb-phinf.pstatic.net/20221109_73/pocket_1667985002959I8coF_JPEG/%C0%E7%B9%FA%C1%FD_%B8%B7%B3%BB%BE%C6%B5%E9.jpg?type=m260" class="card-img-top" alt="재벌집 막내아들">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">재벌집 막내아들</h5>
+				   	<p class="card-text">원작: 산경(山景)</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/53230180" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=4340987" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+				</div>
+			</div>
+			<div class="card">
+	  			<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/adb6e88ef6dafc5c0470e9371d24f4b89072d6f66d8089f4f6a3a896c80c7488762637567665a2ce3246de4f23a746b6a2c2563153be38ca2657c75402484f073e733bf8748c4efaee1f582a40ce34255f4262e9e8b9db3ca7d453faf3d51237d5a25131f3c3bf8a7f655dbf9ae45e53" class="card-img-top" alt="재벌집 막내아들">
+	    			<img class="img-hover" src="https://comicthumb-phinf.pstatic.net/20221109_73/pocket_1667985002959I8coF_JPEG/%C0%E7%B9%FA%C1%FD_%B8%B7%B3%BB%BE%C6%B5%E9.jpg?type=m260" class="card-img-top" alt="재벌집 막내아들">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">재벌집 막내아들</h5>
+				   	<p class="card-text">원작: 산경(山景)</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/53230180" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=4340987" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+				</div>
+			</div>
+			<div class="card">
+	  			<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/adb6e88ef6dafc5c0470e9371d24f4b89072d6f66d8089f4f6a3a896c80c7488762637567665a2ce3246de4f23a746b6a2c2563153be38ca2657c75402484f073e733bf8748c4efaee1f582a40ce34255f4262e9e8b9db3ca7d453faf3d51237d5a25131f3c3bf8a7f655dbf9ae45e53" class="card-img-top" alt="재벌집 막내아들">
+	    			<img class="img-hover" src="https://comicthumb-phinf.pstatic.net/20221109_73/pocket_1667985002959I8coF_JPEG/%C0%E7%B9%FA%C1%FD_%B8%B7%B3%BB%BE%C6%B5%E9.jpg?type=m260" class="card-img-top" alt="재벌집 막내아들">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">재벌집 막내아들</h5>
+				   	<p class="card-text">원작: 산경(山景)</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/53230180" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=4340987" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+				</div>
+			</div>
+	</div>
+	<div class="container w-75">
+	<div class="card-group">
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+	</div>
+	</div>
+	<div class="container w-75">
+	<div class="card-group">
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+		<div class="card">
+    		<img src="..." class="card-img-top" alt="...">
+		    <div class="card-body">
+		      <h5 class="card-title">제목</h5>
+		      <p class="card-text">원작 : 작가이름</p>
+		      <p class="card-text"><small class="text-muted">JTBC / 2022년 11월 18일 ~ 2022년 12월 25일 방영</small></p>
+		    </div>
+		</div>
+	</div>
+	</div>
+	</div>
+<!-- paging -->
+	<nav aria-label="Page navigation example">	
+  	<ul class="pagination justify-content-center">
+    	<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
+    	<span aria-hidden="true">&laquo;</span></a></li>
+      	<li class="page-item"><a class="page-link" href="#">1</a></li>
+      	<li class="page-item"><a class="page-link" href="#">2</a></li>
+      	<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item"><a class="page-link" href="#" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span></a></li>
+      </ul>
+	</nav>
+	</div>
+</div>
+
+<!-- paging 
+	<nav aria-label="Page navigation example">	
+  	<ul class="pagination justify-content-center">
+    	<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
+    	<span aria-hidden="true">&laquo;</span></a></li>
+      	<li class="page-item"><a class="page-link" href="#">1</a></li>
+      	<li class="page-item"><a class="page-link" href="#">2</a></li>
+      	<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item"><a class="page-link" href="#" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span></a></li>
+      </ul>
+	</nav>
+-->
+
 
 <hr class="footer-div">
 
