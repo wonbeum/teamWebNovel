@@ -18,12 +18,16 @@ import com.example.model.kakao_rank;
 import com.example.model.loginDAO;
 import com.example.model.novelInfoTO;
 import com.example.model.novel_insert;
+import com.example.model.reviewListDAO;
+import com.example.model.reviewListTO;
 import com.example.model.userInfoTO;
 import com.example.model.user_adminDAO;
 
 @RestController
 public class ReviewController {
 	
+	@Autowired
+	private reviewListDAO rdao;
 	
 	@RequestMapping("review_list.do")
 	public ModelAndView review_list() {
@@ -34,6 +38,12 @@ public class ReviewController {
 	public ModelAndView review() {
 		return new ModelAndView( "novel_review" );
 	}
-
+	
+	@RequestMapping("ReviewListAll.do")
+	public ArrayList<reviewListTO> ReviewListAll() {
+		ArrayList<reviewListTO> reviewlists = rdao.reviewall_list();
+		
+		return reviewlists;
+	}
 	
 }
