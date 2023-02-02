@@ -199,11 +199,11 @@ $(document).ready(function() {
        	<div class="container d-flex justify-content-around">
 				<div class="col-auto me-auto">
 					<div class="input-group mb-3">
-						<a class="btn btn-outline-dark" href="./board_write.do" id="wbtn" role="button" onclick="location.href='admin_board_delete_ok.do'">전체 삭제</a>
+						<a class="btn btn-outline-dark" href="./admin_board_delete_ok.do" id="addelbtn" role="button">전체 삭제</a>
 					</div>
 				</div>
 				<div class="col-auto">
-					<a class="btn btn-outline-dark" href="./board_write.do" id="wbtn" role="button" onclick="location.href='admin_board_write.do'">글쓰기</a>
+					<a class="btn btn-outline-dark" href="./admin_board_write.do" id="adwbtn" role="button">글쓰기</a>
 				</div>
 		</div>
     
