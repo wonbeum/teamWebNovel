@@ -206,9 +206,6 @@ $(document).ready(function() {
 					<a class="btn btn-outline-dark" href="./board_write.do" id="wbtn" role="button" onclick="location.href='admin_board_write.do'">글쓰기</a>
 				</div>
 		</div>
-		
-	</div>
-</div>
     
 <!--하단 디자인 -->
 

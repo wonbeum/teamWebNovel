@@ -28,7 +28,15 @@ public class AdminController {
 	
 	@Autowired
 	private user_adminDAO userdao;
+	@Autowired
 	private admin_origin_requestDAO aordao;
+	@Autowired
+	private FreeBoardDAO fdao;
+	
+	@RequestMapping("admin_main.do")
+	public ModelAndView admin_main() {
+		return new ModelAndView( "admin_main" );
+	}
 	
 	@RequestMapping("admin_member_list.do")
 	public ModelAndView admiadmin_member_list( HttpServletRequest request ) {
@@ -78,8 +86,14 @@ public class AdminController {
 	}
 
 	@RequestMapping("admin_board_list.do")
-	public ModelAndView admin_board_list() {
-		return new ModelAndView( "admin_board_list" );
+	public ModelAndView admin_board_list( HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin_board_list" );
+		
+		ArrayList<freeboardTO> boardLists = fdao.FreeBoard_list();
+		modelAndView.addObject( "boardLists" , boardLists );
+
+		return modelAndView;
 	}
 
 	@RequestMapping("admin_board_view.do")
