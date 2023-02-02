@@ -60,7 +60,7 @@
 								\${jsonData[i].free_subject}</a></td>
 							<td>\${jsonData[i].user_nickname}</td>
 							<td>\${jsonData[i].free_date}</td>
-							<td>\${jsonData[i].free_hit}</td>
+							<td>\${f[i].free_hit}</td>
 							<td>\${jsonData[i].free_like}</td>
 							</tr>
 						`

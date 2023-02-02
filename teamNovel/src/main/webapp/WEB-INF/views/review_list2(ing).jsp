@@ -18,7 +18,56 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
 
- 
+  $(document).ready(function() {
+		
+		$("#tab1").click(function() {		
+			
+			$.ajax({
+				url : '/ReviewListAll.do',
+				type : 'get',
+				dataType : 'json',
+				success : function(jsonData){
+					//console.log("성공");
+					$('#reviewall').html('');
+					for(let i=0; i<jsonData.length; i++){	
+			
+						div = `
+							<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
+								<div class="row g-0">
+									<div class="col">
+										<a href=""> <img src="\${jsonData[i].user_nickname}" class="img" width="100%"
+											height="225" role="img">
+										</a>
+										<div class="card-body">
+											<p class="card-text">\${jsonData[i].user_nickname}</p>
+											<p class="card-text">\${jsonData[i].review_date}</p>
+											<p class="card-text">\${jsonData[i].review_content}</p>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="card-body">
+											<p class="card-text">\${jsonData[i].novel_genre}</p>
+											<h5 class="card-text">\${jsonData[i].novel_title}/\${jsonData[i].novel_writer}</h5>
+											<p class="card-text">\${jsonData[i].novel_star_grade}/\${jsonData[i].novel_star_grade}</p>
+											<p class="card-text">\${jsonData[i].novel_content}</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+					`
+						$('#reviewall').append(div);
+					}
+				},
+				error : function(e) {
+					alert("error !");
+				}
+			});
+		});
+		
+		
+	});
 
 </script>
 </head>
@@ -98,57 +147,33 @@
 		<div class="text-center" id="reviewromancefantasy"></div>
 		<div class="text-center" id="reviewfantasy"></div>
 	</div>
-	
+	<!-- 
 	<div class="container">
 		<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
 			<div class="row g-0">
 				<div class="col">
-					<a href="./novel_detail.do"> <img src="https://comicthumb-phinf.pstatic.net/20220526_181/pocket_1653546581019RtEzM_JPEG/%C6%C0%C0%E5%B4%D4_%BE%E0%BC%D3%C0%CC_%B4%D9%B8%A3%C0%DD%BE%C6%BF%E4_%C7%A5%C1%F6.jpg?type=m79" class="img" width="100%"
+					<a href="#"> <img src="..." class="img" width="100%"
 						height="225" role="img">
 					</a>
 					<div class="card-body">
-						<p class="card-text">독자</p>
-						<p class="card-text">20023.02.01</p>
-						<p class="card-text">너무 재밌어요~!</p>
+						<p class="card-text">닉네임</p>
+						<p class="card-text">작성일자</p>
+						<p class="card-text">작성 내용</p>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="card-body">
-						<p class="card-text">로맨스</p>
-						<h5 class="card-text">팀장님, 약속이 다르잖아요 [독점](126화/미완결)/공그린</h5>
-						<p class="card-text">★★★★★/5</p>
-						<p class="card-text">사표를 던지러 갔다가 덫에 걸려버렸다!퇴근 시간에 던져주는 일거리, 시도 때도 없는 호출, 원인</p>
+						<p class="card-text">장르</p>
+						<h5 class="card-text">제목/작가</h5>
+						<p class="card-text">별점/평점</p>
+						<p class="card-text">내용</p>
 					</div>
 
 				</div>
 			</div>
 		</div>
 	</div>
-<div class="container">
-		<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
-			<div class="row g-0">
-				<div class="col">
-					<a href="./novel_detail.do"> <img src="https://comicthumb-phinf.pstatic.net/20220526_181/pocket_1653546581019RtEzM_JPEG/%C6%C0%C0%E5%B4%D4_%BE%E0%BC%D3%C0%CC_%B4%D9%B8%A3%C0%DD%BE%C6%BF%E4_%C7%A5%C1%F6.jpg?type=m79" class="img" width="100%"
-						height="225" role="img">
-					</a>
-					<div class="card-body">
-						<p class="card-text">독자</p>
-						<p class="card-text">20023.02.01</p>
-						<p class="card-text">너무 재밌어요~!</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card-body">
-						<p class="card-text">로맨스</p>
-						<h5 class="card-text">팀장님, 약속이 다르잖아요 [독점](126화/미완결)/공그린</h5>
-						<p class="card-text">★★★★★/5</p>
-						<p class="card-text">사표를 던지러 갔다가 덫에 걸려버렸다!퇴근 시간에 던져주는 일거리, 시도 때도 없는 호출, 원인</p>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
+ -->
 
 
 	<hr class="footer-div">

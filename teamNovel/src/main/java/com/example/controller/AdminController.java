@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.FreeBoardDAO;
 import com.example.model.RegisterDAO;
+import com.example.model.admin_origin_requestDAO;
+import com.example.model.admin_origin_requestTO;
 import com.example.model.freeboardTO;
 import com.example.model.kakao_rank;
 import com.example.model.loginDAO;
@@ -26,7 +28,7 @@ public class AdminController {
 	
 	@Autowired
 	private user_adminDAO userdao;
-	
+	private admin_origin_requestDAO aordao;
 	
 	@RequestMapping("admin_member_list.do")
 	public ModelAndView admiadmin_member_list( HttpServletRequest request ) {
@@ -56,6 +58,19 @@ public class AdminController {
 	@RequestMapping("admin_orgin_request_list.do")
 	public ModelAndView admin_orgin_request_list() {
 		return new ModelAndView( "admin_orgin_request_list" );
+	}
+	@RequestMapping("admin_orgin_request_list_delete_ok.do")
+	public ModelAndView admin_orgin_request_list_delete_ok(HttpServletRequest request) {
+		
+		admin_origin_requestTO to = new admin_origin_requestTO();
+		to.setRequest_seq(request.getParameter("seq"));
+
+		int flag = aordao.origin_request_delete_Ok(to);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "origin_request_delete_Ok" );
+		modelAndView.addObject( "flag", flag );
+		return modelAndView;
 	}
 	@RequestMapping("admin_member_modify.do")
 	public ModelAndView admin_member_modify() {
