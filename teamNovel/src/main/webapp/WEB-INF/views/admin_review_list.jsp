@@ -36,7 +36,7 @@
 		});
 		
 		// 선택 삭제 버튼
-		conet list = 
+		const list = 
 		$("#selectalldbtn").click(function(){
 			//for(let i = 0; i < )
 		});
