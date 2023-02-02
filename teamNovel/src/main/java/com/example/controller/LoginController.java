@@ -59,7 +59,7 @@ public class LoginController {
 	@RequestMapping( "logout.do" )
 	public ModelAndView logout(HttpSession session) {
 		session.invalidate();
-		return new ModelAndView( "main" );
+		return new ModelAndView( "redirect:/main.do" );
 	}
 
 	@RequestMapping("register.do")
