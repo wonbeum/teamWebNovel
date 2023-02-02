@@ -123,10 +123,49 @@
 <div class="container w-75">
 	<div class="row">
 		<div align="right">
-		  	<a class="btn btn-outline-dark" href=#" id="rqbtn" role="button">요청하기</a>
+		  	<a class="btn btn-outline-dark" id="rqbtn" data-bs-toggle="modal" data-bs-target="#RequestModal">요청하기</a>
 		</div>
 	</div>
 </div>
+
+<!-- RequestModal -->
+<div class="modal fade" id="RequestModal" tabindex="-1" aria-labelledby="RequestModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="RequestModalLabel">누락 소설 요청하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="InputEmail" class="form-label">신청자 아이디</label>
+            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">요청 작품이 추가될 경우, 해당 주소로 메일이 발송됩니다.</div>
+          </div>
+          <div class="mb-3">
+          	<label class="form-label">카테고리</label>
+				<select class="form-select form-select-sm" name="Inputcategory" required>
+  					<option disabled>카테고리 선택</option>
+  					<option value="웹툰">웹툰</option>
+  					<option value="드라마">드라마</option>
+  					<option value="영화">영화</option>
+				</select>
+			</div>
+			<div class="mb-3">
+            <label for="InputTitle" class="form-label">작품명</label>
+            <input type="text" class="form-control" id="InputTitle">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="submit" class="btn btn-primary">요청</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Tab panes -->
 <div class="tab-content">

@@ -32,15 +32,58 @@
 	.align_left { float:left; }
 	.align_right { float:right; }
 
-	.board { width:100%; }
-	.board th { height:41px; border-bottom:1px solid #dadada; background-color:#f9f9fb; color:#464646; font-weight:600; word-wrap: break-word; border-top:1px solid #464646; word-break: break-all; }
-	.board td { height:30px; border-bottom:1px solid #dadada; color:#797979; text-align:center; padding:5px; word-wrap: break-word; word-break: break-all; }
-	.board td.left {text-align:left;}
-	.board td.category{ font-weight:bold; }  
-	.board_title { font-size:14px; font-weight:bold; color:#000; }
-
-	
 </style>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#cboxAll").click(function() {
+		if($("input:checkbox[id='cboxAll']").prop("checked")){
+			$("input[type=checkbox]").prop("checked", true);
+		} else {
+			$("input[type=checkbox]").prop("checked", false);
+		}
+	});
+	
+	$("input[name=board_check]").click(function() {
+		const total = $("input[name=board_check]").length;
+		const checked = $("input[name=board_check]:checked").length;
+		
+		if(total != checked) $("#cboxAll").prop("checked", false);
+		else $("#cboxAll").prop("checked", true); 
+	});
+	
+	$.ajax({
+		url: 'AdminBoardListAjax.do',
+		type: 'get',
+		dataType: 'json',
+		success: function(jsonData){
+			$('#insertAdminBoardList').html('');
+			
+			for(let i=0; i<jsonData.length; i++){
+				tr=`
+		            <tr>
+					<td><input type="checkbox" name="board_check"></td>
+	                <td>\${jsonData[i].free_seq}</td>
+	                <td class="left"><a href="admin_board_view.do?seq=\${jsonData[i].free_seq}">
+	                \${jsonData[i].free_subject}</a>&nbsp;</td>
+	                <td>${jsonData[i].user_nickname}</td>
+	                <td>\${jsonData[i].free_date}</td>
+	                <td>
+	                	<input type="button" value="상세보기" class="btn_board_view" style="cursor: pointer;" onclick="location.href='admin_board_view.do'"/>
+	                	<input type="button" value="삭제" class="btn_board_delete" style="cursor: pointer;" onclick="location.href='admin_board_delete_ok.do'"/>
+		        </tr>
+		        `
+		        $('#insertAdminBoardList').append(tr);
+			}
+		},
+		error : function(e) {
+			alert("[error]");
+		}
+	});
+});
+
+</script>
+
 </head>
 <body>
 
@@ -70,94 +113,104 @@
   </div>
 </div>
 
-<!-- 본문 -->
 <!-- 상단 디자인 -->
-<div class="con_title">
-	<h3>게시물 관리</h3>
-    <p><strong>최신 게시물</strong></p>
-</div>
 
+<!-- 본문 -->
+	<div class="container w-75" id="con_title">
+		<h4>게시물 관리</h4>
+	    <p><strong>최신 게시물</strong></p>
+	</div>
+
+<!-- 조건 검색 -->
  	<div class="search_form">
     <nav class="navbar navbar-light bg-light justify-content-center">
 	    <div class="search_form_boxes">조건 검색
     		<select class="search_target">
 	  			<option value="title">제목</option>
-	  			<option value="content">내용</option>
+	  			<option value="content">제목+내용</option>
 			</select>
 			<input type="search" name="search_keyword" placeholder="검색" aria-label="Search" aria-describedby="search-addon" />
-  			<button type="submit" class="btn btn-sm btn-outline-secondary" href="#">검색</button>
+  			<button type="submit" class="btn btn-sm btn-outline-secondary" href="#">검색하기</button>
 	    </div>
 	 </nav> 
 	 </div>
 
-<div class="con_txt">
-    <div class="contents_sub">
-        <div class="board_top">
-            <div class="bold">총 <span class="txt_orange">1</span>건</div>
-        </div>
+<!-- 게시물 리스트 -->
 
-        <!--게시판-->
-        <div class="board">
-            <table>
-            <tr>
-             	<th width="3%">&nbsp;</th>
-                <th width="3%">
-                	&nbsp;<input class="form-check-input" type="checkbox" name="deletebox" value="selectall" aria-label="..."  onclick='selectAll(this)'>
-                </th>
-                <th width="5%">번호</th>
-                <th>제목</th>
-                <th width="10%">아이디</th>
-                <th width="17%">작성일</th>
-                <th width="5%">기능</th>
-                <th width="3%">&nbsp;</th>
-            </tr>
+	<div id="boardlist" class="container w-75 mt-3">
+		<table class="table table-sm">
+            <thead class="table-light text-center">
+	            <tr>
+             		<th scope="col"><input type="checkbox" id="cboxAll"></th>
+	                <th scope="col">번호</th>
+    	            <th scope="col">제목</th>
+              	  	<th scope="col">아이디</th>
+              		<th scope="col">작성일</th>
+                	<th scope="col">기능</th>
+                </tr>
+			</thead>
             
 <!--  게시판 반복되는 부분
             <tr>
-                <td>
-                	<div>
-                	<input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-					</div>
-				</td>
-                <td>1</td>
-                <td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="../../images/icon_new.gif" alt="NEW"></td>
-                <td>asdfa</td>
-                <td>2017-01-31</td>
-                <td>6</td>
-                <td>&nbsp;</td>
-            </tr>
--->
-            <tr>
-	            <td>&nbsp;</td>
-                <td>
-                	<input class="form-check-input" type="checkbox" name="deletebox" value="" aria-label="...">
-				</td>
+				<td><input type="checkbox" name="board_check"></td>
                 <td>1</td>
                 <td class="left"><a href="admin_board_view.do">테스트용 게시글</a>&nbsp;</td>
                 <td>tester1</td>
                 <td>2023-01-25</td>
                 <td>
-                	<input type="button" value="상세보기" class="btn_board_view" style="cursor: pointer;" onclick="location.href='admin_board_view.do'" />
-                	<input type="button" value="삭제" class="btn_board_delete" style="cursor: pointer;" onclick="location.href='admin_board_delete_ok.do'" />
-				<td>&nbsp;</td>
-            </tr>
-            
+                	<input type="button" value="상세보기" class="btn_board_view" style="cursor: pointer;" onclick="location.href='admin_board_view.do'"/>
+                	<input type="button" value="삭제" class="btn_board_delete" style="cursor: pointer;" onclick="location.href='admin_board_delete_ok.do'"/>
+	        </tr>
+-->
+			<tbody class="text-center">
+            <tr>
+				<td><input type="checkbox" name="board_check"></td>
+                <td>1</td>
+                <td class="left"><a href="admin_board_view.do">테스트용 게시글</a>&nbsp;</td>
+                <td>tester1</td>
+                <td>2023-01-25</td>
+                <td>
+                	<input type="button" value="상세보기" class="btn_board_view" style="cursor: pointer;" onclick="location.href='admin_board_view.do'"/>
+                	<input type="button" value="삭제" class="btn_board_delete" style="cursor: pointer;" onclick="location.href='admin_board_delete_ok.do'"/>
+	        </tr>
+            </tbody>
             </table>
-        </div>  
-
-        <div class="btn_area">
-        	<div class="align_letf">
-                <input type="button" value="전체 삭제" class="btn_admin_board_delete" style="cursor: pointer;" onclick="location.href='admin_board_delete_ok.do'" />
-			</div>
-			<div class="align_right">
-                <input type="button" value="공지글 작성" class="btn_admin_board_write" style="cursor: pointer;" onclick="location.href='admin_board_write.do'" />
-            </div>
         </div>
-        <!--게시판-->
-    </div>
-</div>
-<!--//하단 디자인 -->
 
+<!-- paging -->
+		<div class="container">
+				<nav aria-label="Page navigation example"
+					class="nav justify-content-center">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						</a></li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+			        
+        <!-- 버튼 -->
+       	<div class="container d-flex justify-content-around">
+				<div class="col-auto me-auto">
+					<div class="input-group mb-3">
+						<a class="btn btn-outline-dark" href="./board_write.do" id="wbtn" role="button" onclick="location.href='admin_board_delete_ok.do'">전체 삭제</a>
+					</div>
+				</div>
+				<div class="col-auto">
+					<a class="btn btn-outline-dark" href="./board_write.do" id="wbtn" role="button" onclick="location.href='admin_board_write.do'">글쓰기</a>
+				</div>
+		</div>
+		
+	</div>
+</div>
+    
+<!--하단 디자인 -->
 
 <hr class="footer-div">
 

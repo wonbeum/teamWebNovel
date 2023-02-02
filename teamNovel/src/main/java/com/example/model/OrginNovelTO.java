@@ -1,6 +1,6 @@
 package com.example.model;
 
-public class OrginNovel {
+public class OrginNovelTO {
 	private String novel_title;
 	private String origin_webtoon;
 	private String origin_drama;
