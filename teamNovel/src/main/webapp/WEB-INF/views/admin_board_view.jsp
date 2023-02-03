@@ -1,5 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="com.example.model.freeboardTO"%>
+	
+<%
+	freeboardTO to = (freeboardTO)request.getAttribute("to");
+
+	String email = to.getUser_email();
+	String nickname = to.getUser_nickname();
+	String wdate = to.getFree_date();
+	String subject = to.getFree_subject();
+	String date = to.getFree_date();
+	String wip = to.getFree_ip();
+	String like = to.getFree_like();
+	String content = to.getFree_content();
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,18 +74,18 @@
             <table>
             <tr>
                 <th width="10%">제목</th>
-                <td width="60%">?</td>
+                <td width="60%"><%=subject %></td>
                 <th width="10%">등록일</th>
-                <td width="20%">?</td>
+                <td width="20%"><%=wdate %></td>
             </tr>
             <tr>
                 <th>글쓴이</th>
-                <td>닉네임(메일주소)(아이피)</td>
+                <td><%=nickname %>(<%=email %>)(<%=wip %>)</td>
                 <th>추천</th>
-                <td>여기 추천수가 들어감</td>
+                <td><%=like %></td>
             </tr>
             <tr>
-                <td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%">작성한 게시글 내용이 이곳에 보여집니다.</td>
+                <td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%"><%=content %></td>
             </tr>
             </table>
         </div>
