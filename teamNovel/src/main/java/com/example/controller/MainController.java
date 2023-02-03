@@ -46,11 +46,50 @@ public class MainController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("test.do")
-	public ModelAndView test() {
-		insertdao.novelInsert();
-		return new ModelAndView( "test" );
+	@RequestMapping("test1.do")
+	public ModelAndView test1() {
+		insertdao.novel_ridiRomance_Insert();
+		return new ModelAndView( "test2" );
 	}
-	
-	
+
+	@RequestMapping("test2.do")
+	public ModelAndView test2() {
+		insertdao.novel_ridiFantasy_Insert();
+		return new ModelAndView( "test2" );
+	}
+	@RequestMapping("test3.do")
+	public ModelAndView test3() {
+		insertdao.novel_ridiRomanceFatasy_Insert();
+		return new ModelAndView( "test2" );
+	}
+	@RequestMapping("test4.do")
+	public ModelAndView test4() {
+		insertdao.novel_kakaoRomance_Insert();
+		return new ModelAndView( "test2" );
+	}
+	@RequestMapping("test5.do")
+	public ModelAndView test5() {
+		insertdao.novel_kakaoFantasy_Insert();
+		return new ModelAndView( "test2" );
+	}
+	@RequestMapping("test6.do")
+	public ModelAndView test6() {
+		insertdao.novel_kakaoRomanceFantasy_Insert();
+		return new ModelAndView( "test2" );
+	}
+	@RequestMapping("test7.do")
+	public ModelAndView test7() {
+		insertdao.novel_naverFantasy_Insert();
+		return new ModelAndView( "test2" );
+	}
+	@RequestMapping("test8.do")
+	public ModelAndView test8() {
+		insertdao.novel_naverRomance_Insert();
+		return new ModelAndView( "test2" );
+	}
+	@RequestMapping("test9.do")
+	public ModelAndView test9() {
+		insertdao.novel_naverRomanceFantasy_Insert();
+		return new ModelAndView( "test2" );
+	}
 }
