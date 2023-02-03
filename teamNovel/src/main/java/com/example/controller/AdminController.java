@@ -90,8 +90,15 @@ public class AdminController {
 	}
 
 	@RequestMapping("admin_board_view.do")
-	public ModelAndView admin_board_view() {
-		return new ModelAndView( "admin_board_view" );
+	public ModelAndView admin_board_view(HttpServletRequest request) {
+		freeboardTO to = new freeboardTO();
+		to.setFree_seq(request.getParameter("seq"));
+		to = fdao.FreeBoard_View(to);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin_board_view" );
+		modelAndView.addObject("to", to);
+		return modelAndView;
 	}
 
 	@RequestMapping("admin_board_write.do")

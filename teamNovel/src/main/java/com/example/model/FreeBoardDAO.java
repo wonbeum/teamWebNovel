@@ -209,7 +209,7 @@ public class FreeBoardDAO {
 			pstmt.close();
 			
 			sql = "select free_category, free_content, date_format(free_date,'%y-%m-%d') free_date,"
-					+ "free_hit, free_like, free_subject, user_nickname from novel_free_board where free_seq=?";
+					+ "free_hit, free_like, free_subject, free_ip, user_email, user_nickname from novel_free_board where free_seq=?";
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, to.getFree_seq() );
 			
@@ -221,6 +221,8 @@ public class FreeBoardDAO {
 				to.setFree_hit( rs.getString( "free_hit" ) );
 				to.setFree_like( rs.getString( "free_like" ) );
 				to.setFree_subject( rs.getString( "free_subject" ) );
+				to.setFree_ip( rs.getString( "free_ip" ) );
+				to.setUser_email( rs.getString( "user_email" ));
 				to.setUser_nickname( rs.getString("user_nickname"));
 			}
 		} catch( SQLException e ) {
