@@ -27,8 +27,16 @@ public class AdminController {
 	private FreeBoardDAO fdao;
 	
 	@RequestMapping("admin_main.do")
-	public ModelAndView admin_main() {
-		return new ModelAndView( "admin_main" );
+	public ModelAndView admin_main(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin_main" );
+		
+		ArrayList<userInfoTO > userLists = userdao.userLists();
+		ArrayList<freeboardTO > boardLists = fdao.FreeBoard_list();
+		modelAndView.addObject( "userLists" , userLists );
+		modelAndView.addObject( "boardLists" , boardLists );
+		
+		return modelAndView;
 	}
 	
 	@RequestMapping("admin_member_list.do")
