@@ -27,22 +27,22 @@ public class MainController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "main" );
 		
-//		ArrayList<novelInfoTO> kr_list = novel_rank.kakao_romance();
-//		ArrayList<novelInfoTO> kf_list = novel_rank.kakao_fantasy();
-//		ArrayList<novelInfoTO> krf_list = novel_rank.kakao_romancefantasy();
-//		
-//		modelAndView.addObject( "kr_list" , kr_list );
-//		modelAndView.addObject( "kf_list" , kf_list );
-//		modelAndView.addObject( "krf_list" , krf_list );
+		ArrayList<novelInfoTO> kr_list = novel_rank.kakao_romance();
+		ArrayList<novelInfoTO> kf_list = novel_rank.kakao_fantasy();
+		ArrayList<novelInfoTO> krf_list = novel_rank.kakao_romancefantasy();
+		
+		modelAndView.addObject( "kr_list" , kr_list );
+		modelAndView.addObject( "kf_list" , kf_list );
+		modelAndView.addObject( "krf_list" , krf_list );
 		
 
-		ArrayList<novelInfoTO> nr_list = novel_rank.naver_romace();
-		ArrayList<novelInfoTO> nf_list = novel_rank.naver_fantasy();
-		ArrayList<novelInfoTO> nrf_list = novel_rank.naver_romacefantasy();
-		
-		modelAndView.addObject( "kr_list" , nr_list );
-		modelAndView.addObject( "kf_list" , nf_list );
-		modelAndView.addObject( "krf_list" , nrf_list );
+//		ArrayList<novelInfoTO> nr_list = novel_rank.naver_romace();
+//		ArrayList<novelInfoTO> nf_list = novel_rank.naver_fantasy();
+//		ArrayList<novelInfoTO> nrf_list = novel_rank.naver_romacefantasy();
+//		
+//		modelAndView.addObject( "kr_list" , nr_list );
+//		modelAndView.addObject( "kf_list" , nf_list );
+//		modelAndView.addObject( "krf_list" , nrf_list );
 		
 		return modelAndView;
 	}
