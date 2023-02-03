@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.model.FreeBoardDAO;
 import com.example.model.RegisterDAO;
 import com.example.model.freeboardTO;
-import com.example.model.kakao_rank;
+import com.example.model.main_novel_rank;
 import com.example.model.loginDAO;
 import com.example.model.novelInfoTO;
 import com.example.model.novel_insert;
@@ -28,67 +28,49 @@ public class MainController {
 	private novel_insert insertdao;
 	
 	@Autowired
-	private kakao_rank kakao_rank;
+	private main_novel_rank novel_rank;
 
 	@RequestMapping("main.do")
 	public ModelAndView main( HttpServletRequest request ) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "main" );
 		
-		ArrayList<novelInfoTO> kr_list = kakao_rank.kakao_romance();
-		ArrayList<novelInfoTO> kf_list = kakao_rank.kakao_fantasy();
-		ArrayList<novelInfoTO> krf_list = kakao_rank.kakao_romancefantasy();
+//		ArrayList<novelInfoTO> kr_list = novel_rank.kakao_romance();
+//		ArrayList<novelInfoTO> kf_list = novel_rank.kakao_fantasy();
+//		ArrayList<novelInfoTO> krf_list = novel_rank.kakao_romancefantasy();
+//		
+//		modelAndView.addObject( "kr_list" , kr_list );
+//		modelAndView.addObject( "kf_list" , kf_list );
+//		modelAndView.addObject( "krf_list" , krf_list );
 		
-		modelAndView.addObject( "kr_list" , kr_list );
-		modelAndView.addObject( "kf_list" , kf_list );
-		modelAndView.addObject( "krf_list" , krf_list );
+
+		ArrayList<novelInfoTO> nr_list = novel_rank.naver_romace();
+		ArrayList<novelInfoTO> nf_list = novel_rank.naver_fantasy();
+		ArrayList<novelInfoTO> nrf_list = novel_rank.naver_romacefantasy();
+		
+		modelAndView.addObject( "kr_list" , nr_list );
+		modelAndView.addObject( "kf_list" , nf_list );
+		modelAndView.addObject( "krf_list" , nrf_list );
 		
 		return modelAndView;
 	}
-	
-	@RequestMapping("test1.do")
-	public ModelAndView test1() {
-		insertdao.novel_ridiRomance_Insert();
-		return new ModelAndView( "test2" );
-	}
 
-	@RequestMapping("test2.do")
-	public ModelAndView test2() {
+	@RequestMapping("test.do")
+	public ModelAndView test() {
+		novel_rank.naver_romace();
+		return new ModelAndView( "test" );
+	}
+	
+	@RequestMapping("insert.do")
+	public ModelAndView inserttest1() {
+		insertdao.novel_ridiRomance_Insert();
 		insertdao.novel_ridiFantasy_Insert();
-		return new ModelAndView( "test2" );
-	}
-	@RequestMapping("test3.do")
-	public ModelAndView test3() {
 		insertdao.novel_ridiRomanceFatasy_Insert();
-		return new ModelAndView( "test2" );
-	}
-	@RequestMapping("test4.do")
-	public ModelAndView test4() {
 		insertdao.novel_kakaoRomance_Insert();
-		return new ModelAndView( "test2" );
-	}
-	@RequestMapping("test5.do")
-	public ModelAndView test5() {
 		insertdao.novel_kakaoFantasy_Insert();
-		return new ModelAndView( "test2" );
-	}
-	@RequestMapping("test6.do")
-	public ModelAndView test6() {
 		insertdao.novel_kakaoRomanceFantasy_Insert();
-		return new ModelAndView( "test2" );
-	}
-	@RequestMapping("test7.do")
-	public ModelAndView test7() {
 		insertdao.novel_naverFantasy_Insert();
-		return new ModelAndView( "test2" );
-	}
-	@RequestMapping("test8.do")
-	public ModelAndView test8() {
 		insertdao.novel_naverRomance_Insert();
-		return new ModelAndView( "test2" );
-	}
-	@RequestMapping("test9.do")
-	public ModelAndView test9() {
 		insertdao.novel_naverRomanceFantasy_Insert();
 		return new ModelAndView( "test2" );
 	}

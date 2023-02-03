@@ -14,7 +14,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class kakao_rank {
+public class main_novel_rank {
 
 	public ArrayList<novelInfoTO> kakao_romance() {
 		
@@ -132,6 +132,130 @@ public class kakao_rank {
 					to.setNovel_img( novel_rank_name.attr( "src" ) );
 					rank_img.add(to);
 				}
+			}
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] : " +e.getMessage() );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] : " +e.getMessage() );
+		} finally {
+			if( br != null ) try { br.close(); } catch (IOException e) { }
+		}
+		
+		return rank_img;
+	}
+	
+	public ArrayList<novelInfoTO> naver_romace(){
+
+		ArrayList<novelInfoTO> rank_img = new ArrayList<>();
+		
+		BufferedReader br = null;
+		
+		try {
+			URL url = new URL("https://series.naver.com/novel/top100List.series?rankingTypeCode=MONTHLY&categoryCode=201");
+			br = new BufferedReader(new InputStreamReader(url.openStream()));
+			
+			String line = null;
+			
+			String strHtml = "";
+			
+			while( (line = br.readLine()) != null ) {
+				strHtml += line.trim();
+			}
+			
+			Document doc = Jsoup.parse(strHtml);
+			
+			Elements novel_rank_names = doc.select("img");
+
+			for( Element novel_rank_name : novel_rank_names ) {
+				novelInfoTO to = new novelInfoTO();
+//				System.out.println(novel_rank_name.attr( "src" ));
+				to.setNovel_img( novel_rank_name.attr( "src" ) );
+				rank_img.add(to);
+			}
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] : " +e.getMessage() );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] : " +e.getMessage() );
+		} finally {
+			if( br != null ) try { br.close(); } catch (IOException e) { }
+		}
+		
+		return rank_img;
+	}
+	public ArrayList<novelInfoTO> naver_fantasy(){
+
+		ArrayList<novelInfoTO> rank_img = new ArrayList<>();
+		
+		BufferedReader br = null;
+		
+		try {
+			URL url = new URL("https://series.naver.com/novel/top100List.series?rankingTypeCode=MONTHLY&categoryCode=202");
+			br = new BufferedReader(new InputStreamReader(url.openStream()));
+			
+			String line = null;
+			
+			String strHtml = "";
+			
+			while( (line = br.readLine()) != null ) {
+				strHtml += line.trim();
+			}
+			
+			Document doc = Jsoup.parse(strHtml);
+			
+			Elements novel_rank_names = doc.select("img");
+
+			for( Element novel_rank_name : novel_rank_names ) {
+				novelInfoTO to = new novelInfoTO();
+//				System.out.println(novel_rank_name.attr( "src" ));
+				to.setNovel_img( novel_rank_name.attr( "src" ) );
+				rank_img.add(to);
+			}
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] : " +e.getMessage() );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] : " +e.getMessage() );
+		} finally {
+			if( br != null ) try { br.close(); } catch (IOException e) { }
+		}
+		
+		return rank_img;
+	}
+	public ArrayList<novelInfoTO> naver_romacefantasy(){
+
+		ArrayList<novelInfoTO> rank_img = new ArrayList<>();
+		
+		BufferedReader br = null;
+		
+		try {
+			URL url = new URL("https://series.naver.com/novel/top100List.series?rankingTypeCode=MONTHLY&categoryCode=207");
+			br = new BufferedReader(new InputStreamReader(url.openStream()));
+			
+			String line = null;
+			
+			String strHtml = "";
+			
+			while( (line = br.readLine()) != null ) {
+				strHtml += line.trim();
+			}
+			
+			Document doc = Jsoup.parse(strHtml);
+			
+			Elements novel_rank_names = doc.select("img");
+
+			for( Element novel_rank_name : novel_rank_names ) {
+				novelInfoTO to = new novelInfoTO();
+//				System.out.println(novel_rank_name.attr( "src" ));
+				to.setNovel_img( novel_rank_name.attr( "src" ) );
+				rank_img.add(to);
 			}
 			
 		} catch (MalformedURLException e) {
