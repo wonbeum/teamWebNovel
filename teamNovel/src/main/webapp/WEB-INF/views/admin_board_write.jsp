@@ -49,49 +49,38 @@
 
 <!-- 본문 -->
 
-<!-- 상단 디자인 -->
-<div class="con_title">
-	<h3>게시물 관리</h3>
-	<p><strong>공지글 작성</strong></p>
-</div>
-
-<div class="con_menu"></div>
-<div class="con_txt">
-	<form action="./admin_write_ok.do" method="post" name="wfrm">
-		<div class="contents_sub">	
-			<!--게시판-->
-			<div class="board_write">
-				<table>
-				<tr>
-					<th>분류</th>
-					<td>
-						<select class="search_category" disabled>
-	  						<option value="title">공지사항</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="subject" value="" class="board_view_input" /></td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td><textarea name="content" class="board_editor_area"></textarea></td>
-				</tr>
-				</table>
+	<div class="text-center mt-5">
+		<h3>공지사항 작성하기</h3>
+	</div>
+	<div class="container p-3 mt-4 mb-5 bg-body-tertiary rounded w-50">
+		<div class="form">
+		<form action="./admin_board_write_ok.do" method="post" name="adminwfrm">
+			<div class="mb-3 w-25">
+			<label class="form-label">카테고리</label>
+				<select class="form-select form-select-sm" name="admin_board_category">
+		  			<option value="공지사항">공지사항</option>
+				</select>
+			</div>
+			<div class="mb-3">
+			<label class="form-label">제목</label>
+				<input type="text" class="form-control" name="admin_board_subject"/>
+			</div>
+			<div class="mb-3"">내용</th>
+				<textarea class="form-control" name="admin_board_content"></textarea>
 			</div>
 			
-			<div class="btn_area">
-				<div class="align_left">
-					<input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='./admin_board_list.do'" />
+			<div class="row">
+				<div class="col-auto me-auto">
+					<a class="btn btn-outline-secondary" role="button" href="./admin_board_list.do"/>목록</a>
 				</div>
-				<div class="align_right">
-					<input type="button" id="wbtn" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='./admin_board_write_ok.do'" />
+				<div class="col-auto">
+					<button type="submit" class="btn btn-secondary">
+					쓰기
+					</button>
 				</div>
 			</div>
-			<!--//게시판-->
-		</div>
 	</form>
+</div>
 </div>
 
 <hr class="footer-div">

@@ -3,6 +3,7 @@ package com.example.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -112,6 +113,43 @@ public class AdminController {
 	@RequestMapping("admin_board_write.do")
 	public ModelAndView admin_board_write() {
 		return new ModelAndView( "admin_board_write" );
+	}
+	
+	@RequestMapping("admin_board_write_ok.do")
+	public ModelAndView admin_board_write_ok(HttpServletRequest request) {
+		//userInfoTO to = (userInfoTO)session.getAttribute("signIn");
+		String user_email = "root";
+		String user_nickname = "관리자";
+
+		freeboardTO fto = new freeboardTO();
+
+		fto.setFree_category(request.getParameter("admin_board_category"));
+		fto.setFree_subject(request.getParameter("admin_board_subject"));
+		fto.setFree_content(request.getParameter("admin_board_content"));
+		fto.setFree_ip(request.getRemoteAddr());
+		fto.setUser_email(user_email);
+		fto.setUser_nickname(user_nickname);
+				
+		int flag = fdao.FreeBoard_Write_Ok(fto);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin_board_write_ok" );
+		modelAndView.addObject( "flag", flag );
+		return modelAndView;
+	}
+	
+	@RequestMapping("admin_board_delete_ok.do")
+	public ModelAndView admin_board_delete_ok(HttpServletRequest request) {
+		
+		freeboardTO to = new freeboardTO();
+		to.setFree_seq(request.getParameter("seq"));
+
+		int flag = fdao.FreeBoard_Delete_Ok(to);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin_board_delete_ok" );
+		modelAndView.addObject( "flag", flag );
+		return modelAndView;
 	}
 	
 	@RequestMapping("admin_review_list.do")
