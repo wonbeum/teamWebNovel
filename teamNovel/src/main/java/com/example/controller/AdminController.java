@@ -10,22 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.model.CommentDAO;
 import com.example.model.FreeBoardDAO;
 import com.example.model.admin_origin_requestDAO;
 import com.example.model.admin_origin_requestTO;
+import com.example.model.commentTO;
 import com.example.model.freeboardTO;
 import com.example.model.userInfoTO;
 import com.example.model.user_adminDAO;
 
 @RestController
 public class AdminController {
-	
 	@Autowired
 	private user_adminDAO userdao;
 	@Autowired
 	private admin_origin_requestDAO aordao;
 	@Autowired
 	private FreeBoardDAO fdao;
+	@Autowired
+	private CommentDAO cdao;
 	
 	@RequestMapping("admin_main.do")
 	public ModelAndView admin_main(HttpServletRequest request) {
@@ -108,6 +111,15 @@ public class AdminController {
 		modelAndView.setViewName( "admin_board_view" );
 		modelAndView.addObject("to", to);
 		return modelAndView;
+	}
+	
+	// 댓글 ajax 가져오기
+	@RequestMapping("AdminCommentListAjax.do")
+	public ArrayList<commentTO> CommentListAjax(HttpServletRequest request) {
+		String free_seq = request.getParameter("free_seq");
+		ArrayList<commentTO> commentList = cdao.Comment_list(free_seq);
+		
+		return commentList;
 	}
 
 	@RequestMapping("admin_board_write.do")

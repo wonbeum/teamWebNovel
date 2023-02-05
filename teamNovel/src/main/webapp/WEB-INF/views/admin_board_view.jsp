@@ -1,18 +1,25 @@
+<%@page import="com.example.model.commentTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.example.model.freeboardTO"%>
 	
 <%
 	freeboardTO to = (freeboardTO)request.getAttribute("to");
-
+	
+	String free_seq = to.getFree_seq();
 	String email = to.getUser_email();
 	String nickname = to.getUser_nickname();
 	String wdate = to.getFree_date();
 	String subject = to.getFree_subject();
 	String date = to.getFree_date();
 	String wip = to.getFree_ip();
+	String hit = to.getFree_hit();
 	String like = to.getFree_like();
 	String content = to.getFree_content();
+	
+	commentTO cto = (commentTO)request.getAttribute("cto");
+
+	
 %>
 
 <!DOCTYPE html>
@@ -25,11 +32,88 @@
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style type="text/css">
-	.nav-scroller{
+.nav-scroller{
 		border: 1px solid black ;
-	}
+}
 </style>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$(function(){
+		commentList();
+		setInterval(commentList, 1000);
+		commentList();
+	});
+});
+
+//댓글 가져오기
+const commentList =function() {
+	$.ajax({
+		url : 'AdminCommentListAjax.do',
+		type : 'get',
+		data : {
+			free_seq : "<%=free_seq%>"
+		},
+		dataType : 'json',
+		success : function(jsonData){
+				
+			$('#cmt_area').html('');
+			
+			for(let i=0; i<jsonData.length; i++){	
+				const result = `
+					<li>
+						<div>
+							<span><strong>\${jsonData[i].user_nickname}(\${jsonData[i].user_email})</strong></span> <span class='fw-lighter'>\${jsonData[i].cmt_date}</span>
+							<input type="button" class="cmtdelbtn" value="삭제">
+						</div>
+						<div>
+							<p>\${jsonData[i].cmt_content}</p>
+						</div>
+					</li>
+				`
+				$('#cmt_area').append(result);
+				$(".cmtdelbtn").on('click', deleteReply);
+			}
+		
+		},
+		error : function(e) {
+			alert("error !");
+		}
+	});
+};
+
+function deleteReply(){
+	alert("삭제!");
+}
+
+const deleteOkServer = function(){
+	$.ajax({
+		url:'./board_comment_delete_ok.json?seq='+ <%=free_seq%>,
+		type: 'get',
+		dataType: 'json',
+		success: function(jsonData) {
+			if(jsonData.flag==0){
+				alert( "삭제 성공!");
+			
+				$( '#d_password').val('');
+				$( '#deleteDialog').dialog('close');
+				commentList();
+			}
+		},
+		error: function(err) {
+			alert( "[에러] :" + err.status );
+		}
+	})
+};
+
+</script>
 </head>
 <body>
 
@@ -58,51 +142,85 @@
 			</nav>
   </div>
 </div>
-
+<!-- 상단 디자인 -->
 <!-- 본문 -->
 
-<!-- 상단 디자인 -->
-<div class="con_title">
-    <h3>게시물 관리</h3>
-    <p><strong>게시글 보기</strong></p>
+<!-- 게시판 헤더 -->
+<main>
+<div class="container w-75">
+	<div class="row mt-5">
+		<div class="col-auto me-auto">
+  		  <h5>커뮤니티 게시판 상세보기</h5>
+		</div>
+		<div class="col-auto">
+			<a href="./admin_main.do">
+			<img src="//image.istarbucks.co.kr/common/img/common/icon_home.png" alt="홈으로">
+			</a>
+			<img class="arrow" src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png" alt="하위메뉴"><a href="./admin_board_list.do">게시판 관리</a>
+		</div>
+	</div>
 </div>
 
-<div class="con_txt">
-    <div class="contents_sub">
-        <!--게시판-->
-        <div class="board_view">
-            <table>
-            <tr>
-                <th width="10%">제목</th>
-                <td width="60%"><%=subject %></td>
-                <th width="10%">등록일</th>
-                <td width="20%"><%=wdate %></td>
-            </tr>
-            <tr>
-                <th>글쓴이</th>
-                <td><%=nickname %>(<%=email %>)(<%=wip %>)</td>
-                <th>추천</th>
-                <td><%=like %></td>
-            </tr>
-            <tr>
-                <td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%"><%=content %></td>
-            </tr>
+<!-- 게시판 내용 -->
+	<div class="container w-75 mb-5">
+        <div class="container w-75">
+ 		<form action="./admin_board_delete_ok.do" method="post" name="AdminBoardDelete">
+		<input type="hidden" name="seq" value="<%=free_seq %>" />
+			<table class="table">
+           	<thead>
+           		<tr>
+	                <th width="10%">제목</th>
+	                <td width="40%"><%=subject %></td>
+	                <th width="10%">등록일</th>
+	                <td width="20%"><%=wdate %></td>
+	                <th width="10%"></th>
+	            </tr>
+				<tr>
+	                <th>글쓴이</th>
+                	<td><%=nickname %>(<%=email %>)(<%=wip %>)</td>
+                	<th>추천</th>
+                	<td><%=like %></td>
+                	<th>조회</th>
+                	<td><%=hit %></td>
+         	   </tr>
+         	</thead>
+         	<tbody>
+         		<tr>
+               		<td colspan="4" height="200" valign="top" style="padding: 20px; line-height: 160%"><%=content %></td>
+	            </tr>
+            </tbody>
             </table>
+            </form>
         </div>
+        
+        <!-- 댓글 -->
+			<div class="container w-75 mb-5">
+					<table class="table">
+						<tbody>
+							<tr>
+								<th class="subject"><h4>댓글</h4></th>
+							</tr>
+						</tbody>
+					</table>
+					<ul class="list-unstyled" id="cmt_area">					 
+					</ul>
+			</div>
+		</div>
 
-        <div class="btn_area">
-            <div class="align_left">
-                <input type="button" value="목록" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='admin_board_list.do'" />
+
+<!-- 버튼 -->
+        <div class="container d-flex justify-content-around">
+            <div class="col-auto me-auto">
+            	<a class="btn btn-outline-secondary mt-3" href="./admin_board_list.do" role="button">목록</a>
             </div>
-            <div class="align_right">
-                <input type="button" value="삭제" class="btn_list btn_txt02" style="cursor: pointer;" onclick="location.href='admin_board_delete_ok.do'" />
-                <input type="button" value="쓰기" class="btn_write btn_txt01" style="cursor: pointer;" onclick="location.href='admin_board_write.do'" />
+            <div class="col-auto">
+            	<a class="btn btn-outline-secondary mt-3" href="./admin_board_delete_ok.do?seq=<%=free_seq%>" role="button">삭제</a>
+            	<a class="btn btn-outline-secondary mt-3" href="./admin_board_write.do" role="button">쓰기</a>
             </div>
-        </div>  
-        <!--//게시판-->
-    </div>
-</div>
+        </div>
+</main>
 <!-- 하단 디자인 -->
+
 
 <hr class="footer-div">
 

@@ -48,9 +48,9 @@ public class FreeBoardController {
 	
 	@RequestMapping("board_write_ok.do")
 	public ModelAndView board_write_ok(HttpServletRequest request, HttpSession session) {
-		userInfoTO to = (userInfoTO)session.getAttribute("signIn");
-		String user_email = to.getUser_email();
-		String user_nickname = to.getUser_nickname();
+		//userInfoTO to = (userInfoTO)session.getAttribute("signIn");
+		String user_email = "root";
+		String user_nickname = "관리자";
 		
 		freeboardTO fto = new freeboardTO();
 		fto.setFree_category(request.getParameter("free_category"));

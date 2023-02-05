@@ -34,7 +34,7 @@
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style type="text/css">
 	.nav-scroller{
 		border: 1px solid black ;
@@ -88,11 +88,13 @@ $().ready(function () {
             if (result.isConfirmed) {
                 Swal.fire(
                     '삭제가 완료되었습니다.',
-                )
+                );
+                deleteServer( $())
             }
         })
     });
 });
+
 </script>
 
 </head>

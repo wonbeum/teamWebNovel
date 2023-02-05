@@ -66,7 +66,7 @@ public class CommentDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "select cmt_content, date_format(cmt_date,'%y-%m-%d') cmt_date, user_nickname from novel_free_comment where free_seq = ? and cmt_status = '공개' order by free_seq desc";
+			String sql = "select cmt_content, date_format(cmt_date,'%y-%m-%d') cmt_date, user_nickname, user_email from novel_free_comment where free_seq = ? and cmt_status = '공개' order by free_seq desc";
 			
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1,  free_seq );
@@ -77,6 +77,7 @@ public class CommentDAO {
 				to.setCmt_content( rs.getString( "cmt_content" ) );
 				to.setCmt_date( rs.getString( "cmt_date" ) );
 				to.setUser_nickname( rs.getString( "user_nickname" ) );
+				to.setUser_email( rs.getString( "user_email" ) );
 				
 				commentlists.add( to );
 			}

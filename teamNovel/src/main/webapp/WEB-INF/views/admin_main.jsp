@@ -11,15 +11,16 @@
 	ArrayList<userInfoTO> userLists = (ArrayList<userInfoTO>)request.getAttribute("userLists");
 	
 	StringBuilder sbHtml1 = new StringBuilder();
-	
-	for( userInfoTO to : userLists ){
-		sbHtml1.append("<tr>");
-		sbHtml1.append("<th scope='row'>1</td>");
-		sbHtml1.append("	<td>"+ to.getUser_email() +"</td>");
-		sbHtml1.append("	<td>"+ to.getUser_nickname() +"</td>");
-		sbHtml1.append("	<td>"+to.getUser_cdate()+"</td>");
-		sbHtml1.append("</tr>");
-	}
+
+		for( userInfoTO to : userLists ){
+			sbHtml1.append("<tr>");
+			sbHtml1.append("<th scope='row'>"+ userLists.indexOf("userLists") +"</td>");
+			sbHtml1.append("	<td>"+ to.getUser_email() +"</td>");
+			sbHtml1.append("	<td>"+ to.getUser_nickname() +"</td>");
+			sbHtml1.append("	<td>"+to.getUser_cdate()+"</td>");
+			sbHtml1.append("</tr>");
+		}
+
 
 
 	ArrayList<freeboardTO> boardLists = (ArrayList<freeboardTO>)request.getAttribute("boardLists");
@@ -27,8 +28,10 @@
 	StringBuilder sbHtm2 = new StringBuilder();
 
 	for( freeboardTO to : boardLists ){
+		if( boardLists.size() == 5)
+			break;
 		sbHtm2.append("<tr>");
-		sbHtm2.append("	<th scope='row'>1</th>");
+		sbHtm2.append("	<th scope='row'>"+ to.getFree_seq() +"</th>");
 		sbHtm2.append("		<td>["+ to.getFree_category() + "]</td>");
 		sbHtm2.append("		<td>"+ to.getFree_subject() + "</td>");
 		sbHtm2.append("		<td>"+ to.getUser_email() +"</td>");
@@ -102,7 +105,15 @@
         <!--회원리스트-->
         <div class="table-responsive" style="width:500px" id="MemberList">
             <table class="table table-sm caption-top">
-            <caption>회원 리스트</caption>
+            <caption>
+            회원 리스트
+            	<a href="./admin_member_list.do" class="text-decoration-none">
+            	바로가기
+            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+  					<path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+				</svg>
+				</a>
+			</caption>
             <thead class="table-dark">
             <tr>
 	            <th scope="col">#</th>
@@ -121,36 +132,6 @@
                 <td>가입일</td>
             </tr>
 -->
-            <tr>
-	            <th scope="row">1</th>
-                <td>이메일</td>
-                <td>닉네임</td>
-                <td>가입일</td>
-            </tr>
-            <tr>
-	            <th scope="row">2</th>
-                <td>이메일</td>
-                <td>닉네임</td>
-                <td>가입일</td>
-            </tr>
-            <tr>
-	            <th scope="row">3</th>
-                <td>이메일</td>
-                <td>닉네임</td>
-                <td>가입일</td>
-            </tr>
-            <tr>
-	            <th scope="row">4</th>
-                <td>이메일</td>
-                <td>닉네임</td>
-                <td>가입일</td>
-            </tr>
-            <tr>
-	            <th scope="row">5</th>
-                <td>이메일</td>
-                <td>닉네임</td>
-                <td>가입일</td>
-            </tr>
             </tbody>
             </table>
         </div>
@@ -158,7 +139,15 @@
         <!--게시물 리스트-->
         <div class="table-responsive" style="width:500px" id="BoardList">
             <table class="table table-sm caption-top">
-            <caption>최신 게시글</caption>
+            <caption>최신 게시글
+            <a href="./admin_board_list.do" class="text-decoration-none">
+            	바로가기
+            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+  					<path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+				</svg>
+			</a>
+            </caption>
+            
             <thead class="table-dark">
             <tr>
             	<th scope="col">#</th>
@@ -177,36 +166,6 @@
                 <td>작성자</td>
             </tr>
  -->
-             <tr>
-                <th scope="row">1</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>작성자</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>작성자</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>작성자</td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>작성자</td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>작성자</td>
-            </tr>
             </tbody>
             </table>
         </div>
@@ -216,7 +175,14 @@
         <!--리뷰리스트-->
         <div class="table-responsive" style="width:500px" id="ReviewList">
         <table class="table table-sm caption-top">
-            <caption>리뷰 리스트</caption>
+            <caption>리뷰 리스트
+                <a href="./admin_review_list.do" class="text-decoration-none">
+            	바로가기
+            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+  					<path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+				</svg>
+				</a>
+            </caption>
             <thead class="table-dark">
             <tr>
             	<th scope="col">#</th>
@@ -271,7 +237,14 @@
         <!--요청리스트-->
         <div class="table-responsive" style="width:500px" id="RequestList">
         <table class="table table-sm caption-top">
-            <caption>요청 리스트</caption>
+            <caption>요청 리스트
+               	<a href="./admin_request_list.do" class="text-decoration-none">
+            	바로가기
+            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+  					<path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+				</svg>
+				</a>
+            </caption>
             <thead class="table-dark">
             <tr>
             	<th scope="col">#</th>
