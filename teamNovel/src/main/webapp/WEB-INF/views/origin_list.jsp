@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="com.example.model.userInfoTO"  %>
 
 <!DOCTYPE html>
 <html>
@@ -42,18 +43,20 @@
 	}
 </style>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#rqbtn').click(function(){
-			if(true) {
+		$('#rqbtn').click(function handler(event){
+			if(${signIn == null}) {
 				alert("로그인 후 요청이 가능합니다!");
-				return false;
+			} else {
+				$("#RequestModal").modal("show");
 			}
 		});
+
 	});
 
 </script>
-</style>
 </head>
 <body>
 
@@ -123,7 +126,7 @@
 <div class="container w-75">
 	<div class="row">
 		<div align="right">
-		  	<a class="btn btn-outline-dark" id="rqbtn" data-bs-toggle="modal" data-bs-target="#RequestModal">요청하기</a>
+		  	<a class="btn btn-outline-dark" id="rqbtn" data-bs-toggle="modal" data-bs-target="">요청하기</a>
 		</div>
 	</div>
 </div>
