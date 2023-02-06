@@ -54,7 +54,7 @@ public class CommentDAO {
 	}
 
 	
-	// 전체 댓글 list
+	// 전체 댓글 list (공개만)
 	public ArrayList<commentTO> Comment_list(String free_seq) {
 		 
 		Connection conn = null;
@@ -66,7 +66,7 @@ public class CommentDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "select cmt_content, date_format(cmt_date,'%y-%m-%d') cmt_date, user_nickname, user_email from novel_free_comment where free_seq = ? and cmt_status = '공개' order by free_seq desc";
+			String sql = "select cmt_seq, free_seq, cmt_content, date_format(cmt_date,'%y-%m-%d') cmt_date, user_nickname, user_email from novel_free_comment where free_seq = ? and cmt_status = '공개' order by free_seq desc";
 			
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1,  free_seq );
@@ -74,6 +74,8 @@ public class CommentDAO {
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
 				commentTO to = new commentTO();
+				to.setCmt_seq( rs.getString( "cmt_seq" ) );
+				to.setFree_seq( rs.getString( "free_seq" ) );
 				to.setCmt_content( rs.getString( "cmt_content" ) );
 				to.setCmt_date( rs.getString( "cmt_date" ) );
 				to.setUser_nickname( rs.getString( "user_nickname" ) );
@@ -96,7 +98,7 @@ public class CommentDAO {
 
 	
 	///댓글 delete_ok
-	public int FreeBoard_Delete_Ok( freeboardTO to ) {
+	public int Comment_Delete_Ok( commentTO to ) {
 		 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -107,10 +109,11 @@ public class CommentDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "delete from novel_free_board where free_seq=?";
+			String sql = "update novel_free_comment set cmt_status='차단' where free_seq=? and cmt_seq=?";
 			
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, to.getFree_seq() );		
+			pstmt.setString( 2, to.getCmt_seq() );		
 			
 			int result = pstmt.executeUpdate();
 			if(result == 1) {

@@ -87,6 +87,9 @@ public class FreeBoardController {
 		modelAndView.addObject("to", to);
 		return modelAndView;
 	}
+	
+
+	// 댓글
 
 	// 댓글 작성 ajax
 	@RequestMapping("CommentWriteAjax.do")
@@ -109,7 +112,23 @@ public class FreeBoardController {
 		return flag;
 	}
 	
-	// ajax 리스트 가져오기
+	// 댓글 삭제 ajax
+	@RequestMapping("CommentDeleteAjax.do")
+	public int CommentDeleteAjax(HttpServletRequest request) {
+		String free_seq = request.getParameter("free_seq");
+		String cmt_seq = request.getParameter("cmt_seq");
+		
+		commentTO cto = new commentTO();
+		cto.setFree_seq(free_seq);
+		cto.setCmt_seq(cmt_seq);
+		
+		int flag = cdao.Comment_Delete_Ok(cto);
+		
+		return flag;
+	}
+	
+	
+	// ajax 댓글 리스트 가져오기
 	@RequestMapping("CommentListAjax.do")
 	public ArrayList<commentTO> CommentListAjax(HttpServletRequest request) {
 		String free_seq = request.getParameter("free_seq");
