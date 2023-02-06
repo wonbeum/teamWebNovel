@@ -29,12 +29,21 @@
 	border: 1px solid black;
 }
 </style>
+<!-- Jquery -->
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 // 자기가 쓴 글을 볼때만 취소 삭제 버튼 나타남
 	const board_nickname = "<%=user_nickname%>";
+	
+	// 삭제
+	function clickDel(formName) {
+		formName.action = "/board_delete_ok.do";
+		formName.method = "post";
+		formName.submit();
+	}
+	
 	$(document).ready(function(){
 		if("${signIn.user_nickname}" == board_nickname) {
 			$('#likebtn').remove();
@@ -43,14 +52,15 @@
 		} 
 		//console.log(${signIn.user_nickname});
 		//console.log(board_nickname);
+	
+	// 댓글 실시간(1초마다) 가져오기
 	$(function(){
 		commentList();
 		setInterval(commentList, 1000);
 		commentList();
 	});
-		
 	
-		
+	
 		// 댓글 작성
 		$('#cmtbtn').click(function(){
 			if(${signIn.user_nickname != null}){
@@ -79,13 +89,8 @@
 	
 	});
 	
-	// 삭제
-	function clickDel(formName) {
-		formName.action = "/board_delete_ok.do";
-		formName.method = "post";
-		formName.submit();
-	}
-});
+
+	});
 	
 	// 댓글 가져오기
 	function commentList() {
@@ -210,10 +215,11 @@
 				<div class="col-lg-6 col-md-12 mt-3 mb-5">
 				<form action="./board_modify_ok.do" method="post" name="userInfo">
 				<input type="hidden" name="seq" value="<%=free_seq %>" /> 
+						<h4><%=free_subject %></h4>
 					<table class="table">
 						<thead>
 							<tr>
-								<td><h4><%=free_subject %></h4></td>
+								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -221,15 +227,15 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td width="40%" id="user_nickname"><%=user_nickname %></td>
-								<td width="20%"><%=free_date %></td>
+								<td width="35%" id="user_nickname"><%=user_nickname %></td>
+								<td width="25%"><%=free_date %></td>
 								<td width="20%">조회 <%=free_hit %></td>
-								<td width="20%">추천 <%=free_like%></td>
+								<td width="25%">추천 <%=free_like%></td>
 							</tr>
 						</tbody>
 					</table>
 					</form>
-					<textarea class="form-control" name="content" rows="8" readonly><%=free_content %></textarea>
+					<div class="form-control" name="content" style="height:300px; overflow:scroll;"><%=free_content %></div>
 					<div id ="btnarea">
 						<a class="btn btn-outline-dark mt-3" href="./board_list.do"
 						role="button" id="listbtn">목록</a>

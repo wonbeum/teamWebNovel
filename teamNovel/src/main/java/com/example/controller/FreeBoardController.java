@@ -33,13 +33,21 @@ public class FreeBoardController {
 		return new ModelAndView( "board_list" );
 	}
 	
-	// ajax 리스트 가져오기
+	// ajax 전체 리스트 가져오기
 	@RequestMapping("BoardListAjax.do")
 	public ArrayList<freeboardTO> boardListAjax() {
 		ArrayList<freeboardTO> boardList = fdao.FreeBoard_list();
 		
 		return boardList;
 	}
+	
+	// ajax 공지 리스트 가져오기
+		@RequestMapping("NoticeListAjax.do")
+		public ArrayList<freeboardTO> NoticeListAjax() {
+			ArrayList<freeboardTO> boardList = fdao.Notice_list("free_category","공지");
+			
+			return boardList;
+		}
 	
 	@RequestMapping("board_write.do")
 	public ModelAndView board_write(HttpServletRequest request, HttpServletResponse response) {	
@@ -48,9 +56,9 @@ public class FreeBoardController {
 	
 	@RequestMapping("board_write_ok.do")
 	public ModelAndView board_write_ok(HttpServletRequest request, HttpSession session) {
-		//userInfoTO to = (userInfoTO)session.getAttribute("signIn");
-		String user_email = "root";
-		String user_nickname = "관리자";
+		userInfoTO to = (userInfoTO)session.getAttribute("signIn");
+		String user_email = to.getUser_email();
+		String user_nickname = to.getUser_nickname();
 		
 		freeboardTO fto = new freeboardTO();
 		fto.setFree_category(request.getParameter("free_category"));

@@ -33,34 +33,83 @@
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	
+	<!-- SmartEditor2 라이브러리  -->
+<script type="text/javascript" src="smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 
 function clickModi(formName) {
 	formName.action = "/board_modify_ok.do";
 	formName.method = "post";
+	
+	   oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
+       let content = document.getElementById("editorTxt").value;
+	
+    if(content == "" || content == null || content == '&nbsp;' || 
+			content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
+		//alert("내용을 입력해주세요.");
+		return false;
+	}
+    
+    if (title == null || title == "") {
+		//alert("제목을 입력해주세요.");
+		//$("#title").focus();
+		return false;
+	}
 	formName.submit();
 }
-	// 입력값 검사
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
 
-      const mbtn = document.getElementById('mbtn');
-      const modalbtn = document.getElementById('modalbtn');
-   	Array.prototype.filter.call(forms, (form) => {
-    	mbtn.addEventListener("click", function (event) {
-       
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-      		modalbtn.disabled = true;
-          }
-			
-          form.classList.add('was-validated');
-        }, false);
-      });
-      
-    }, false);
+
+<!-- SmartEditor2 -->
+	let oEditors = []
+
+	smartEditor = function() {
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors,
+			elPlaceHolder : "editorTxt",
+			sSkinURI : "smarteditor/SmartEditor2Skin.html",
+			fCreator : "createSEditor2",
+			htParams : {
+				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseToolbar : true,
+
+				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : false,
+
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseModeChanger : false
+			}
+		});
+	}
 	
+
+	// 입력값 검사
+	$(document).ready(function(){
+		smartEditor();
+		$("#savebutton").click(function(){
+	        //id가 smarteditor인 textarea에 에디터에서 대입
+	        oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
+	        let content = document.getElementById("editorTxt").value;
+	        let title = $("#free_subject").val();
+	        // 입력값 검사
+	        if(content == "" || content == null || content == '&nbsp;' || 
+					content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
+				alert("내용을 입력해주세요.");
+				return false;
+			}
+	        
+	        if (title == null || title == "") {
+				alert("제목을 입력해주세요.");
+				//$("#title").focus();
+				return false;
+			}
+	        
+	        //폼 submit
+	        $("#frm").submit();
+	    });
+		
+	});
 	
 </script>
 </head>
@@ -129,7 +178,7 @@ function clickModi(formName) {
 	<div
 		class="container shadow p-3 mt-4 mb-5 bg-body-tertiary rounded w-50">
 		<div class="form">
-			<form class="validation-form" name="userInfo" novalidate>
+			<form class="validation-form" name="userInfo" id="frm" novalidate>
 				<input type="hidden" name="seq" value=<%=free_seq %>>
 				<div class="mb-3 w-25">
 					<label class="form-label">카테고리</label> <select
@@ -139,19 +188,19 @@ function clickModi(formName) {
 						<option value="이슈">이슈</option>
 						<option value="잡담">잡담</option>
 					</select>
-					<div class="invalid-feedback">카테고리를 선택해주세요.</div>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">제목</label> <input type="text"
-						name="free_subject" class="form-control" placeholder="제목 입력"
-						value=<%=free_subject %> required>
-					<div class="invalid-feedback">제목을 입력해주세요.</div>
+						name="free_subject" id="free_subject" class="form-control" placeholder="제목 입력"
+						value=<%=free_subject %>>
 				</div>
 				<div class="mb-3">
 					<label class="form-label">내용</label>
-					<textarea class="form-control" name="free_content" rows="5"
-						placeholder="내용 입력" required><%=free_content %></textarea>
-					<div class="invalid-feedback">내용을 입력해주세요.</div>
+						<!-- SmartEditor2  -->
+					<div id="smarteditor">
+						<textarea name="free_content" id="editorTxt" rows="10" cols="10"
+							placeholder="내용을 입력해주세요" style="width: 100%"><%=free_content %></textarea>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-auto me-auto">
@@ -183,7 +232,7 @@ function clickModi(formName) {
 				<div class="modal-footer">
 					<button type="button" id="modalbtn" class="btn btn-secondary"
 						data-bs-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" id="modalbtn" onclick=clickModi(userInfo)>수정하기</button>
+					<button type="submit" class="btn btn-primary" id="savebutton" onclick=clickModi(userInfo)>수정하기</button>
 				</div>
 			</div>
 		</div>

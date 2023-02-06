@@ -99,8 +99,8 @@ public class FreeBoardDAO {
 		return boardlists;
 	}
 	
-	// 공지 글 / 서치 list
-	public ArrayList<freeboardTO> FreeBoard_list( String menu, String content ) {
+	// 공지 글 
+	public ArrayList<freeboardTO> Notice_list( String menu, String content ) {
 		 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -111,13 +111,10 @@ public class FreeBoardDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "select free_seq, free_category, free_subject, user_nickname, free_date, "
-					+ "free_hit, free_like from novel_free_board where ? like ? order by free_seq desc";
+			String sql = "select free_seq, free_category, free_subject, user_nickname, date_format(free_date,'%y-%m-%d') free_date, "
+					+ "free_hit, free_like from novel_free_board where free_category = '공지' order by free_seq desc";
 			
 			pstmt = conn.prepareStatement( sql );
-			pstmt.setString( 1, menu  );
-			pstmt.setString( 2, "%"+content+"%"  );
-		
 			
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
@@ -125,7 +122,7 @@ public class FreeBoardDAO {
 				to.setFree_seq( rs.getString( "free_seq" ) );
 				to.setFree_category( rs.getString( "free_category" ) );
 				to.setFree_subject( rs.getString( "free_subject" ) );
-				to.setUser_nickname( rs.getString( "free_nickname" ) );
+				to.setUser_nickname( rs.getString( "user_nickname" ) );
 				to.setFree_date( rs.getString( "free_date" ) );
 				to.setFree_hit( rs.getString( "free_hit" ) );
 				to.setFree_like( rs.getString( "free_like" ) );
@@ -141,7 +138,53 @@ public class FreeBoardDAO {
 			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
 			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 		}	
+		//System.out.println(boardlists);
+		return boardlists;
+	}
+	
+	// 서치 list
+	public ArrayList<freeboardTO> Search_list( String menu, String content ) {
+		 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
+		ArrayList<freeboardTO> boardlists = new ArrayList<freeboardTO>();
+		
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "select free_seq, free_category, free_subject, user_nickname, free_date, "
+					+ "free_hit, free_like from novel_free_board where ? like ? order by free_seq desc";
+			
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setString( 1, menu  );
+			pstmt.setString( 2, content+"%"  );
+		
+			
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				freeboardTO to = new freeboardTO();
+				to.setFree_seq( rs.getString( "free_seq" ) );
+				to.setFree_category( rs.getString( "free_category" ) );
+				to.setFree_subject( rs.getString( "free_subject" ) );
+				to.setUser_nickname( rs.getString( "user_nickname" ) );
+				to.setFree_date( rs.getString( "free_date" ) );
+				to.setFree_hit( rs.getString( "free_hit" ) );
+				to.setFree_like( rs.getString( "free_like" ) );
+				
+				boardlists.add( to );
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}	
+		//System.out.println(boardlists);
 		return boardlists;
 	}
 

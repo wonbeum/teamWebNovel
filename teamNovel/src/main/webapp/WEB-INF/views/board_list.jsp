@@ -32,19 +32,19 @@ $(document).ready(function(){
 				return false;
 			}
 		});	
-			
+		
+	// 전체 리스트 가져오기
 	$.ajax({
 		url : 'BoardListAjax.do',
 		type : 'get',
 		dataType : 'json',
 		success : function(jsonData){
 			//console.log("성공");
-			$('#insertList').html('');
+			$('#insertTotalList').html('');
 			
 			for(let i=0; i<jsonData.length; i++){	
 				tr = `
 					<tr> 
-					<td>\${jsonData[i].free_seq}</td>
 					<td>\${jsonData[i].free_category}</td>
 					<td class='text-start'><a href='board_view.do?seq=\${jsonData[i].free_seq}'>
 						\${jsonData[i].free_subject}</a></td>
@@ -54,16 +54,57 @@ $(document).ready(function(){
 					<td>\${jsonData[i].free_like}</td>
 					</tr>
 				`
-				$('#insertList').append(tr);
+				$('#insertTotalList').append(tr);
 			}
 		},
 		error : function(e) {
 			alert("error !");
 		}
 	});
+	
+	
+	NoticeAjax();
+	
+	// 인기글 가져오기
+	
+	
+	// 공지 가져오기
+	
 		
 });
-
+	// 공지 가져오기
+	function NoticeAjax(){
+		$.ajax({
+			url : 'NoticeListAjax.do',
+			type : 'get',
+			dataType : 'json',
+			success : function(jsonData){
+				//console.log("성공");
+				
+				$('#insertNoticeList').html('');
+				
+				for(let i=0; i<jsonData.length; i++){	
+					tr = `
+						<tr> 
+						<td>\${jsonData[i].free_category}</td>
+						<td class='text-start'><a href='board_view.do?seq=\${jsonData[i].free_seq}'>
+							\${jsonData[i].free_subject}</a></td>
+						<td>\${jsonData[i].user_nickname}</td>
+						<td>\${jsonData[i].free_date}</td>
+						<td>\${jsonData[i].free_hit}</td>
+						<td>\${jsonData[i].free_like}</td>
+						</tr>
+					`
+					$('#insertNoticeList').append(tr);
+				}
+				
+			},
+			error : function(e) {
+				alert("error !");
+			}
+		});
+	}
+	
 </script>
 </head>
 <body>
@@ -146,7 +187,6 @@ $(document).ready(function(){
 				<table class="table table-hover mt-3">
 					<thead class="table-light text-center">
 						<tr>
-							<th scope="col" width="8%">번호</th>
 							<th scope="col" width="10%">카테고리</th>
 							<th scope="col">제목</th>
 							<th scope="col" width="13%">작성자</th>
@@ -155,7 +195,7 @@ $(document).ready(function(){
 							<th scope="col" width="8%">추천</th>
 						</tr>
 					</thead>
-					<tbody class="text-center" id="insertList">
+					<tbody class="text-center" id="insertTotalList">
 						<!-- 
 				<tr>
 					<th scope="col">1</th>
@@ -194,18 +234,16 @@ $(document).ready(function(){
 				<table class="table table-hover mt-3">
 					<thead class="table-light text-center">
 						<tr>
-							<th scope="col" width="8%">번호</th>
 							<th scope="col" width="10%">카테고리</th>
 							<th scope="col">제목</th>
 							<th scope="col" width="13%">작성자</th>
-							<th scope="col" width="8%">날짜</th>
-							<th scope="col" width="6%">조회</th>
-							<th scope="col" width="6%">추천</th>
+							<th scope="col" width="13%">날짜</th>
+							<th scope="col" width="8%">조회</th>
+							<th scope="col" width="8%">추천</th>
 						</tr>
 					</thead>
 					<tbody class="text-center">
 						<tr>
-							<th scope="col">1</th>
 							<td>공지</td>
 							<td class="text-start"><a href="board_view.do">title</td>
 							<td>writer</td>
@@ -214,7 +252,6 @@ $(document).ready(function(){
 							<td>10</td>
 						</tr>
 						<tr>
-							<th scope="col">2</th>
 							<td>공지</td>
 							<td class="text-start"><a href="board_view.do">title</td>
 							<td>writer</td>
@@ -249,17 +286,17 @@ $(document).ready(function(){
 			<div class="container">
 				<table class="table table-hover mt-3">
 					<thead class="table-light text-center">
-						<tr>
-							<th scope="col" width="8%">번호</th>
+							<tr>
 							<th scope="col" width="10%">카테고리</th>
 							<th scope="col">제목</th>
 							<th scope="col" width="13%">작성자</th>
-							<th scope="col" width="8%">날짜</th>
-							<th scope="col" width="6%">조회</th>
-							<th scope="col" width="6%">추천</th>
+							<th scope="col" width="13%">날짜</th>
+							<th scope="col" width="8%">조회</th>
+							<th scope="col" width="8%">추천</th>
 						</tr>
 					</thead>
-					<tbody class="text-center">
+					<tbody class="text-center" id="insertNoticeList">
+					<!-- 
 						<tr>
 							<th scope="col">1</th>
 							<td>공지</td>
@@ -269,15 +306,7 @@ $(document).ready(function(){
 							<td>1</td>
 							<td>10</td>
 						</tr>
-						<tr>
-							<th scope="col">2</th>
-							<td>공지</td>
-							<td class="text-start"><a href="board_view.do">title</td>
-							<td>writer</td>
-							<td>23.01.26</td>
-							<td>3</td>
-							<td>10</td>
-						</tr>
+					 -->
 					</tbody>
 				</table>
 			</div>

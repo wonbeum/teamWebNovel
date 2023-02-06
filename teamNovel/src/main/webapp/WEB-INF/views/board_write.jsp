@@ -1,8 +1,9 @@
-<%@page import="ch.qos.logback.core.recovery.ResilientSyslogOutputStream"%>
+<%@page
+	import="ch.qos.logback.core.recovery.ResilientSyslogOutputStream"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.example.model.userInfoTO"  %>
+<%@ page import="com.example.model.userInfoTO"%>
 <%
 
 %>
@@ -21,27 +22,65 @@
 	border: 1px solid black;
 }
 </style>
-<script>
-	// 입력값 검사
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
 
-   	Array.prototype.filter.call(forms, (form) => {
-    	form.addEventListener('submit', function (event) {
-       
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-            
-          }
-			
-          form.classList.add('was-validated');
-        }, false);
-      });
-      
-    }, false);
+<!-- SmartEditor2 라이브러리  -->
+<script type="text/javascript" src="smarteditor/js/HuskyEZCreator.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script>
+
+<!-- SmartEditor2 -->
+	let oEditors = []
+
+	smartEditor = function() {
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors,
+			elPlaceHolder : "editorTxt",
+			sSkinURI : "smarteditor/SmartEditor2Skin.html",
+			fCreator : "createSEditor2",
+			htParams : {
+				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseToolbar : true,
+
+				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : false,
+
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseModeChanger : false
+			}
+		});
+	}
 	
-	
+	// 입력값 검사
+	$(document).ready(function(){
+		smartEditor();
+		$("#savebutton").click(function(){
+	        //id가 smarteditor인 textarea에 에디터에서 대입
+	        oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
+	        let content = document.getElementById("editorTxt").value;
+	        let title = $("#free_subject").val();
+	        // 입력값 검사
+	        if(content == "" || content == null || content == '&nbsp;' || 
+					content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
+				alert("내용을 입력해주세요.");
+				return false;
+			}
+	        
+	        if (title == null || title == "") {
+				alert("제목을 입력해주세요.");
+				//$("#title").focus();
+				return false;
+			}
+	        
+	        //폼 submit
+	        $("#frm").submit();
+	    });
+		
+
+	});	 
+
 </script>
 </head>
 <body>
@@ -106,41 +145,44 @@
 	<div class="text-center mt-5">
 		<h3>커뮤니티 글 쓰기</h3>
 	</div>
-	<div class="container shadow p-3 mt-4 mb-5 bg-body-tertiary rounded w-50">
-		<div class="form"  >
-			<form class="validation-form" action="./board_write_ok.do" method="post" novalidate>
+	<div
+		class="container shadow p-3 mt-4 mb-5 bg-body-tertiary rounded w-50">
+		<div class="form">
+			<form class="validation-form" action="./board_write_ok.do"
+				method="get" id="frm" novalidate>
 				<div class="mb-3 w-25">
-  					<label class="form-label">카테고리</label>
-					<select class="form-select form-select-sm" name="free_category" required>
-  						<option disabled>카테고리 선택</option>
-  						<option value="질문">질문</option>
-  						<option value="이슈">이슈</option>
-  						<option value="잡담">잡담</option>
-				</select>
-				<div class="invalid-feedback">카테고리를 선택하세요.</div>
+					<label class="form-label">카테고리</label> <select
+						class="form-select form-select-sm" name="free_category" required>
+						<option disabled>카테고리 선택</option>
+						<option value="질문">질문</option>
+						<option value="이슈">이슈</option>
+						<option value="잡담">잡담</option>
+					</select>
+					<div class="invalid-feedback">카테고리를 선택하세요.</div>
 				</div>
 				<div class="mb-3">
-  					<label class="form-label">제목</label>
- 					 <input type="text" name="free_subject" class="form-control" placeholder="제목 입력" required>
- 					 <div class="invalid-feedback">제목을 입력해주세요.</div>
+					<label class="form-label">제목</label> <input type="text" id="free_subject"
+						name="free_subject" class="form-control" placeholder="제목 입력"
+						required>
+					<div class="invalid-feedback">제목을 입력해주세요.</div>
 				</div>
-				<div class="mb-3">
- 					 <label class="form-label">내용</label>
- 					 <textarea class="form-control" name="free_content" rows="5" placeholder="내용 입력" required></textarea>
- 					 <div class="invalid-feedback">내용을 입력해주세요.</div>
+
+				<!-- SmartEditor2  -->
+				<div id="smarteditor">
+					<textarea name="free_content" id="editorTxt" rows="10" cols="10" style="width: 100%"></textarea>
 				</div>
-					<div class="row">
-						<div class="col-auto me-auto">
-							<a class="btn btn-outline-secondary" href="./board_list.do" role="button">목록</a>
-						</div>
-						<div class="col-auto">
-							<button type="submit" class="btn btn-secondary">
- 							 글쓰기 
-							</button>
-							
-						</div>
-		
+
+				<div class="row">
+					<div class="col-auto me-auto">
+						<a class="btn btn-outline-secondary" href="./board_list.do"
+							role="button">목록</a>
 					</div>
+					<div class="col-auto">
+						<button type="submit" id="savebutton" class="btn btn-secondary">글쓰기</button>
+
+					</div>
+
+				</div>
 			</form>
 		</div>
 	</div>
@@ -171,4 +213,6 @@
 		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
 		crossorigin="anonymous"></script>
 </body>
+
 </html>
+
