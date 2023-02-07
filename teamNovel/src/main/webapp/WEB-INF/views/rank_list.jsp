@@ -16,7 +16,37 @@
 	.nav-scroller{
 		border: 1px solid black ;
 	}
+	
+	.nav {
+    --bs-nav-link-padding-x: 1rem;
+    --bs-nav-link-padding-y: 0.5rem;
+    --bs-nav-link-font-weight: ;
+    --bs-nav-link-color: #343a40;
+    --bs-nav-link-hover-color: #ffc107;
+    --bs-nav-link-disabled-color: var(--bs-secondary-color);
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+	}
 </style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready( function() {
+		$.ajax({
+			url : '',
+			type : 'get',
+			dataType : 'json',
+			success : function( jsonData ){
+				
+			},
+			error: function( err ) {
+				console.log('에러 :',error.status);				
+			}
+		});
+	});
+</script>
 </head>
 <body>
 
@@ -66,33 +96,42 @@
 </div>
 
 <!-- 본문 -->
-	<div class="container">
-		<header
-			class="d-flex flex-wrap align-items-center justify-content-center">
-			<ul
-				class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-				<li><a href="#" class="nav-link px-2 link-secondary">top30</a></li>
-				<li><a href="#" class="nav-link px-2 link-secondary">카카오 페이지</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">리디북스</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">네이버 시리즈</a></li>
-			</ul>
-		</header>
-	</div>
+
+<div class="container w-75">
+	<!-- Nav pills -->
+	<ul class="nav justify-content-center bg-light" role="tablist">
+	
+		<li class="nav-item">
+			<a class="nav-link active" data-bs-toggle="pill" href="#series">top30</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-bs-toggle="pill" href="#kakaopage">카카오 페이지</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-bs-toggle="pill" href="#series">네이버 시리즈</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-bs-toggle="pill" href="#ridi">리디북스</a>
+		</li>
+	</ul>
+</div>
+
+<div class="container w-75">
+	<!-- Nav pills -->
+	<ul class="nav justify-content-center bg-light" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" data-bs-toggle="pill" href="romance">로맨스</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-bs-toggle="pill" href="#fantasy">판타지</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-bs-toggle="pill" href="#romancefantasy">로맨스판타지</a>
+		</li>
+	</ul>
+</div>
 
 	<div class="container">
-		<header
-			class="d-flex flex-wrap align-items-center justify-content-center">
-			<ul
-				class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-				<li><a href="#" class="nav-link px-2 link-secondary">로맨스
-						</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">로맨스 판타지</a></li>
-				<li><a href="#" class="nav-link px-2 link-dark">판타지</a></li>
-			</ul>
-		</header>
-	</div>
-
-	<div class="container">
 
 		<div class="row row-cols-2 row-cols-sm-2 row-cols-md-5 g-2">
 			<div class="col">
@@ -405,19 +444,6 @@
 			</div>
 		</div>
 	</div>
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item">
-      <a class="page-link" href="#">Next</a>
-    </li>
-  </ul>
-</nav>
 
 
 <hr class="footer-div">

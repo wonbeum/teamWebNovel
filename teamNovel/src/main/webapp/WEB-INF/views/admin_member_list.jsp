@@ -12,13 +12,13 @@
 	for( userInfoTO to : userLists ){
 		sbHtml.append("<tr>");
 		sbHtml.append("		<td><input type='checkbox' name='user_check'></td>");
-		sbHtml.append("		<td>"+ to.getUser_email() +"</td>");
-		sbHtml.append("		<td>"+ to.getUser_nickname() +"</td>");
-		sbHtml.append("		<td>"+to.getUser_gender()+"</td>");
-		sbHtml.append("		<td>"+to.getUser_birth()+"</td>");
-		sbHtml.append("		<td>"+to.getUser_cdate()+"</td>");
+		sbHtml.append("		<td><input name='email' value='"+ to.getUser_email() +"' disabled/></td>");
+		sbHtml.append("		<td><input value='"+ to.getUser_nickname() +"' disabled/></td>");
+		sbHtml.append("		<td><input value='"+to.getUser_gender()+"' disabled/></td>");
+		sbHtml.append("		<td><input value='"+to.getUser_birth()+"' disabled/></td>");
+		sbHtml.append("		<td><input value='"+to.getUser_cdate()+"' disabled/></td>");
 		sbHtml.append("		<td><input type='button' value='상세보기' onClick=\"location.href='./admin_member_view.do?email="+ to.getUser_email() +"'\"><input");
-		sbHtml.append("			type='button' value='삭제' class='confirmStart'></td>");
+		sbHtml.append("			type='submit' value='삭제' class='deletebutton'></td>");
 		sbHtml.append("	</tr>");
 	}
 %>
@@ -61,7 +61,7 @@ $(document).ready(function() {
 });
 
 $().ready(function () {
-    $(".confirmStart").click(function () {
+    $(".deletebutton").click(function () {
         Swal.fire({
             title: '회원 정보 삭제',
             text: "삭제된 회원 정보는 복구할 수 없습니다. 정말 삭제하시겠습니까?",
@@ -74,8 +74,9 @@ $().ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire(
-                    '삭제가 완료되었습니다.',
-                )
+                    '삭제가 완료되었습니다.'
+                ),
+                location.href = "./main.do"
             }
         })
     });
@@ -104,11 +105,11 @@ $().ready(function () {
 		</header>
 
 		<div class="nav-scroller py-1 mb-2">
-				<nav class="nav d-flex justify-content-between">
-				<a class="p-2 link-secondary" href="./admin_member_list.do">회원 관리</a> <a
-					class="p-2 link-secondary" href="./admin_board_list.do">게시물 관리</a> <a
-					class="p-2 link-secondary" href="./admin_review_list.do">리뷰 관리</a> <a
-					class="p-2 link-secondary" href="./admin_origin_request_list.do">요청 리스트</a>
+			<nav class="nav d-flex justify-content-between">
+				<a class="p-2 link-secondary" href="#">회원 관리</a> <a
+					class="p-2 link-secondary" href="#">게시물 관리</a> <a
+					class="p-2 link-secondary" href="#">리뷰 관리</a> <a
+					class="p-2 link-secondary" href="#">요청 리스트</a>
 			</nav>
 		</div>
 	</div>

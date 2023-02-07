@@ -86,8 +86,45 @@ public class AdminController {
 		return modelAndView;
 	}
 	@RequestMapping("admin_member_modify.do")
-	public ModelAndView admin_member_modify() {
-		return new ModelAndView( "admin_member_modify" );
+	public ModelAndView admin_member_modify( HttpServletRequest request ) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin_member_modify");
+		
+		userInfoTO to = new userInfoTO();
+		to.setUser_email( request.getParameter( "email" ) );
+		to = userdao.userModify(to);
+		
+		modelAndView.addObject( "to" , to );
+		
+		return modelAndView;
+	}
+
+	@RequestMapping("admin_member_modify_ok.do")
+	public ModelAndView admin_member_modify_ok( HttpServletRequest request ) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin_member_modify_ok");
+		
+		userInfoTO to = new userInfoTO();
+		to.setUser_nickname( request.getParameter( "nickname" ) );
+		to.setUser_email( request.getParameter( "email" ) );
+		to.setUser_gender( request.getParameter( "gender" ) );
+		to.setUser_birth( request.getParameter( "birth" ) );
+		to.setUser_cdate( request.getParameter( "cdate" ) );
+		
+		System.out.println( to.getUser_nickname() );
+		System.out.println( to.getUser_email() );
+		System.out.println( to.getUser_gender() );
+		System.out.println( to.getUser_birth() );
+		System.out.println( to.getUser_cdate() );
+		
+		int flag = userdao.userModify_ok(to);
+		
+		modelAndView.addObject( "flag" , flag );
+		modelAndView.addObject( "email" , to.getUser_email() );
+		
+		
+		
+		return modelAndView;
 	}
 
 	@RequestMapping("admin_board_list.do")
