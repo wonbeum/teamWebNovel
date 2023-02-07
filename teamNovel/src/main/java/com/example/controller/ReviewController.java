@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
+ 
 import com.example.model.reviewListDAO;
 import com.example.model.reviewListTO;
 
@@ -21,9 +21,9 @@ public class ReviewController {
 		return new ModelAndView( "review_list" );
 	}
 	
-	@RequestMapping("novel_review.do")
+	@RequestMapping("novel_detail.do")
 	public ModelAndView review() {
-		return new ModelAndView( "novel_review" );
+		return new ModelAndView( "novel_detail" );
 	}
 	
 	@RequestMapping("ReviewListAll.do")
@@ -33,4 +33,31 @@ public class ReviewController {
 		return reviewlists;
 	}
 	
+	@RequestMapping("ReviewRomance.do")
+	public ArrayList<reviewListTO> reviewRomance() {
+		ArrayList<reviewListTO> reviewromance = rdao.reviewRomance();
+		
+		return reviewromance;
+	}
+	
+	@RequestMapping("ReviewRomanceFantasy.do")
+	public ArrayList<reviewListTO> reviewRomanceFantasy() {
+		ArrayList<reviewListTO> reviewromancefantasy = rdao.reviewRomanceFantasy();
+		
+		return reviewromancefantasy;
+	}
+	
+	@RequestMapping("ReviewFantasy.do")
+	public ArrayList<reviewListTO> reviewFantasy() {
+		ArrayList<reviewListTO> reviewfantasy = rdao.reviewFantasy();
+		
+		return reviewfantasy;
+	}
+	
+	@RequestMapping("ReviewSearch.do")
+	public ArrayList<reviewListTO> reaviewSearch() {
+		ArrayList<reviewListTO> reviewsearch = rdao.reviewSearch();
+				
+		return reviewsearch;
+	}
 }
