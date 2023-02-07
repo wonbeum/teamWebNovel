@@ -29,6 +29,7 @@
 		font-family: "AppleSDGothicNeoR";
 	}
 
+
 	#nav-button{
 	width: 120px;
 	height: 40px;
@@ -41,7 +42,6 @@
 	font-size: 18px;
 	font-weight: 800;
   	font-style: normal;
-  	text-decoration-line: none;
   	text-align: center;
   	color: #ffb26c;
 	}
@@ -54,21 +54,27 @@
 	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
 	background-color: #000;
 	
-	font-family: AppleSDGothicNeo;
+	font-family: AppleSDGothicNeoSB;
 	font-size: 20px;
 	font-weight: 800;
-  	font-style: normal;
-  	text-decoration-line: none;
   	text-align: center;
   	color: #fff;
 	}
-	
+		
 	.card-imgs{
 	position: relative;
 	width: 286px;
   	height: 405px;
-  	margin: 10px;
+  	margin: 5px;
   	border-radius: 15px;
+	}
+	
+	.card-body{
+	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+  	align-items: center;
+  	font-family: AppleSDGothicNeoR;
 	}
 	
 	.card-imgs img{
@@ -76,6 +82,7 @@
 	  width: 100%;
 	  height: 100%;
 	  border-radius: 15px;
+	  display: flex;
 	}
 	.card-imgs img.img-hover{
 	  display:none;
@@ -97,6 +104,22 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
+	    $('#tablists').on('show.bs.tab', function(e){
+	    	var Target1 = e.target;
+	    	Target1.style.background ="#ffb26b"
+	    	var Target2 = e.relatedTarget;
+	    	Target2.style.background = "white";
+	    	//alert( $(e.target).text() );
+	        });
+	    
+	    $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e){
+	    	var myTarget = e.target;
+	    	myTarget.style.color = "white";
+	    	var futureTarget = e.relatedTarget;
+	    	futureTarget.style.color = "#ffb26b";
+	    	//alert( $(e.target).text() );
+	        });
+		
 		$('#rqbtn').click(function handler(event){
 			if(${signIn == null}) {
 				alert("로그인 후 요청이 가능합니다!");
@@ -145,7 +168,7 @@
 
 <!-- Nav pills -->
 <div class="container d-flex justify-content-center">
-	<nav class="nav nav-pills nav-fill justify-content-center" role="tablist">
+	<nav class="nav nav-pills nav-fill justify-content-center" role="tablist" id="tablists">
 		<a class="nav-link active" data-bs-toggle="tab" data-bs-target="#webtoon" href="#webtoon" id="nav-button" style="background-color: #ffb26c; color: #fff;">웹툰</a>
 		<a class="nav-link" data-bs-toggle="tab" data-bs-target="#drama" href="#drama" id="nav-button">드라마</a>
 		<a class="nav-link" data-bs-toggle="tab" data-bs-target="#movie" href="#movie" id="nav-button">영화</a>
@@ -153,20 +176,20 @@
 </div>
 
 <!-- 제목 -->
-	<div class="d-flex justify-content-center" id="title">
-		<span style="font-family: AppleSDGothicNeoSB; font-size: 50px; font-weight: 900";
-	  width: 173px; height: 60px; margin: 66px 0 15px 1px;>원작소설</span>
-	 </div>
-	<div class="d-flex justify-content-center" >
-		<p style="font-family: AppleSDGothicNeoR; font-size: 20px; font-weight: 500">원하시는 작품을 자유롭게 요청하세요!</p>
+<div class="title">
+	<div class="container d-flex justify-content-center">
+		<span style="font-family: AppleSDGothicNeoSB; font-size: 50px; font-weight: 900;">원작소설</span>
 	</div>
+	<div class="container d-flex justify-content-center">
+		<span style="font-family: AppleSDGothicNeoR; font-size: 20px; font-weight: 500;">원하시는 작품을 자유롭게 요청하세요!</span>
+	</div>
+</div>
 
 <!-- 요청하기 버튼 -->
 <div class="container w-75">
 	<div class="row">
 		<div align="right">
-		  	<a class="btn" id="rqbtn" data-bs-toggle="modal" data-bs-target=""
-		  	style="font-family: AppleSDGothicNeoB ; padding: 7px;">요청하기</a>
+		  	<a class="btn" id="rqbtn" data-bs-toggle="modal">요청하기</a>
 		</div>
 	</div>
 </div>
@@ -175,23 +198,24 @@
 <div class="modal fade" id="RequestModal" tabindex="-1" aria-labelledby="RequestModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="RequestModalLabel">소설 요청하기</h5>
+      <div class="modal-header d-flex justify-content-center">
+        <h5 class="modal-title" id="RequestModalLabel"
+        style="font-family: AppleSDGothicNeoB; font-size: 27px; font-weight: bold;">요청하기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form>
           <div class="mb-3">
-            <label for="InputEmail" class="form-label">신청자 아이디</label>
+            <label for="InputEmail" class="form-label">이메일*</label>
             <input type="email" class="form-control" id="user_email">
             <div id="emailHelp" class="form-text">요청 작품이 추가될 경우, 해당 주소로 메일이 발송됩니다.</div>
           </div>
           <div class="mb-3">
-            <label for="InputEmail" class="form-label">신청자 닉네임</label>
+            <label for="InputEmail" class="form-label">닉네임*</label>
             <input type="email" class="form-control" id="user_nickname">
           </div>
           <div class="mb-3">
-          	<label class="form-label">카테고리</label>
+          	<label class="form-label">카테고리*</label>
 				<select class="form-select form-select-sm" id="request_category" required>
   					<option disabled>카테고리 선택</option>
   					<option value="웹툰">웹툰</option>
@@ -200,14 +224,14 @@
 				</select>
 			</div>
 			<div class="mb-3">
-            <label for="InputTitle" class="form-label">작품명</label>
+            <label for="InputTitle" class="form-label">작품명*</label>
             <input type="text" class="form-control" id="request_title">
           </div>
         </form>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer d-flex justify-content-center">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-primary" id="rqbtn_ok">요청</button>
+        <button type="submit" class="btn" style="background-color: #ffb26c; color: #fff;" id="rqbtn_ok">요청</button>
       </div>
     </div>
   </div>
@@ -658,6 +682,96 @@
 				   	<p class="card-text"><small class="text-muted">카카오웹툰 / 2018. 03. 06. ~ </small></p>
 				</div>
 			</div>
+			<div class="col">
+	  		<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/65fba6663f3f87d9991ced9952b979e7734356e1788d1d4eec416d3cfd45f5516e23d2ab0c5fdfbed720e4f37bac22c5ee8ddd5df1808ff054a84659523ec8ccc38701cf05e1284a45944f7f72c757d40dffb0818264e22bd84eb63aad6fbc5b1ff44e1be4f02e2570c11ebe4e0a83a9" class="card-img-top" alt="레베">
+	    			<img class="img-hover" src="https://w.namu.la/s/a1c96de666a6d854b967dd89469fbefd4bfc99f174de39dc6b34cc828ba166d83aa06323b3677666d959a7655354fe768a4900d7aa58fd4ee11e061a7b615c9dd9922d571d97232339a3f8e4af0f4a25f4b11a9cb5a06cc5b1bfddd2a6622bdb8a3f93fee8415d5e3bec3ded6a18184c" alt="레베">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">레이디 베이비</h5>
+				   	<p class="card-text">원작: 주해온</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/50227496" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=6620107" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">카카오웹툰 / 2018. 09. 07. ~ </small></p>
+				</div>
+			</div>
+			<div class="col">
+	  		<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/9d440e6e320b1577a0cae9242f9b4b81ab00c8450be39931271a9fe990f9548ccbab8b7a18c29a8ac6a1ad414c5aeb8a0f3a190d2b8afc5efbc844a8592d7cee4667cd2801006cc652cf86284387fa79190c7146673d09cf7cf0970e04248166520b89710e086b546d885450e8e8873a" class="card-img-top" alt="마른가지">
+	    			<img class="img-hover" src="https://w.namu.la/s/17ab8d0c6567454b1ef29eeaf7391c7895f54f073f804cde2836a177b52fe8adf36751141066175d088b22e719cf4a031a0a2be995b5ad1ac5464a317db603ba68467f8fa9f2f1435c63c00889a4ed5a3e12eb9a8b2537936100c2579840843220af4f2a9aab8e468efd8558e7869fd6" alt="마른가지">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">마른 가지에 바람처럼</h5>
+				   	<p class="card-text">원작: 달새울</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_series" href="https://page.kakao.com/content/48895658" target="_blank">네이버시리즈</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">네이버 웹툰 / 2020. 09. 16. ~ </small></p>
+				</div>
+			</div>
+			<div class="col">
+	  		<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/e001fea7a134f3321d2330bb82b3c55743cd527598a71e7a89ac2aba04cb518e59e4dda196612234233d78f4694806352d6983a35b05fc38b78b74d3730f6d739be544eb25ab45b1d54879acd7bdb678462d1a18aa4e9e9b0080371bcf2a5ff6bf9b78287e8490a37d5b33955b326761" class="card-img-top" alt="만렙부터">
+	    			<img class="img-hover" src="https://w.namu.la/s/2b17d54ed18b9bb4579687416e620efa03ad3c7c925f6ea5e8a5b77fdf2f687eaff459a2dcbc6cdb824cec3108c46b789ddcb436f076d462f9d9e12c61cdac4ec0c31d46504a389840eb07ebd6b4db75f819a95ef0c49ff5dbd0165caafe3d5416d3be8b48f3469769b16d34f282f1e8" alt="만렙부터">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">만렙부터 레벨업</h5>
+				   	<p class="card-text">원작: 해무극</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/50740194" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3131291" target="_blank">네이버시리즈</a>
+				   			<a class="platform_ridi" href="https://ridibooks.com/books/2065007219" target="_blank">리디북스</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">카카오웹툰 / 2021. 11. 30. ~  </small></p>
+				</div>
+			</div>
+			<div class="col">
+	  		<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/d820b3bd0b3791b1e5ca4d439c2dd18facca2a86483609a0d118e797ccb561e5b61df8cd1e4a35040fa37d2e8c770d45f574f82167992a60b8b23d7abd9ad8bf640075a1f39e6f7aaaf8dc2324fcee871f49919c6434cd60854c11aa6c136884d6860fb492e7249617ec55b4f87c56e0" class="card-img-top" alt="백망되">
+	    			<img class="img-hover" src="https://w.namu.la/s/6f8246a018cef77aa664634ba6781d4caf0ea01b46db2ec1ea16bb9626497fe5fd626135209b426816d4728da531bee439443b7ea4e07fd47a681ba8d30dce684811f7114d191d0a8b5f453866c0a73b28d5d7f4805c23cec31c27a37ab073b7eba02d01c42b03d55f97ab75669010c3" alt="백망되">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">백작가의 망나니가 되었다</h5>
+				   	<p class="card-text">원작: 유려한</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/51863028" target="_blank">카카오페이지</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3522708" target="_blank">네이버시리즈</a>
+				   			<a class="platform_ridi" href="https://ridibooks.com/books/875103701" target="_blank">리디북스</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">카카오웹툰 / 2020. 09. 01. ~ </small></p>
+				</div>
+			</div>
+			<div class="col">
+	  		<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/fc3898f0f2a6400fcc71ddc79386f5075df1653b136abc447ed079f2c60f47d7135286d8794ecfd94b32ca031da60025ea9c92d005dc8da132b214c2667f29b05080d68d081a82ba5fd16f18ceb462c9d7063517e994ec551de459882fc92a50814ec243a3b68b7bd97bcf053abfbd6f" class="card-img-top" alt="버림받은황비">
+	    			<img class="img-hover" src="https://w.namu.la/s/d6f8443ed2bfe2e05d390862645203e9d34b07a1e07d292ee6f9a029f009001aaacc73717e2350e28eeab85a6ad894a5eff5bd1035f4b4d1608a63c4863c188017eaae05f9330b329d2eeda000709a44ade1df11e0d858fcd9a57951ada4329fd707a0e139ba293bc2960334e7088ca9" alt="버림받은황비">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">버림 받은 황비</h5>
+				   	<p class="card-text">원작: 정유나</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/46790791" target="_blank">카카오페이지</a>
+					   		<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=2144645" target="_blank">네이버시리즈</a>				   		
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">디앤씨웹툰비즈 / 2017. 06. 11. ~ 2021. 03. 09.</small></p>
+				</div>
+			</div>
+			<div class="col">
+	  		<div class="card-imgs">
+	    			<img class="img" src="https://w.namu.la/s/0c56c884f0385d60e69a1cf4722ea5af15dedd4a93b6089fbe51b1db24ec5faf9d13d3e6ff4ff2100d3422ff4ba79112797c72c42124bfe453845a890d4fc7fbd58989538b8ab9e4037f1b689048cc443492c0ed936169f21dabd239a9a84ad2c0eca0159481221e68d3c46ea7118c43" class="card-img-top" alt="빙특혜">
+	    			<img class="img-hover" src="https://w.namu.la/s/5dc7bfc294b8d258b60b276f63b6e2bb7ef978e44286f1dcd8d9ec2f4a0039ddbb68aa55105d55bd0a783505fa0b8fd6ae353eef2b8fef3fb6992b40fd88f52828180894134e8ecb0100be53784ed4b75d2eb72e0253b1bdc2e9bdb5812e38513b23fd9b3f8ffea3a8adbec41b0f1104" alt="빙특혜">
+	    		</div>
+	    		<div class="card-body">
+	      			<h5 class="card-title">빙의자를 위한 특혜</h5>
+				   	<p class="card-text">원작: 이린비</p>
+				   		<div class="platform_logos">
+				   			<a class="platform_kakao" href="https://page.kakao.com/content/56908119" target="_blank">카카오페이지</a>
+				   		</div>
+				   	<p class="card-text"><small class="text-muted">카카오웹툰 / 2022. 03. 31. ~ </small></p>
+				</div>
+			</div>
 
 <!-- paging -->
 	<nav aria-label="Page navigation example">	
@@ -987,102 +1101,67 @@
 	  <div class="row">
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/0f4bec8b7b47e3b200a16d896ae291d480198462bf2b6e1e3ed2ce54c85bde2ee8221f36a549c620eaca806395118f5abf79c725f893ca190299f63c1ce7571762fb58d1be5ed9c8cfa801be5b152cbf356b0b5de53f9be04ff55d26abc1fe9a6705dfdfeccbae6813d18f606b29bad6" class="card-img-top" alt="미남당">
-	    			<img class="img-hover" src="https://w.namu.la/s/4ba616adc01754b8fef2072ab30289a357d602b0f850c60103902eb17da68caef78f616f067999ecc1ec0326116a7949c67409d3b42510d2f7e3b540fa6da8e8f59c04d895ad0a352da208a1e6019490a29a3a8e2b24d5eb1022ae64400c96d98466fd2b667dd577ba8161ed9b060a20" class="card-img-top" alt="미남당">
+	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	    			<img class="img-hover" src="https://w.namu.la/s/36b192b3cc6cbe898437ed45a25fead31c38181c46e3d72899d50e4cfe87d3b9a124349762040674e2109d555b369968472ae4bb9477fab8dea72ff6d2a535e7cfbf6675754584d2690e21b7f1d0eedda69f3205c88e3acf699eaae8e14fc80053037a524725b28225ad206a486bee0d" class="card-img-top" alt="전독시">
 	    		</div>
 		   	    		<div class="card-body">
-	      			<h5 class="card-title">그래서 나는 안티팬과 결혼했다</h5>
-				   	<p class="card-text">원작: 김은정</p>
+	      			<h5 class="card-title">전지적 독자 시점</h5>
+				   	<p class="card-text">원작: 싱숑</p>
 				   		<div class="platform_logos">
-				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3821459" target="_blank">네이버시리즈</a>
+				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3400123" target="_blank">네이버시리즈</a>
 				   		</div>
-				   	<p class="card-text"><small class="text-muted">네이버TV / 2021년 4월 30일 ~ 2021년 6월 19일 방영</small></p>
+				   	<p class="card-text"><small class="text-muted">리얼라이즈 픽처스 / 총 5편 제작 예정</small></p>
 				</div>
 			</div>
+
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/0f4bec8b7b47e3b200a16d896ae291d480198462bf2b6e1e3ed2ce54c85bde2ee8221f36a549c620eaca806395118f5abf79c725f893ca190299f63c1ce7571762fb58d1be5ed9c8cfa801be5b152cbf356b0b5de53f9be04ff55d26abc1fe9a6705dfdfeccbae6813d18f606b29bad6" class="card-img-top" alt="미남당">
-	    			<img class="img-hover" src="https://w.namu.la/s/4ba616adc01754b8fef2072ab30289a357d602b0f850c60103902eb17da68caef78f616f067999ecc1ec0326116a7949c67409d3b42510d2f7e3b540fa6da8e8f59c04d895ad0a352da208a1e6019490a29a3a8e2b24d5eb1022ae64400c96d98466fd2b667dd577ba8161ed9b060a20" class="card-img-top" alt="미남당">
+	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	    			<img class="img-hover" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
 	    		</div>
 		   	    		<div class="card-body">
-	      			<h5 class="card-title">그래서 나는 안티팬과 결혼했다</h5>
-				   	<p class="card-text">원작: 김은정</p>
+	      			<h5 class="card-title"></h5>
+				   	<p class="card-text"></p>
 				   		<div class="platform_logos">
-				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3821459" target="_blank">네이버시리즈</a>
+				   			<a class="platform_series" href="" target="_blank"></a>
 				   		</div>
-				   	<p class="card-text"><small class="text-muted">네이버TV / 2021년 4월 30일 ~ 2021년 6월 19일 방영</small></p>
+				   	<p class="card-text"><small class="text-muted"></small></p>
 				</div>
 			</div>
+
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/0f4bec8b7b47e3b200a16d896ae291d480198462bf2b6e1e3ed2ce54c85bde2ee8221f36a549c620eaca806395118f5abf79c725f893ca190299f63c1ce7571762fb58d1be5ed9c8cfa801be5b152cbf356b0b5de53f9be04ff55d26abc1fe9a6705dfdfeccbae6813d18f606b29bad6" class="card-img-top" alt="미남당">
-	    			<img class="img-hover" src="https://w.namu.la/s/4ba616adc01754b8fef2072ab30289a357d602b0f850c60103902eb17da68caef78f616f067999ecc1ec0326116a7949c67409d3b42510d2f7e3b540fa6da8e8f59c04d895ad0a352da208a1e6019490a29a3a8e2b24d5eb1022ae64400c96d98466fd2b667dd577ba8161ed9b060a20" class="card-img-top" alt="미남당">
+	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	    			<img class="img-hover" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
 	    		</div>
 		   	    		<div class="card-body">
-	      			<h5 class="card-title">그래서 나는 안티팬과 결혼했다</h5>
-				   	<p class="card-text">원작: 김은정</p>
+	      			<h5 class="card-title"></h5>
+				   	<p class="card-text"></p>
 				   		<div class="platform_logos">
-				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3821459" target="_blank">네이버시리즈</a>
+				   			<a class="platform_series" href="" target="_blank"></a>
 				   		</div>
-				   	<p class="card-text"><small class="text-muted">네이버TV / 2021년 4월 30일 ~ 2021년 6월 19일 방영</small></p>
+				   	<p class="card-text"><small class="text-muted"></small></p>
 				</div>
 			</div>
+	
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/0f4bec8b7b47e3b200a16d896ae291d480198462bf2b6e1e3ed2ce54c85bde2ee8221f36a549c620eaca806395118f5abf79c725f893ca190299f63c1ce7571762fb58d1be5ed9c8cfa801be5b152cbf356b0b5de53f9be04ff55d26abc1fe9a6705dfdfeccbae6813d18f606b29bad6" class="card-img-top" alt="미남당">
-	    			<img class="img-hover" src="https://w.namu.la/s/4ba616adc01754b8fef2072ab30289a357d602b0f850c60103902eb17da68caef78f616f067999ecc1ec0326116a7949c67409d3b42510d2f7e3b540fa6da8e8f59c04d895ad0a352da208a1e6019490a29a3a8e2b24d5eb1022ae64400c96d98466fd2b667dd577ba8161ed9b060a20" class="card-img-top" alt="미남당">
+	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	    		<img class="img-hover" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
 	    		</div>
 		   	    		<div class="card-body">
-	      			<h5 class="card-title">그래서 나는 안티팬과 결혼했다</h5>
-				   	<p class="card-text">원작: 김은정</p>
+	      			<h5 class="card-title"></h5>
+				   	<p class="card-text"></p>
 				   		<div class="platform_logos">
-				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3821459" target="_blank">네이버시리즈</a>
+				   			<a class="platform_series" href="" target="_blank"></a>
 				   		</div>
-				   	<p class="card-text"><small class="text-muted">네이버TV / 2021년 4월 30일 ~ 2021년 6월 19일 방영</small></p>
+				   	<p class="card-text"><small class="text-muted"></small></p>
 				</div>
 			</div>
-	  		<div class="col">
-	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/0f4bec8b7b47e3b200a16d896ae291d480198462bf2b6e1e3ed2ce54c85bde2ee8221f36a549c620eaca806395118f5abf79c725f893ca190299f63c1ce7571762fb58d1be5ed9c8cfa801be5b152cbf356b0b5de53f9be04ff55d26abc1fe9a6705dfdfeccbae6813d18f606b29bad6" class="card-img-top" alt="미남당">
-	    			<img class="img-hover" src="https://w.namu.la/s/4ba616adc01754b8fef2072ab30289a357d602b0f850c60103902eb17da68caef78f616f067999ecc1ec0326116a7949c67409d3b42510d2f7e3b540fa6da8e8f59c04d895ad0a352da208a1e6019490a29a3a8e2b24d5eb1022ae64400c96d98466fd2b667dd577ba8161ed9b060a20" class="card-img-top" alt="미남당">
-	    		</div>
-		   	    		<div class="card-body">
-	      			<h5 class="card-title">그래서 나는 안티팬과 결혼했다</h5>
-				   	<p class="card-text">원작: 김은정</p>
-				   		<div class="platform_logos">
-				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3821459" target="_blank">네이버시리즈</a>
-				   		</div>
-				   	<p class="card-text"><small class="text-muted">네이버TV / 2021년 4월 30일 ~ 2021년 6월 19일 방영</small></p>
-				</div>
-			</div>
-	  		<div class="col">
-	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/0f4bec8b7b47e3b200a16d896ae291d480198462bf2b6e1e3ed2ce54c85bde2ee8221f36a549c620eaca806395118f5abf79c725f893ca190299f63c1ce7571762fb58d1be5ed9c8cfa801be5b152cbf356b0b5de53f9be04ff55d26abc1fe9a6705dfdfeccbae6813d18f606b29bad6" class="card-img-top" alt="미남당">
-	    			<img class="img-hover" src="https://w.namu.la/s/4ba616adc01754b8fef2072ab30289a357d602b0f850c60103902eb17da68caef78f616f067999ecc1ec0326116a7949c67409d3b42510d2f7e3b540fa6da8e8f59c04d895ad0a352da208a1e6019490a29a3a8e2b24d5eb1022ae64400c96d98466fd2b667dd577ba8161ed9b060a20" class="card-img-top" alt="미남당">
-	    			</div>
-		   	    		<div class="card-body">
-	      			<h5 class="card-title">그래서 나는 안티팬과 결혼했다</h5>
-				   	<p class="card-text">원작: 김은정</p>
-				   		<div class="platform_logos">
-				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3821459" target="_blank">네이버시리즈</a>
-				   		</div>
-				   	<p class="card-text"><small class="text-muted">네이버TV / 2021년 4월 30일 ~ 2021년 6월 19일 방영</small></p>
-				</div>
-			</div>
-	  		<div class="col">
-	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/0f4bec8b7b47e3b200a16d896ae291d480198462bf2b6e1e3ed2ce54c85bde2ee8221f36a549c620eaca806395118f5abf79c725f893ca190299f63c1ce7571762fb58d1be5ed9c8cfa801be5b152cbf356b0b5de53f9be04ff55d26abc1fe9a6705dfdfeccbae6813d18f606b29bad6" class="card-img-top" alt="미남당">
-	    			<img class="img-hover" src="https://w.namu.la/s/4ba616adc01754b8fef2072ab30289a357d602b0f850c60103902eb17da68caef78f616f067999ecc1ec0326116a7949c67409d3b42510d2f7e3b540fa6da8e8f59c04d895ad0a352da208a1e6019490a29a3a8e2b24d5eb1022ae64400c96d98466fd2b667dd577ba8161ed9b060a20" class="card-img-top" alt="미남당">
-	    		</div>
-		   	    		<div class="card-body">
-	      			<h5 class="card-title">그래서 나는 안티팬과 결혼했다</h5>
-				   	<p class="card-text">원작: 김은정</p>
-				   		<div class="platform_logos">
-				   			<a class="platform_series" href="https://series.naver.com/novel/detail.series?productNo=3821459" target="_blank">네이버시리즈</a>
-				   		</div>
-				   	<p class="card-text"><small class="text-muted">네이버TV / 2021년 4월 30일 ~ 2021년 6월 19일 방영</small></p>
-				</div>
-			</div>	
+	  		
+	  		
+	  		
+
 <!-- paging -->
 	<nav aria-label="Page navigation example">	
   	<ul class="pagination justify-content-center">
