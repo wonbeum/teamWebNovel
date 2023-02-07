@@ -58,7 +58,7 @@
 			<div class="mb-3 w-25">
 			<label class="form-label">카테고리</label>
 				<select class="form-select form-select-sm" name="admin_board_category">
-		  			<option value="공지사항">공지사항</option>
+		  			<option value="공지">공지</option>
 				</select>
 			</div>
 			<div class="mb-3">
