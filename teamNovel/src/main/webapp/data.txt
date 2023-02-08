@@ -45,7 +45,7 @@ free_like int,
 free_comment int,
 user_email varchar(50),
 user_nickname varchar(30),
-foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname)
+foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 create table novel_free_comment(
@@ -56,7 +56,7 @@ cmt_status varchar(8),
 user_email varchar(50),
 free_seq int,
 user_nickname varchar(30),
-foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname),
+foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname) ON UPDATE CASCADE ON DELETE CASCADE,
 foreign key (free_seq) references novel_free_board(free_seq)
 );
 
