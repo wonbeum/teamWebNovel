@@ -18,7 +18,7 @@
 		sbHtml.append("		<td><input value='"+to.getUser_birth()+"' disabled/></td>");
 		sbHtml.append("		<td><input value='"+to.getUser_cdate()+"' disabled/></td>");
 		sbHtml.append("		<td><input type='button' value='상세보기' onClick=\"location.href='./admin_member_view.do?email="+ to.getUser_email() +"'\"><input");
-		sbHtml.append("			type='submit' value='삭제' class='deletebutton'></td>");
+		sbHtml.append("			type='submit' value='삭제' class='deletebutton' data-email='"+ to.getUser_email() +"'></td>");
 		sbHtml.append("	</tr>");
 	}
 %>
@@ -73,10 +73,8 @@ $().ready(function () {
             cancelButtonText: '취소'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                    '삭제가 완료되었습니다.'
-                ),
-                location.href = "./main.do"
+            	let email = $(this).attr("data-email");
+                location.href = "./admin_member_delete_ok.do?email="+email;
             }
         })
     });

@@ -47,10 +47,7 @@ $().ready(function () {
             cancelButtonText: '취소'
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire(
-                    '삭제가 완료되었습니다.',
-                );
-                location.href="./admin_member_list.do";
+                location.href="./admin_member_delete_ok.do?email=<%=email%>";
             }
         })
     });

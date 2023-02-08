@@ -215,4 +215,19 @@ public class AdminController {
 	public ModelAndView admin_review_delete_ok() {
 		return new ModelAndView( "admin_review_delete_ok" );
 	}
+	
+	@RequestMapping("admin_member_delete_ok.do")
+	public ModelAndView admin_member_delete_ok( HttpServletRequest request ) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin_member_delete_ok");
+		
+		userInfoTO to = new userInfoTO();
+		to.setUser_email( request.getParameter( "email" ) );
+		
+		int flag = userdao.userDelete_ok(to);
+		
+		modelAndView.addObject( "flag" , flag );
+		
+		return modelAndView;
+	}
 }

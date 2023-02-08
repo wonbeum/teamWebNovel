@@ -156,4 +156,38 @@ public class user_adminDAO {
 		
 		return flag;
 	}
+	
+	public int userDelete_ok(userInfoTO to) {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int flag = 2;
+		
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "delete from novel_user_information where user_email= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString( 1, to.getUser_email() );
+			
+			int result = pstmt.executeUpdate();
+			
+			if( result == 0 ) {
+				flag = 1;
+			} else if ( result == 1 ) {
+				flag = 0;
+			}
+			
+		} catch( SQLException e ) {
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}
+		
+		return flag;
+	}
 }
