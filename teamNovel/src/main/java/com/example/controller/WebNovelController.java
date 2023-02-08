@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.model.NovelPagingTO;
 import com.example.model.novelInfoTO;
 import com.example.model.novel_listDAO;
 
@@ -23,12 +24,136 @@ public class WebNovelController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "novel_list" );
 		
-		ArrayList<novelInfoTO> Lists = noveldao.kakao_romance();
+//		ArrayList<novelInfoTO> Lists = noveldao.kakao_romance();
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		NovelPagingTO Lists = new NovelPagingTO();
+		Lists.setCpage( cpage );
+		
+		Lists = noveldao.kakao_romance( Lists );
 		
 		modelAndView.addObject("Lists", Lists);
 		
-		
 		return modelAndView;
+	}
+	
+	@RequestMapping("novel_list_kakao_romance.do")
+	public ArrayList<NovelPagingTO> novel_list_kr( HttpServletRequest request ) {
+
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		
+		NovelPagingTO Lists = new NovelPagingTO();
+		Lists.setCpage( cpage );
+		
+		Lists = noveldao.kakao_romance( Lists );
+		
+		ArrayList<NovelPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result; 
+	}
+
+	@RequestMapping("novel_list_kakao_fantasy.do")
+	public ArrayList<NovelPagingTO> novel_list_kf( HttpServletRequest request ) {
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		
+		NovelPagingTO Lists = new NovelPagingTO();
+		Lists.setCpage( cpage );
+		
+		Lists = noveldao.kakao_fantasy( Lists );
+		
+		ArrayList<NovelPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result; 
+	}
+
+	@RequestMapping("novel_list_kakao_romancefantasy.do")
+	public ArrayList<NovelPagingTO> novel_list_krf( HttpServletRequest request ) {
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		
+		NovelPagingTO Lists = new NovelPagingTO();
+		Lists.setCpage( cpage );
+		
+		Lists = noveldao.kakao_romancefantasy( Lists );
+		
+		ArrayList<NovelPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result; 
+	}
+
+	@RequestMapping("novel_list_naver_romance.do")
+	public ArrayList<NovelPagingTO> novel_list_nr( HttpServletRequest request ) {
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		
+		NovelPagingTO Lists = new NovelPagingTO();
+		Lists.setCpage( cpage );
+		
+		Lists = noveldao.naver_romance( Lists );
+		
+		ArrayList<NovelPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result; 
+	}
+
+	@RequestMapping("novel_list_naver_fantasy.do")
+	public ArrayList<NovelPagingTO> novel_list_nf( HttpServletRequest request ) {
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		
+		NovelPagingTO Lists = new NovelPagingTO();
+		Lists.setCpage( cpage );
+		
+		Lists = noveldao.naver_fantasy( Lists );
+		
+		ArrayList<NovelPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result; 
+	}
+
+	@RequestMapping("novel_list_naver_romancefantasy.do")
+	public ArrayList<NovelPagingTO> novel_list_nrf( HttpServletRequest request ) {
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		
+		NovelPagingTO Lists = new NovelPagingTO();
+		Lists.setCpage( cpage );
+		
+		Lists = noveldao.naver_romancefantasy( Lists );
+		
+		ArrayList<NovelPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result; 
 	}
 	
 }
