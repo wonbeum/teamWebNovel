@@ -36,7 +36,7 @@
 
 	const board_nickname = "<%=user_nickname%>";
 	
-	// 삭제
+	// 게시물 삭제
 	function clickDel(formName) {
 		formName.action = "/board_delete_ok.do";
 		formName.method = "post";
@@ -59,6 +59,14 @@
 		setInterval(commentList, 1000);
 		commentList();
 	});
+	// 좋아요 이미지 가져오기
+	$(function(){
+		LikeResult();
+		setInterval(LikeResult(), 1000);
+		LikeResult();
+	});
+	LikeNum();
+	
 	
 	
 		// 댓글 작성
@@ -86,7 +94,16 @@
 				alert('로그인후 댓글을 입력해주세요');
 			}
 		});
-	});
+		
+		
+		// 좋아요 버튼 눌렀을 때
+		$('#likebtn').click(function(){
+			LikeClick();
+			LikeResult();
+		});
+		
+		
+	}); // 로딩 되었을때 실행부
 	
 	// 댓글 가져오기
 	function commentList() {
@@ -99,7 +116,8 @@
 			dataType : 'json',
 			success : function(jsonData){
 			//alert("성공");
-					
+			//console.log(jsonData);
+		
 				$('#cmt_area').html('');
 				
 				for(let i=0; i<jsonData.length; i++){	
@@ -152,8 +170,79 @@
 		}
 	}
 
-
-
+	// 좋아요 가져오기
+	function LikeResult() {
+		if(${signIn.user_nickname != null}){
+		$.ajax({
+			url : 'LikeResultAjax.do',
+			type : 'get',
+			data : {
+				free_seq : "<%=free_seq%>"
+			},
+			dataType : 'json',
+			success : function(Data){
+				//alert("좋아요 가져오기 성공");
+				//console.log(Data);
+				if(Data==2){
+					$('#likeimg').attr("src","../images/like_ok.png");
+				} else if(Data==1){
+					$('#likeimg').attr("src","../images/like_no.png");					
+				}
+			},
+			error : function(e) {
+				alert("좋아요 가져오기 에러");
+			}
+		});
+		}
+	}
+	
+	
+	// 좋아요 설정하기
+		function LikeClick() {
+			if(${signIn.user_nickname != null}){
+				$.ajax({
+					url : 'LikeClickAjax.do',
+					type : 'get',
+					data : {
+						free_seq : "<%=free_seq%>"
+					},
+					dataType : 'json',
+					success : function(jsonData){
+						LikeResult();
+						LikeNum();
+						//alert("좋아요 완료");
+					},
+					error : function(e) {
+						alert("error !");
+					}
+				});
+				
+			} else {
+				alert('로그인후 좋아요를 눌러주세요');
+			}
+		}
+	
+	// 좋아요수 가져오기
+	function LikeNum() {
+		$.ajax({
+			url : 'LikeNumAjax.do',
+			type : 'get',
+			data : {
+				free_seq : "<%=free_seq%>"
+			},
+			dataType : 'json',
+			success : function(Data){
+				//alert("좋아요수 가져오기 성공");
+				//console.log(Data);
+				$('#likenum').text('추천 '+Data);
+			},
+			error : function(e) {
+				alert("좋아요 수 가져오기 에러");
+			}
+		});
+	}
+	
+		
 </script>
 
 </head>
@@ -255,7 +344,7 @@
 									<td width="35%" id="user_nickname"><%=user_nickname%></td>
 									<td width="25%"><%=free_date%></td>
 									<td width="20%">조회 <%=free_hit%></td>
-									<td width="25%">추천 <%=free_like%></td>
+									<td width="25%" id="likenum">추천</td>
 								</tr>
 							</tbody>
 						</table>
@@ -266,7 +355,10 @@
 						<a class="btn btn-outline-dark mt-3" href="./board_list.do"
 							role="button" id="listbtn">목록</a>
 						<button type="checkbox" id="likebtn"
-							class="btn btn-outline-secondary mt-3">좋아요</button>
+							class="btn btn-outline-secondary mt-3">
+							<img id="likeimg" src="../images/like_no.png"
+								style="width: 25px;"></img>
+						</button>
 					</div>
 				</div>
 

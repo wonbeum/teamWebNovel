@@ -40,6 +40,12 @@
 	height: 75px;
 }
 
+#mag_tag {
+	width: 55px;
+	height: 51px;
+	text-decoration-line: none;
+}
+
 .link-secondary {
 	color: #000000 !important;
 }
@@ -56,10 +62,25 @@
 	text-decoration-line: none;
 }
 
-#navbar {
-	font-family: 'AppleSDGothicNeoB';
+#header_nav li a {
+	font-family: AppleSDGothicNeoB;
 	font-size: 25px;
-	color: #000;
+}
+
+#dropdown {
+	display: inline-block;
+}
+
+#dropdown button {
+	font-family: 'AppleSDGothicNeoR';
+	font-size: 25px;
+	border-radius: 15px;
+	height: 50px;
+}
+
+.dropdown-item{
+	font-family: 'AppleSDGothicNeoR';
+	font-size: 20px;
 }
 </style>
 </head>
@@ -71,39 +92,32 @@
 			<div class="col" style="padding-left: 39px; padding-right: 0px;">
 			</div>
 			<div class="col-6 text-center" style="height: 75px;">
-				<a href="./main.do"><img class="logoimg" src="/images/headerLogo.png"></a>
+				<a href="./main.do"><img class="logoimg" src="../images/logo.png"
+					srcset="../images/logo@2x.png 2x, ../images/logo@3x.png 3x"></a>
 			</div>
 			<div class="col d-flex flex-row-reverse py-4"
 				style="padding-right: 39px; padding-left: 0px;">
 				<div class="justify-content-end">
-					<a class="link-secondary" href="./novel_search.do"
-						aria-label="Search"> <svg xmlns="http://www.w3.org/2000/svg"
-							width="20" height="20" fill="none" stroke="currentColor"
-							stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-							class="mx-3" role="img" viewBox="0 0 24 24">
-							<title>Search</title><circle cx="10.5" cy="10.5" r="7.5" />
-						<path d="M21 21l-5.2-5.2" /></svg>
+					<a class="link-secondary" id="mag_tag" href="./novel_search.do">
+						<img src="../images/magnifier.png"
+						style="width: 48px; padding: 5px; padding-bottom: 7px">
 					</a>
 
 					<!-- 로그인 -->
 					<c:if test="${signIn == null}">
 						<a class="login_btn" href="./login.do" role="button"
-							style="padding-top: 11px; height: 41px;">로그인</a>
+							style="padding-top: 11px; height: 41px; margin-left: 20px;">로그인</a>
 					</c:if>
 					<c:if test="${signIn != null}">
-						<div class="dropdown text-end">
-							<a href="#"
-								class="d-block link-dark text-decoration-none dropdown-toggle"
-								data-bs-toggle="dropdown" aria-expanded="false"> <img
-								src="https://github.com/mdo.png" alt="mdo" width="32"
-								height="32" class="rounded-circle">
-							</a>
-							<ul class="dropdown-menu text-small">
-								<li><a class="dropdown-item" href="#">New project...</a></li>
-								<li><a class="dropdown-item" href="#">Settings</a></li>
-								<li><a class="dropdown-item" href="#">Profile</a></li>
+						<div class="dropdown" id="dropdown">
+							<button class="btn btn-secondary dropdown-toggle" type="button"
+								data-bs-toggle="dropdown" aria-expanded="false"
+								style=" margin-left: 20px;">
+								${signIn.user_nickname}</button>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#">마이페이지</a></li>
 								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="./logout.do">로그아웃</a></li>
+								<li><a class="dropdown-item" href="logout.do">로그아웃</a></li>
 							</ul>
 						</div>
 					</c:if>
@@ -113,7 +127,7 @@
 		<hr style="margin-top: 0px; margin-bottom: 0px;">
 		<div class="py-1">
 
-			<ul
+			<ul id="header_nav"
 				class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0"
 				id="navbar" style="height: 64px;">
 				<li><a href="./rank_list.do" class="nav-link px-4 link-dark"
@@ -128,7 +142,7 @@
 					style="padding-bottom: 0px; padding-top: 16px;">원작소설 찾기</a></li>
 			</ul>
 		</div>
-		<hr style="margin-top: 0px;">
+		<hr style="margin-top: 0px; margin-bottom: 0px;">
 	</header>
 
 	<script

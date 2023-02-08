@@ -9,9 +9,17 @@ public class freeboardTO {
 	private String free_ip;
 	private String free_hit;
 	private String free_like;
+	private String free_comment;
 	private String user_email;
 	private String user_nickname;
-
+	
+	
+	public String getFree_comment() {
+		return free_comment;
+	}
+	public void setFree_comment(String free_comment) {
+		this.free_comment = free_comment;
+	}
 	public String getUser_nickname() {
 		return user_nickname;
 	}

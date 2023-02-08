@@ -27,7 +27,7 @@
 	font-weight: 500;
 }
 
-.text-muted { -
+#footer_nav {
 	-bs-text-opacity: 1;
 	color: #fff !important;
 }
@@ -40,26 +40,27 @@
 	<footer class="mt-10">
 		<div class="footer">
 			<div class="text-center" style="height: 67px; padding-top: 25px;">
-				<a href="./main.do"><img src="/images/footerLogo.png"
+				<a href="./main.do"><img src="images/logo-footer.png"
+     				srcset="images/logo-footer@2x.png 2x, images/logo-footer@3x.png 3x"
 					style="height: 42px; padding-top: 0px; margin-bottom: 25px; width: 196px;"></a>
 			</div>
 			<div>
 				<ul class="nav justify-content-center pb-2"
 					style="margin-top: 21px;padding-bottom: 0px;margin-bottom: 0px;">
 					<li class="nav-item"><a href="./rank_list.do"
-						class="nav-link px-4 text-muted">랭킹</a></li>
+						class="nav-link px-4 text-muted" id="footer_nav">랭킹</a></li>
 					<li class="nav-item"><a href="./review_list.do"
-						class="nav-link px-4 text-muted">리뷰</a></li>
+						class="nav-link px-4 text-muted" id="footer_nav">리뷰</a></li>
 					<li class="nav-item"><a href="./novel_list.do"
-						class="nav-link px-4 text-muted">웹소설</a></li>
+						class="nav-link px-4 text-muted" id="footer_nav">웹소설</a></li>
 					<li class="nav-item"><a href="./board_list.do"
-						class="nav-link px-4 text-muted">커뮤니티</a></li>
+						class="nav-link px-4 text-muted" id="footer_nav">커뮤니티</a></li>
 					<li class="nav-item"><a href="./origin_list.do"
-						class="nav-link px-4 text-muted">원작 소설 찾기</a></li>
+						class="nav-link px-4 text-muted" id="footer_nav">원작 소설 찾기</a></li>
 				</ul>
 			</div>
 			<div>
-			<p class="text-center text-muted">&copy; 2023 개발 못하면 죽는 병, Inc</p>
+			<p class="text-center text-muted" id="footer_nav">&copy; 2023 개발 못하면 죽는 병, Inc</p>
 			</div>
 		</div>
 	</footer>

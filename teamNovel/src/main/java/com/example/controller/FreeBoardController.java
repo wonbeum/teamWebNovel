@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.CommentDAO;
 import com.example.model.FreeBoardDAO;
+import com.example.model.LikeDAO;
+import com.example.model.LikeTO;
 import com.example.model.commentTO;
 import com.example.model.freeboardTO;
 import com.example.model.userInfoTO;
@@ -27,6 +29,9 @@ public class FreeBoardController {
 	@Autowired
 	private CommentDAO cdao;
 
+	@Autowired
+	private LikeDAO ldao;
+
 	
 	@RequestMapping("board_list.do")
 	public ModelAndView board_list() {
@@ -36,18 +41,27 @@ public class FreeBoardController {
 	// ajax 전체 리스트 가져오기
 	@RequestMapping("BoardListAjax.do")
 	public ArrayList<freeboardTO> boardListAjax() {
+		
 		ArrayList<freeboardTO> boardList = fdao.FreeBoard_list();
 		
 		return boardList;
 	}
 	
 	// ajax 공지 리스트 가져오기
-		@RequestMapping("NoticeListAjax.do")
-		public ArrayList<freeboardTO> NoticeListAjax() {
-			ArrayList<freeboardTO> boardList = fdao.Notice_list("free_category","공지");
+	@RequestMapping("NoticeListAjax.do")
+	public ArrayList<freeboardTO> NoticeListAjax() {
+			ArrayList<freeboardTO> boardList = fdao.Notice_list();
 			
 			return boardList;
 		}
+	
+	// ajax 인기글 리스트 가져오기
+	@RequestMapping("BestListAjax.do")
+	public ArrayList<freeboardTO> BestListAjax() {
+		ArrayList<freeboardTO> boardList = fdao.Best_list();
+		
+		return boardList;
+	}
 	
 	@RequestMapping("board_write.do")
 	public ModelAndView board_write(HttpServletRequest request, HttpServletResponse response) {	
@@ -183,5 +197,68 @@ public class FreeBoardController {
 	}
 
 	
+	// 좋아요 ajax 가져오기
+	@RequestMapping("LikeResultAjax.do")
+	public int LikeResultAjax(HttpServletRequest request, HttpSession session ) {
+		String free_seq = request.getParameter("free_seq");
+		
+		userInfoTO to = (userInfoTO)session.getAttribute("signIn");
+		String user_nickname = to.getUser_nickname();
+		
+		int result = ldao.LikeFind(free_seq, user_nickname);
+		
+		int like_state = 0;
+		// like_state = 0 이면 에러, 1이면 좋아요x, 2면 좋아요중
+		if(result == 0) {
+			like_state= 1;
+		} else if(result == 1){
+			like_state = 2;
+		}
+		
+		return like_state;
+	}
 	
+	// 좋아요 눌렀을때 좋아요 입력/삭제
+	@RequestMapping("LikeClickAjax.do")
+	public int LikeClickAjax(HttpServletRequest request, HttpSession session ) {
+		String free_seq = request.getParameter("free_seq");
+	
+		userInfoTO to = (userInfoTO)session.getAttribute("signIn");
+		String user_nickname = to.getUser_nickname();
+		String user_email = to.getUser_email();
+	
+		LikeTO lto = new LikeTO();
+		lto.setFree_seq(free_seq);
+		lto.setUser_email(user_email);
+		lto.setUser_nickname(user_nickname);
+	
+		int result = ldao.LikeFind(free_seq, user_nickname);
+	
+		// 좋아요가 상태확인
+		int flag = 1;
+		// 좋아요중이 아니면
+		if(result == 0) {
+			flag = ldao.Insert_Like_Ok(lto);
+			// result가 0이면 insert 됨
+	
+		// 좋아요중이면
+		} else if(result == 1){
+			flag = ldao.Delete_Like_Ok(lto);
+		} else {
+			System.out.println("좋아요 설정 에러");
+		}
+	
+	
+		return flag;
+	}
+	
+	// 좋아요 수 ajax 가져오기
+	@RequestMapping("LikeNumAjax.do")
+	public int LikeNumtAjax(HttpServletRequest request) {
+		String free_seq = request.getParameter("free_seq");
+		
+		int result = ldao.Like_num(free_seq);
+		
+		return result;
+	}
 }

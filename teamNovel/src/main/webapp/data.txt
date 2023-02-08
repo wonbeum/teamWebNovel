@@ -42,9 +42,10 @@ free_date datetime,
 free_ip varchar(15),
 free_hit int,
 free_like int,
+free_comment int,
 user_email varchar(50),
-user_nickname varchar(30) ,
-foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname) ON UPDATE CASCADE ON DELETE CASCADE
+user_nickname varchar(30),
+foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname)
 );
 
 create table novel_free_comment(
@@ -54,11 +55,19 @@ cmt_date datetime,
 cmt_status varchar(8),
 user_email varchar(50),
 free_seq int,
-user_nickname varchar(30) ,
-foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname) ON UPDATE CASCADE ON DELETE CASCADE,
+user_nickname varchar(30),
+foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname),
 foreign key (free_seq) references novel_free_board(free_seq)
 );
 
+create table novel_free_like(
+like_seq int auto_increment primary key,
+free_seq int not null,
+user_email varchar(50),
+user_nickname varchar(30),
+foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname) on delete cascade on update cascade,
+foreign key (free_seq) references novel_free_board(free_seq) on delete cascade
+);
 create table novel_origin_request(
 request_seq int auto_increment primary key,
 request_title varchar(100),

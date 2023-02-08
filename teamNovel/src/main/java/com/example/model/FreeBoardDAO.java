@@ -27,7 +27,7 @@ public class FreeBoardDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "insert into novel_free_board values (0, ?, ?, ?, now(), ?, 0, 0, ?, ?)";
+			String sql = "insert into novel_free_board values (0, ?, ?, ?, now(), ?, 0, 0, 0, ?, ?)";
 			
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, to.getFree_category() );
@@ -68,8 +68,10 @@ public class FreeBoardDAO {
 			conn = dataSource.getConnection();
 			
 			String sql = "select free_seq, free_category, free_subject, user_nickname, "
-					+ "date_format(free_date,'%y-%m-%d') free_date, free_hit, free_like "
-					+ "from novel_free_board order by free_seq desc";
+					+ "date_format(free_date,'%y-%m-%d') free_date, free_hit, "
+					+ "(select count(user_nickname) from novel_free_like where free_seq = f.free_seq) as free_like, "
+					+ "(select count(cmt_seq) from novel_free_comment where free_seq= f.free_seq and cmt_status='공개') as free_comment "
+					+ "from novel_free_board f order by free_seq desc";
 			
 			pstmt = conn.prepareStatement( sql );
 			
@@ -83,6 +85,7 @@ public class FreeBoardDAO {
 				to.setFree_date( rs.getString( "free_date" ) );
 				to.setFree_hit( rs.getString( "free_hit" ) );
 				to.setFree_like( rs.getString( "free_like" ) );
+				to.setFree_comment( rs.getString( "free_comment" ) );
 				
 				boardlists.add( to );
 			}
@@ -100,7 +103,7 @@ public class FreeBoardDAO {
 	}
 	
 	// 공지 글 
-	public ArrayList<freeboardTO> Notice_list( String menu, String content ) {
+	public ArrayList<freeboardTO> Notice_list() {
 		 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -111,8 +114,11 @@ public class FreeBoardDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "select free_seq, free_category, free_subject, user_nickname, date_format(free_date,'%y-%m-%d') free_date, "
-					+ "free_hit, free_like from novel_free_board where free_category = '공지' order by free_seq desc";
+			String sql = "select free_seq, free_category, free_subject, user_nickname, "
+					+ "date_format(free_date,'%y-%m-%d') free_date, free_hit, "
+					+ "(select count(user_nickname) from novel_free_like where free_seq = f.free_seq) as free_like, "
+					+ "(select count(cmt_seq) from novel_free_comment where free_seq= f.free_seq and cmt_status='공개') as free_comment "
+					+ "from novel_free_board f where free_category='공지' order by free_seq desc";
 			
 			pstmt = conn.prepareStatement( sql );
 			
@@ -126,6 +132,7 @@ public class FreeBoardDAO {
 				to.setFree_date( rs.getString( "free_date" ) );
 				to.setFree_hit( rs.getString( "free_hit" ) );
 				to.setFree_like( rs.getString( "free_like" ) );
+				to.setFree_comment( rs.getString( "free_comment" ) );
 				
 				boardlists.add( to );
 			}
@@ -188,8 +195,8 @@ public class FreeBoardDAO {
 		return boardlists;
 	}
 
-	// 인기 글 수정해야함
-	public ArrayList<freeboardTO> FreeBoard_bestlist( String menu ) {
+	// 인기 글
+	public ArrayList<freeboardTO> Best_list() {
 		 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -201,12 +208,12 @@ public class FreeBoardDAO {
 			conn = dataSource.getConnection();
 			
 			String sql = "select free_seq, free_category, free_subject, user_nickname, "
-					+ "date_format(free_date,'%y-%m-%d') free_date, free_hit, free_like "
-					+ "from novel_free_board order by ? desc";
+					+ "date_format(free_date,'%y-%m-%d') free_date, free_hit, "
+					+ "(select count(user_nickname) from novel_free_like where free_seq = f.free_seq) as free_like, "
+					+ "(select count(cmt_seq) from novel_free_comment where free_seq= f.free_seq and cmt_status='공개') as free_comment "
+					+ "from novel_free_board f where free_like>=10 order by free_seq desc";
 			
 			pstmt = conn.prepareStatement( sql );
-			pstmt.setString( 1, menu  );
-		
 			
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
@@ -218,6 +225,7 @@ public class FreeBoardDAO {
 				to.setFree_date( rs.getString( "free_date" ) );
 				to.setFree_hit( rs.getString( "free_hit" ) );
 				to.setFree_like( rs.getString( "free_like" ) );
+				to.setFree_like( rs.getString( "free_comment" ) );
 				
 				boardlists.add( to );
 			}
