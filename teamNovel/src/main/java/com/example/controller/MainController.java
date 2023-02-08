@@ -55,9 +55,6 @@ public class MainController {
 	
 	@RequestMapping("insert.do")
 	public ModelAndView inserttest1() {
-		insertdao.novel_ridiRomance_Insert();
-		insertdao.novel_ridiFantasy_Insert();
-		insertdao.novel_ridiRomanceFatasy_Insert();
 		insertdao.novel_kakaoRomance_Insert();
 		insertdao.novel_kakaoFantasy_Insert();
 		insertdao.novel_kakaoRomanceFantasy_Insert();
