@@ -32,7 +32,7 @@ public class novel_insert {
 		try {
 			conn = dataSource.getConnection();
 			
-			Reader reader = new FileReader("./src/main/webapp/datas/리디북스_ 로맨스.json");
+			Reader reader = new FileReader("./src/main/webapp/datas/리디북스_로맨스.json");
 			
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(reader);
@@ -257,7 +257,7 @@ public class novel_insert {
 		try {
 			conn = dataSource.getConnection();
 			
-			Reader reader = new FileReader("./src/main/webapp/datas/네이버시리즈_로맨스.json");
+			Reader reader = new FileReader("./src/main/webapp/datas/naver_romance.json");
 			
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(reader);
@@ -332,7 +332,7 @@ public class novel_insert {
 		try {
 			conn = dataSource.getConnection();
 			
-			Reader reader = new FileReader("./src/main/webapp/datas/네이버시리즈_판타지.json");
+			Reader reader = new FileReader("./src/main/webapp/datas/naver_fantasy.json");
 			
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(reader);
@@ -407,7 +407,7 @@ public class novel_insert {
 		try {
 			conn = dataSource.getConnection();
 			
-			Reader reader = new FileReader("./src/main/webapp/datas/네이버시리즈_로맨스판타지.json");
+			Reader reader = new FileReader("./src/main/webapp/datas/naver_romancefantasy.json");
 			
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(reader);
@@ -482,7 +482,7 @@ public class novel_insert {
 		try {
 			conn = dataSource.getConnection();
 			
-			Reader reader = new FileReader("./src/main/webapp/datas/카카오페이지_로맨스.json");
+			Reader reader = new FileReader("./src/main/webapp/datas/kakao_romance.json");
 			
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(reader);
@@ -557,7 +557,7 @@ public class novel_insert {
 		try {
 			conn = dataSource.getConnection();
 			
-			Reader reader = new FileReader("./src/main/webapp/datas/카카오페이지_판타지.json");
+			Reader reader = new FileReader("./src/main/webapp/datas/kakao_fantasy.json");
 			
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(reader);
@@ -632,7 +632,7 @@ public class novel_insert {
 		try {
 			conn = dataSource.getConnection();
 			
-			Reader reader = new FileReader("./src/main/webapp/datas/카카오페이지_로맨스판타지.json");
+			Reader reader = new FileReader("./src/main/webapp/datas/kakao_romancefantasy.json");
 			
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(reader);
