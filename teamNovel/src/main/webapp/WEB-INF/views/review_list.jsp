@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="javax.servlet.http.HttpSession"%>
-<%
-
-%>
+<%@page import="com.example.model.reviewListTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +86,8 @@ $(document).ready(function() {
 							<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
 								<div class="row g-0">
 									<div class="col">
-										<a href=""> <img src="\${jsonData[i].novel_img}" class="img" width="100%"
+									<a href="novel_detail.do?novel_title=\${jsonData[i].novel_title}">
+									<img src="\${jsonData[i].novel_img}" class="img" width="100%"
 											height="225" role="img">
 										</a>
 										<div class="card-body">
@@ -135,7 +134,8 @@ $(document).ready(function() {
 							<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
 								<div class="row g-0">
 									<div class="col">
-										<a href=""> <img src="\${jsonData[i].novel_img}" class="img" width="100%"
+										<a href="novel_detail.do?novel_title=\${jsonData[i].novel_title}">
+										<img src="\${jsonData[i].novel_img}" class="img" width="100%"
 											height="225" role="img">
 										</a>
 										<div class="card-body">
@@ -182,7 +182,8 @@ $(document).ready(function() {
 							<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
 								<div class="row g-0">
 									<div class="col">
-										<a href=""> <img src="\${jsonData[i].novel_img}" class="img" width="100%"
+									<a href="novel_detail.do?novel_title=\${jsonData[i].novel_title}">
+									<img src="\${jsonData[i].novel_img}" class="img" width="100%"
 											height="225" role="img">
 										</a>
 										<div class="card-body">
@@ -229,7 +230,8 @@ $(document).ready(function() {
 							<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
 								<div class="row g-0">
 									<div class="col">
-										<a href=""> <img src="\${jsonData[i].novel_img}" class="img" width="100%"
+									<a href="novel_detail.do?novel_title=\${jsonData[i].novel_title}">
+									<img src="\${jsonData[i].novel_img}" class="img" width="100%"
 											height="225" role="img">
 										</a>
 										<div class="card-body">
