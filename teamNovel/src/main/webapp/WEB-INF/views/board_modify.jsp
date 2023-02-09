@@ -30,6 +30,133 @@
 .nav-scroller {
 	border: 1px solid black;
 }
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoM.ttf");
+	font-family: "AppleSDGothicNeoM";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoEB.ttf");
+	font-family: "AppleSDGothicNeoEB";
+}
+
+#rouded_box {
+	width: 77.1%;
+	height: 87.2%;
+	margin: 0 30px;
+	padding: 40px 38px 33px 38px;
+	border-radius: 20px;
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+	background-color: #fff;
+	display: inline-block;
+}
+
+.background {
+	text-align: center;
+	background-color: #f8f8fb;
+	height: 100%;
+	padding-top: 59px;
+	padding-bottom: 100px;
+}
+
+#title {
+	font-family: AppleSDGothicNeoB;
+	font-size: 27px; text-align : left;
+	color: #000;
+	text-align: left;
+}
+
+#floatingSelect.form-select {
+	font-family: AppleSDGothicNeoM;
+	font-size: 18px;
+	font-weight: 500;
+	color: #000000;
+	height: 58px;
+	border-radius: 14px;
+	margin-bottom: 20px;
+	padding-left: 25px;
+	padding-bottom: 7px;
+}
+
+#free_subject.form-control {
+	font-family: AppleSDGothicNeoM;
+	font-size: 18px;
+	font-weight: 500;
+	color: #000000;
+	height: 58px;
+	border-radius: 14px;
+	margin-bottom: 22px;
+	padding-left: 25px;
+	padding-bottom: 7px;
+}
+
+#smart_editor2_content {
+	border-radius: 7px;
+}
+
+#listbtn {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+  	background-color: #000;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 10px;
+    padding-top: 14px;
+}
+#savebutton, #mbtn {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+	border: 0px;
+  	background-color: #ffb26b;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 12px;
+    padding-top: 14px;
+    padding-bottom: 10px;
+}
+
+#modalbtn, #backbtn {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+  	background-color: #000;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 10px;
+    padding-top: 13px;
+}
+
+#ModiModalLabel {
+	font-family: AppleSDGothicNeoB;
+  	font-size: 27px;
+  	text-align: center;
+  	color: #000;
+}
+
+#ModalContent {
+	font-family: AppleSDGothicNeoSB;
+  	font-size: 25px;
+  	font-weight: 500;
+  	line-height: 1.67;
+  	text-align: center;
+  	color: #000;
+}
+
+
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -115,120 +242,68 @@ function clickModi(formName) {
 </head>
 <body>
 	<!-- header -->
-	<div class="container">
-		<header class="blog-header lh-1 py-3">
-			<div
-				class="row flex-nowrap justify-content-between align-items-center">
-				<div class="col-4 pt-1">
-					<a class="link-secondary" href="./main.do">사이트 로고</a>
-				</div>
-				<div class="col-4 text-center">
-					<a class="blog-header-logo text-dark" href="./main.do">사이트 이름</a>
-				</div>
-				<div class="col-4 d-flex justify-content-end align-items-center">
-					<a class="link-secondary" href="./novel_search.do"
-						aria-label="Search"> <svg xmlns="http://www.w3.org/2000/svg"
-							width="20" height="20" fill="none" stroke="currentColor"
-							stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-							class="mx-3" role="img" viewBox="0 0 24 24">
-							<title>Search</title><circle cx="10.5" cy="10.5" r="7.5" />
-							<path d="M21 21l-5.2-5.2" /></svg>
-					</a>
-					<c:if test="${signIn == null}">
-						<a class="btn btn-sm btn-outline-secondary" href="./login.do">Sign
-							up</a>
-					</c:if>
-					<c:if test="${signIn != null}">
-						<div class="dropdown text-end">
-							<a href="#"
-								class="d-block link-dark text-decoration-none dropdown-toggle"
-								data-bs-toggle="dropdown" aria-expanded="false"> <img
-								src="https://github.com/mdo.png" alt="mdo" width="32"
-								height="32" class="rounded-circle">
-							</a>
-							<ul class="dropdown-menu text-small">
-								<li><a class="dropdown-item" href="#">New project...</a></li>
-								<li><a class="dropdown-item" href="#">Settings</a></li>
-								<li><a class="dropdown-item" href="#">Profile</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="./logout.do">Sign
-										out</a></li>
-							</ul>
-						</div>
-					</c:if>
-				</div>
-			</div>
-		</header>
-
-		<div class="nav-scroller py-1 mb-2">
-			<nav class="nav d-flex justify-content-between">
-				<a class="p-2 link-secondary" href="./rank_list.do">랭킹</a> <a
-					class="p-2 link-secondary" href="./review_list.do">리뷰</a> <a
-					class="p-2 link-secondary" href="./novel_list.do">웹소설</a> <a
-					class="p-2 link-secondary" href="./board_list.do">커뮤니티</a> <a
-					class="p-2 link-secondary" href="./origin_list.do">원작 소설 찾기</a>
-			</nav>
-		</div>
-	</div>
+	<jsp:include page="../include/header1.jsp" />
 
 	<!-- main -->
-	<div class="text-center mt-5">
-		<h3>커뮤니티 나의 글 수정하기</h3>
-	</div>
-	<div
-		class="container shadow p-3 mt-4 mb-5 bg-body-tertiary rounded w-50">
-		<div class="form">
-			<form class="validation-form" name="userInfo" id="frm" novalidate>
+	<div class="background">
+		<div class="container justify-content-center" id="rouded_box">
+			<p class="text-start" id="title" style="margin-bottom: 0px;">글
+				수정하기</p>
+			<hr style="color: #e5e8eb;" />
+			<div class="form">
+				<form class="validation-form" name="userInfo" id="frm" novalidate>
 				<input type="hidden" name="seq" value=<%=free_seq %>>
-				<div class="mb-3 w-25">
-					<label class="form-label">카테고리</label> <select
-						class="form-select form-select-sm" name="free_category" required>
-						<option disabled>수정전 : <%=free_category %></option>
-						<option value="질문">질문</option>
-						<option value="이슈">이슈</option>
-						<option value="잡담">잡담</option>
-					</select>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">제목</label> <input type="text"
-						name="free_subject" id="free_subject" class="form-control" placeholder="제목 입력"
-						value=<%=free_subject %>>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">내용</label>
-						<!-- SmartEditor2  -->
+					<div class="form-floating">
+						<select class="form-select" id="floatingSelect"
+							style="color: #000000; margin-bottom: 20px;"
+							aria-label="Floating label select example" id="free_category"
+							name="free_category">
+							<option disabled>수정전 : <%=free_category %></option>
+							<option value="질문">질문</option>
+							<option value="이슈">이슈</option>
+							<option value="잡담">잡담</option>
+						</select> <label for="floatingSelect" style="padding-left: 25px;">카테고리 선택</label>
+					</div>
+					<div class="form-floating">
+						<input type="text" class="form-control" id="free_subject"
+							placeholder="제목을 입력하세요" name="free_subject" value=<%=free_subject %>> <label
+							for="floatingPassword" 
+							style="padding-left: 25px; font-family: AppleSDGothicNeoM;">제목 입력</label>
+					</div>
+
+					<!-- SmartEditor2  -->
 					<div id="smarteditor">
 						<textarea name="free_content" id="editorTxt" rows="10" cols="10"
-							placeholder="내용을 입력해주세요" style="width: 100%"><%=free_content %></textarea>
+							style="width: 100%"><%=free_content %></textarea>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-auto me-auto">
-						<a class="btn btn-outline-secondary" href="./board_list.do"
-							role="button">목록</a>
-					</div>
+
+					<div class="row" style="margin-top: 39px;">
+						<div class="col-auto me-auto">
+							<a class="btn btn-outline-secondary" id="backbtn" href="./board_view.do?seq=<%=free_seq%>"
+							role="button">돌아가기</a>
+						</div>
 					<div class="col-auto">
 						<button type="button" id="mbtn" class="btn btn-secondary"
 							data-bs-toggle="modal" data-bs-target="#myModal">
 							수정하기</button>
 					</div>
 
-				</div>
-			</form>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">수정 확인</h1>
+					<h1 class="modal-title fs-5" id="ModiModalLabel">수정하기</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">수정을 완료하시겠습니까?</div>
+				<div class="modal-body" id="ModalContent">수정을 완료하시겠습니까?</div>
 				<div class="modal-footer">
 					<button type="button" id="modalbtn" class="btn btn-secondary"
 						data-bs-dismiss="modal">취소</button>
@@ -239,25 +314,7 @@ function clickModi(formName) {
 	</div>
 
 	<!-- footer -->
-	<hr class="footer-div">
-
-	<div class="container">
-		<footer class="py-3 my-4">
-			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-				<li class="nav-item"><a href="./rank_list.do"
-					class="nav-link px-2 text-muted">랭킹</a></li>
-				<li class="nav-item"><a href="./review_list.do"
-					class="nav-link px-2 text-muted">리뷰</a></li>
-				<li class="nav-item"><a href="./novel_list.do"
-					class="nav-link px-2 text-muted">웹소설</a></li>
-				<li class="nav-item"><a href="./board_list.do"
-					class="nav-link px-2 text-muted">커뮤니티</a></li>
-				<li class="nav-item"><a href="./origin_list.do"
-					class="nav-link px-2 text-muted">원작 소설 찾기</a></li>
-			</ul>
-			<p class="text-center text-muted">&copy; 2023 개발 못하면 죽는 병, Inc</p>
-		</footer>
-	</div>
+	<jsp:include page="../include/footer1.jsp" />
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

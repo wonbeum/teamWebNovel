@@ -28,6 +28,269 @@
 .nav-scroller {
 	border: 1px solid black;
 }
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoEB.ttf");
+	font-family: "AppleSDGothicNeoEB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoSB.ttf");
+	font-family: "AppleSDGothicNeoSB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoL.ttf");
+	font-family: "AppleSDGothicNeoL";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoM.ttf");
+	font-family: "AppleSDGothicNeoM";
+}
+
+::-webkit-scrollbar {
+display: none;
+}
+
+.background {
+	text-align: center;
+	background-color: #f8f8fb;
+	height: 100%;
+	padding-top: 59px;
+	padding-bottom: 100px;
+}
+
+#rounded_box {
+	width: 77.1%;
+	height: 87.2%;
+	margin: 0 30px;
+	padding: 40px 10px 33px 10px;
+	border-radius: 20px;
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+	background-color: #fff;
+	display: inline-block;
+}
+
+#free_subject {
+	font-family: AppleSDGothicNeoB;
+	font-size: 27px;
+	font-weight: bold;
+	color: #000;
+	padding-left: 38px;
+}
+
+#free_date {
+	font-family: AppleSDGothicNeoL;
+	font-size: 16px;
+	color: #707071;
+	padding-right: 38px;
+}
+
+#user_nickname {
+	font-family: AppleSDGothicNeoM;
+	font-size: 20px;
+	font-weight: 500;
+	color: #777;
+	padding-left: 38px;
+}
+
+#likenum {
+	font-family: AppleSDGothicNeoSB;
+	font-size: 15px;
+	font-weight: 100;
+	text-align: left;
+	color: #000;
+}
+
+#commentnum {
+	font-family: AppleSDGothicNeoSB;
+	font-size: 15px;
+	font-weight: 100;
+	text-align: left;
+	color: #000;
+	margin-right:10px;
+}
+
+
+#likeicon {
+	width: 19px;
+	height: 19px;
+}
+
+#cmticon {
+	width: 19px;
+	height: 19px;
+}
+
+#free_content {
+	font-family: AppleSDGothicNeoM;
+  	font-size: 18px;
+  	font-weight: 500;
+  	text-align: left;
+  	color: #777;
+}
+
+#listbtn {
+	width: 109px;
+  	height: 54px;
+  	padding: 17px 14px;
+  	border-radius: 13px;
+  	background-color: #000;
+	font-family: AppleSDGothicNeoEB;
+  	font-size: 17px;
+  	font-weight: 300;
+  	color: #fff;
+}
+
+#modi, #del {
+	width: 70px;
+  	height: 54px;
+  	padding: 17px 14px;
+  	border-radius: 13px;
+  	border: 0;
+  	margin-top: 0px;
+  	margin-right: 4px;
+  	background-color: #707071;
+	font-family: AppleSDGothicNeoEB;
+  	font-size: 17px;
+  	font-weight: 300;
+  	color: #fff;
+}
+
+#modi {
+	background-color: #777777;
+}
+
+#del {
+	background-color: #af1515;
+}
+
+#cmt_content {
+  	height: 54px;
+  	padding: 17px 20px 16px 25px;
+  	border-radius: 14px;
+  	border: solid 1px #e5e8eb;
+  	background-color: #fff;
+}
+
+#cmtbtn {
+	width: 136px;
+  	height: 54px;
+  	border-radius: 13px;
+  	background-color: #ffb26b;
+  	border: 0;
+  	padding-top: 10px;
+  	font-family: AppleSDGothicNeoEB;
+  	font-size: 17px;
+  	font-weight: 300;
+  	color: #fff;
+  	margin-left: 15px;
+}
+
+#cmt_delbtn{
+	width: 55px;
+  	height: 25px;
+  	border-radius: 13px;
+  	background-color: #fff;
+  	border-width: 1px;
+  	padding-top: 2px;
+  	border-color: #e5e8eb;
+  	font-family: AppleSDGothicNeoEB;
+  	font-size: 13px;
+  	font-weight: 100;
+  	color: #707071;
+  	margin-left: 5px;
+  	margin-bottom: 7px;
+}
+
+#cmt_nickname {
+	font-family: AppleSDGothicNeoM;
+  	font-size: 23px;
+  	padding-left: 15px;
+}
+
+#cmt_date {
+	font-family: AppleSDGothicNeoM;
+  	font-size: 13px;
+  	padding-left: 5px;
+}
+
+#cmt_content {
+	font-family: AppleSDGothicNeoM;
+  	font-size: 18px;
+  	margin-bottom: 30px;
+}
+
+#likebtn {
+	width: 54px;
+  	height: 54px;
+  	border-radius: 13px;
+  	border-color: #e5e8eb;
+}
+
+#savebutton, #mbtn {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+	border: 0px;
+  	background-color: #ffb26b;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 12px;
+    padding-top: 14px;
+    padding-bottom: 10px;
+}
+
+#modalbtn, #listbtn {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+  	background-color: #000;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 10px;
+    padding-top: 13px;
+}
+
+#Delmodalbtn {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+  	background-color: #af1515;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 10px;
+    padding-top: 13px;
+}
+
+#DelModalLabel {
+	font-family: AppleSDGothicNeoB;
+  	font-size: 27px;
+  	text-align: center;
+  	color: #000;
+}
+
+#ModalContent {
+	font-family: AppleSDGothicNeoSB;
+  	font-size: 25px;
+  	font-weight: 500;
+  	line-height: 1.67;
+  	text-align: center;
+  	color: #000;
+}
+
 </style>
 <!-- Jquery -->
 <script type="text/javascript"
@@ -47,8 +310,8 @@
 	$(document).ready(function(){
 		if("${signIn.user_nickname}" == board_nickname) {
 			$('#likebtn').remove();
-			$('#btnarea').append('<a class="btn btn-outline-secondary mt-3" href="./board_modify.do?seq=<%=free_seq%>" role="button">수정</a>')
-			$('#btnarea').append('<a class="btn btn-outline-secondary mt-3" data-bs-toggle="modal" data-bs-target="#myModal" href="#" role="button">삭제</a>')
+			$('#btnarea').append('<a id="modi" class="btn" href="./board_modify.do?seq=<%=free_seq%>" role="button">수정</a>')
+			$('#btnarea').append('<a id="del" class="btn" data-bs-toggle="modal" data-bs-target="#myModal" href="#" role="button">삭제</a>')
 		} 
 		//console.log(${signIn.user_nickname});
 		//console.log(board_nickname);
@@ -66,6 +329,7 @@
 		LikeResult();
 	});
 	LikeNum();
+	CommentNum();
 	
 	
 	
@@ -84,6 +348,7 @@
 						//alert("댓글작성완료");
 						//console.log(jsonData)
 						$("#cmt_content").val("");
+						CommentNum();
 					},
 					error : function(e) {
 						alert("error !");
@@ -124,15 +389,15 @@
 					let result = "" ;
 						result += "<li>";
 						result += "<div>";
-						result += "	<span><strong>"+jsonData[i].user_nickname+"</strong></span> <span class='fw-lighter'>"+jsonData[i].cmt_date+"</span>";
+						result += "	<span id='cmt_nickname'><strong>"+jsonData[i].user_nickname+"</strong></span> <span id='cmt_date'class='fw-lighter'>"+jsonData[i].cmt_date+"</span>";
 						if(jsonData[i].user_nickname == '${signIn.user_nickname}' ) {
 						result += "	<span class='fw-lighter'>";
-						result += "		<button onclick = 'cmt_delete("+ jsonData[i].free_seq +","+ jsonData[i].cmt_seq +")'>삭제</button>";
+						result += "		<button id='cmt_delbtn' onclick = 'cmt_delete("+ jsonData[i].free_seq +","+ jsonData[i].cmt_seq +")'>삭제</button>";
 						result += "	</span>";
 						}
 						result += "</div>";
 						result += "<div>";
-						result += "	<p>"+jsonData[i].cmt_content+"</p>";
+						result += "	<p id='cmt_content'>"+jsonData[i].cmt_content+"</p>";
 						result += "</div>";
 						result += "</li>";
 							
@@ -161,6 +426,7 @@
 				success : function(list){
 					commentList();
 					//alert("댓글 삭제 완료");
+					CommentNum();
 				
 				},
 				error : function(){
@@ -234,7 +500,27 @@
 			success : function(Data){
 				//alert("좋아요수 가져오기 성공");
 				//console.log(Data);
-				$('#likenum').text('추천 '+Data);
+				$('#likenum').text(Data);
+			},
+			error : function(e) {
+				alert("좋아요 수 가져오기 에러");
+			}
+		});
+	}
+	
+	//댓글수 가져오기
+	function CommentNum() {
+		$.ajax({
+			url : 'CommentNumAjax.do',
+			type : 'get',
+			data : {
+				free_seq : "<%=free_seq%>"
+			},
+			dataType : 'json',
+			success : function(Data){
+				//alert("댓글수 가져오기 성공");
+				//console.log(Data);
+				$('#commentnum').text(Data);
 			},
 			error : function(e) {
 				alert("좋아요 수 가져오기 에러");
@@ -249,201 +535,110 @@
 <body>
 
 	<!-- header -->
-	<div class="container">
-		<header class="blog-header lh-1 py-3">
-			<div
-				class="row flex-nowrap justify-content-between align-items-center">
-				<div class="col-4 pt-1">
-					<a class="link-secondary" href="./main.do">사이트 로고</a>
-				</div>
-				<div class="col-4 text-center">
-					<a class="blog-header-logo text-dark" href="./main.do">사이트 이름</a>
-				</div>
-				<div class="col-4 d-flex justify-content-end align-items-center">
-					<a class="link-secondary" href="./novel_search.do"
-						aria-label="Search"> <svg xmlns="http://www.w3.org/2000/svg"
-							width="20" height="20" fill="none" stroke="currentColor"
-							stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-							class="mx-3" role="img" viewBox="0 0 24 24">
-							<title>Search</title><circle cx="10.5" cy="10.5" r="7.5" />
-							<path d="M21 21l-5.2-5.2" /></svg>
-					</a>
-					<c:if test="${signIn == null}">
-						<a class="btn btn-sm btn-outline-secondary" href="./login.do">Sign
-							up</a>
-					</c:if>
-					<c:if test="${signIn != null}">
-						<div class="dropdown text-end">
-							<a href="#"
-								class="d-block link-dark text-decoration-none dropdown-toggle"
-								data-bs-toggle="dropdown" aria-expanded="false"> <img
-								src="https://github.com/mdo.png" alt="mdo" width="32"
-								height="32" class="rounded-circle">
-							</a>
-							<ul class="dropdown-menu text-small">
-								<li><a class="dropdown-item" href="#">New project...</a></li>
-								<li><a class="dropdown-item" href="#">Settings</a></li>
-								<li><a class="dropdown-item" href="#">Profile</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="./logout.do">Sign
-										out</a></li>
-							</ul>
-						</div>
-					</c:if>
-				</div>
-			</div>
-		</header>
-
-		<div class="nav-scroller py-1 mb-2">
-			<nav class="nav d-flex justify-content-between">
-				<a class="p-2 link-secondary" href="./rank_list.do">랭킹</a> <a
-					class="p-2 link-secondary" href="./review_list.do">리뷰</a> <a
-					class="p-2 link-secondary" href="./novel_list.do">웹소설</a> <a
-					class="p-2 link-secondary" href="./board_list.do">커뮤니티</a> <a
-					class="p-2 link-secondary" href="./origin_list.do">원작 소설 찾기</a>
-			</nav>
-		</div>
-	</div>
+	<jsp:include page="../include/header1.jsp" />
 
 	<!-- main -->
 	<main>
-		<div class="container w-75">
-			<input type="hidden" name="seq" value="" />
-			<div class="row mt-5">
-				<div class="col-auto me-auto">
-					<h5>커뮤니티 게시판</h5>
-				</div>
-				<div class="col-auto">
-					<a href="./main.do"> <img
-						src="//image.istarbucks.co.kr/common/img/common/icon_home.png"
-						alt="홈으로">
-					</a> <img class="arrow"
-						src="//image.istarbucks.co.kr/common/img/common/icon_arrow.png"
-						alt="하위메뉴"> <a href="./board_list.do">커뮤니티</a>
-				</div>
-			</div>
-		</div>
-		<!-- 게시글 -->
-		<div class="container w-75 mb-5">
-			<div class="row">
-				<div class="col-lg-6 col-md-12 mt-3 mb-5">
-					<form action="./board_modify_ok.do" method="post" name="userInfo">
-						<input type="hidden" name="seq" value="<%=free_seq%>" />
-						<h4><%=free_subject%></h4>
-						<table class="table">
-							<thead>
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td width="35%" id="user_nickname"><%=user_nickname%></td>
-									<td width="25%"><%=free_date%></td>
-									<td width="20%">조회 <%=free_hit%></td>
-									<td width="25%" id="likenum">추천</td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
-					<div class="form-control" name="content"
-						style="height: 300px; overflow: scroll;"><%=free_content%></div>
-					<div id="btnarea">
-						<a class="btn btn-outline-dark mt-3" href="./board_list.do"
-							role="button" id="listbtn">목록</a>
-						<button type="checkbox" id="likebtn"
-							class="btn btn-outline-secondary mt-3">
-							<img id="likeimg" src="../images/like_no.png"
-								style="width: 25px;"></img>
-						</button>
+		<div class="background">
+			<div id="rounded_box">
+				<!-- 게시글 -->
+				<form action="./board_modify_ok.do" method="post" name="userInfo">
+					<input type="hidden" name="seq" value="<%=free_seq%>" />
+				</form>
+				<div class="container">
+					<input type="hidden" name="seq" value="" />
+					<div class="row">
+						<div class="col-auto me-auto">
+							<p id="free_subject"><%=free_subject%></p>
+						</div>
+						<div class="col-auto">
+							<p id="free_date"><%=free_date%></p>
+						</div>
 					</div>
-				</div>
-
-				<!-- 댓글 -->
-				<div class="col mt-3">
-					<table class="table">
-						<tbody>
-							<tr>
-								<th class="subject"><h4>댓글</h4></th>
-						</tbody>
-					</table>
-					<ul class="list-unstyled" id="cmt_area">
-						<!-- 
-						<li>
-							<div>
-								<span><strong>닉네임10</strong></span> <span class="fw-lighter">(23.01.28)</span>
-								<span class="fw-lighter">수정</span>
-								<span class="fw-lighter">삭제</span>
+					<hr style="color: #707071; height: 1px; margin-bottom: 26px; margin-top: 0px;" />
+					<div class="row" style="height: 24px;">
+						<div class="col-auto me-auto">
+							<p id="user_nickname"><%=user_nickname%></p>
+						</div>
+						<div class="col-auto" style="padding-right: 38px;">
+							<a id="cmtnum"> 
+								<img id="cmticon" alt="4" src="../images/comment.png" /> 
+								<a id="commentnum"></a>
+							</a> 
+							<a> <img id="likeicon" src="../images/like_icon.png" /> 
+								<a id="likenum"></a>
+							</a>
+						</div>
+					</div>
+					<div>
+						<div class="container">
+							<div class="form-control" name="content" id="free_content"
+							style="height: 300px; scrollbar-width: none; overflow-y: scroll;  margin-top: 35px;padding-top: 20px;padding-left: 23px;padding-right: 23px;" >
+								<%=free_content%>
 							</div>
-							<div>
-								<p>왓챠처럼 예상별점 보여주기는 아무래도 좀 어려울까요? 현재 평균별점에 개인의 연령대, 성별, 선호장르,
-									선호작가 등으로 가감하면 예상별점이 산출될 수 있을 것 같은데요. 웹소설 분야의 왓챠가 되면 좋겠네요</p>
+						</div>
+					</div>
+					
+					<hr style="color: #707071;height: 1px;margin-bottom: 15px;margin-top: 30px;" />
+					
+					<div class="row"  style="padding-left: 15px;padding-right: 20px;">
+						<div id="btnarea" class="col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-12 text-start">
+							<a class="btn btn-outline-dark" href="./board_list.do"
+								role="button" id="listbtn">목록으로</a>
+							<button id="likebtn"
+								class="btn btn-outline-secondary">
+								<img id="likeimg" src="../images/like_no.png"
+									style="width: 32px;"></img>
+							</button>
+						</div>
+					<!-- 댓글 -->
+						<div class="col-xxl-9 col-xl-8 col-lg-7 col-md-6 col-sm-12">
+							<div class="row">
+								<textarea class="col form-control pr-5" name="cmt_content"
+									id="cmt_content" rows="3" placeholder="댓글을 입력해보세요"></textarea>
+								<button type="submit" id="cmtbtn"
+									class="col-2 btn btn-outline-secondary">댓글 작성하기</button>
 							</div>
-						</li>
+						</div>
+					</div>
+					<div class="text-start">
+						<ul class="list-unstyled" id="cmt_area" style=" margin-top: 30px;margin-left: 10px;margin-right: 10px;">
+							<!-- 
+					
 						 -->
-					</ul>
+						</ul>
+					</div>
+			</div>
 
-					<div class="container">
-						<div class="row">
-							<textarea class="col form-control pr-5" name="cmt_content"
-								id="cmt_content" rows="3" placeholder="댓글을 입력해보세요"></textarea>
-							<button type="submit" id="cmtbtn"
-								class="col-2 btn btn-outline-secondary">등록</button>
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="DelModalLabel">삭제하기</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body" id="ModalContent">
+							정말로 삭제하시겠습니까?<br /> 삭제하면 되돌릴 수 없습니다.
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="modalbtn" class="btn btn-secondary"
+								data-bs-dismiss="modal">취소</button>
+							<button type="submit" class="btn btn-primary" id="Delmodalbtn"
+								onclick=clickDel(userInfo)>삭제하기</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">수정 확인</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						정말로 삭제하시겠습니까?<br /> 삭제한 데이터는 복구할 수 없습니다.
-					</div>
-					<div class="modal-footer">
-						<button type="button" id="modalbtn" class="btn btn-secondary"
-							data-bs-dismiss="modal">취소</button>
-						<button type="submit" class="btn btn-primary" id="modalbtn"
-							onclick=clickDel(userInfo)>삭제하기</button>
-					</div>
-				</div>
-			</div>
 		</div>
-
 	</main>
 
 
 	<!-- footer -->
-	<hr class="footer-div">
-
-	<div class="container">
-		<footer class="py-3 my-4">
-			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-				<li class="nav-item"><a href="./rank_list.do"
-					class="nav-link px-2 text-muted">랭킹</a></li>
-				<li class="nav-item"><a href="./review_list.do"
-					class="nav-link px-2 text-muted">리뷰</a></li>
-				<li class="nav-item"><a href="./novel_list.do"
-					class="nav-link px-2 text-muted">웹소설</a></li>
-				<li class="nav-item"><a href="./board_list.do"
-					class="nav-link px-2 text-muted">커뮤니티</a></li>
-				<li class="nav-item"><a href="./origin_list.do"
-					class="nav-link px-2 text-muted">원작 소설 찾기</a></li>
-			</ul>
-			<p class="text-center text-muted">&copy; 2023 개발 못하면 죽는 병, Inc</p>
-		</footer>
-	</div>
+	<jsp:include page="../include/footer1.jsp" />
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

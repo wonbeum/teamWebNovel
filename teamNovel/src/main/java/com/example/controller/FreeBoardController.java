@@ -151,7 +151,15 @@ public class FreeBoardController {
 		return commentList;
 	}
 	
-
+	// 댓글 수 ajax 가져오기
+	@RequestMapping("CommentNumAjax.do")
+	public int CommentNumtAjax(HttpServletRequest request) {
+		String free_seq = request.getParameter("free_seq");
+		
+		int result = cdao.Comment_num(free_seq);
+		
+		return result;
+	}
 	
 	@RequestMapping("board_modify.do")
 	public ModelAndView board_modify(HttpServletRequest request) {	

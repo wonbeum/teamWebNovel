@@ -132,4 +132,38 @@ public class CommentDAO {
 		return flag;
 	}
 
+	
+	// 글의 like 갯수 가져오기
+		public int Comment_num(String free_seq) {
+			 
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			int result = 0;
+			try {
+				conn = dataSource.getConnection();
+				
+				String sql = "select count(cmt_seq)commentnum from novel_free_comment where free_seq = ? and cmt_status = '공개'";
+				
+				pstmt = conn.prepareStatement( sql );
+				pstmt.setString( 1,  free_seq );
+				
+				rs = pstmt.executeQuery();
+				while( rs.next() ) {
+					result = rs.getInt("commentnum");
+					//System.out.println("좋아요수 :"+result );
+				}
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				System.out.println( "[에러] " + e.getMessage() );
+			} finally {
+				if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+				if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+				if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+			}	
+			
+			return result;
+		}
 }

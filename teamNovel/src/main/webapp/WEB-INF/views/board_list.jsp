@@ -41,7 +41,7 @@
 }
 
 @font-face {
-	src: url("/font/AppleSDGothicNeoR.ttf");
+	src: url("/font/AppleSDGothicNeoEB.ttf");
 	font-family: "AppleSDGothicNeoEB";
 }
 
@@ -127,25 +127,47 @@ th {
 }
 
 #category {
-	width: 84px;
+	width: 83px;
 	height: 28px;
-	padding: 4px 27px 4px 28px;
+	padding: 4px 17px 4px 17px;
 	border-radius: 14px;
 	background-color: #ffb26c;
 	font-family: AppleSDGothicNeoSB;
 	font-size: 17px;
 	color: #fff;
-	font-size: 17px;
 }
-#button-search {
-  	height: 45px;
+
+#searchbox {
+	height: 45px;
+	width: 300px;
+	padding: 11px 20px 10px 20px;
+	border-radius: 15px;
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+	background-color: #fff;
+}
+
+#pageGroup > ul > li > a{
+	color: #999;
+	border: none;
+	font-family: AppleSDGothicNeoEB;
+  	font-size: 20px;
+	width: 40px;
+  	height: 40px;
+  	margin-right: 16px;
+  	margin-left: 16px;
+}
+
+#pagging {
+  	height: 69px;
+  	margin: 50px 64px 0 57px;
+  	padding: 15px 25px 14px;
+  	border-radius: 15px;
   	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
   	background-color: #fff;
-  	font-family: AppleSDGothicNeoEB;
-  	font-size: 20px;
-  	font-weight: 800;
-  	color: #999;
+	width: 555px;
+ 	text-align: center;
 }
+
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -159,42 +181,49 @@ $(document).ready(function(){
 			}
 		});	
 		
-	// 전체 리스트 가져오기
-	$.ajax({
-		url : 'BoardListAjax.do',
-		type : 'get',
-		dataType : 'json',
-		success : function(jsonData){
-			//console.log("성공");
-			$('#insertTotalList').html('');
-			
-			for(let i=0; i<jsonData.length; i++){	
-				tr = `
-					<tr> 
-					<td><a id="category">\${jsonData[i].free_category}</a></td>
-					<td class='text-start'><a id="td_link" href='board_view.do?seq=\${jsonData[i].free_seq}'>
-						\${jsonData[i].free_subject}</a></td>
-					<td>\${jsonData[i].user_nickname}</td>
-					<td>\${jsonData[i].free_date}</td>
-					<td>\${jsonData[i].free_hit}</td>
-					<td>\${jsonData[i].free_comment}</td>
-					<td>\${jsonData[i].free_like}</td>
-					</tr>
-				`
-				$('#insertTotalList').append(tr);
-			}
-		},
-		error : function(e) {
-			alert("error !");
-		}
-	});
 	
 	// 가져오기
+	BoardList();
 	NoticeAjax();
 	BestListAjax();
 	
 
 });
+
+//전체 리스트 가져오기
+function BoardList(){
+
+$.ajax({
+	url : 'BoardListAjax.do',
+	type : 'get',
+	dataType : 'json',
+	success : function(jsonData){
+		//console.log("성공");
+		$('#insertTotalList').html('');
+		
+		for(let i=0; i<jsonData.length; i++){	
+			tr = `
+				<tr> 
+				<td><a id="category">\${jsonData[i].free_category}</a></td>
+				<td class='text-start'><a id="td_link" href='board_view.do?seq=\${jsonData[i].free_seq}'class="d-inline-block text-truncate" style="max-width: 230px;">
+					\${jsonData[i].free_subject}</a></td>
+				<td>\${jsonData[i].user_nickname}</td>
+				<td>\${jsonData[i].free_date}</td>
+				<td>\${jsonData[i].free_hit}</td>
+				<td>\${jsonData[i].free_comment}</td>
+				<td>\${jsonData[i].free_like}</td>
+				</tr>
+			`
+			$('#insertTotalList').append(tr);
+		}
+	},
+	error : function(e) {
+		alert("error !");
+	}
+});
+
+}
+
 	// 공지 가져오기
 	function NoticeAjax(){
 		$.ajax({
@@ -210,7 +239,7 @@ $(document).ready(function(){
 					tr = `
 						<tr> 
 						<td><a id="category">\${jsonData[i].free_category}</a></td>
-						<td class='text-start'><a id="td_link" href='board_view.do?seq=\${jsonData[i].free_seq}'>
+						<td class='text-start'><a id="td_link" href='board_view.do?seq=\${jsonData[i].free_seq}'class="d-inline-block text-truncate" style="max-width: 230px;">
 							\${jsonData[i].free_subject}</a></td>
 						<td>\${jsonData[i].user_nickname}</td>
 						<td>\${jsonData[i].free_date}</td>
@@ -244,7 +273,7 @@ $(document).ready(function(){
 					tr = `
 						<tr> 
 						<td><a id="category">\${jsonData[i].free_category}</a></td>
-						<td class='text-start'><a id="td_link" href='board_view.do?seq=\${jsonData[i].free_seq}'>
+						<td class='text-start'><a id="td_link" href='board_view.do?seq=\${jsonData[i].free_seq}'class="d-inline-block text-truncate" style="max-width: 230px;">
 							\${jsonData[i].free_subject}</a></td>
 						<td>\${jsonData[i].user_nickname}</td>
 						<td>\${jsonData[i].free_date}</td>
@@ -319,15 +348,15 @@ $(document).ready(function(){
 						</table>
 					</div>
 				</div>
-				<div id="best" class="container tab-pane fade ">
+				<div id="best" class="tab-pane fade ">
 					<div class="container">
 						<table class="table table-hover mt-3">
 							<thead class="text-center">
 								<tr>
-									<th scope="col" width="12%">카테고리</th>
+									<th scope="col" width="17%">카테고리</th>
 									<th scope="col">제목</th>
 									<th scope="col" width="13%">작성자</th>
-									<th scope="col" width="13%">날짜</th>
+									<th scope="col" width="15%">날짜</th>
 									<th scope="col" width="8%">조회</th>
 									<th scope="col" width="8%">댓글</th>
 									<th scope="col" width="8%">추천</th>
@@ -340,15 +369,15 @@ $(document).ready(function(){
 					</div>
 				</div>
 
-				<div id="notice" class="container tab-pane fade">
+				<div id="notice" class="tab-pane fade">
 					<div class="container">
 						<table class="table table-hover mt-3">
 							<thead class="text-center">
 								<tr>
-									<th scope="col" width="12%">카테고리</th>
+									<th scope="col" width="17%">카테고리</th>
 									<th scope="col">제목</th>
 									<th scope="col" width="13%">작성자</th>
-									<th scope="col" width="13%">날짜</th>
+									<th scope="col" width="15%">날짜</th>
 									<th scope="col" width="8%">조회</th>
 									<th scope="col" width="8%">댓글</th>
 									<th scope="col" width="8%">추천</th>
@@ -364,13 +393,15 @@ $(document).ready(function(){
 		</div>
 
 		<!-- 글쓰기, 검색 -->
-		<div class="container" style="width: 77.1%; height: 45px">
-			<div class="row" style="margin-bottom: 0px;">
+		<div class="container"
+			style="width: 77.1%; height: 45px; padding-left: 0px; padding-right: 0px;">
+			<div class="row" style="margin-bottom: 0px; padding-right: 0px">
 				<div class="col-auto me-auto">
-					<div class="input-group mb-3" id="button-search">
-						<input type="text" class="form-control"
-							placeholder="작성자 입력">
-						<button class="btn btn-outline-secondary" type="button">검색</button>
+					<div id="searchbox" class="text-start">
+						<input type="text" placeholder="작성자/내용 입력"
+							style="border: none; outline: none; width: 80%; font-family: AppleSDGothicNeoSB; font-size: 17px;">
+						<a type="button"
+							style="font-family: AppleSDGothicNeoB; font-size: 20px; color: #999;">검색</a>
 					</div>
 				</div>
 				<div class="col-auto">
@@ -379,7 +410,23 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-		<div style="height: 200px"></div>
+		<!-- 페이징 -->
+		<div style="display: inline-block;" id="pageGroup">
+				<ul class="pagination" id="pagging">
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#">4</a></li>
+					<li class="page-item"><a class="page-link" href="#">5</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</ul>
+		</div>
+		<div style="height: 100px"></div>
 	</div>
 
 

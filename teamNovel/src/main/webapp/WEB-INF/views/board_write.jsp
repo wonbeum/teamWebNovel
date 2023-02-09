@@ -21,6 +21,102 @@
 .nav-scroller {
 	border: 1px solid black;
 }
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoM.ttf");
+	font-family: "AppleSDGothicNeoM";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoEB.ttf");
+	font-family: "AppleSDGothicNeoEB";
+}
+
+#rouded_box {
+	width: 77.1%;
+	height: 87.2%;
+	margin: 0 30px;
+	padding: 40px 38px 33px 38px;
+	border-radius: 20px;
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+	background-color: #fff;
+	display: inline-block;
+}
+
+.background {
+	text-align: center;
+	background-color: #f8f8fb;
+	height: 100%;
+	padding-top: 59px;
+	padding-bottom: 100px;
+}
+
+#title {
+	font-family: AppleSDGothicNeoB;
+	font-size: 27px; text-align : left;
+	color: #000;
+	text-align: left;
+}
+
+#floatingSelect.form-select {
+	font-family: AppleSDGothicNeoM;
+	font-size: 18px;
+	font-weight: 500;
+	color: #000000;
+	height: 58px;
+	border-radius: 14px;
+	margin-bottom: 20px;
+	padding-left: 25px;
+	padding-bottom: 7px;
+}
+
+#free_subject.form-control {
+	font-family: AppleSDGothicNeoM;
+	font-size: 18px;
+	font-weight: 500;
+	color: #000000;
+	height: 58px;
+	border-radius: 14px;
+	margin-bottom: 22px;
+	padding-left: 25px;
+	padding-bottom: 7px;
+}
+
+#smart_editor2_content {
+	border-radius: 7px;
+}
+
+#listbtn {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+  	background-color: #000;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 10px;
+    padding-top: 14px;
+}
+#savebutton {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+	border: 0px;
+  	background-color: #ffb26b;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 12px;
+    padding-top: 14px;
+    padding-bottom: 10px;
+}
 </style>
 
 <!-- SmartEditor2 라이브러리  -->
@@ -30,7 +126,6 @@
 	src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <script>
-
 <!-- SmartEditor2 -->
 	let oEditors = []
 
@@ -52,161 +147,97 @@
 			}
 		});
 	}
-	
+
 	// 입력값 검사
-	$(document).ready(function(){
-		smartEditor();
-		$("#savebutton").click(function(){
-	        //id가 smarteditor인 textarea에 에디터에서 대입
-	        oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
-	        let content = document.getElementById("editorTxt").value;
-	        let title = $("#free_subject").val();
-	        // 입력값 검사
-	        if(content == "" || content == null || content == '&nbsp;' || 
-					content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
-				alert("내용을 입력해주세요.");
-				return false;
-			}
-	        
-	        if (title == null || title == "") {
-				alert("제목을 입력해주세요.");
-				//$("#title").focus();
-				return false;
-			}
-	        
-	        //폼 submit
-	        $("#frm").submit();
-	    });
-		
+	$(document).ready(
+			function() {
+				smartEditor();
+				$("#savebutton")
+						.click(
+								function() {
+									//id가 smarteditor인 textarea에 에디터에서 대입
+									oEditors.getById["editorTxt"].exec(
+											"UPDATE_CONTENTS_FIELD", []);
+									let content = document
+											.getElementById("editorTxt").value;
+									let title = $("#free_subject").val();
+									// 입력값 검사
+									if (content == "" || content == null
+											|| content == '&nbsp;'
+											|| content == '<br>'
+											|| content == '<br/>'
+											|| content == '<p>&nbsp;</p>') {
+										alert("내용을 입력해주세요.");
+										return false;
+									}
 
-	});	 
+									if (title == null || title == "") {
+										alert("제목을 입력해주세요.");
+										//$("#title").focus();
+										return false;
+									}
 
+									//폼 submit
+									$("#frm").submit();
+								});
+
+			});
 </script>
 </head>
 <body>
 	<!-- header -->
-	<div class="container">
-		<header class="blog-header lh-1 py-3">
-			<div
-				class="row flex-nowrap justify-content-between align-items-center">
-				<div class="col-4 pt-1">
-					<a class="link-secondary" href="./main.do">사이트 로고</a>
-				</div>
-				<div class="col-4 text-center">
-					<a class="blog-header-logo text-dark" href="./main.do">사이트 이름</a>
-				</div>
-				<div class="col-4 d-flex justify-content-end align-items-center">
-					<a class="link-secondary" href="./novel_search.do"
-						aria-label="Search"> <svg xmlns="http://www.w3.org/2000/svg"
-							width="20" height="20" fill="none" stroke="currentColor"
-							stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-							class="mx-3" role="img" viewBox="0 0 24 24">
-							<title>Search</title><circle cx="10.5" cy="10.5" r="7.5" />
-							<path d="M21 21l-5.2-5.2" /></svg>
-					</a>
-					<c:if test="${signIn == null}">
-						<a class="btn btn-sm btn-outline-secondary" href="./login.do">Sign
-							up</a>
-					</c:if>
-					<c:if test="${signIn != null}">
-						<div class="dropdown text-end">
-							<a href="#"
-								class="d-block link-dark text-decoration-none dropdown-toggle"
-								data-bs-toggle="dropdown" aria-expanded="false"> <img
-								src="https://github.com/mdo.png" alt="mdo" width="32"
-								height="32" class="rounded-circle">
-							</a>
-							<ul class="dropdown-menu text-small">
-								<li><a class="dropdown-item" href="#">New project...</a></li>
-								<li><a class="dropdown-item" href="#">Settings</a></li>
-								<li><a class="dropdown-item" href="#">Profile</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="./logout.do">Sign
-										out</a></li>
-							</ul>
-						</div>
-					</c:if>
-				</div>
-			</div>
-		</header>
-
-		<div class="nav-scroller py-1 mb-2">
-			<nav class="nav d-flex justify-content-between">
-				<a class="p-2 link-secondary" href="./rank_list.do">랭킹</a> <a
-					class="p-2 link-secondary" href="./review_list.do">리뷰</a> <a
-					class="p-2 link-secondary" href="./novel_list.do">웹소설</a> <a
-					class="p-2 link-secondary" href="./board_list.do">커뮤니티</a> <a
-					class="p-2 link-secondary" href="./origin_list.do">원작 소설 찾기</a>
-			</nav>
-		</div>
-	</div>
+	<jsp:include page="../include/header1.jsp"></jsp:include>
 
 	<!-- main -->
-	<div class="text-center mt-5">
-		<h3>커뮤니티 글 쓰기</h3>
-	</div>
-	<div
-		class="container shadow p-3 mt-4 mb-5 bg-body-tertiary rounded w-50">
-		<div class="form">
-			<form class="validation-form" action="./board_write_ok.do"
-				method="get" id="frm" novalidate>
-				<div class="mb-3 w-25">
-					<label class="form-label">카테고리</label> <select
-						class="form-select form-select-sm" name="free_category" required>
-						<option disabled>카테고리 선택</option>
-						<option value="질문">질문</option>
-						<option value="이슈">이슈</option>
-						<option value="잡담">잡담</option>
-					</select>
-					<div class="invalid-feedback">카테고리를 선택하세요.</div>
-				</div>
-				<div class="mb-3">
-					<label class="form-label">제목</label> <input type="text" id="free_subject"
-						name="free_subject" class="form-control" placeholder="제목 입력"
-						required>
-					<div class="invalid-feedback">제목을 입력해주세요.</div>
-				</div>
-
-				<!-- SmartEditor2  -->
-				<div id="smarteditor">
-					<textarea name="free_content" id="editorTxt" rows="10" cols="10" style="width: 100%"></textarea>
-				</div>
-
-				<div class="row">
-					<div class="col-auto me-auto">
-						<a class="btn btn-outline-secondary" href="./board_list.do"
-							role="button">목록</a>
+	<div class="background">
+		<div class="container justify-content-center" id="rouded_box">
+			<p class="text-start" id="title" style="margin-bottom: 0px;">글
+				작성하기</p>
+			<hr style="color: #e5e8eb;" />
+			<div class="form">
+				<form class="validation-form" action="./board_write_ok.do"
+					method="get" id="frm" novalidate>
+					<div class="form-floating">
+						<select class="form-select" id="floatingSelect"
+							style="color: #000000; margin-bottom: 20px;"
+							aria-label="Floating label select example" id="free_category"
+							name="free_category">
+							<option disabled>카테고리</option>
+							<option value="질문">질문</option>
+							<option value="이슈">이슈</option>
+							<option value="잡담">잡담</option>
+						</select> <label for="floatingSelect" style="padding-left: 25px;">카테고리 선택</label>
 					</div>
-					<div class="col-auto">
-						<button type="submit" id="savebutton" class="btn btn-secondary">글쓰기</button>
-
+					<div class="form-floating">
+						<input type="text" class="form-control" id="free_subject"
+							placeholder="제목을 입력하세요" name="free_subject"> <label
+							for="floatingPassword"
+							style="padding-left: 25px; font-family: AppleSDGothicNeoM;">제목 입력</label>
 					</div>
 
-				</div>
-			</form>
+					<!-- SmartEditor2  -->
+					<div id="smarteditor">
+						<textarea name="free_content" id="editorTxt" rows="10" cols="10"
+							style="width: 100%"></textarea>
+					</div>
+
+					<div class="row" style="margin-top: 39px;">
+						<div class="col-auto me-auto">
+							<a class="btn btn-outline-secondary" href="./board_list.do"
+								role="button" id="listbtn">목록으로</a>
+						</div>
+						<div class="col-auto">
+							<button type="submit" id="savebutton" class="btn btn-secondary">작성하기</button>
+
+						</div>
+
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-
 	<!-- footer -->
-	<hr class="footer-div">
-
-	<div class="container">
-		<footer class="py-3 my-4">
-			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-				<li class="nav-item"><a href="./rank_list.do"
-					class="nav-link px-2 text-muted">랭킹</a></li>
-				<li class="nav-item"><a href="./review_list.do"
-					class="nav-link px-2 text-muted">리뷰</a></li>
-				<li class="nav-item"><a href="./novel_list.do"
-					class="nav-link px-2 text-muted">웹소설</a></li>
-				<li class="nav-item"><a href="./board_list.do"
-					class="nav-link px-2 text-muted">커뮤니티</a></li>
-				<li class="nav-item"><a href="./origin_list.do"
-					class="nav-link px-2 text-muted">원작 소설 찾기</a></li>
-			</ul>
-			<p class="text-center text-muted">&copy; 2023 개발 못하면 죽는 병, Inc</p>
-		</footer>
-	</div>
+	<jsp:include page="../include/footer1.jsp"></jsp:include>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
