@@ -13,22 +13,40 @@
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
 <style type="text/css">
-.nav-scroller {
-	border: 1px solid black;
+#nav-button{
+	width: 120px;
+	height: 40px;
+	margin: 16px;
+	margin-top: 50px;
+	border-radius: 20px;
+	border: solid 2px #ffb26b;
+	background-color: #fff;
+	padding-top: 6px;
+	font-family: AppleSDGothicNeoR;
+	font-size: 15px;
+	font-weight: 800;
+	font-style: normal;
+	text-decoration-line: none;
+	text-align: center;
+	color: #ffb26c;
 }
-
-.nav { -
-	-bs-nav-link-padding-x: 1rem; -
-	-bs-nav-link-padding-y: 0.5rem; -
-	-bs-nav-link-font-weight:; -
-	-bs-nav-link-color: #343a40; -
-	-bs-nav-link-hover-color: #ffc107; -
-	-bs-nav-link-disabled-color: var(- -bs-secondary-color);
-	display: flex;
-	flex-wrap: wrap;
-	padding-left: 0;
-	margin-bottom: 0;
-	list-style: none;
+#kromance, #kfantasy, #kromancefantasy,
+#nromance, #nfantasy, #nromancefantasy{
+	width: 120px;
+	height: 40px;
+	margin: 16px;
+	margin-top: 20px;
+	border-radius: 20px;
+	border: 0;
+	background-color: #fff;
+	padding-top: 6px;
+	font-family: AppleSDGothicNeoR;
+	font-size: 15px;
+	font-weight: 800;
+	font-style: normal;
+	text-decoration-line: none;
+	text-align: center;
+	color: #ffb26c;
 }
 </style>
 <script type="text/javascript"
@@ -47,6 +65,8 @@
 				listhtml +="<div class='container'>";
 				
 				for( let i = 0 ; i<25; i ++ ){
+
+					let title = encodeURI(jsonData[i].novel_title);
 					
 					if( (i%5) == 0 ){
 						listhtml +="<div class='row row-cols-2 row-cols-sm-2 row-cols-md-5 g-2'>";
@@ -55,7 +75,7 @@
 					
 					listhtml +="	<div class='col'>";
 					listhtml +="		<div class='card shadow-sm'>";
-					listhtml +="			<a href='#'> <img src='"+ jsonData[i].novel_img +"' class='img' width='100%'";
+					listhtml +="			<a href='./novel_detail.do?novel_title=" + title + "'> <img src='"+ jsonData[i].novel_img +"' class='img' width='100%'";
 					listhtml +="				height='225' role='img' aria-label='Placeholder: Thumbnail'>";
 					listhtml +="			</a>";
 					listhtml +="			<div class='card-body'>";
@@ -107,6 +127,21 @@
 			url = 'novel_rank_naver_fantasy.do';
 			novelrankLists(url);
 		}); 
+		
+
+	    $('#tablists').on('show.bs.tab', function(e){
+	    	let Target1 = e.target;
+	    	Target1.style.background ="#ffb26b"
+	    	let Target2 = e.relatedTarget;
+	    	Target2.style.background = "white";
+	        });
+	    
+	    $('a[data-link="platform"]').on('show.bs.tab', function(e){
+	    	let myTarget = e.target;
+	    	myTarget.style.color = "white";
+	    	let futureTarget = e.relatedTarget;
+	    	futureTarget.style.color = "#ffb26b";
+	        });
 	});
 </script>
 </head>
@@ -121,14 +156,15 @@
 
 	<div class="container w-75">
 		<!-- Nav pills -->
-		<ul class="nav nav-tabs justify-content-center bg-light"
-			role="tablist">
+		<ul class="nav justify-content-center"
+			role="tablist" id="tablists">
 			<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-				href="#pop30">TOP 30</a>
+				href="#pop30" id="nav-button" data-link="platform">TOP 30</a>
 			<li class="nav-item"><a class="nav-link active"
-				data-bs-toggle="pill" href="#kakaopage">카카오 페이지</a></li>
+				data-bs-toggle="pill" href="#kakaopage" id="nav-button" data-link="platform"
+				style="background-color: #ffb26c; color: #fff;">카카오 페이지</a></li>
 			<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-				href="#series">네이버 시리즈</a>
+				href="#series" id="nav-button" data-link="platform">네이버 시리즈</a>
 		</ul>
 	</div>
 	<div class="container w-75">
@@ -137,7 +173,7 @@
 			<div id="pop30" class="container tab-pane fade"></div>
 			<div id="kakaopage" class="container tab-pane active">
 				<!-- Nav pills -->
-				<ul class="nav justify-content-center bg-light" role="tablist">
+				<ul class="nav justify-content-center" role="tablist">
 					<li class="nav-item"><a class="nav-link active"
 						data-bs-toggle="pill" href="#romance" id="kromance">로맨스</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
@@ -148,7 +184,7 @@
 			</div>
 
 			<div id="series" class="container tab-pane fade">
-				<ul class="nav justify-content-center bg-light" role="tablist">
+				<ul class="nav justify-content-center" role="tablist">
 					<li class="nav-item"><a class="nav-link active"
 						data-bs-toggle="pill" href="#romance" id="nromance">로맨스</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"

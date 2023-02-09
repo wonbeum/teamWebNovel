@@ -144,7 +144,6 @@ public class WebNovelController {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
 		
-		
 		NovelPagingTO Lists = new NovelPagingTO();
 		Lists.setCpage( cpage );
 		
@@ -156,4 +155,23 @@ public class WebNovelController {
 		return result; 
 	}
 	
+	@RequestMapping("novel_list_search.do")
+	public ArrayList<NovelPagingTO> novel_list_search( HttpServletRequest request ) {
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+
+		String search = request.getParameter("search");
+		
+		NovelPagingTO Lists = new NovelPagingTO();
+		Lists.setCpage( cpage );
+		
+		Lists = noveldao.search_list( Lists ,search );
+		
+		ArrayList<NovelPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result; 
+	}
 }

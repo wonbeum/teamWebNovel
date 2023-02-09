@@ -40,30 +40,6 @@
 	}
 </script> -->
 <style type="text/css">
-@font-face {
-	src: url("/font/AppleSDGothicNeoB.ttf");
-	font-family: "AppleSDGothicNeoB";
-}
-
-@font-face {
-	src: url("/font/AppleSDGothicNeoM.ttf");
-	font-family: "AppleSDGothicNeoM";
-}
-
-@font-face {
-	src: url("/font/AppleSDGothicNeoSB.ttf");
-	font-family: "AppleSDGothicNeoSB";
-}
-
-@font-face {
-	src: url("/font/AppleSDGothicNeoR.ttf");
-	font-family: "AppleSDGothicNeoR";
-}
-
-@font-face {
-	src: url("/font/AppleSDGothicNeoR.ttf");
-	font-family: "AppleSDGothicNeoEB";
-}
 
 #kakaonovelRank, #navernovelRank, #nav-button1, 
 #nav-button2, #nav-button3, #nav-button4,
@@ -165,15 +141,18 @@
 						<div class="carousel-inner">
 							`;
 				for(let i=0, j=1 ; j<=2 ; j++ ){
+
+					
 					if( j==1 ){
 						listhtml +=`
 							<div class="carousel-item active">
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(romance[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_review.do?novel_title=\${romance[i].novel_title}"> <img src="\${romance[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -189,9 +168,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(romance[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="#"> <img src="\${romance[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -230,9 +210,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(romance[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_review.do?novel_title=\${romance[i].novel_title}"> <img src="\${romance[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -248,9 +229,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(romance[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_review.do?novel_title=\${romance[i].novel_title}"> <img src="\${romance[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -289,9 +271,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(romancefantasy[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_review.do?novel_title=\${romancefantasy[i].novel_title}"> <img src="\${romancefantasy[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romancefantasy[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -307,9 +290,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(romancefantasy[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_review.do?novel_title=\${romancefantasy[i].novel_title}"> <img src="\${romancefantasy[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romancefantasy[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -346,9 +330,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(fantasy[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_review.do?novel_title=\${fantasy[i].novel_title}"> <img src="\${fantasy[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${fantasy[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -364,9 +349,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(fantasy[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_review.do?novel_title=\${fantasy[i].novel_title}"> <img src="\${fantasy[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${fantasy[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -403,9 +389,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(romance[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_review.do?novel_title=\${romance[i].novel_title}"> <img src="\${romance[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -421,9 +408,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
+							let title = encodeURI(romance[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="#"> <img src="\${romance[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>

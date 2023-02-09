@@ -5,40 +5,6 @@
 <%@page import="com.example.model.novelInfoTO"%>
 <%@page import="java.util.ArrayList"%>
 
-<%--
-ArrayList<novelInfoTO> novelLists = (ArrayList<novelInfoTO>) request.getAttribute("Lists");
-
-StringBuilder krsbHtml = new StringBuilder();
-
-int i = 1;
-
-
-for( novelInfoTO to : novelLists ){
-	if( (i % 5) == 1 ){
-		krsbHtml.append("<div class='row row-cols-2 row-cols-sm-2 row-cols-md-5 g-2'>");
-	}
-
-	krsbHtml.append("	<div class='col'>");
-	krsbHtml.append("		<div class='card shadow-sm'>");
-	krsbHtml.append("			<a href='#'> <img src='"+ to.getNovel_img() +"' class='img' width='100%'");
-	krsbHtml.append("				height='225' role='img' aria-label='Placeholder: Thumbnail'>");
-	krsbHtml.append("			</a>");
-	krsbHtml.append("			<div class='card-body'>");
-	krsbHtml.append("				<p class='card-text'>"+ to.getNovel_genre() +"</p>");
-	krsbHtml.append("				<p class='card-text'>"+ to.getNovel_title() +"</p>");
-	krsbHtml.append("				<p class='card-text'>"+ to.getNovel_writer() +"</p>");
-	krsbHtml.append("				<p class='card-text'>별점 평균</p>");
-	krsbHtml.append("			</div>");
-	krsbHtml.append("		</div>");
-	krsbHtml.append("	</div>");
-	
-	if( (i % 5) == 0 ){
-		krsbHtml.append("</div>");
-	}
-	i++;
-}
-
---%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,22 +16,42 @@ for( novelInfoTO to : novelLists ){
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
 <style type="text/css">
-.nav-scroller {
-	border: 1px solid black;
+
+#nav-button{
+	width: 120px;
+	height: 40px;
+	margin: 16px;
+	margin-top: 20px;
+	border-radius: 20px;
+	border: solid 2px #ffb26b;
+	background-color: #fff;
+	padding-top: 6px;
+	font-family: AppleSDGothicNeoR;
+	font-size: 15px;
+	font-weight: 800;
+	font-style: normal;
+	text-decoration-line: none;
+	text-align: center;
+	color: #ffb26c;
 }
 
-.nav { -
-	-bs-nav-link-padding-x: 1rem; -
-	-bs-nav-link-padding-y: 0.5rem; -
-	-bs-nav-link-font-weight:; -
-	-bs-nav-link-color: #343a40; -
-	-bs-nav-link-hover-color: #ffc107; -
-	-bs-nav-link-disabled-color: var(- -bs-secondary-color);
-	display: flex;
-	flex-wrap: wrap;
-	padding-left: 0;
-	margin-bottom: 0;
-	list-style: none;
+#kromance, #kfantasy, #kromancefantasy,
+#nromance, #nfantasy, #nromancefantasy{
+	width: 120px;
+	height: 40px;
+	margin: 16px;
+	margin-top: 20px;
+	border-radius: 20px;
+	border: 0;
+	background-color: #fff;
+	padding-top: 6px;
+	font-family: AppleSDGothicNeoR;
+	font-size: 15px;
+	font-weight: 800;
+	font-style: normal;
+	text-decoration-line: none;
+	text-align: center;
+	color: #ffb26c;
 }
 </style>
 
@@ -73,13 +59,14 @@ for( novelInfoTO to : novelLists ){
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-	function novelLists( url, page ){
+	function novelLists( url, page , search ){
 		
 		$.ajax({
 			url : url,
 			type : 'get',
 	        data : {
-		        'cpage' : page
+		        'cpage' : page,
+		        'search' : search
 	        },
 			dataType : 'json',
 			success : function(jsonData) {
@@ -95,6 +82,9 @@ for( novelInfoTO to : novelLists ){
 				$('#insertnovelList').html('');
 				let listhtml = '';
 				for( let i = 0; i < recordPerPage ; i++ ){
+					
+					let title = encodeURI(jsonData[0].novelLists[i].novel_title);
+					
 					if( (i % 5) == 0 ){
 						listhtml += `<div class='row row-cols-2 row-cols-sm-2 row-cols-md-5 g-2'>`;
 					}
@@ -109,7 +99,7 @@ for( novelInfoTO to : novelLists ){
 					} else {
 						listhtml += `										
 						<div class='card shadow-sm'>
-							<a href='#'> <img src='\${jsonData[0].novelLists[i].novel_img}' class='img' width='100%'
+							<a href='./novel_detail.do?novel_title=\${title}'> <img src='\${jsonData[0].novelLists[i].novel_img}' class='img' width='100%'
 							height='225' role='img' aria-label='Placeholder: Thumbnail'>
 							</a>
 							<div class='card-body'>`;
@@ -171,18 +161,49 @@ for( novelInfoTO to : novelLists ){
 				
 				$(".goBackPage").click(function(){
 			      	let page = cpage - 1;
-			       	novelLists( url, page );
+			       	novelLists( url, page , search );
 		        });
 				
 				$(".goPage").click(function(){
 					page = $(this).attr("data-page");
-			       	novelLists( url, page );
+			       	novelLists( url, page , search );
 				});
 
 				$(".goNextPage").click(function(){
 			      	let page = cpage + 1;
-			       	novelLists( url, page );
+			       	novelLists( url, page , search );
 		        });
+
+				$('#kromance').click(function(e){
+					page = 1;
+					url = 'novel_list_kakao_romance.do';
+					novelLists( url, page );
+				});
+				$('#kromancefantasy').click(function(e){
+					page = 1;
+					url = 'novel_list_kakao_romancefantasy.do';
+					novelLists( url, page );
+				});
+				$('#kfantasy').click(function(e){
+					page = 1;
+					url = 'novel_list_kakao_fantasy.do';
+					novelLists( url, page );
+				});
+				$('#nromance').click(function(e){
+					page = 1;
+					url = 'novel_list_naver_romance.do';
+					novelLists( url, page );
+				});
+				$('#nromancefantasy').click(function(e){
+					page = 1;
+					url = 'novel_list_naver_romancefantasy.do';
+					novelLists( url, page );
+				});
+				$('#nfantasy').click(function(e){
+					page = 1;
+					url = 'novel_list_naver_fantasy.do';
+					novelLists( url, page );
+				}); 
 				
 			},
 			error : function(err) {
@@ -196,37 +217,26 @@ for( novelInfoTO to : novelLists ){
 		let page = 1;
 		novelLists( url, page );
 
-		$('#kromance').click(function(e){
-			page = 1;
-			url = 'novel_list_kakao_romance.do';
-			novelLists( url, page );
+		$('#searchbtn').click(function(){
+			page=1;
+			url = 'novel_list_search.do';
+			let search = document.getElementById('search').value;
+			novelLists( url, page, search )
 		});
-		$('#kromancefantasy').click(function(e){
-			page = 1;
-			url = 'novel_list_kakao_romancefantasy.do';
-			novelLists( url, page );
-		});
-		$('#kfantasy').click(function(e){
-			page = 1;
-			url = 'novel_list_kakao_fantasy.do';
-			novelLists( url, page );
-		});
-		$('#nromance').click(function(e){
-			page = 1;
-			url = 'novel_list_naver_romance.do';
-			novelLists( url, page );
-		});
-		$('#nromancefantasy').click(function(e){
-			page = 1;
-			url = 'novel_list_naver_romancefantasy.do';
-			novelLists( url, page );
-		});
-		$('#nfantasy').click(function(e){
-			page = 1;
-			url = 'novel_list_naver_fantasy.do';
-			novelLists( url, page );
-		}); 
 
+	    $('#tablists').on('show.bs.tab', function(e){
+	    	let Target1 = e.target;
+	    	Target1.style.background ="#ffb26b"
+	    	let Target2 = e.relatedTarget;
+	    	Target2.style.background = "white";
+	        });
+	    
+	    $('a[data-link="platform"]').on('show.bs.tab', function(e){
+	    	let myTarget = e.target;
+	    	myTarget.style.color = "white";
+	    	let futureTarget = e.relatedTarget;
+	    	futureTarget.style.color = "#ffb26b";
+	        });
 	});
 </script>
 </head>
@@ -238,37 +248,22 @@ for( novelInfoTO to : novelLists ){
 	<!-- 본문 -->
 
 
-	<div class="container" id="novellist">
-		<div class="row">
-			<div class="col">
-				<div class="col w-75 p-100" style="float: none; margin: 0 auto;">
-					<div class="input-group mb-3">
-						<input type="text" class="form-control center"
-							placeholder="검색어를 입력하세요" aria-describedby="button-addon">
-						<button class="btn btn-outline-secondary" type="button"
-							id="searchbtn">검색</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="container w-75">
-		<!-- Nav pills -->
-		<ul class="nav nav-tabs justify-content-center bg-light"
-			role="tablist">
+		<ul class="nav justify-content-center"
+			role="tablist" id="tablists">
 			<li class="nav-item"><a class="nav-link active"
-				data-bs-toggle="pill" href="#kakaopage">카카오 페이지</a></li>
+				data-bs-toggle="pill" href="#kakaopage" id="nav-button" data-link="platform"
+				style="background-color: #ffb26c; color: #fff;">카카오 페이지</a></li>
 			<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-				href="#series">네이버 시리즈</a>
+				href="#series" id="nav-button" data-link="platform">네이버 시리즈</a>
 		</ul>
 	</div>
 	<div class="container w-75">
 
 		<div class="tab-content" id="novel_genre">
 			<div id="kakaopage" class="container tab-pane active">
-				<!-- Nav pills -->
-				<ul class="nav justify-content-center bg-light" role="tablist">
+				<ul class="nav justify-content-center" role="tablist">
 					<li class="nav-item"><a class="nav-link active"
 						data-bs-toggle="pill" href="#romance" id="kromance">로맨스</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
@@ -279,7 +274,7 @@ for( novelInfoTO to : novelLists ){
 			</div>
 
 			<div id="series" class="container tab-pane fade">
-				<ul class="nav justify-content-center bg-light" role="tablist">
+				<ul class="nav justify-content-center" role="tablist">
 					<li class="nav-item"><a class="nav-link active"
 						data-bs-toggle="pill" href="romance" id="nromance">로맨스</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
@@ -288,9 +283,22 @@ for( novelInfoTO to : novelLists ){
 						href="#fantasy" id="nfantasy">판타지</a></li>
 				</ul>
 			</div>
-
 		</div>
-
+ 
+	<div class="container" id="novellist">
+		<div class="row">
+			<div class="col">
+				<div class="col w-75 p-100" style="float: none; margin: 0 auto;">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control center"
+							placeholder="검색어를 입력하세요" aria-describedby="button-addon" id="search">
+						<button class="btn btn-outline-secondary" type="button"
+							id="searchbtn">검색</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 		<div class="container" id="insertnovelList"></div>
 	</div>
