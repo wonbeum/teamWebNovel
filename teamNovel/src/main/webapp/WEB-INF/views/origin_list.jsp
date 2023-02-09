@@ -14,22 +14,6 @@
 	crossorigin="anonymous">
 <style type="text/css">
 
-	@font-face {
-		src: url("/font/AppleSDGothicNeoB.ttf");
-		font-family: "AppleSDGothicNeoB";
-	}
-	
-	@font-face {
-		src: url("/font/AppleSDGothicNeoSB.ttf");
-		font-family: "AppleSDGothicNeoSB";
-	}
-	
-	@font-face {
-		src: url("/font/AppleSDGothicNeoR.ttf");
-		font-family: "AppleSDGothicNeoR";
-	}
-
-
 	#nav-button{
 	width: 120px;
 	height: 40px;
@@ -97,7 +81,13 @@
 	  transition: 1s ease-out;
 	  opacity : 0.6;
 	}
-	
+
+	.dotebtn1, .dotebtn2{
+		width: 14px;
+		height: 14px;
+		margin: 64px 0px 64px 15px;
+	}
+
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -139,7 +129,10 @@ window.addEventListener('load', () => {
 	    	futureTarget.style.color = "#ffb26b";
 	    	//alert( $(e.target).text() );
 	        });
-		
+	    
+	    
+<!-- 요청하기 버튼 -->
+
 		$('#rqbtn').click(function handler(event){
 			if(${signIn == null}) {
 				alert("로그인 후 요청이 가능합니다!");
@@ -186,7 +179,8 @@ window.addEventListener('load', () => {
 		})
 	};
 
-	
+
+
 </script>
 </head>
 <body>
@@ -206,7 +200,7 @@ window.addEventListener('load', () => {
 </div>
 
 <!-- 제목 -->
-<div class="title">
+<div class="top">
 	<div class="container d-flex justify-content-center">
 		<span style="font-family: AppleSDGothicNeoSB; font-size: 50px; font-weight: 900;">원작소설</span>
 	</div>
@@ -807,18 +801,21 @@ window.addEventListener('load', () => {
 				</div>
 			</div>
 
-<!-- paging -->
-	<nav aria-label="Page navigation example">	
-  	<ul class="pagination justify-content-center">
-    	<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-    	<span aria-hidden="true">&laquo;</span></a></li>
-      	<li class="page-item"><a class="page-link" href="#">1</a></li>
-      	<li class="page-item"><a class="page-link" href="#">2</a></li>
-      	<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-			<span aria-hidden="true">&raquo;</span></a></li>
-      </ul>
-	</nav>
+<!-- 버튼 클릭시 상단 이동 처리-->
+	<div class="down">
+	  	<ul class="pagination justify-content-center">
+	      	<li class="Dotebtn">
+		      	<a class="downbtn" href="#down">
+		      	<img class="dotebtn1" src="../images/dote_button1.png">
+		      	</a>
+	      	</li>
+	      	<li class="Dotebtn">
+		      	<a class="topbtn" href="#top">
+		      	<img class="dotebtn2" src="../images/dote_button2.png">
+		      	</a>
+	      	</li>
+	     </ul>
+     </div>
 </div>
 </div>
 </div>
@@ -1084,7 +1081,7 @@ window.addEventListener('load', () => {
 			</div>
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	    			<img class="img" src="../images/noimage.png" class="card-img-top" alt="예정">
 	    			<img class="img-hover" src="https://w.namu.la/s/99499fc1f52fab7eb340c579577106f1f5b93fb8d58a45dd7fde856123e63b70b0d2ff8776730f15aef1be9017a52e1176938aeb099f8267957a547470dc2a8f5d9ea0485e54330073c7ced7428776352f9fa67827f426f1319395e2f57c693c967fbc9b898767b968112de5d5c3eeba" class="card-img-top" alt="해시의 신루">
 	    		</div>
 		   	    		<div class="card-body">
@@ -1098,7 +1095,7 @@ window.addEventListener('load', () => {
 			</div>
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	  				<img class="img" src="../images/noimage.png" class="card-img-top" alt="예정">
 	    			<img class="img-hover" src="https://w.namu.la/s/04f8694484cc56e485ebdb27a2e360191db7d3d1fc30ada8283df828ef6f8afe9882cf7dcde77a418014a12408e730d3f3a6033e8721e6738b6f106becaf2a2028cc7eabe90a740fecaf063087cf844e0a562e5b586688eb25bdad319872d4b61878915f7350471f7624b916e02288b4" class="card-img-top" alt="열녀박씨">
 	    		</div>
 		   	    		<div class="card-body">
@@ -1110,18 +1107,22 @@ window.addEventListener('load', () => {
 				   	<p class="card-text"><small class="text-muted">MBC / 방송 예정</small></p>
 				</div>
 			</div>
-<!-- paging -->
-<nav aria-label="Page navigation example">	
-  	<ul class="pagination justify-content-center">
-    	<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-    	<span aria-hidden="true">&laquo;</span></a></li>
-      	<li class="page-item"><a class="page-link" href="#">1</a></li>
-      	<li class="page-item"><a class="page-link" href="#">2</a></li>
-      	<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-			<span aria-hidden="true">&raquo;</span></a></li>
-      </ul>
-</nav>
+
+<!-- 버튼 클릭시 상단 이동 처리-->
+	<div class="down">
+	  	<ul class="pagination justify-content-center">
+	      	<li class="Dotebtn">
+		      	<a class="downbtn" href="#down">
+		      	<img class="dotebtn1" src="../images/dote_button1.png">
+		      	</a>
+	      	</li>
+	      	<li class="Dotebtn">
+		      	<a class="topbtn" href="#top">
+		      	<img class="dotebtn2" src="../images/dote_button2.png">
+		      	</a>
+	      	</li>
+	     </ul>
+     </div>
 </div>
 </div>
 </div>
@@ -1135,7 +1136,7 @@ window.addEventListener('load', () => {
 	  <div class="row">
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	    			<img class="img" src="../images/noimage.png" class="card-img-top" alt="예정">
 	    			<img class="img-hover" src="https://w.namu.la/s/36b192b3cc6cbe898437ed45a25fead31c38181c46e3d72899d50e4cfe87d3b9a124349762040674e2109d555b369968472ae4bb9477fab8dea72ff6d2a535e7cfbf6675754584d2690e21b7f1d0eedda69f3205c88e3acf699eaae8e14fc80053037a524725b28225ad206a486bee0d" class="card-img-top" alt="전독시">
 	    		</div>
 		   	    		<div class="card-body">
@@ -1150,8 +1151,8 @@ window.addEventListener('load', () => {
 
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
-	    			<img class="img-hover" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	    			<img class="img" src="../images/noimage.png" class="card-img-top" alt="예정">
+	    			<img class="img-hover" src="../images/noimage.png" class="card-img-top" alt="예정">
 	    		</div>
 		   	    		<div class="card-body">
 	      			<h5 class="card-title"></h5>
@@ -1165,8 +1166,8 @@ window.addEventListener('load', () => {
 
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
-	    			<img class="img-hover" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	    			<img class="img" src="../images/noimage.png" class="card-img-top" alt="예정">
+	    			<img class="img-hover" src="../images/noimage.png" class="card-img-top" alt="예정">
 	    		</div>
 		   	    		<div class="card-body">
 	      			<h5 class="card-title"></h5>
@@ -1180,8 +1181,8 @@ window.addEventListener('load', () => {
 	
 	  		<div class="col">
 	  			<div class="card-imgs">
-	    			<img class="img" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
-	    		<img class="img-hover" src="https://w.namu.la/s/4e27a1a480ab581c916bee201603fff754465ca1b4cb588719c85d4bc031d60a808621a69841ecb67f5c70e06f06f16023b023c51fe3f9947063ede0a2d75d56486f937550c773712a1057398289a17aeb34433bb7f06a811730ab22bbb49378" class="card-img-top" alt="예정">
+	    			<img class="img" src="../images/noimage.png" class="card-img-top" alt="예정">
+	    			<img class="img-hover" src="../images/noimage.png" class="card-img-top" alt="예정">
 	    		</div>
 		   	    		<div class="card-body">
 	      			<h5 class="card-title"></h5>
@@ -1196,34 +1197,30 @@ window.addEventListener('load', () => {
 	  		
 	  		
 
-<!-- paging -->
-	<nav aria-label="Page navigation example">	
-  	<ul class="pagination justify-content-center">
-    	<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-    	<span aria-hidden="true">&laquo;</span></a></li>
-      	<li class="page-item"><a class="page-link" href="#">1</a></li>
-      	<li class="page-item"><a class="page-link" href="#">2</a></li>
-      	<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-			<span aria-hidden="true">&raquo;</span></a></li>
-      </ul>
-	</nav>
+
+<!-- 버튼 클릭시 상단 이동 처리-->
+	<div class="down">
+	  	<ul class="pagination justify-content-center">
+	      	<li class="Dotebtn">
+		      	<a class="downbtn" href="#down">
+		      	<img class="dotebtn1" src="../images/dote_button1.png">
+		      	</a>
+	      	</li>
+	      	<li class="Dotebtn">
+		      	<a class="topbtn" href="#top">
+		      	<img class="dotebtn2" src="../images/dote_button2.png">
+		      	</a>
+	      	</li>
+	     </ul>
+     </div>
 </div>
 </div>
 </div>
-<!-- paging
-	<nav aria-label="Page navigation example">	
-  	<ul class="pagination justify-content-center">
-    	<li class="page-item"><a class="page-link" href="#" aria-label="Previous">
-    	<span aria-hidden="true">&laquo;</span></a></li>
-      	<li class="page-item"><a class="page-link" href="#">1</a></li>
-      	<li class="page-item"><a class="page-link" href="#">2</a></li>
-      	<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#" aria-label="Next">
-			<span aria-hidden="true">&raquo;</span></a></li>
-      </ul>
-	</nav>
--->
+
+
+
+
+
 </div>
 
 <!-- footer -->

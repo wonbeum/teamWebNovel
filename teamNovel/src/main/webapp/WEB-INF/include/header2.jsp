@@ -50,14 +50,26 @@
 	color: #000000 !important;
 }
 
-.login_btn {
+.Mainbtn {
 	width: 130px;
 	height: 50px;
 	padding: 10px 32px 9px 33px;
 	border-radius: 15px;
 	background-color: #ffb26b;
 	font-family: 'AppleSDGothicNeoR';
-	font-size: 25px;
+	font-size: 15px;
+	color: #fff;
+	text-decoration-line: none;
+}
+
+.Logoutbtn {
+	width: 130px;
+	height: 50px;
+	padding: 10px 32px 9px 33px;
+	border-radius: 15px;
+	font-family: 'AppleSDGothicNeoR';
+	background-color: grey;
+	font-size: 15px;
 	color: #fff;
 	text-decoration-line: none;
 }
@@ -97,8 +109,9 @@
 			<div class="col d-flex flex-row-reverse py-4"
 				style="padding-right: 39px; padding-left: 0px;">
 				<div class="justify-content-end">
-					<a class="btn btn-sm btn-outline-secondary" href="./main.do"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16"><title>Mainpage</title><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/></svg> Home</a>
-					<a class="btn btn-sm btn-outline-secondary" href="href="logout.do">로그아웃</a>
+					<a class="Mainbtn" href="./main.do" role="button">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16"><path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/></svg>사용자 페이지</a>
+					<a class="Logoutbtn" href="logout.do" role="button">로그아웃</a>
    				</div>
 			</div>
 		</div>
@@ -114,7 +127,7 @@
 					style="padding-bottom: 0px; padding-top: 16px;">게시물 관리</a></li>
 				<li><a href="./admin_review_list.do" class="nav-link px-4 link-dark"
 					style="padding-bottom: 0px; padding-top: 16px;">리뷰 관리</a></li>
-				<li><a href="./admin_request_list.do" class="nav-link px-4 link-dark"
+				<li><a href="./admin_origin_request_list.do" class="nav-link px-4 link-dark"
 					style="padding-bottom: 0px; padding-top: 16px;">요청 리스트</a></li>
 			</ul>
 		</div>
