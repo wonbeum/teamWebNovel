@@ -21,6 +21,11 @@ public class ReviewController {
 		return new ModelAndView( "review_list" );
 	}
 	
+	@RequestMapping("novel_detail.do")
+	public ModelAndView review() {
+		return new ModelAndView( "novel_detail" );
+	}
+	
 	@RequestMapping("ReviewListAll.do")
 	public ArrayList<reviewListTO> ReviewListAll() {
 		ArrayList<reviewListTO> reviewlists = rdao.reviewall_list();

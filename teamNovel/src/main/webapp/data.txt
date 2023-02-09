@@ -72,6 +72,7 @@ create table novel_origin_request(
 request_seq int auto_increment primary key,
 request_title varchar(100),
 request_category varchar(20),
+free_like int,
 user_email varchar(50),
 user_nickname varchar(30) ,
 foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname) ON UPDATE CASCADE ON DELETE CASCADE

@@ -1,21 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="com.example.model.novel_detailTO"%>
-<%
-	
-	novel_detailTO to = (novel_detailTO)request.getAttribute("to");
-	String novel_genre = to.getNovel_genre();
-	String novel_title = to.getNovel_title();
-	String novel_writer = to.getNovel_writer();
-	String novel_content = to.getNovel_content();
-	String novel_img = to.getNovel_img();
-	String review_star_grade = to.getReview_star_grade();
-	String kakao = to.getNovel_kakao();
-	String ridi= to.getNovel_ridi();
-	String seriese = to.getNovel_series();
-
-%>
 
 <!DOCTYPE html>
 <html>
@@ -32,9 +17,6 @@
 	border: 1px solid black;
 }
 </style>
-<!-- Jquery -->
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -100,13 +82,13 @@
 	<div class="row">
 		<div class="col-sm-6 col-lg-4">
 			<div class="card">
-				<img src="<%=novel_img %>" class="img" width="100%" height="225" role="img">
+				<img src="..." class="img" width="100%" height="225" role="img">
 
 				<div class="card-body">
-					<p class="card-title">작품명</p>
-					<h5 class="card-text"><%=novel_title %></h5>
-					<a>작가 <%=novel_writer %></a>
-					<p>작품에 대한 소개 <%=novel_content %></p>
+					<p class="card-title">장르</p>
+					<h5 class="card-text">제목</h5>
+					<a>작가</a>
+					<p>작품에 대한 소개</p>
 					<a href=""><button type="button" class="btn btn-warning">플랫폼
 							이동</button></a>
 				</div>
@@ -173,7 +155,7 @@
 							<h6 class="mb-0">닉네임</h6>
 							<p class="mb-0 opacity-75">리뷰내용</p>
 						</div>
-						<small class="opacity-50 text-nowrap">작성날짜</small>
+						<small class="opacity-50 text-nowrap">작성날자</small>
 					</div>
 
 				</a> <a href="#"

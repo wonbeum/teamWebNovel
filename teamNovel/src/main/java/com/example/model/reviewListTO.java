@@ -9,20 +9,11 @@ public class reviewListTO {
 	private String novel_series;
 	private String novel_kakao;
 	private String novel_ridi;
-	
 	private String review_seq;
 	private String review_content;
 	private String review_date;
-
 	private String user_nickname;
-	private String user_email;
 	
-	public String getUser_email() {
-		return user_email;
-	}
-	public void setUser_email(String user_email) {
-		this.user_email = user_email;
-	}
 	public String getNovel_title() {
 		return novel_title;
 	}
