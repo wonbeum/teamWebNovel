@@ -103,8 +103,11 @@
 }
 
 .button {
+	width: 6px;
+	height: 6px;
 	margin: 10px;
 	margin-top: 20px;
+	margin-bottom: 40px;
 	border-radius: 20px;
 	border: solid 2px #ffb26b;
 	background-color: #fff;
@@ -116,6 +119,7 @@
 	text-decoration-line: none;
 	text-align: center;
 	color: #ffb26c;
+	border-radius: 100%;
 }
 
 .cards-wrapper {
@@ -483,23 +487,23 @@
 
 		$('#nav-button1').click(function(){
 			let offset = $('#carouselExample1').offset(); 
-	        $('html').animate({scrollTop : offset.top-200}, 200);
+	        $('html').animate({scrollTop : offset.top-250}, 200);
 		});
 		$('#nav-button2').click(function(){
 			let offset = $('#carouselExample2').offset(); 
-	        $('html').animate({scrollTop : offset.top-200}, 200);
+	        $('html').animate({scrollTop : offset.top-250}, 200);
 		});
 		$('#nav-button3').click(function(){
 			let offset = $('#carouselExample3').offset(); 
-	        $('html').animate({scrollTop : offset.top-200}, 200);
+	        $('html').animate({scrollTop : offset.top-250}, 200);
 		});
 		$('#nav-button4').click(function(){
 			let offset = $('#carouselExample4').offset(); 
-	        $('html').animate({scrollTop : offset.top-200}, 200);
+	        $('html').animate({scrollTop : offset.top-250}, 200);
 		});
 		$('#nav-button5').click(function(){
 			let offset = $('#carouselExample5').offset(); 
-	        $('html').animate({scrollTop : offset.top-200}, 200);
+	        $('html').animate({scrollTop : offset.top-250}, 200);
 		});
 	});
 </script>
