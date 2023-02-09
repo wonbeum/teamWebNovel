@@ -41,12 +41,23 @@ public class novel_rank_listDAO {
 
 			Document doc = Jsoup.parse(strHtml);
 
-			Elements novel_rank_names = doc.select("span[class='font-medium2 pb-2pxr text-el-70 line-clamp-2 css-0']");
+			Elements lists = doc.select("div[class='grid under-tablet:grid-cols-2 under-tablet:grid-inner-border-cols2 tablet:grid-cols-2 tablet:grid-inner-border-cols2 css-1pd6zje']>div");
+			
+			for( Element list : lists ) {
+				Elements names = list.select("span[class='font-medium2 pb-2pxr text-el-70 line-clamp-2 css-0']");
+				novelInfoTO to = new novelInfoTO();
+				for( Element name : names ) {
+					to.setNovel_title(name.text());
+				}
+				Elements imgs = list.select("img");
 
-			for (Element novel_rank_name : novel_rank_names) {
-				System.out.println(novel_rank_name.text());
+				for( Element img : imgs ) {
+					if( img.attr("alt").equals("썸네일") ) {
+						to.setNovel_img( img.attr( "src" ) );
+					}
+				}
+				ranklists.add(to);
 			}
-
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
@@ -54,11 +65,7 @@ public class novel_rank_listDAO {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
 		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-				}
+			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
 
 		return ranklists;
@@ -84,12 +91,23 @@ public class novel_rank_listDAO {
 
 			Document doc = Jsoup.parse(strHtml);
 
-			Elements novel_rank_names = doc.select("span[class='font-medium2 pb-2pxr text-el-70 line-clamp-2 css-0']");
+			Elements lists = doc.select("div[class='grid under-tablet:grid-cols-2 under-tablet:grid-inner-border-cols2 tablet:grid-cols-2 tablet:grid-inner-border-cols2 css-1pd6zje']>div");
+			
+			for( Element list : lists ) {
+				Elements names = list.select("span[class='font-medium2 pb-2pxr text-el-70 line-clamp-2 css-0']");
+				novelInfoTO to = new novelInfoTO();
+				for( Element name : names ) {
+					to.setNovel_title(name.text());
+				}
+				Elements imgs = list.select("img");
 
-			for (Element novel_rank_name : novel_rank_names) {
-				System.out.println(novel_rank_name.text());
+				for( Element img : imgs ) {
+					if( img.attr("alt").equals("썸네일") ) {
+						to.setNovel_img( img.attr( "src" ) );
+					}
+				}
+				ranklists.add(to);
 			}
-
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
@@ -97,11 +115,7 @@ public class novel_rank_listDAO {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
 		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-				}
+			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
 
 		return ranklists;
@@ -127,10 +141,22 @@ public class novel_rank_listDAO {
 
 			Document doc = Jsoup.parse(strHtml);
 
-			Elements novel_rank_names = doc.select("span[class='font-medium2 pb-2pxr text-el-70 line-clamp-2 css-0']");
+			Elements lists = doc.select("div[class='grid under-tablet:grid-cols-2 under-tablet:grid-inner-border-cols2 tablet:grid-cols-2 tablet:grid-inner-border-cols2 css-1pd6zje']>div");
+			
+			for( Element list : lists ) {
+				Elements names = list.select("span[class='font-medium2 pb-2pxr text-el-70 line-clamp-2 css-0']");
+				novelInfoTO to = new novelInfoTO();
+				for( Element name : names ) {
+					to.setNovel_title(name.text());
+				}
+				Elements imgs = list.select("img");
 
-			for (Element novel_rank_name : novel_rank_names) {
-				System.out.println(novel_rank_name.text());
+				for( Element img : imgs ) {
+					if( img.attr("alt").equals("썸네일") ) {
+						to.setNovel_img( img.attr( "src" ) );
+					}
+				}
+				ranklists.add(to);
 			}
 
 		} catch (MalformedURLException e) {
@@ -140,11 +166,7 @@ public class novel_rank_listDAO {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
 		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-				}
+			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
 
 		return ranklists;
@@ -178,10 +200,20 @@ public class novel_rank_listDAO {
 			}
 
 			Document doc = Jsoup.parse(strHtml);
-			Elements novel_rank_names = doc.select("img");
 
-			for (Element novel_rank_name : novel_rank_names) {
-				System.out.println(novel_rank_name.attr("alt"));
+			Elements lists = doc.select("ul[class='comic_top_lst']>li");
+
+			for( Element list : lists ) {
+				novelInfoTO to = new novelInfoTO();
+				
+				Elements imgs = list.select("img");
+				for( Element img : imgs ) {
+					String imgsrc = img.attr("src").replace("type=m79", "type=m260");
+					to.setNovel_img( imgsrc );
+					to.setNovel_title( img.attr( "alt" ) );
+					ranklists.add(to);
+				}
+				
 			}
 
 		} catch (MalformedURLException e) {
@@ -191,11 +223,7 @@ public class novel_rank_listDAO {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
 		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-				}
+			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
 
 		return ranklists;
@@ -229,10 +257,20 @@ public class novel_rank_listDAO {
 			}
 
 			Document doc = Jsoup.parse(strHtml);
-			Elements novel_rank_names = doc.select("img");
 
-			for (Element novel_rank_name : novel_rank_names) {
-				System.out.println(novel_rank_name.attr("alt"));
+			Elements lists = doc.select("ul[class='comic_top_lst']>li");
+
+			for( Element list : lists ) {
+				novelInfoTO to = new novelInfoTO();
+				
+				Elements imgs = list.select("img");
+				for( Element img : imgs ) {
+					String imgsrc = img.attr("src").replace("type=m79", "type=m260");
+					to.setNovel_img( imgsrc );
+					to.setNovel_title( img.attr( "alt" ) );
+					ranklists.add(to);
+				}
+				
 			}
 
 		} catch (MalformedURLException e) {
@@ -242,11 +280,7 @@ public class novel_rank_listDAO {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
 		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-				}
+			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
 
 		return ranklists;
@@ -281,10 +315,20 @@ public class novel_rank_listDAO {
 			}
 
 			Document doc = Jsoup.parse(strHtml);
-			Elements novel_rank_names = doc.select("img");
 
-			for (Element novel_rank_name : novel_rank_names) {
-				System.out.println(novel_rank_name.attr("alt"));
+			Elements lists = doc.select("ul[class='comic_top_lst']>li");
+
+			for( Element list : lists ) {
+				novelInfoTO to = new novelInfoTO();
+				
+				Elements imgs = list.select("img");
+				for( Element img : imgs ) {
+					String imgsrc = img.attr("src").replace("type=m79", "type=m260");
+					to.setNovel_img( imgsrc );
+					to.setNovel_title( img.attr( "alt" ) );
+					ranklists.add(to);
+				}
+				
 			}
 
 		} catch (MalformedURLException e) {
@@ -294,156 +338,10 @@ public class novel_rank_listDAO {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
 		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-				}
-		}
-
-		return ranklists;
-	}
-	
-
-	public ArrayList<novelInfoTO> ridi_rank_romance() {
-
-		ArrayList<novelInfoTO> ranklists = new ArrayList<novelInfoTO>();
-
-		BufferedReader br = null;
-
-		try {
-			URL url = new URL(
-					"https://ridibooks.com/category/bestsellers/1650?adult_exclude=y&page=1&period=monthly");
-			br = new BufferedReader(new InputStreamReader(url.openStream()));
-
-			String line = null;
-
-			String strHtml = "";
-
-			while ((line = br.readLine()) != null) {
-				strHtml += line.trim();
-			}
-
-			Document doc = Jsoup.parse(strHtml);
-			Elements novel_rank_names = doc.select("li");
-
-			for (Element novel_rank_name : novel_rank_names) {
-				if( novel_rank_name.select("h3 > a[class='fig-z0an5g']").text().equals("") ) {
-					
-				} else {
-					System.out.println( novel_rank_name.select("h3 > a[class='fig-z0an5g']").text() );
-				}
-			}
-
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("[에러] : " + e.getMessage());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("[에러] : " + e.getMessage());
-		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-				}
-		}
-
-		return ranklists;
-	}
-	
-
-	public ArrayList<novelInfoTO> ridi_rank_fantasy() {
-
-		ArrayList<novelInfoTO> ranklists = new ArrayList<novelInfoTO>();
-
-		BufferedReader br = null;
-
-		try {
-			URL url = new URL(
-					"https://ridibooks.com/category/bestsellers/1750?page=1&period=monthly&adult_exclude=y");
-			br = new BufferedReader(new InputStreamReader(url.openStream()));
-
-			String line = null;
-
-			String strHtml = "";
-
-			while ((line = br.readLine()) != null) {
-				strHtml += line.trim();
-			}
-
-			Document doc = Jsoup.parse(strHtml);
-			Elements novel_rank_names = doc.select("li");
-
-			for (Element novel_rank_name : novel_rank_names) {
-				if( novel_rank_name.select("h3 > a[class='fig-z0an5g']").text().equals("") ) {
-					
-				} else {
-					System.out.println( novel_rank_name.select("h3 > a[class='fig-z0an5g']").text() );
-				}
-			}
-
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("[에러] : " + e.getMessage());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("[에러] : " + e.getMessage());
-		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-				}
+			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
 
 		return ranklists;
 	}
 
-	public ArrayList<novelInfoTO> ridi_rank_romancefantasy() {
-
-		ArrayList<novelInfoTO> ranklists = new ArrayList<novelInfoTO>();
-
-		BufferedReader br = null;
-
-		try {
-			URL url = new URL(
-					"https://ridibooks.com/category/bestsellers/6050?adult_exclude=y&page=1&period=monthly");
-			br = new BufferedReader(new InputStreamReader(url.openStream()));
-
-			String line = null;
-
-			String strHtml = "";
-
-			while ((line = br.readLine()) != null) {
-				strHtml += line.trim();
-			}
-
-			Document doc = Jsoup.parse(strHtml);
-			Elements novel_rank_names = doc.select("li");
-
-			for (Element novel_rank_name : novel_rank_names) {
-				if( novel_rank_name.select("h3 > a[class='fig-z0an5g']").text().equals("") ) {
-					
-				} else {
-					System.out.println( novel_rank_name.select("h3 > a[class='fig-z0an5g']").text() );
-				}
-			}
-
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("[에러] : " + e.getMessage());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("[에러] : " + e.getMessage());
-		} finally {
-			if (br != null)
-				try {
-					br.close();
-				} catch (IOException e) {
-				}
-		}
-
-		return ranklists;
-	}
 }

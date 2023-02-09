@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
 public class novel_insert {
 	@Autowired
 	private DataSource dataSource;
-
+	
 	public void novel_naverRomance_Insert() {
 
 		Connection conn= null;;
