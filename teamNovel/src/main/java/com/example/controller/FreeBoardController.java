@@ -173,7 +173,8 @@ public class FreeBoardController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("board_modify_ok.do")
+
+@RequestMapping("board_modify_ok.do")
 	public ModelAndView board_modify_ok(HttpServletRequest request) {
 		
 		freeboardTO to = new freeboardTO();
@@ -187,6 +188,7 @@ public class FreeBoardController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "board_modify_ok" );
 		modelAndView.addObject( "flag", flag );
+		modelAndView.addObject( "free_seq", to.getFree_seq() );
 		return modelAndView;
 	}
 	

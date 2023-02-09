@@ -15,6 +15,154 @@
 .nav-scroller {
 	border: 1px solid black;
 }
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoM.ttf");
+	font-family: "AppleSDGothicNeoM";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoEB.ttf");
+	font-family: "AppleSDGothicNeoEB";
+}
+
+#rouded_box {
+	width: 30.7%;
+	min-width: 435px;
+	height: 100%;
+	margin: 0 30px;
+	padding: 40px 38px 33px 38px;
+	border-radius: 20px;
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+	background-color: #fff;
+	display: inline-block;
+	text-align: left;
+}
+
+.background {
+	text-align: center;
+	background-color: #f8f8fb;
+	height: 100%;
+	padding-top: 59px;
+	padding-bottom: 100px;
+}
+
+#title {
+	font-family: AppleSDGothicNeoB;
+	font-size: 26px; 
+	color: #000;
+	text-align: left;
+}
+
+#labeltext {
+	font-family: AppleSDGothicNeoB;
+  	font-size: 18px;
+  	font-weight: 500;
+  	text-align: left;
+  	color: #777;
+  	margin-bottom: 11px;
+  	margin-top: 23px;
+}
+
+#pw_label, #nickname_label {
+	 font-family: AppleSDGothicNeoM;
+  	font-size: 15px;
+  	font-weight: 500;
+  	line-height: 2;
+  	text-align: left;
+  	color: #777;
+}
+
+#inputbox {
+	width: 516px;
+  	height: 54px;
+  	border-radius: 14px;
+  	border: solid 1px #e5e8eb;
+  	background-color: #fff;
+}
+
+#nicknamebox {
+	width: 516px;
+  	height: 54px;
+  	border-radius: 14px;
+  	border: solid 1px #e5e8eb;
+  	background-color: #fff;
+}
+
+input {
+	width: 516px;
+  	height: 54px;
+  	border-radius: 14px;
+  	border: solid 1px #e5e8eb;
+  	background-color: #fff;
+	font-family: AppleSDGothicNeoM;
+  	font-size: 15px;
+  	font-weight: 500;
+  	line-height: 2;
+  	text-align: left;
+  	color: #777;
+}
+div.invalid-feedback {
+	font-family: AppleSDGothicNeoM;
+  	font-size: 15px;
+  	font-weight: 500;
+  	line-height: 2;
+  	text-align: left;
+}
+
+label.form-check-label {
+	font-family: AppleSDGothicNeoM;
+  	font-size: 17px;
+  	font-weight: 500;
+  	text-align: left;
+  	color: #777;
+}
+
+#aggrement {
+	width: 15px;
+  	height: 15px;
+}
+
+#agreetext {
+	font-family: AppleSDGothicNeoB;
+  	font-size: 17px;
+  	font-weight: 500;
+  	text-align: left;
+  	color: #777;
+}
+
+#listbtn {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+  	background-color: #000;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 10px;
+    padding-top: 14px;
+}
+#savebutton {
+	font-family: AppleSDGothicNeoEB;
+	border-radius: 13px;
+	border: 0px;
+  	background-color: #ffb26b;
+  	width: 109px;
+  	height: 54px;
+  	font-size: 18px;
+  	font-weight: 300;
+  	color: #fff;
+    padding-left: 12px;
+    padding-top: 14px;
+    padding-bottom: 10px;
+}
+
 </style>
 
 <script>
@@ -60,97 +208,55 @@
 </head>
 <body>
 
-<!-- header -->
-<div class="container" >
-  <header class="blog-header lh-1 py-3">
-    <div class="row flex-nowrap justify-content-between align-items-center">
-      <div class="col-4 pt-1">
-        <a class="link-secondary" href="./main.do">사이트 로고</a>
-      </div>
-      <div class="col-4 text-center">
-        <a class="blog-header-logo text-dark" href="./main.do">사이트 이름</a>
-      </div>
-      <div class="col-4 d-flex justify-content-end align-items-center">
-        <a class="link-secondary" href="./novel_search.do" aria-label="Search">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
-        </a>
-        <c:if test="${signIn == null}">
-        	<a class="btn btn-sm btn-outline-secondary" href="./login.do">Sign up</a>
-        </c:if>
-        <c:if test="${signIn != null}">
-        	<div class="dropdown text-end">
-        		<a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        			<img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
-        		</a>
-        		<ul class="dropdown-menu text-small">
-        			<li><a class="dropdown-item" href="#">New project...</a></li>
-        			<li><a class="dropdown-item" href="#">Settings</a></li>
-        			<li><a class="dropdown-item" href="#">Profile</a></li>
-        			<li><hr class="dropdown-divider"></li>
-        			<li><a class="dropdown-item" href="./logout.do">Sign out</a></li>
-        		</ul>
-        	</div>
-        </c:if>
-      </div>
-    </div>
-  </header>
-
-  <div class="nav-scroller py-1 mb-2">
-    <nav class="nav d-flex justify-content-between">
-      <a class="p-2 link-secondary" href="./rank_list.do">랭킹</a>
-      <a class="p-2 link-secondary" href="./review_list.do">리뷰</a>
-      <a class="p-2 link-secondary" href="./novel_list.do">웹소설</a>
-      <a class="p-2 link-secondary" href="./board_list.do">커뮤니티</a>
-      <a class="p-2 link-secondary" href="./origin_list.do">원작 소설 찾기</a>
-    </nav>
-  </div>
-</div>
-	<!-- main -->
-
+	<!-- header -->
+	<jsp:include page="../include/header1.jsp"></jsp:include>
 	
-	<div class="container-fluid mt-5 mb-5">
-		<div class="row justify-content-md-center">
-			<div class="col-md-6">
-				<h4 class="mb-3">회원가입</h4>
+	<!-- main -->
+<div class="background">
+		<div class="container justify-content-center" id="rouded_box">
+			<p class="text-start" id="title" style="margin-bottom: 0px;">회원가입</p>
+			<hr style="color: #777;" />
 				<form class="validation-form" action="./register_ok.do"
 					method="post" name="mainform"novalidate>
-
+					
 					<div class="mb-3">
-						<label for="email">이메일</label> <input type="email" name="user_email"
+						<p id="labeltext" for="email">이메일*</p> <input type="email" name="user_email"
 							value="" class="form-control" id="email"
 							placeholder="you@example.com" required>
 						<div class="invalid-feedback">이메일을 입력해주세요.</div>
 					</div>
-
-
-					<label for="nickname">닉네임</label>
-					<div class="input-group mb-3">
-						<input type="text" name="user_nickname" value="" class="form-control"
-							placeholder="" id="nickname" aria-label="nickname"
+					
+					<p id="labeltext" for="nickname">닉네임*</p>
+					<div class="mb-3">
+						<input type="text" name="user_nickname" value=""  class="form-control"
+							placeholder=""  aria-label="nickname"
 							aria-describedby="button-addon2" required>
 						<div class="invalid-feedback">닉네임을 입력해주세요.</div>
-						<button class="btn btn-outline-secondary" type="button"
-							id="nicknamebtn">닉네임 중복 확인</button>
+						<p id="nickname_label">나를 표현할 닉네임을 입력해주세요.</p>
 					</div>
-
-
+					
 					<div class="mb-3">
-						<label for="password">비밀번호</label> <input type="password"
+						<p id="labeltext" for="password">비밀번호*</p> <input type="password"
 							name="user_password" value="" class="form-control" id="password"
 							placeholder="" required>
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
+						<p id="pw_label">•다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다.<br/>
+							•비밀번호는 최소 8자 이상이어야 합니다.<br/>
+							•통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.<br/>
+							•숫자로만 이루어진 비밀번호는 사용할 수 없습니다.</p>
 					</div>
-
+					
 					<div class="mb-3">
-						<label for="password_check">비밀번호 확인</label> <input type="password"
+						<p id="labeltext" for="password_check">비밀번호 확인*</p> <input type="password"
 							name="password2" value="" class="form-control"
 							id="password_check" placeholder="" required>
 						<div class="invalid-feedback">비밀번호를 다시 입력해주세요.</div>
+						<p id="nickname_label">확인을 위해 이전과 동일한 비밀번호를 입력하세요.</p>
 					</div>
-
-					<div class="mb-3">
-						<label for="password_check">성별</label> <br />
-						<div class="form-check form-check-inline">
+					
+						<div class="mb-3">
+						<p id="labeltext" for="password_check">성별*</p>
+						<div class="form-check form-check-inline" >
 							<input class="form-check-input" type="radio" name="user_gender"
 								id="inlineRadio1" value="M"> <label
 								class="form-check-label" for="inlineRadio1">남성</label>
@@ -165,45 +271,44 @@
 								id="inlineRadio2" value="N" required> <label
 								class="form-check-label" for="inlineRadio2">비공개</label>
 						</div>
+						<p id="nickname_label">성별에 따른 취향을 분석하기 위해 꼭 입력해주세요.</p>
 					</div>
 
 					<div class="mb-3">
-						<label for="birth">생년월일</label> <input type="text" name="user_birth"
+						<p id="labeltext" for="birth">생년월일*</p> <input type="text" name="user_birth"
 							value="" class="form-control" id="birth" placeholder="8자리를 입력"
 							required>
-						<div class="invalid-feedback">생년월일을 입력해주세요</div>
+						<div class="invalid-feedback">생년월일을 입력해주세요.</div>
+						<p id="nickname_label">연령에 따른 취향을 분석하기 위해 꼭 입력해주세요.</p>
 					</div>
 
-
-					<hr class="mb-4">
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" id="aggrement"
-							required> <label class="custom-control-label"
-							for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+					<hr style="color: #777;" />
+					<div>
+						<input type="checkbox" class="custom-control-input" id="aggrement" required > 
+						<span id="agreetext" class="custom-control-label" >개인정보 수집 및 이용에 동의합니다.</span>
+						<div class="invalid-feedback">반드시 동의에 체크해주세요.</div>
 					</div>
-					<div class="mb-4"></div>
-					<button class="btn btn-primary btn-lg btn-block" type="submit">가입완료</button>
+					<hr style="color: #777;" />
+					<div class="row" style="margin-top: 39px;">
+						<div class="col-auto me-auto">
+							<a class="btn btn-outline-secondary" href="./login.do"
+								role="button" id="listbtn">뒤로가기</a>
+						</div>
+						<div class="col-auto">
+							<button type="submit" id="savebutton" class="btn btn-secondary">회원가입</button>
+
+						</div>
+
+					</div>
 				</form>
 			</div>
 		</div>
-	</div>
+	
+	
 	
 
-<!-- footer -->
-<hr class="footer-div">
-
-<div class="container">
-  <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="./rank_list.do" class="nav-link px-2 text-muted">랭킹</a></li>
-      <li class="nav-item"><a href="./review_list.do" class="nav-link px-2 text-muted">리뷰</a></li>
-      <li class="nav-item"><a href="./novel_list.do" class="nav-link px-2 text-muted">웹소설</a></li>
-      <li class="nav-item"><a href="./board_list.do" class="nav-link px-2 text-muted">커뮤니티</a></li>
-      <li class="nav-item"><a href="./origin_list.do" class="nav-link px-2 text-muted">원작 소설 찾기</a></li>
-    </ul>
-    <p class="text-center text-muted">&copy; 2023 개발 못하면 죽는 병, Inc</p>
-  </footer>
-</div>
+	<!-- footer -->
+	<jsp:include page="../include/footer1.jsp"></jsp:include>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
