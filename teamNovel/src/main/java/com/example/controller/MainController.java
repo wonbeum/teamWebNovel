@@ -63,12 +63,12 @@ public class MainController {
 	
 	@RequestMapping("insert.do")
 	public ModelAndView inserttest1() {
-		insertdao.novel_kakaoRomance_Insert();
-		insertdao.novel_kakaoFantasy_Insert();
-		insertdao.novel_kakaoRomanceFantasy_Insert();
-		insertdao.novel_naverFantasy_Insert();
+//		insertdao.novel_kakaoRomance_Insert();
+//		insertdao.novel_kakaoFantasy_Insert();
+//		insertdao.novel_kakaoRomanceFantasy_Insert();
+//		insertdao.novel_naverFantasy_Insert();
 		insertdao.novel_naverRomance_Insert();
-		insertdao.novel_naverRomanceFantasy_Insert();
+//		insertdao.novel_naverRomanceFantasy_Insert();
 		return new ModelAndView( "test2" );
 	}
 }
