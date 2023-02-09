@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.model.mainRankTO;
 import com.example.model.main_novel_rank;
 import com.example.model.novelInfoTO;
 import com.example.model.novel_insert;
@@ -27,30 +28,37 @@ public class MainController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "main" );
 		
-		ArrayList<novelInfoTO> kr_list = novel_rank.kakao_romance();
-		ArrayList<novelInfoTO> kf_list = novel_rank.kakao_fantasy();
-		ArrayList<novelInfoTO> krf_list = novel_rank.kakao_romancefantasy();
-		
-		modelAndView.addObject( "kr_list" , kr_list );
-		modelAndView.addObject( "kf_list" , kf_list );
-		modelAndView.addObject( "krf_list" , krf_list );
-		
-
-//		ArrayList<novelInfoTO> nr_list = novel_rank.naver_romace();
-//		ArrayList<novelInfoTO> nf_list = novel_rank.naver_fantasy();
-//		ArrayList<novelInfoTO> nrf_list = novel_rank.naver_romacefantasy();
-//		
-//		modelAndView.addObject( "kr_list" , nr_list );
-//		modelAndView.addObject( "kf_list" , nf_list );
-//		modelAndView.addObject( "krf_list" , nrf_list );
-		
 		return modelAndView;
 	}
 
-	@RequestMapping("test.do")
-	public ModelAndView test() {
-		novel_rank.naver_romace();
-		return new ModelAndView( "test" );
+	@RequestMapping("novel_main_kakaolists.do")
+	public ArrayList<mainRankTO> novel_main_kakaolists( HttpServletRequest request ) {
+		
+		ArrayList<mainRankTO> result = new ArrayList<>();
+		
+		mainRankTO to = novel_rank.kakao_romance();
+		result.add(to);
+		to = novel_rank.kakao_fantasy();
+		result.add(to);
+		to = novel_rank.kakao_romancefantasy();
+		result.add(to);
+		
+		return result;
+	}
+
+	@RequestMapping("novel_main_naverlists.do")
+	public ArrayList<mainRankTO> novel_main_naverlists( HttpServletRequest request ) {
+		
+		ArrayList<mainRankTO> result = new ArrayList<>();
+		
+		mainRankTO to = novel_rank.naver_romace();
+		result.add(to);
+		to = novel_rank.naver_fantasy();
+		result.add(to);
+		to = novel_rank.naver_romacefantasy();
+		result.add(to);
+		
+		return result;
 	}
 	
 	@RequestMapping("insert.do")
