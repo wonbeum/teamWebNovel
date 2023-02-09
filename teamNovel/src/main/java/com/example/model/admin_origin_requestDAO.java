@@ -24,12 +24,12 @@ public class admin_origin_requestDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		ArrayList<admin_origin_requestTO> boardlists = new ArrayList<admin_origin_requestTO>();
+		ArrayList<admin_origin_requestTO> requestLists = new ArrayList<admin_origin_requestTO>();
 		
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "select request_seq, request_category, request_title, user_nickname from novel_orgin_request order by request_seq desc";
+			String sql = "select request_seq, request_title, request_category, user_email, user_nickname from novel_origin_request order by request_seq desc";
 			
 			pstmt = conn.prepareStatement( sql );
 			
@@ -37,11 +37,12 @@ public class admin_origin_requestDAO {
 			while( rs.next() ) {
 				admin_origin_requestTO to = new admin_origin_requestTO();
 				to.setRequest_seq( rs.getString( "request_seq" ) );
-				to.setRequest_category( rs.getString( "request_category" ) );
 				to.setRequest_title( rs.getString( "request_title" ) );
+				to.setRequest_category( rs.getString( "request_category" ) );
+				to.setUser_email( rs.getString( "user_email" ));
 				to.setUser_nickname( rs.getString( "user_nickname" ) );
 				
-				boardlists.add( to );
+				requestLists.add( to );
 			}
 			
 		} catch (SQLException e) {
@@ -53,7 +54,7 @@ public class admin_origin_requestDAO {
 			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 		}	
 		
-		return boardlists;
+		return requestLists;
 	}
 	
 

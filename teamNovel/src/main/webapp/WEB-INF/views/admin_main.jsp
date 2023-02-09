@@ -1,3 +1,5 @@
+<%@page import="com.example.model.reviewListTO"%>
+<%@page import="com.example.model.admin_origin_requestTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="com.example.model.freeboardTO"%>
@@ -14,7 +16,7 @@
 
 		for( userInfoTO to : userLists ){
 			sbHtml1.append("<tr>");
-			sbHtml1.append("<th scope='row'>"+ userLists.indexOf("userLists") +"</td>");
+			sbHtml1.append("<th scope='row'>"+ 1 +"</td>");
 			sbHtml1.append("	<td>"+ to.getUser_email() +"</td>");
 			sbHtml1.append("	<td>"+ to.getUser_nickname() +"</td>");
 			sbHtml1.append("	<td>"+to.getUser_cdate()+"</td>");
@@ -22,22 +24,47 @@
 		}
 
 
-
 	ArrayList<freeboardTO> boardLists = (ArrayList<freeboardTO>)request.getAttribute("boardLists");
 
 	StringBuilder sbHtm2 = new StringBuilder();
 
-	for( freeboardTO to : boardLists ){
-		if( boardLists.size() == 5)
-			break;
-		sbHtm2.append("<tr>");
-		sbHtm2.append("	<th scope='row'>"+ to.getFree_seq() +"</th>");
-		sbHtm2.append("		<td>["+ to.getFree_category() + "]</td>");
-		sbHtm2.append("		<td>"+ to.getFree_subject() + "</td>");
-		sbHtm2.append("		<td>"+ to.getUser_email() +"</td>");
-		sbHtm2.append("	</tr>");
-	}
+		for( freeboardTO to : boardLists ){
+			sbHtm2.append("<tr>");
+			sbHtm2.append("	<th scope='row'>"+ to.getFree_seq() +"</th>");
+			sbHtm2.append("		<td>["+ to.getFree_category() + "]</td>");
+			sbHtm2.append("		<td>"+ to.getFree_subject() + "</td>");
+			sbHtm2.append("		<td>"+ to.getUser_nickname() +"</td>");
+			sbHtm2.append("	</tr>");
+		}
+	
+		
+	ArrayList<reviewTO> reviewlist = (ArrayList<reviewTO>)request.getAttribute("reviewlist");
 
+		StringBuilder sbHtm3 = new StringBuilder();
+
+			for( reviewTO to : reviewlist ){
+				sbHtm3.append("<tr>");
+				sbHtm3.append("	<th scope='row'>"+ to.getReview_seq() +"</th>");
+				sbHtm3.append("		<td>"+ to.getNovel_title() + "</td>");
+				sbHtm3.append("		<td>"+ to.getUser_nickname() + "</td>");
+				sbHtm3.append("		<td>"+ to.getReview_star_grade() +"</td>");
+				sbHtm3.append("	</tr>");
+		}
+
+		
+	ArrayList<admin_origin_requestTO> requestLists = (ArrayList<admin_origin_requestTO>)request.getAttribute("requestLists");
+		
+	StringBuilder sbHtm4 = new StringBuilder();
+
+		for( admin_origin_requestTO to : requestLists ){
+			sbHtm4.append("<tr>");
+			sbHtm4.append("	<th scope='row'>"+ to.getRequest_seq() +"</th>");
+			sbHtm4.append("		<td>["+ to.getRequest_category() + "]</td>");
+			sbHtm4.append("		<td>"+ to.getRequest_title() + "</td>");
+			sbHtm4.append("		<td>"+ to.getUser_email() +"</td>");
+			sbHtm4.append("	</tr>");
+		}
+		
 %>
 
 
@@ -169,6 +196,7 @@
             </tr>
             </thead>
             <tbody>
+            <%=sbHtm3 %>
 <!-- 리뷰리스트 반복구간
             <tr>
             	<th scope="row">1</th>
@@ -195,18 +223,6 @@
                 <td>작성자</td>
                 <td>별점</td>         
             </tr>
-            <tr>
-            	<th scope="row">4</th>
-                <td>작품명</td>
-                <td>작성자</td>
-                <td>별점</td>         
-            </tr>
-            <tr>
-            	<th scope="row">5</th>
-                <td>작품명</td>
-                <td>작성자</td>
-                <td>별점</td>         
-            </tr>
             </tbody>
             </table>
         </div>
@@ -227,47 +243,36 @@
             	<th scope="col">#</th>
                 <th scope="col">카테고리</th>
                 <th scope="col">제목</th>
-                <th scope="col">날짜</th>         
+                <th scope="col">요청자</th>         
             </tr>
             </thead>
             <tbody>
+            <%=sbHtm4 %>
 <!-- 요청리스트 반복 구간
             <tr>
             	<th scope="row">1</th>
-                <td>카테고리</td>
+                <td>[카테고리]</td>
                 <td>제목</td>
-                <td>날짜</td>         
+                <td>이메일</td>         
             </tr>
  -->
             <tr>
             	<th scope="row">1</th>
-                <td>카테고리</td>
+                <td>[카테고리]</td>
                 <td>제목</td>
-                <td>날짜</td>         
+                <td>이메일</td>         
             </tr>
             <tr>
             	<th scope="row">2</th>
-                <td>카테고리</td>
+                <td>[카테고리]</td>
                 <td>제목</td>
-                <td>날짜</td>         
+                <td>이메일</td>         
             </tr>
             <tr>
             	<th scope="row">3</th>
-                <td>카테고리</td>
+                <td>[카테고리]</td>
                 <td>제목</td>
-                <td>날짜</td>         
-            </tr>
-            <tr>
-            	<th scope="row">4</th>
-                <td>카테고리</td>
-                <td>제목</td>
-                <td>날짜</td>         
-            </tr>
-            <tr>
-            	<th scope="row">5</th>
-                <td>카테고리</td>
-                <td>제목</td>
-                <td>날짜</td>         
+                <td>이메일</td>         
             </tr>
             </tbody>
             </table>

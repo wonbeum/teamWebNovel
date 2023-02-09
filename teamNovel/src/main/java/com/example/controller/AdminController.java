@@ -16,6 +16,10 @@ import com.example.model.admin_origin_requestDAO;
 import com.example.model.admin_origin_requestTO;
 import com.example.model.commentTO;
 import com.example.model.freeboardTO;
+import com.example.model.reviewDAO;
+import com.example.model.reviewListDAO;
+import com.example.model.reviewListTO;
+import com.example.model.reviewTO;
 import com.example.model.userInfoTO;
 import com.example.model.user_adminDAO;
 
@@ -29,6 +33,8 @@ public class AdminController {
 	private FreeBoardDAO fdao;
 	@Autowired
 	private CommentDAO cdao;
+	@Autowired
+	private reviewDAO rdao;
 	
 	@RequestMapping("admin_main.do")
 	public ModelAndView admin_main(HttpServletRequest request) {
@@ -37,9 +43,13 @@ public class AdminController {
 		
 		ArrayList<userInfoTO > userLists = userdao.userLists();
 		ArrayList<freeboardTO > boardLists = fdao.FreeBoard_list();
+		ArrayList<admin_origin_requestTO> requestLists = aordao.origin_request_list();
+		ArrayList<reviewTO> reviewlist = rdao.reviewlist();
+		
 		modelAndView.addObject( "userLists" , userLists );
 		modelAndView.addObject( "boardLists" , boardLists );
-		
+		modelAndView.addObject( "requestLists" , requestLists );
+		modelAndView.addObject( "reviewlist" , reviewlist );
 		return modelAndView;
 	}
 	
@@ -69,9 +79,16 @@ public class AdminController {
 		return modelAndView;
 	}
 	@RequestMapping("admin_origin_request_list.do")
-	public ModelAndView admin_orgin_request_list() {
-		return new ModelAndView( "admin_origin_request_list" );
+	public ModelAndView admin_orgin_request_list( HttpServletRequest request ) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin_origin_request_list" );
+		
+		ArrayList<admin_origin_requestTO> requestLists = aordao.origin_request_list();
+		modelAndView.addObject( "requestLists" , requestLists );
+		
+		return modelAndView;
 	}
+	
 	@RequestMapping("admin_origin_request_list_delete_ok.do")
 	public ModelAndView admin_orgin_request_list_delete_ok(HttpServletRequest request) {
 		
@@ -85,6 +102,7 @@ public class AdminController {
 		modelAndView.addObject( "flag", flag );
 		return modelAndView;
 	}
+	
 	@RequestMapping("admin_member_modify.do")
 	public ModelAndView admin_member_modify( HttpServletRequest request ) {
 		ModelAndView modelAndView = new ModelAndView();
