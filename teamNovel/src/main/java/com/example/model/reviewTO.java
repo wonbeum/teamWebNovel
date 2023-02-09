@@ -6,12 +6,16 @@ public class reviewTO {
 	private String review_date;
 	private String review_ip;
 	private String review_star_grade;
+	
 	private String user_email;
 	private String user_nickname;
+	
 	private String novel_title;
+	
 	public String getReview_seq() {
 		return review_seq;
 	}
+	
 	public void setReview_seq(String review_seq) {
 		this.review_seq = review_seq;
 	}

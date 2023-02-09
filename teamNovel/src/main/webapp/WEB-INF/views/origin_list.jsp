@@ -103,6 +103,26 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
 
+<!-- 입력값 검사 --> 
+window.addEventListener('load', () => {
+	  const forms = document.getElementsByClassName('validation-form');
+
+	  Array.prototype.filter.call(forms, (form) => {
+	    form.addEventListener('submit', function (event) {
+	      if (form.checkValidity() === false) {
+	        event.preventDefault();
+	        event.stopPropagation();
+	      }
+
+	      form.classList.add('was-validated');
+	    }, false);
+	  });
+	  
+	  
+	}, false);
+	
+	
+<!-- 네비바 주황색 버튼 --> 
 	$(document).ready(function(){
 	    $('#tablists').on('show.bs.tab', function(e){
 	    	var Target1 = e.target;
@@ -132,8 +152,17 @@
 			});
 		});
 	});
-	
+
+<!-- 모달 창 정보 입력 --> 
 	const origin_request_ok_Server = function(){
+        let request_title = $("#request_title").val();
+        // 입력값 검사
+
+        if (request_title == null || request_title == "") {
+			alert("작품명을 입력해주세요!");
+			return false;
+		}
+        
 		$.ajax({
 			url:'origin_request_ok.do',
 			type: 'get',
@@ -147,16 +176,17 @@
 			dataType: 'json',
 			success: function(jsonData) {
 				if(jsonData.flag==0){
-				alert( "요청 완료 성공!");
+				alert( "요청 성공! 해당 작품 추가 소식을 메일을 통해 확인하세요.");
 				$("#RequestModal").modal("hide");
 				}
 			},
 			error: function(err) {
-				alert( "[에러] :" + err.status );
+				alert( "회원 정보를 정확히 입력해주세요." );
 			}
 		})
 	};
 
+	
 </script>
 </head>
 <body>
@@ -167,7 +197,7 @@
 <!-- 본문 -->
 
 <!-- Nav pills -->
-<div class="container d-flex justify-content-center">
+<div class="container d-flex justify-content-center" style="margin-top: 20px; margin-bottom: 20px; padding-top: 20px; padding-bottom: 20px;">
 	<nav class="nav nav-pills nav-fill justify-content-center" role="tablist" id="tablists">
 		<a class="nav-link active" data-bs-toggle="tab" data-bs-target="#webtoon" href="#webtoon" id="nav-button" style="background-color: #ffb26c; color: #fff;">웹툰</a>
 		<a class="nav-link" data-bs-toggle="tab" data-bs-target="#drama" href="#drama" id="nav-button">드라마</a>
@@ -203,16 +233,18 @@
         style="font-family: AppleSDGothicNeoB; font-size: 27px; font-weight: bold;">요청하기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form class="validation-form" novalidate>
       <div class="modal-body">
-        <form>
           <div class="mb-3">
             <label for="InputEmail" class="form-label">이메일*</label>
-            <input type="email" class="form-control" id="user_email">
+            <input type="email" class="form-control" id="user_email" value="${signIn.user_email}" required>
             <div id="emailHelp" class="form-text">요청 작품이 추가될 경우, 해당 주소로 메일이 발송됩니다.</div>
+            <div class="invalid-feedback">이메일을 입력해주세요.</div>
           </div>
           <div class="mb-3">
-            <label for="InputEmail" class="form-label">닉네임*</label>
-            <input type="email" class="form-control" id="user_nickname">
+            <label for="InputNickname" class="form-label">닉네임*</label>
+            <input type="text" class="form-control" id="user_nickname" value="${signIn.user_nickname}" required>
+            <div class="invalid-feedback">닉네임을 입력해주세요.</div>
           </div>
           <div class="mb-3">
           	<label class="form-label">카테고리*</label>
@@ -222,17 +254,19 @@
   					<option value="드라마">드라마</option>
   					<option value="영화">영화</option>
 				</select>
+				<div class="invalid-feedback">카테고리를 선택해주세요.</div>
 			</div>
 			<div class="mb-3">
             <label for="InputTitle" class="form-label">작품명*</label>
-            <input type="text" class="form-control" id="request_title">
+            <input type="text" class="form-control" id="request_title" required>
+            <div class="invalid-feedback">작품명을 입력해주세요.</div>
           </div>
-        </form>
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
         <button type="submit" class="btn" style="background-color: #ffb26c; color: #fff;" id="rqbtn_ok">요청</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
