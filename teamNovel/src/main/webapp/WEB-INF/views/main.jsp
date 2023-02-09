@@ -40,8 +40,82 @@
 	}
 </script> -->
 <style type="text/css">
-.nav-scroller {
-	border: 1px solid black;
+@font-face {
+	src: url("/font/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoM.ttf");
+	font-family: "AppleSDGothicNeoM";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoSB.ttf");
+	font-family: "AppleSDGothicNeoSB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoR.ttf");
+	font-family: "AppleSDGothicNeoR";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoR.ttf");
+	font-family: "AppleSDGothicNeoEB";
+}
+
+#kakaonovelRank, #navernovelRank, #nav-button1, 
+#nav-button2, #nav-button3, #nav-button4,
+#nav-button5{
+	width: 120px;
+	height: 40px;
+	margin: 16px;
+	margin-top: 20px;
+	border-radius: 20px;
+	border: solid 2px #ffb26b;
+	background-color: #fff;
+	padding-top: 6px;
+	font-family: AppleSDGothicNeoR;
+	font-size: 15px;
+	font-weight: 800;
+	font-style: normal;
+	text-decoration-line: none;
+	text-align: center;
+	color: #ffb26c;
+}
+
+#contentname {
+	width: 120px;
+	height: 40px;
+	margin: 16px;
+	margin-top: 20px;
+	border-radius: 20px;
+	border: 0;
+	padding-top: 6px;
+	font-family: AppleSDGothicNeoR;
+	font-size: 20px;
+	font-weight: 800;
+	font-style: normal;
+	text-decoration-line: none;
+	text-align: center;
+	display: inline-block;
+}
+
+.button {
+	margin: 10px;
+	margin-top: 20px;
+	border-radius: 20px;
+	border: solid 2px #ffb26b;
+	background-color: #fff;
+	padding-top: 6px;
+	font-family: AppleSDGothicNeoR;
+	font-size: 15px;
+	font-weight: 800;
+	font-style: normal;
+	text-decoration-line: none;
+	text-align: center;
+	color: #ffb26c;
 }
 
 .cards-wrapper {
@@ -50,8 +124,15 @@
 }
 
 .card {
-	margin: 0 .5em;
-	width: calc(50%/ 3);
+	width: calc(75%/ 3);
+}
+
+.eventimg {
+	width: 30%;
+}
+
+.eventcontainer {
+	text-align: center;
 }
 </style>
 
@@ -75,7 +156,7 @@
 				/* 인기순 - 데이터 필요 */
 				listhtml +=`
 					<div id="container">
-					<div align="center" >인기순</div>
+					<div id="contentname" class="justify-content-center">인기순</div>
 					<div id="carouselExample1" class="carousel slide">
 						<div class="carousel-inner">
 							`;
@@ -122,10 +203,10 @@
 							</div>
 						</div>
 					</div>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample1" data-bs-slide="prev">
 					</button>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample1" data-bs-slide="next">
 					</button>
 					`;
@@ -134,7 +215,7 @@
 				/* 로맨스 */
 				listhtml +=`
 					<div id="container">
-					<div align="center">로맨스</div>
+					<div id="contentname" align="center">로맨스</div>
 					<div id="carouselExample2" class="carousel slide">
 						<div class="carousel-inner">
 							`;
@@ -181,10 +262,10 @@
 							</div>
 						</div>
 					</div>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample2" data-bs-slide="prev">
 					</button>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample2" data-bs-slide="next">
 					</button>
 					`;
@@ -193,7 +274,7 @@
 				/* 로맨스 판타지 */
 				listhtml +=`
 					<div id="container">
-					<div align="center">로맨스 판타지</div>
+					<div id="contentname" align="center">로맨스 판타지</div>
 					<div id="carouselExample3" class="carousel slide">
 						<div class="carousel-inner">
 							`;
@@ -240,17 +321,17 @@
 							</div>
 						</div>
 					</div>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample3" data-bs-slide="prev">
 					</button>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample3" data-bs-slide="next">
 					</button>
 					`;
 				/* 판타지 */
 				listhtml +=`
 					<div id="container">
-					<div align="center">판타지</div>
+					<div id="contentname" align="center">판타지</div>
 					<div id="carouselExample4" class="carousel slide">
 						<div class="carousel-inner">
 							`;
@@ -297,17 +378,17 @@
 							</div>
 						</div>
 					</div>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample4" data-bs-slide="prev">
 					</button>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample4" data-bs-slide="next">
 					</button>
 					`;
 				/* 이달의 신작 */
 				listhtml +=`
 					<div id="container">
-						<div align="center">이달의 신작</div>
+						<div id="contentname" align="center">이달의 신작</div>
 						<div id="carouselExample5" class="carousel slide">
 							<div class="carousel-inner">
 							`;
@@ -354,10 +435,10 @@
 							</div>
 						</div>
 					</div>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample5" data-bs-slide="prev">
 					</button>
-					<button type="button"
+					<button class="button" type="button"
 						data-bs-target="#carouselExample5" data-bs-slide="next">
 					</button>
 					`;
@@ -372,6 +453,21 @@
 		})
 	};
 	$(document).ready(function() {
+		
+	    $('#tablists').on('show.bs.tab', function(e){
+	    	let Target1 = e.target;
+	    	Target1.style.background ="#ffb26b"
+	    	let Target2 = e.relatedTarget;
+	    	Target2.style.background = "white";
+	        });
+	    
+	    $('a[data-link="platform"]').on('show.bs.tab', function(e){
+	    	let myTarget = e.target;
+	    	myTarget.style.color = "white";
+	    	let futureTarget = e.relatedTarget;
+	    	futureTarget.style.color = "#ffb26b";
+	        });
+		
 		let url = 'novel_main_kakaolists.do';
 		novelLists(url);
 		
@@ -383,6 +479,28 @@
 			url = 'novel_main_naverlists.do';
 			novelLists(url);
 		});
+		
+
+		$('#nav-button1').click(function(){
+			let offset = $('#carouselExample1').offset(); 
+	        $('html').animate({scrollTop : offset.top-200}, 200);
+		});
+		$('#nav-button2').click(function(){
+			let offset = $('#carouselExample2').offset(); 
+	        $('html').animate({scrollTop : offset.top-200}, 200);
+		});
+		$('#nav-button3').click(function(){
+			let offset = $('#carouselExample3').offset(); 
+	        $('html').animate({scrollTop : offset.top-200}, 200);
+		});
+		$('#nav-button4').click(function(){
+			let offset = $('#carouselExample4').offset(); 
+	        $('html').animate({scrollTop : offset.top-200}, 200);
+		});
+		$('#nav-button5').click(function(){
+			let offset = $('#carouselExample5').offset(); 
+	        $('html').animate({scrollTop : offset.top-200}, 200);
+		});
 	});
 </script>
 </head>
@@ -393,14 +511,28 @@
 
 	<!-- 본문 -->
 
+	<div class="container w-90">
+		<div class="eventcontainer">
+		<a>
+			<img class="eventimg" alt=""
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg">
+			</a>
+		<a><img class="eventimg" alt=""
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg">
+			</a>
+		<a><img class="eventimg" alt=""
+				src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg">
+		</a>
+		</div>
+	</div>
 
 	<div class="container w-75">
 		<!-- Nav pills -->
-		<ul class="nav nav-tabs justify-content-center bg-light"
-			role="tablist">
-			<li class="nav-item"><a class="nav-link active"
-				data-bs-toggle="pill" href="#kakaopage" id="kakaonovelRank">카카오 페이지</a></li>
-			<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
+		<ul class="nav nav-pills justify-content-center" role="tablists" id="tablists">
+			<li class="nav-item"><a class="nav-link active" data-link="platform"
+				data-bs-toggle="pill" href="#kakaopage" id="kakaonovelRank" style="background-color: #ffb26c; color: #fff;">카카오
+					페이지</a></li>
+			<li class="nav-item"><a class="nav-link" data-link="platform" data-bs-toggle="pill"
 				href="#series" id="navernovelRank">네이버 시리즈</a>
 		</ul>
 	</div>
@@ -409,39 +541,39 @@
 		<div class="tab-content" id="novel_genre">
 			<div id="kakaopage" class="container tab-pane active">
 				<!-- Nav pills -->
-				<ul class="nav justify-content-center bg-light" role="tablist">
+				<ul class="nav justify-content-center" role="tablist">
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample1" >인기순</a></li>
+						id="nav-button1" href="carouselExample1">인기순</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample2" >로맨스</a></li>
+						id="nav-button2" href="#carouselExample2">로맨스</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample3" >로맨스판타지</a></li>
+						id="nav-button3" href="#carouselExample3">로맨스판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample4" >판타지</a></li>
+						id="nav-button4" href="#carouselExample4">판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample5" >이달의 신작</a></li>
+						id="nav-button5" href="#carouselExample5">이달의 신작</a></li>
 				</ul>
 			</div>
 
 			<div id="series" class="container tab-pane fade">
-				<ul class="nav justify-content-center bg-light" role="tablist">
+				<ul class="nav justify-content-center" role="tablist">
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample1" >인기순</a></li>
+						id="nav-button1" href="carouselExample1">인기순</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample2" >로맨스</a></li>
+						id="nav-button2" href="#carouselExample2">로맨스</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample3" >로맨스판타지</a></li>
+						id="nav-button3" href="#carouselExample3">로맨스판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample4" >판타지</a></li>
+						id="nav-button4" href="#carouselExample4">판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						href="#carouselExample5" >이달의 신작</a></li>
+						id="nav-button5" href="#carouselExample5">이달의 신작</a></li>
 				</ul>
 			</div>
 
 		</div>
 
 
-		<div class="container" id="insertnovelList"></div>
+		<div class="container text-center" id="insertnovelList"></div>
 	</div>
 
 
