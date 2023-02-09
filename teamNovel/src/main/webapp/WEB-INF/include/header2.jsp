@@ -92,7 +92,7 @@
 			<div class="col" style="padding-left: 39px; padding-right: 0px;">
 			</div>
 			<div class="col-6 text-center" style="height: 75px;">
-				<a href="./admin_main.do"><img class="logoimg" src="#">ADMINISTRATOR</a>
+				<a href="./admin_main.do"><img class="logoimg" src="../images/adminlogo.png"></a>
 			</div>
 			<div class="col d-flex flex-row-reverse py-4"
 				style="padding-right: 39px; padding-left: 0px;">
