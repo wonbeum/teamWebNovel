@@ -317,6 +317,7 @@ $(document).ready(function(){
 				BoardListAjax('SearchListAjax.do', 1 , '#insertTotalList',keyword);
 			}
 			//console.log(keyword);
+			$('#input_keyword').val('');
 		});
 		
 });
