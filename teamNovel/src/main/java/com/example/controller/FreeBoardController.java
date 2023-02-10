@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.CommentDAO;
 import com.example.model.FreeBoardDAO;
+import com.example.model.FreeBoardPagingTO;
 import com.example.model.LikeDAO;
 import com.example.model.LikeTO;
 import com.example.model.commentTO;
@@ -38,27 +39,85 @@ public class FreeBoardController {
 		return new ModelAndView( "board_list" );
 	}
 	
-	// ajax 전체 리스트 가져오기
+	// ajax 전체 리스트 가져오기 + pagination
 	@RequestMapping("BoardListAjax.do")
-	public ArrayList<freeboardTO> boardListAjax() {
+	public ArrayList<FreeBoardPagingTO> boardListAjax(HttpServletRequest request) {
 		
-		ArrayList<freeboardTO> boardList = fdao.FreeBoard_list();
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		// cpage (현재페이지) 받아와서 Dao 거쳐서 출력
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = fdao.FreeBoard_List(Lists);
+		
+		ArrayList<FreeBoardPagingTO> boardList = new ArrayList<FreeBoardPagingTO>();
+		boardList.add(Lists);
+		
+		return boardList;
+	}
+
+	// ajax 공지 리스트 가져오기 + pagination
+	@RequestMapping("NoticeListAjax.do")
+	public ArrayList<FreeBoardPagingTO> NoticeListAjax(HttpServletRequest request) {
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		// cpage (현재페이지) 받아와서 Dao 거쳐서 출력
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = fdao.Notice_list(Lists);
+		
+		ArrayList<FreeBoardPagingTO> boardList = new ArrayList<FreeBoardPagingTO>();
+		boardList.add(Lists);
+		
+		return boardList;
+		}
+	
+	// ajax 인기글 리스트 가져오기 + pagination
+	@RequestMapping("BestListAjax.do")
+	public ArrayList<FreeBoardPagingTO> BestListAjax(HttpServletRequest request) {
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		// cpage (현재페이지) 받아와서 Dao 거쳐서 출력
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = fdao.Best_list(Lists);
+		
+		ArrayList<FreeBoardPagingTO> boardList = new ArrayList<FreeBoardPagingTO>();
+		boardList.add(Lists);
 		
 		return boardList;
 	}
 	
-	// ajax 공지 리스트 가져오기
-	@RequestMapping("NoticeListAjax.do")
-	public ArrayList<freeboardTO> NoticeListAjax() {
-			ArrayList<freeboardTO> boardList = fdao.Notice_list();
-			
-			return boardList;
+	// ajax 검색 리스트 가져오기 + pagination
+	@RequestMapping("SearchListAjax.do")
+	public ArrayList<FreeBoardPagingTO> SearchListAjax(HttpServletRequest request) {
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
-	
-	// ajax 인기글 리스트 가져오기
-	@RequestMapping("BestListAjax.do")
-	public ArrayList<freeboardTO> BestListAjax() {
-		ArrayList<freeboardTO> boardList = fdao.Best_list();
+		
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		String keyword = request.getParameter("keyword");
+		
+		Lists = fdao.Search_list(Lists, keyword);
+		
+		ArrayList<FreeBoardPagingTO> boardList = new ArrayList<FreeBoardPagingTO>();
+		boardList.add(Lists);
 		
 		return boardList;
 	}
