@@ -18,64 +18,152 @@
 .nav-scroller {
 	border: 1px solid black;
 }
+
+#td_link {
+	color: #000;
+}
 </style>
 
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#allbtn").click(function() {
-			//만약 전체 선택 체크박스가 체크된상태일경우
-			if ($("#allbtn").prop("checked")) {
-				$("input[type=checkbox]").prop("checked", true);
-				//input type이 체크박스인것은 모두 체크함
-			} else {
-				$("input[type=checkbox]").prop("checked", false);
-				//input type이 체크박스인것은 모두 체크 해제함
+function ReviewListAjax(url, page, keyword){
+	$.ajax({
+		url : url,
+		type : 'get',
+		dataType : 'json',
+		data : {
+			'cpage' : page,
+			'keyword' : keyword
+		},
+		success : function(jsonData){
+			//console.log("성공");
+			
+			let cpage = jsonData[0].cpage;
+			let recordPerPage = jsonData[0].recordPerPage;
+			let blockPerPage = jsonData[0].blockPerPage;
+			let totalPage = jsonData[0].totalPage;
+			let totalRecord = jsonData[0].totalRecord;
+			let startBlock = jsonData[0].startBlock;
+			let endBlock = jsonData[0].endBlock;
+				
+			$('#insert').html('');
+			
+			let ajaxHtml = '';
+			
+			for(let i=0; i<recordPerPage; i++){
+				if( jsonData[0].reviewLists[i] == null ){
+					ajaxHtml += `
+						<tr> 
+						</tr>
+					`;
+					
+				} else {
+					ajaxHtml += `
+							<tr> 
+							<td>\${jsonData[0].reviewLists[i].review_seq}</td>
+							<td><a id="td_link" href="novel_detail.do?novel_title=\${jsonData[0].reviewLists[i].novel_title}">\${jsonData[0].reviewLists[i].novel_title}</td>
+							<td>\${jsonData[0].reviewLists[i].user_nickname}</td>
+							<td><a id="td_link" href="admin_review_view.do?seq=\${jsonData[0].reviewLists[i].review_seq}" class="d-inline-block text-truncate" style="max-width: 400px;">
+								\${jsonData[0].reviewLists[i].review_content}</a></td>
+							<td>\${jsonData[0].reviewLists[i].review_star_grade}</td>
+							<td>\${jsonData[0].reviewLists[i].review_date}</td>
+							<td><input type="button" value="삭제" onclick="location.href='admin_review_delete_ok.do?seq=\${jsonData[0].reviewLists[i].review_seq}'"/></td>
+							</tr>
+						`;
+				}
 			}
-		});
-		
-		// 선택 삭제 버튼
-		const list = 
-		$("#selectalldbtn").click(function(){
-			//for(let i = 0; i < )
-		});
+				$('#insert').append(ajaxHtml);
+				
+				$('#insertPagging').html('');
+				let page = '';
+				
+				page += `
+				<div style="display: inline-block;" id="pageGroup">
+				<ul class="pagination" id="pagging">`;
+				
+				if( cpage == 1 ){
+					page += `<li id="pageLi" class="page-item disabled"><a class="page-link"> <span aria-hidden="true">&laquo;</span>
+					</a></li>`;
+				} else {
+					page += `<li id="pageLi" class="page-item"><a class="goBackPage page-link"> <span aria-hidden="true">&laquo;</span>
+					</a></li>`;
+				}
+				
+				for( let i = startBlock ; i <= endBlock ; i ++ ){
+					if( cpage == i ){
+						page += '	<li id="pageLi" class="page-item disabled"><a class="page-link">' + i + '</a></li>';
+					} else {
+						page += '	<li id="pageLi" class="page-item"><a class="goPage page-link" data-page="' + i +  '">' + i + '</a></li>';
+					}
+				}
+				
+				if( cpage == totalPage ){
+					page += `<li id="pageLi" class="page-item disabled"><a class="page-link"><span aria-hidden="true">&raquo;</span></a></li>`;
+				} else {
+					page += `<li id="pageLi" class="page-item"><a class="goNextPage page-link"><span aria-hidden="true">&raquo;</span></a></li>`;
+				}
+				
+				page += `
+						</ul>
+					</div>`;
+					
+					$('#insertPagging').append(page);
+					
+					$(".goBackPage").click(function(){
+				      	page = (cpage - 1);
+				      	ReviewListAjax( url, page, keyword);
+			        });
+					
+					$(".goPage").click(function(){
+						page = $(this).attr("data-page");
+						ReviewListAjax( url, page, keyword );
+					});
+
+					$(".goNextPage").click(function(){
+				      	page = (cpage + 1);
+				      	ReviewListAjax( url, page, keyword );
+			        });
+		},
+		error : function(e) {
+			alert("error !");
+		}
 	});
+};
+	
+	$(document).ready(function() {
+		
+		let url = 'ReviewListAjax.do';
+		let page = 1;
+		let keyword = '';
+		ReviewListAjax( url, page, keyword );
+		
+		// 검색
+		$('#searchbtn').click(function(){
+			let keyword = $('#input_keyword').val().trim();
+		
+			if($('#serch_category').val()=='작품명') {
+				ReviewListAjax('SearchReview_titleAjax.do', 1 , keyword);
+				
+			} else if($('#serch_category').val()=='별점') {
+				ReviewListAjax('SearchReview_starAjax.do', 1 , keyword);
+				
+			} else {
+				ReviewListAjax('SearchReview_contentAjax.do', 1 , keyword);
+			}	
+					//console.log(keyword);
+			
+		});
+	
+	});
+	
 </script>
 </head>
 <body>
-
-	<div class="container">
-		<header class="blog-header lh-1 py-3">
-			<div
-				class="row flex-nowrap justify-content-between align-items-center">
-				<div class="col-4 pt-1">
-					<a class="blog-header-logo text-dark" href="./frame.do">ADMINISTRATOR</a>
-				</div>
-				<div class="col-4 d-flex justify-content-end align-items-center">
-					<a class="link-secondary" href="#" aria-label="Mainpage"> </a> <a
-						class="btn btn-sm btn-outline-secondary" href="#"><svg
-							xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-							fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-							<title>Mainpage</title><path
-								d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" /></svg>
-						Home</a> <a class="btn btn-sm btn-outline-secondary" href="#">Logout</a>
-				</div>
-			</div>
-		</header>
-
-		<div class="nav-scroller py-1 mb-2">
-						<nav class="nav d-flex justify-content-between">
-				<a class="p-2 link-secondary" href="./admin_member_list.do">회원 관리</a> <a
-					class="p-2 link-secondary" href="./admin_board_list.do">게시물 관리</a> <a
-					class="p-2 link-secondary" href="./admin_review_list.do">리뷰 관리</a> <a
-					class="p-2 link-secondary" href="./admin_origin_request_list.do">요청 리스트</a>
-			</nav>
-		</div>
-	</div>
+	<!-- header -->
+	<%@ include file="../include/header2.jsp" %>
 
 	<!-- main -->
-
 	<!-- 검색 -->
 	<form class="row g-3 justify-content-md-center mt-4">
 		<div class="col-md-2"></div>
@@ -86,17 +174,17 @@
 			<a>조건검색</a>
 		</div>
 		<div class="col-md-3">
-			<select class="form-select" id="validationCustom04" required>
-				<option selected value="">제목</option>
-				<option>제목+내용</option>
+			<select class="form-select" id="serch_category">
+				<option selected>작품명</option>
+				<option>별점</option>
+				<option>닉네임+내용</option>
 			</select>
 		</div>
 		<div class="col-md-4">
-			<input type="text" class="form-control" id="validationCustom03"
-				required>
+			<input type="text" class="form-control" id="input_keyword">
 		</div>
 		<div class="col-md-2">
-			<button class="btn btn-primary" type="submit">검색하기</button>
+			<button class="btn btn-primary" type="button" id="searchbtn">검색하기</button>
 		</div>
 	</form>
 
@@ -105,23 +193,18 @@
 		<table class="table">
 			<thead class="table-light">
 				<tr>
-				<!-- 전체선택 -->
-					<th scope="col"><input class="form-check-input" type="checkbox" role="switch"
-				id="allbtn"></th>
-				<!-- 전체선택 -->
-					<th scope="col">번호</th>
-					<th scope="col">작품명</th>
-					<th scope="col">별점</th>
-					<th scope="col">내용</th>
-					<th scope="col">아이디</th>
-					<th scope="col">작성일</th>
-					<th scope="col">기능</th>
+					<th>번호</th>
+					<th>작품명</th>
+					<th>닉네임</th>
+					<th>내용</th>
+					<th>별점</th>
+					<th>작성일</th>
+					<th>기능</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="insert">
+			<!-- 
 				<tr>
-					<td scope="col" ><input class="form-check-input"
-						type="checkbox" name="select" value=""></td>
 					<td scope="col">1</td>
 					<td scope="col">test</td>
 					<td scope="col">10</td>
@@ -130,34 +213,11 @@
 					<td scope="col">20230126</td>
 					<td scope="col"><input type="button" value="삭제" data-bs-toggle="modal" data-bs-target="#dmodal" /></td>
 				</tr>
-				<tr>
-					<td scope="col"><input class="form-check-input"
-						type="checkbox" name="select" value=""></td>
-					<td scope="col">2</td>
-					<td scope="col">test</td>
-					<td scope="col">10</td>
-					<td scope="col">contect</td>
-					<td scope="col">test@test</td>
-					<td scope="col">20230126</td>
-					<td scope="col"><input type="button" value="삭제" /></td>
-				</tr>
-				<tr>
-					<td scope="col"><input class="form-check-input"
-						type="checkbox" name="select" value=""></td>
-					<td scope="col">3</td>
-					<td scope="col">test</td>
-					<td scope="col">10</td>
-					<td scope="col">contect</td>
-					<td scope="col">test@test</td>
-					<td scope="col">20230126</td>
-					<td scope="col"><input type="button" value="삭제" /></td>
-				</tr>
+			 -->
 			</tbody>
 		</table>
-		<div>
-			<button type="button" class="btn btn-outline-primary" id="selectalldbtn">선택삭제</button>
-		</div>
 	</div>
+	
 
 	<!-- Modal -->
 	<div class="modal fade" id="dModal" tabindex="-1"
@@ -182,7 +242,9 @@
 
 
 	<!-- paging -->
-	<div class="container mb-4">
+	<div class="container mb-4" id="insertPagging">
+	</div>
+	<!-- 
 		<nav aria-label="Page navigation example"
 			class="nav justify-content-center">
 			<ul class="pagination">
@@ -197,16 +259,10 @@
 				</a></li>
 			</ul>
 		</nav>
-	</div>
+	 -->
 
 	<!-- footer -->
-	<hr class="footer-div">
-
-	<div class="container">
-		<footer class="py-3 my-4">
-			<p class="text-center text-muted">&copy; 2023 개발 못하면 죽는 병, Inc</p>
-		</footer>
-	</div>
+	<%@ include file="../include/footer1.jsp" %>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

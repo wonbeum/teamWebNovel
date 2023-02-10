@@ -1,8 +1,18 @@
+<%@page import="com.example.model.reviewTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <%
+	reviewTO to = (reviewTO)request.getAttribute("to");
 
+	String review_seq = to.getReview_seq();
+	String review_content = to.getReview_content();
+	String review_date = to.getReview_date();
+	String review_ip = to.getReview_ip();
+	String review_star_grade = to.getReview_star_grade();
+	String user_nickname = to.getUser_nickname();
+	String user_email = to.getUser_email();
+	String novel_title = to.getNovel_title();
 %>
 <!DOCTYPE html>
 <html>
@@ -76,7 +86,6 @@
 		<div class="container w-75 mb-5">
 
 			<div class="col mt-3 mb-5">
-					<form action="./admin_review_delete_ok.jsp" method="post" name="mfrm">
 						<table class="table text-center">
 							<thead>
 								<tr>
@@ -89,19 +98,18 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td width="10%">test@test</td>
-									<td width="20%">tester</td>
-									<td width="35%" class="text-start">작품1</td>
-									<td width="15%">23.01.31</td>
-									<td width="10%">5점</td>
+									<td width="10%"><%=user_email %></td>
+									<td width="20%"><%=user_nickname %></td>
+									<td width="35%" class="text-start"><%=novel_title %></td>
+									<td width="15%"><%=review_date %></td>
+									<td width="10%"><%=review_star_grade %>점</td>
 								</tr>
 							</tbody>
 						</table>
-					</form>
-					<textarea class="form-control" name="content" rows="8" readonly>내용이 들어가는 부분입니다</textarea>
+					<textarea class="form-control" name="content" rows="8" readonly><%=review_content %></textarea>
 					<a class="btn btn-outline-dark mt-3" href="./admin_review_list.do"
 						role="button">목록</a>
-					<button type="submit" id="dbtn" class="btn btn-secondary mt-3"><a href="./admin_review_delete_ok.do">삭제</button>
+					<button type="submit" id="dbtn" class="btn btn-secondary mt-3"><a href="./admin_review_delete_ok.do?seq=<%=review_seq %>">삭제</button>
 				</div>
 			</div>
 	</main>

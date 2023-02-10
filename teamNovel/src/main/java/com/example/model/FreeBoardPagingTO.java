@@ -12,6 +12,7 @@ public class FreeBoardPagingTO {
 	private int endBlock;
 	
 	private ArrayList<freeboardTO> boardLists;
+	private ArrayList<reviewTO> ReviewLists;
 	
 	public FreeBoardPagingTO() {
 		this.cpage = 1;
@@ -83,6 +84,14 @@ public class FreeBoardPagingTO {
 
 	public void setBoardLists(ArrayList<freeboardTO> boardLists) {
 		this.boardLists = boardLists;
+	}
+
+	public ArrayList<reviewTO> getReviewLists() {
+		return ReviewLists;
+	}
+
+	public void setReviewLists(ArrayList<reviewTO> reviewLists) {
+		ReviewLists = reviewLists;
 	}
 
 

@@ -12,8 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.model.CommentDAO;
 import com.example.model.FreeBoardDAO;
+import com.example.model.FreeBoardPagingTO;
 import com.example.model.admin_origin_requestDAO;
 import com.example.model.admin_origin_requestTO;
+import com.example.model.admin_reviewDAO;
 import com.example.model.commentTO;
 import com.example.model.freeboardTO;
 import com.example.model.reviewDAO;
@@ -35,6 +37,8 @@ public class AdminController {
 	private CommentDAO cdao;
 	@Autowired
 	private reviewDAO rdao;
+	@Autowired
+	private admin_reviewDAO ad_rdao;
 	
 	@RequestMapping("admin_main.do")
 	public ModelAndView admin_main(HttpServletRequest request) {
@@ -145,6 +149,22 @@ public class AdminController {
 		return modelAndView;
 	}
 
+
+	@RequestMapping("admin_member_delete_ok.do")
+	public ModelAndView admin_member_delete_ok( HttpServletRequest request ) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin_member_delete_ok");
+		
+		userInfoTO to = new userInfoTO();
+		to.setUser_email( request.getParameter( "email" ) );
+		
+		int flag = userdao.userDelete_ok(to);
+		
+		modelAndView.addObject( "flag" , flag );
+		
+		return modelAndView;
+	}
+	
 	@RequestMapping("admin_board_list.do")
 	public ModelAndView admin_board_list( HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -219,33 +239,127 @@ public class AdminController {
 		return modelAndView;
 	}
 	
+	
+	
+	// 리뷰관리 ---------------------------------
+	
 	@RequestMapping("admin_review_list.do")
 	public ModelAndView admin_review_list() {
 		return new ModelAndView( "admin_review_list" );
 	}
 	
+	// ajax 전체 리뷰 리스트 가져오기 + pagination
+	@RequestMapping("ReviewListAjax.do")
+	public ArrayList<FreeBoardPagingTO> ReviewListAjax(HttpServletRequest request) {
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = ad_rdao.Review_List(Lists);
+		
+		ArrayList<FreeBoardPagingTO> reviewList = new ArrayList<FreeBoardPagingTO>();
+		reviewList.add(Lists);
+		
+		return reviewList;
+	}
+	
+	// ajax 작품명 검색 리뷰 리스트 가져오기 + pagination
+	@RequestMapping("SearchReview_titleAjax.do")
+	public ArrayList<FreeBoardPagingTO> SearchReview_titleAjax(HttpServletRequest request) {
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		String keyword = request.getParameter("keyword");
+		
+		Lists = ad_rdao.ReviewSearch_TitleList(Lists, keyword);
+		
+		ArrayList<FreeBoardPagingTO> reviewList = new ArrayList<FreeBoardPagingTO>();
+		reviewList.add(Lists);
+		
+		return reviewList;
+	}
+	
+	// ajax 별점 검색 리뷰 리스트 가져오기 + pagination
+	@RequestMapping("SearchReview_starAjax.do")
+	public ArrayList<FreeBoardPagingTO> SearchReview_starAjax(HttpServletRequest request) {
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		String keyword = request.getParameter("keyword");
+		
+		Lists = ad_rdao.ReviewSearch_StarList(Lists, keyword);
+		
+		ArrayList<FreeBoardPagingTO> reviewList = new ArrayList<FreeBoardPagingTO>();
+		reviewList.add(Lists);
+		
+		return reviewList;
+	}
+	
+	// ajax 닉네임+내용 검색 리뷰 리스트 가져오기 + pagination
+	@RequestMapping("SearchReview_contentAjax.do")
+	public ArrayList<FreeBoardPagingTO> SearchReview_contentAjax(HttpServletRequest request) {
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		String keyword = request.getParameter("keyword");
+		
+		Lists = ad_rdao.ReviewSearch_ContentList(Lists, keyword);
+		
+		ArrayList<FreeBoardPagingTO> reviewList = new ArrayList<FreeBoardPagingTO>();
+		reviewList.add(Lists);
+		
+		return reviewList;
+	}
+	
 	@RequestMapping("admin_review_view.do")
-	public ModelAndView admin_review_view() {
-		return new ModelAndView( "admin_review_view" );
+	public ModelAndView admin_review_view(HttpServletRequest request) {
+		reviewTO to = new reviewTO();
+		to.setReview_seq(request.getParameter("seq"));
+		to = ad_rdao.Review_View(to);
+			
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin_review_view" );
+		modelAndView.addObject("to", to);
+		return modelAndView;
 	}
 	
 	@RequestMapping("admin_review_delete_ok.do")
-	public ModelAndView admin_review_delete_ok() {
-		return new ModelAndView( "admin_review_delete_ok" );
-	}
-	
-	@RequestMapping("admin_member_delete_ok.do")
-	public ModelAndView admin_member_delete_ok( HttpServletRequest request ) {
+	public ModelAndView admin_review_delete_ok(HttpServletRequest request) {
+		reviewTO to = new reviewTO();
+		to.setReview_seq(request.getParameter("seq"));
+
+		int flag = ad_rdao.Review_DeleteOk(to);
+		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin_member_delete_ok");
-		
-		userInfoTO to = new userInfoTO();
-		to.setUser_email( request.getParameter( "email" ) );
-		
-		int flag = userdao.userDelete_ok(to);
-		
-		modelAndView.addObject( "flag" , flag );
-		
+		modelAndView.setViewName( "admin_review_delete_ok" );
+		modelAndView.addObject( "flag", flag );
 		return modelAndView;
 	}
+	
+	
+
+	
 }
