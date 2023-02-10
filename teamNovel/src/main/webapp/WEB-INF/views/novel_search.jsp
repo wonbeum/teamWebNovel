@@ -84,6 +84,15 @@ input:focus::-webkit-input-placeholder {
 	width: 1000px;
 }
 
+a {
+  text-decoration: none;
+  color : #ffb26b;
+}
+
+a:hover {
+  color : #83dcb7;
+}
+
 .col{
 	position: relative;
     top: 30%;
@@ -116,49 +125,26 @@ input:focus::-webkit-input-placeholder {
 		<span style="font-family: AppleSDGothicNeoR; font-size: 18px;">검색어를 입력해보세요!</span>	
 		</div>
 	</div>
-	
-<!--
-		<div class="w-75 p-100">
-			<div class="input-group mb-3" style="margin-top: 238px; padding-top: 20px; padding-bottom: 20px;">
-				<input type="text" class="form-control" placeholder="검색어를 입력하세요"
-					aria-describedby="button-addon">
-				<button class="btn btn-outline-secondary" type="button"
-					id="searchbtn">검색</button>
-			</div>
-		</div>
--->
 
 	<div class="container" id="siteLink">
 		<div class="row" style="height: 300px;">
 			<div class="col">
-				<h3>장르</h3>
-				<p>
-					<a href="./novel_list.do">로맨스</a>
-				</p>
-				<p>
-					<a href="./novel_list.do">로맨스 판타지</a>
-				</p>
-				<p>
-					<a href="./novel_list.do">판타지</a>
-				</p>
+				<h3><a href="./novel_list.do">웹소설</a></h3>
+				<p>로맨스, 로맨스판타지, 판타지!</p>
+				<p>가장 유명한 장르의 웹소설을</p>
+				<p>플랫폼 별로 모아봐요!</p>
 			</div>
 			<div class="col">
-				<h3>커뮤니티</h3>
-				<p>
-					<a href="./board_list.do">전체글</a>
-				</p>
+				<h3><a href="./board_list.do">커뮤니티</a></h3>
+				<p>"오늘 읽은 웹소설은..."</p>
+				<p>"이번 달에 괜찮은 신작 소설 있나요?"</p>
+				<p>좋아하는 것에 대해 마음껏 이야기 나누세요!</p>
 			</div>
 			<div class="col">
-				<h3>원작 소설 찾기</h3>
-				<p>
-					<a href="./origin_list.do">웹툰</a>
-				</p>
-				<p>
-					<a href="./origin_list.do">드라마</a>
-				</p>
-				<p>
-					<a href="./origin_list.do">영화</a>
-				</p>
+				<h3><a href="./origin_list.do">원작 소설 찾기</a></h3>
+				<p>참신한 소재로 열풍 중인 웹툰, 드라마, 영화...</p>
+				<p>트렌드의 바탕에는 웹소설이 있습니다.</p>
+				<p>원천 IP로 활약하는 웹소설을 확인해보세요! </p>
 			</div>
 		</div>
 	</div>
