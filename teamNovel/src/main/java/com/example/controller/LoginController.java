@@ -31,6 +31,9 @@ public class LoginController {
 	@RequestMapping( "login_ok.do" )
 	public ModelAndView signIn(HttpServletRequest request) {
 		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "login_ok" );
+		
 		userInfoTO to = new userInfoTO();
 		
 		to.setUser_email( request.getParameter("user_email") );
@@ -41,12 +44,35 @@ public class LoginController {
 		HttpSession session = request.getSession();
 		if( signIn.getUser_nickname() != null) {
 			session.setAttribute("signIn", signIn);
+			modelAndView.addObject("grade", "user");
 		} else {
 			session.setAttribute("signIn", null);
 		}
-		return new ModelAndView( "login_ok" );
+		return modelAndView;
 	}
 	
+	@RequestMapping("adminlogin_ok.do")
+	public ModelAndView adminsignIn(HttpServletRequest request) {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "login_ok" );
+		
+		userInfoTO to = new userInfoTO();
+		
+		to.setUser_email( request.getParameter("user_email") );
+		to.setUser_password( request.getParameter("user_password") );
+		
+		userInfoTO signIn = dao.adminlogin(to);
+		System.out.println( signIn.getUser_nickname() );
+		HttpSession session = request.getSession();
+		if( signIn.getUser_nickname() != null) {
+			session.setAttribute("signIn", signIn);
+			modelAndView.addObject("grade", "master");
+		} else {
+			session.setAttribute("signIn", null);
+		}
+		return modelAndView;
+	}
 	
 	@RequestMapping( "logout.do" )
 	public ModelAndView logout(HttpSession session) {

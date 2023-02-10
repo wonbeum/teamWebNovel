@@ -12,6 +12,7 @@ public class NovelPagingTO {
 	private int endBlock;
 	
 	private ArrayList<novelInfoTO> novelLists;
+	private ArrayList<reviewListTO> reviewList;
 	
 	public NovelPagingTO() {
 		this.cpage = 1;
@@ -19,6 +20,10 @@ public class NovelPagingTO {
 		this.blockPerPage = 5 ;
 		this.totalPage = 1 ;
 		this.totalRecord = 0 ;
+	}
+
+	public ArrayList<reviewListTO> getReviewList() {
+		return reviewList;
 	}
 
 	public int getCpage() {
@@ -83,6 +88,11 @@ public class NovelPagingTO {
 
 	public void setNovelLists(ArrayList<novelInfoTO> novelLists) {
 		this.novelLists = novelLists;
+	}
+
+	public void setReviewList(ArrayList<reviewListTO> reviewall ) {
+
+		this.reviewList = reviewall;
 	}
 	
 	
