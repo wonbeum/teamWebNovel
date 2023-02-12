@@ -1,5 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@page import="com.example.model.admin_origin_requestTO"%>
+<%@page import="java.util.ArrayList"%>
+
+<%
+
+ArrayList<admin_origin_requestTO> requestLists = (ArrayList<admin_origin_requestTO>)request.getAttribute("requestLists");
+
+StringBuilder sbHtml = new StringBuilder();
+	
+	for( admin_origin_requestTO to : requestLists ){
+		sbHtml.append("<tr>");
+		sbHtml.append("<td><input type='checkbox' name='user_check'></td>");
+		sbHtml.append("<td>" + to.getRequest_seq() + "</td>");
+		sbHtml.append("<td>" + to.getRequest_category() + "</td>");
+		sbHtml.append("<td>" + to.getRequest_title() + "</td>");
+		sbHtml.append("<td>" + to.getUser_email() + "</td>");
+		sbHtml.append("<td><input type='button' value='완료' onClick='#'>");
+		sbHtml.append("<input type='button' value='삭제'></td>");
+		sbHtml.append("</tr>");
+		}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,8 +63,8 @@ $(document).ready(function() {
 $().ready(function () {
     $("#confirmStart").click(function () {
         Swal.fire({
-            title: '회원 정보 삭제',
-            text: "삭제된 회원 정보는 복구할 수 없습니다. 정말 삭제하시겠습니까?",
+            title: '요청 삭제',
+            text: "삭제된 요청은 복구할 수 없습니다. 정말 삭제하시겠습니까?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -51,7 +74,7 @@ $().ready(function () {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire(
-                    '삭제가 완료되었습니다.',
+                    '삭제되었습니다.',
                 )
             }
         })
@@ -61,34 +84,8 @@ $().ready(function () {
 </head>
 <body>
 
-	<div class="container">
-		<header class="blog-header lh-1 py-3">
-			<div
-				class="row flex-nowrap justify-content-between align-items-center">
-				<div class="col-4 pt-1">
-					<a class="blog-header-logo text-dark" href="./frame.do">ADMINISTRATOR</a>
-				</div>
-				<div class="col-4 d-flex justify-content-end align-items-center">
-					<a class="link-secondary" href="#" aria-label="Mainpage"> </a> <a
-						class="btn btn-sm btn-outline-secondary" href="#"><svg
-							xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-							fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
-							<title>Mainpage</title><path
-								d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" /></svg>
-						Home</a> <a class="btn btn-sm btn-outline-secondary" href="#">Logout</a>
-				</div>
-			</div>
-		</header>
-
-		<div class="nav-scroller py-1 mb-2">
-			<nav class="nav d-flex justify-content-between">
-				<a class="p-2 link-secondary" href="./admin_member_list.do">회원 관리</a> <a
-					class="p-2 link-secondary" href="./admin_board_list.do">게시물 관리</a> <a
-					class="p-2 link-secondary" href="./admin_review_list.do">리뷰 관리</a> <a
-					class="p-2 link-secondary" href="./admin_origin_request_list.do">요청 리스트</a>
-			</nav>
-		</div>
-	</div>
+<!-- header -->
+<jsp:include page="../include/header2.jsp"></jsp:include>
 
 	<!-- 본문 -->
 	<h2>요청 리스트</h2>
@@ -96,7 +93,8 @@ $().ready(function () {
 		<table class="table table-striped table-sm  table-bordered">
 			<thead>
 				<tr>
-					<th scope="col"><input type="checkbox" id="cboxAll"></th>
+					<th scope="col"></th>
+					<th scope="col">번호</th>
 					<th scope="col">카테고리</th>
 					<th scope="col">작품명</th>
 					<th scope="col">아이디</th>
@@ -104,54 +102,18 @@ $().ready(function () {
 				</tr>
 			</thead>
 			<tbody>
+			<%=sbHtml %>
+			<!--
 				<tr>
 					<td><input type="checkbox" name="user_check"></td>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td><input type="button" value="완료"><input
 						type="button" value="삭제"></td>
 				</tr>
-				<tr>
-					<td><input type="checkbox" name="user_check"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><input type="button" value="완료"><input
-						type="button" value="삭제"></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="user_check"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><input type="button" value="완료"><input
-						type="button" value="삭제"></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="user_check"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><input type="button" value="완료"><input
-						type="button" value="삭제"></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="user_check"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><input type="button" value="완료"><input
-						type="button" value="삭제"></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" name="user_check"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><input type="button" value="완료"><input
-						type="button" value="삭제"></td>
-				</tr>
+			-->
 			</tbody>
 		</table>
 	</div>
@@ -170,25 +132,10 @@ $().ready(function () {
 			</a></li>
 		</ul>
 	</nav>
-	<hr class="footer-div">
 
-	<div class="container">
-		<footer class="py-3 my-4">
-			<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-				<li class="nav-item"><a href="#"
-					class="nav-link px-2 text-muted">랭킹</a></li>
-				<li class="nav-item"><a href="#"
-					class="nav-link px-2 text-muted">리뷰</a></li>
-				<li class="nav-item"><a href="#"
-					class="nav-link px-2 text-muted">웹소설</a></li>
-				<li class="nav-item"><a href="#"
-					class="nav-link px-2 text-muted">커뮤니티</a></li>
-				<li class="nav-item"><a href="#"
-					class="nav-link px-2 text-muted">원작 소설 찾기</a></li>
-			</ul>
-			<p class="text-center text-muted">&copy; 2023 개발 못하면 죽는 병, Inc</p>
-		</footer>
-	</div>
+	<!-- footer -->
+	<jsp:include page="../include/footer1.jsp"></jsp:include>
+	
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

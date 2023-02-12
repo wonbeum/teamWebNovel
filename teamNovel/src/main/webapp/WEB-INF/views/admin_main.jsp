@@ -10,13 +10,13 @@
 <%@page import="java.util.ArrayList"%>
 
 <%
-	ArrayList<userInfoTO> userLists = (ArrayList<userInfoTO>)request.getAttribute("userLists");
+	ArrayList<userInfoTO> AdminUserLists = (ArrayList<userInfoTO>)request.getAttribute("AdminUserLists");
 	
 	StringBuilder sbHtml1 = new StringBuilder();
 
-		for( userInfoTO to : userLists ){
+		for( userInfoTO to : AdminUserLists ){
 			sbHtml1.append("<tr>");
-			sbHtml1.append("<th scope='row'>"+ 1 +"</td>");
+			sbHtml1.append("<th scope='row'></td>");
 			sbHtml1.append("	<td>"+ to.getUser_email() +"</td>");
 			sbHtml1.append("	<td>"+ to.getUser_nickname() +"</td>");
 			sbHtml1.append("	<td>"+to.getUser_cdate()+"</td>");
@@ -24,11 +24,11 @@
 		}
 
 
-	ArrayList<freeboardTO> boardLists = (ArrayList<freeboardTO>)request.getAttribute("boardLists");
+	ArrayList<freeboardTO> AdminFreeBoardlist = (ArrayList<freeboardTO>)request.getAttribute("AdminFreeBoardlist");
 
 	StringBuilder sbHtm2 = new StringBuilder();
 
-		for( freeboardTO to : boardLists ){
+		for( freeboardTO to : AdminFreeBoardlist ){
 			sbHtm2.append("<tr>");
 			sbHtm2.append("	<th scope='row'>"+ to.getFree_seq() +"</th>");
 			sbHtm2.append("		<td>["+ to.getFree_category() + "]</td>");
@@ -38,11 +38,11 @@
 		}
 	
 		
-	ArrayList<reviewTO> reviewlist = (ArrayList<reviewTO>)request.getAttribute("reviewlist");
+	ArrayList<reviewTO> Adminreviewlist = (ArrayList<reviewTO>)request.getAttribute("Adminreviewlist");
 
 		StringBuilder sbHtm3 = new StringBuilder();
 
-			for( reviewTO to : reviewlist ){
+			for( reviewTO to : Adminreviewlist ){
 				sbHtm3.append("<tr>");
 				sbHtm3.append("	<th scope='row'>"+ to.getReview_seq() +"</th>");
 				sbHtm3.append("		<td>"+ to.getNovel_title() + "</td>");
@@ -52,11 +52,11 @@
 		}
 
 		
-	ArrayList<admin_origin_requestTO> requestLists = (ArrayList<admin_origin_requestTO>)request.getAttribute("requestLists");
+	ArrayList<admin_origin_requestTO> AdminrequestList = (ArrayList<admin_origin_requestTO>)request.getAttribute("AdminrequestList");
 		
 	StringBuilder sbHtm4 = new StringBuilder();
 
-		for( admin_origin_requestTO to : requestLists ){
+		for( admin_origin_requestTO to : AdminrequestList ){
 			sbHtm4.append("<tr>");
 			sbHtm4.append("	<th scope='row'>"+ to.getRequest_seq() +"</th>");
 			sbHtm4.append("		<td>["+ to.getRequest_category() + "]</td>");
@@ -91,10 +91,19 @@
     width: 90%;
     margin: 10px auto;
 	}
-
-	.align_left { float:left; }
-	.align_right { float:right; }
-
+	
+	caption, th {
+	  background: #E2E2E2;
+	  padding: 10px;
+	  margin: 0px 0px 15px 0px;
+	  font-family: "AppleSDGothicNeoSB";
+	  font-size: 18px;
+	}
+	
+	table{
+		font-family: "AppleSDGothicNeoR";
+	}
+	
 </style>
 </head>
 <body>
@@ -103,9 +112,8 @@
 <jsp:include page="../include/header2.jsp"></jsp:include>
 
 <!-- 본문 -->
-<!-- 상단 디자인 -->
 
-<div class="container d-flex justify-content-around">
+<div class="container d-flex justify-content-around" style="margin: 110px">
         <!--회원리스트-->
         <div class="table-responsive" style="width:500px" id="MemberList">
             <table class="table table-sm caption-top">
@@ -113,12 +121,12 @@
             회원 리스트
             	<a href="./admin_member_list.do" class="text-decoration-none">
             	바로가기
-            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
-  					<path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right-square" viewBox="0 0 16 16">
+				  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z"/>
 				</svg>
 				</a>
 			</caption>
-            <thead class="table-dark">
+            <thead class="table">
             <tr>
 	            <th scope="col">#</th>
                 <th scope="col">이메일</th>
@@ -128,14 +136,6 @@
             </thead>
             <tbody>
             <%=sbHtml1 %>
-<!-- 회원 반복구간 
-            <tr>
-	            <th scope="row">1</th>
-                <td>이메일</td>
-                <td>닉네임</td>
-                <td>가입일</td>
-            </tr>
--->
             </tbody>
             </table>
         </div>
@@ -146,13 +146,13 @@
             <caption>최신 게시글
             <a href="./admin_board_list.do" class="text-decoration-none">
             	바로가기
-            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
-  					<path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
-				</svg>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right-square" viewBox="0 0 16 16">
+			  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z"/>
+			</svg>
 			</a>
             </caption>
             
-            <thead class="table-dark">
+            <thead class="table">
             <tr>
             	<th scope="col">#</th>
             	<th scope="col">카테고리</th>
@@ -162,32 +162,24 @@
             </thead>
             <tbody>
             <%=sbHtm2 %>
-<!-- 최신게시물 반복구간
-            <tr>
-                <th scope="row">1</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>작성자</td>
-            </tr>
- -->
             </tbody>
             </table>
         </div>
 </div>
 
-<div class="container d-flex justify-content-around">
+<div class="container d-flex justify-content-around" style="margin: 110px">
         <!--리뷰리스트-->
         <div class="table-responsive" style="width:500px" id="ReviewList">
         <table class="table table-sm caption-top">
             <caption>리뷰 리스트
                 <a href="./admin_review_list.do" class="text-decoration-none">
             	바로가기
-            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
-  					<path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right-square" viewBox="0 0 16 16">
+				  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z"/>
 				</svg>
 				</a>
             </caption>
-            <thead class="table-dark">
+            <thead class="table">
             <tr>
             	<th scope="col">#</th>
                 <th scope="col">작품명</th>
@@ -197,32 +189,6 @@
             </thead>
             <tbody>
             <%=sbHtm3 %>
-<!-- 리뷰리스트 반복구간
-            <tr>
-            	<th scope="row">1</th>
-                <td>작품명</td>
-                <td>작성자</td>
-                <td>별점</td>         
-            </tr>
--->
-            <tr>
-            	<th scope="row">1</th>
-                <td>작품명</td>
-                <td>작성자</td>
-                <td>별점</td>         
-            </tr>
-            <tr>
-            	<th scope="row">2</th>
-                <td>작품명</td>
-                <td>작성자</td>
-                <td>별점</td>         
-            </tr>
-            <tr>
-            	<th scope="row">3</th>
-                <td>작품명</td>
-                <td>작성자</td>
-                <td>별점</td>         
-            </tr>
             </tbody>
             </table>
         </div>
@@ -231,14 +197,14 @@
         <div class="table-responsive" style="width:500px" id="RequestList">
         <table class="table table-sm caption-top">
             <caption>요청 리스트
-               	<a href="./admin_request_list.do" class="text-decoration-none">
+               	<a href="./admin_origin_request_list.do" class="text-decoration-none">
             	바로가기
-            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
-  					<path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-right-square" viewBox="0 0 16 16">
+				  <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm5.854 8.803a.5.5 0 1 1-.708-.707L9.243 6H6.475a.5.5 0 1 1 0-1h3.975a.5.5 0 0 1 .5.5v3.975a.5.5 0 1 1-1 0V6.707l-4.096 4.096z"/>
 				</svg>
 				</a>
             </caption>
-            <thead class="table-dark">
+            <thead class="table">
             <tr>
             	<th scope="col">#</th>
                 <th scope="col">카테고리</th>
@@ -248,32 +214,6 @@
             </thead>
             <tbody>
             <%=sbHtm4 %>
-<!-- 요청리스트 반복 구간
-            <tr>
-            	<th scope="row">1</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>이메일</td>         
-            </tr>
- -->
-            <tr>
-            	<th scope="row">1</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>이메일</td>         
-            </tr>
-            <tr>
-            	<th scope="row">2</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>이메일</td>         
-            </tr>
-            <tr>
-            	<th scope="row">3</th>
-                <td>[카테고리]</td>
-                <td>제목</td>
-                <td>이메일</td>         
-            </tr>
             </tbody>
             </table>
         </div>

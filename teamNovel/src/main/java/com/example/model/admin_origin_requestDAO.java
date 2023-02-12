@@ -57,6 +57,7 @@ public class admin_origin_requestDAO {
 		return requestLists;
 	}
 	
+	
 
 	// delete_ok
 	public int origin_request_delete_Ok( admin_origin_requestTO to ) {

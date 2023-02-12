@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.model.CommentDAO;
 import com.example.model.FreeBoardDAO;
 import com.example.model.FreeBoardPagingTO;
+import com.example.model.admin_mainDAO;
 import com.example.model.admin_origin_requestDAO;
 import com.example.model.admin_origin_requestTO;
 import com.example.model.admin_reviewDAO;
@@ -39,21 +40,23 @@ public class AdminController {
 	private reviewDAO rdao;
 	@Autowired
 	private admin_reviewDAO ad_rdao;
+	@Autowired
+	private admin_mainDAO adminDAO;
 	
 	@RequestMapping("admin_main.do")
 	public ModelAndView admin_main(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "admin_main" );
 		
-		ArrayList<userInfoTO > userLists = userdao.userLists();
-		ArrayList<freeboardTO > boardLists = fdao.FreeBoard_list();
-		ArrayList<admin_origin_requestTO> requestLists = aordao.origin_request_list();
-		ArrayList<reviewTO> reviewlist = rdao.reviewlist();
+		ArrayList<userInfoTO > AdminUserLists = adminDAO.AdminUserLists();
+		ArrayList<freeboardTO > AdminFreeBoardlist = adminDAO.AdminFreeBoardlist();
+		ArrayList<admin_origin_requestTO> AdminrequestList = adminDAO.admin_request_list();
+		ArrayList<reviewTO> Adminreviewlist = adminDAO.Adminreviewlist();
 		
-		modelAndView.addObject( "userLists" , userLists );
-		modelAndView.addObject( "boardLists" , boardLists );
-		modelAndView.addObject( "requestLists" , requestLists );
-		modelAndView.addObject( "reviewlist" , reviewlist );
+		modelAndView.addObject( "AdminUserLists" , AdminUserLists );
+		modelAndView.addObject( "AdminFreeBoardlist" , AdminFreeBoardlist );
+		modelAndView.addObject( "AdminrequestList" , AdminrequestList );
+		modelAndView.addObject( "Adminreviewlist" , Adminreviewlist );
 		return modelAndView;
 	}
 	

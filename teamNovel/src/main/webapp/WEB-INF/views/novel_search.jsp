@@ -99,6 +99,23 @@ a:hover {
     }
 
 </style>
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+function searchForm() {
+	window.location.href = ( 'novel_list.do' );
+	
+		//function novelLists( url, page , search ) {
+		//	page=1;
+		//	url = 'novel_list_search.do';
+		//	let search = document.getElementById('search').value;
+		//	novelLists( url, page, search )
+		//};
+}
+
+</script>
+
 </head>
 <body>
 	<div class="container">
@@ -118,7 +135,7 @@ a:hover {
 	
 	<div class="container justify-content-center">
 		<div class="wrapper">
-    		<input class="input" placeholder="찾으시는 웹소설이 있으신가요?" type="text" >
+    		<input class="input" type="text" placeholder="찾으시는 웹소설이 있으신가요?" id="search" onkeyup="if(window.event.keyCode==13) {searchForm()}" />
 		    <span class="underline"></span>
 		</div>
 		<div class="container text-center">

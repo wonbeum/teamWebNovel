@@ -504,16 +504,13 @@
 	<!-- 본문 -->
 
 	<div class="container w-90">
-		<div class="eventcontainer">
-		<a>
-			<img class="eventimg" alt=""
-				src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg">
-			</a>
-		<a><img class="eventimg" alt=""
-				src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg">
-			</a>
-		<a><img class="eventimg" alt=""
-				src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg">
+		<div class="eventcontainer" style="margin-top:70px; margin-bottom:50px;">
+		<a><img class="eventimg" alt="" src="../images/mainimg2.png">
+		</a>
+		<a><img class="eventimg" alt="" src="../images/mainimg3-2.png">
+		</a>
+		<a href="./board_list.do">
+		<img class="eventimg" alt="" src="../images/mainimg1.png">
 		</a>
 		</div>
 	</div>
