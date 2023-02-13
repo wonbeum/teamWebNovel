@@ -24,20 +24,6 @@ public class WebNovelController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "novel_list" );
 		
-//		ArrayList<novelInfoTO> Lists = noveldao.kakao_romance();
-		
-		int cpage = 1;
-		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
-			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
-		}
-		
-		NovelPagingTO Lists = new NovelPagingTO();
-		Lists.setCpage( cpage );
-		
-		Lists = noveldao.kakao_romance( Lists );
-		
-		modelAndView.addObject("Lists", Lists);
-		
 		return modelAndView;
 	}
 	
@@ -48,7 +34,6 @@ public class WebNovelController {
 		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
 		}
-		
 		
 		NovelPagingTO Lists = new NovelPagingTO();
 		Lists.setCpage( cpage );

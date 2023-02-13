@@ -17,41 +17,6 @@ public class novel_listDAO {
 	@Autowired
 	private DataSource dataSource;
 	
-	public ArrayList<novelInfoTO> kakao_romance(){
-		ArrayList<novelInfoTO> lists = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_kakao != 'null' and novel_genre='romance' ";
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			while( rs.next() ) {
-				novelInfoTO to = new novelInfoTO();
-				to.setNovel_title( rs.getString("novel_title") );
-				to.setNovel_genre( rs.getString("novel_genre") );
-				to.setNovel_writer( rs.getString("novel_writer") );
-				to.setNovel_img( rs.getString("novel_img") );
-				lists.add(to);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] " + e.getMessage() );
-		} finally {
-			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
-			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
-			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
-		}
-		
-		return lists;
-	}
-
 	public NovelPagingTO kakao_romance(NovelPagingTO novelTO) {
 
 		Connection conn = null;
@@ -65,7 +30,7 @@ public class novel_listDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_kakao != 'null' and novel_genre='romance' ";
+			String sql = "select n.novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n left join novel_review_board r on n.novel_title = r.novel_title where novel_kakao != 'null' and novel_genre='romance' group by n.novel_title ";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
 			rs = pstmt.executeQuery();
@@ -87,6 +52,7 @@ public class novel_listDAO {
 				to.setNovel_genre( rs.getString("novel_genre") );
 				to.setNovel_writer( rs.getString("novel_writer") );
 				to.setNovel_img( rs.getString("novel_img") );
+				to.setNovel_avgstar( rs.getString("avg") );
 				lists.add(to);
 			}
 			
@@ -110,41 +76,7 @@ public class novel_listDAO {
 		return novelTO;
 	}
 	
-	public ArrayList<novelInfoTO> kakao_fantasy(){
-		ArrayList<novelInfoTO> lists = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_kakao != 'null' and novel_genre='fantasy' ";
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			while( rs.next() ) {
-				novelInfoTO to = new novelInfoTO();
-				to.setNovel_title( rs.getString("novel_title") );
-				to.setNovel_genre( rs.getString("novel_genre") );
-				to.setNovel_writer( rs.getString("novel_writer") );
-				to.setNovel_img( rs.getString("novel_img") );
-				lists.add(to);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] " + e.getMessage() );
-		} finally {
-			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
-			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
-			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
-		}
-		
-		return lists;
-	}
-
+	
 	public NovelPagingTO kakao_fantasy(NovelPagingTO novelTO) {
 
 		Connection conn = null;
@@ -158,7 +90,7 @@ public class novel_listDAO {
 		try {
 			conn = dataSource.getConnection();
 
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_kakao != 'null' and novel_genre='fantasy' ";
+			String sql = "select n.novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n left join novel_review_board r on n.novel_title = r.novel_title where novel_kakao != 'null' and novel_genre='fantasy' group by n.novel_title ";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
 			rs = pstmt.executeQuery();
@@ -180,6 +112,7 @@ public class novel_listDAO {
 				to.setNovel_genre( rs.getString("novel_genre") );
 				to.setNovel_writer( rs.getString("novel_writer") );
 				to.setNovel_img( rs.getString("novel_img") );
+				to.setNovel_avgstar( rs.getString("avg") );
 				lists.add(to);
 			}
 			
@@ -203,40 +136,6 @@ public class novel_listDAO {
 		return novelTO;
 	}
 	
-	public ArrayList<novelInfoTO> kakao_romancefantasy(){
-		ArrayList<novelInfoTO> lists = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_kakao != 'null' and novel_genre='romancefantasy' ";
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			while( rs.next() ) {
-				novelInfoTO to = new novelInfoTO();
-				to.setNovel_title( rs.getString("novel_title") );
-				to.setNovel_genre( rs.getString("novel_genre") );
-				to.setNovel_writer( rs.getString("novel_writer") );
-				to.setNovel_img( rs.getString("novel_img") );
-				lists.add(to);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] " + e.getMessage() );
-		} finally {
-			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
-			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
-			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
-		}
-		
-		return lists;
-	}
 
 	public NovelPagingTO kakao_romancefantasy(NovelPagingTO novelTO) {
 
@@ -251,7 +150,7 @@ public class novel_listDAO {
 		try {
 			conn = dataSource.getConnection();
 
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_kakao != 'null' and novel_genre='romancefantasy' ";
+			String sql = "select n.novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n left join novel_review_board r on n.novel_title = r.novel_title where novel_kakao != 'null' and novel_genre='romancefantasy' group by n.novel_title ";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
 			rs = pstmt.executeQuery();
@@ -273,6 +172,7 @@ public class novel_listDAO {
 				to.setNovel_genre( rs.getString("novel_genre") );
 				to.setNovel_writer( rs.getString("novel_writer") );
 				to.setNovel_img( rs.getString("novel_img") );
+				to.setNovel_avgstar( rs.getString("avg") );
 				lists.add(to);
 			}
 			
@@ -296,40 +196,6 @@ public class novel_listDAO {
 		return novelTO;
 	}
 	
-	public ArrayList<novelInfoTO> naver_romance(){
-		ArrayList<novelInfoTO> lists = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_series != 'null' and novel_genre='romance' ";
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			while( rs.next() ) {
-				novelInfoTO to = new novelInfoTO();
-				to.setNovel_title( rs.getString("novel_title") );
-				to.setNovel_genre( rs.getString("novel_genre") );
-				to.setNovel_writer( rs.getString("novel_writer") );
-				to.setNovel_img( rs.getString("novel_img") );
-				lists.add(to);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] " + e.getMessage() );
-		} finally {
-			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
-			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
-			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
-		}
-		
-		return lists;
-	}
 
 	public NovelPagingTO naver_romance(NovelPagingTO novelTO) {
 
@@ -344,7 +210,7 @@ public class novel_listDAO {
 		try {
 			conn = dataSource.getConnection();
 
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_series != 'null' and novel_genre='romance' ";
+			String sql = "select n.novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n left join novel_review_board r on n.novel_title = r.novel_title where novel_series != 'null' and novel_genre='romance' group by n.novel_title ";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
 			rs = pstmt.executeQuery();
@@ -366,6 +232,7 @@ public class novel_listDAO {
 				to.setNovel_genre( rs.getString("novel_genre") );
 				to.setNovel_writer( rs.getString("novel_writer") );
 				to.setNovel_img( rs.getString("novel_img") );
+				to.setNovel_avgstar( rs.getString("avg") );
 				lists.add(to);
 			}
 			
@@ -387,41 +254,6 @@ public class novel_listDAO {
 		}
 		
 		return novelTO;
-	}
-	
-	public ArrayList<novelInfoTO> naver_fantasy(){
-		ArrayList<novelInfoTO> lists = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_series != 'null' and novel_genre='fantasy' ";
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			while( rs.next() ) {
-				novelInfoTO to = new novelInfoTO();
-				to.setNovel_title( rs.getString("novel_title") );
-				to.setNovel_genre( rs.getString("novel_genre") );
-				to.setNovel_writer( rs.getString("novel_writer") );
-				to.setNovel_img( rs.getString("novel_img") );
-				lists.add(to);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] " + e.getMessage() );
-		} finally {
-			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
-			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
-			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
-		}
-		
-		return lists;
 	}
 
 	public NovelPagingTO naver_fantasy(NovelPagingTO novelTO) {
@@ -437,7 +269,7 @@ public class novel_listDAO {
 		try {
 			conn = dataSource.getConnection();
 
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_series != 'null' and novel_genre='fantasy' ";
+			String sql = "select n.novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n left join novel_review_board r on n.novel_title = r.novel_title where novel_series != 'null' and novel_genre='fantasy' group by n.novel_title ";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
 			rs = pstmt.executeQuery();
@@ -459,6 +291,7 @@ public class novel_listDAO {
 				to.setNovel_genre( rs.getString("novel_genre") );
 				to.setNovel_writer( rs.getString("novel_writer") );
 				to.setNovel_img( rs.getString("novel_img") );
+				to.setNovel_avgstar( rs.getString("avg") );
 				lists.add(to);
 			}
 			
@@ -481,41 +314,6 @@ public class novel_listDAO {
 		
 		return novelTO;
 	}
-	
-	public ArrayList<novelInfoTO> naver_romancefantasy(){
-		ArrayList<novelInfoTO> lists = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = dataSource.getConnection();
-			
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_series != 'null' and novel_genre='romancefantasy' ";
-			pstmt = conn.prepareStatement(sql);
-			
-			rs = pstmt.executeQuery();
-			
-			while( rs.next() ) {
-				novelInfoTO to = new novelInfoTO();
-				to.setNovel_title( rs.getString("novel_title") );
-				to.setNovel_genre( rs.getString("novel_genre") );
-				to.setNovel_writer( rs.getString("novel_writer") );
-				to.setNovel_img( rs.getString("novel_img") );
-				lists.add(to);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] " + e.getMessage() );
-		} finally {
-			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
-			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
-			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
-		}
-		
-		return lists;
-	}
 
 	public NovelPagingTO naver_romancefantasy(NovelPagingTO novelTO) {
 
@@ -530,7 +328,7 @@ public class novel_listDAO {
 		try {
 			conn = dataSource.getConnection();
 
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information  where novel_series != 'null' and novel_genre='romancefantasy' ";
+			String sql = "select n.novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n left join novel_review_board r on n.novel_title = r.novel_title where novel_series != 'null' and novel_genre='romancefantasy' group by n.novel_title ";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
 			rs = pstmt.executeQuery();
@@ -552,6 +350,7 @@ public class novel_listDAO {
 				to.setNovel_genre( rs.getString("novel_genre") );
 				to.setNovel_writer( rs.getString("novel_writer") );
 				to.setNovel_img( rs.getString("novel_img") );
+				to.setNovel_avgstar( rs.getString("avg") );
 				lists.add(to);
 			}
 			
@@ -588,7 +387,7 @@ public class novel_listDAO {
 		try {
 			conn = dataSource.getConnection();
 
-			String sql = "select novel_title, novel_genre, novel_writer, novel_img from novel_information where novel_title like ? ";
+			String sql = "select n.novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n left join novel_review_board r on n.novel_title = r.novel_title where n.novel_title like ? group by n.novel_title";
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			pstmt.setString( 1 , "%"+search+"%" );
 			
@@ -611,6 +410,7 @@ public class novel_listDAO {
 				to.setNovel_genre( rs.getString("novel_genre") );
 				to.setNovel_writer( rs.getString("novel_writer") );
 				to.setNovel_img( rs.getString("novel_img") );
+				to.setNovel_avgstar( rs.getString("avg") );
 				lists.add(to);
 			}
 			

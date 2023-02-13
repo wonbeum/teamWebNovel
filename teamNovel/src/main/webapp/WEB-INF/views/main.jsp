@@ -40,10 +40,9 @@
 	}
 </script> -->
 <style type="text/css">
-
-#kakaonovelRank, #navernovelRank, #nav-button1, 
-#nav-button2, #nav-button3, #nav-button4,
-#nav-button5{
+#kakaonovelRank, #navernovelRank, #nav-button11, #nav-button12,
+	#nav-button13, #nav-button14, #nav-button15, #nav-button21,
+	#nav-button22, #nav-button23, #nav-button24, #nav-button25 {
 	width: 120px;
 	height: 40px;
 	margin: 16px;
@@ -114,6 +113,11 @@
 .eventcontainer {
 	text-align: center;
 }
+
+.card-a {
+	width: 100%;
+	height: 15%;
+}
 </style>
 
 <script type="text/javascript"
@@ -152,7 +156,7 @@
 							let title = encodeURI(romance[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
+								<a class="card-a" href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -442,7 +446,48 @@
 			error : function(err) {
 				alert('[에러] : ' + err.status);
 			}
-		})
+		});
+
+		$('#nav-button11').click(function(){
+			let offset = $('#carouselExample1').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
+		$('#nav-button12').click(function(){
+			let offset = $('#carouselExample2').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
+		$('#nav-button13').click(function(){
+			let offset = $('#carouselExample3').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
+		$('#nav-button14').click(function(){
+			let offset = $('#carouselExample4').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
+		$('#nav-button15').click(function(){
+			let offset = $('#carouselExample5').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
+		$('#nav-button21').click(function(){
+			let offset = $('#carouselExample1').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
+		$('#nav-button22').click(function(){
+			let offset = $('#carouselExample2').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
+		$('#nav-button23').click(function(){
+			let offset = $('#carouselExample3').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
+		$('#nav-button24').click(function(){
+			let offset = $('#carouselExample4').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
+		$('#nav-button25').click(function(){
+			let offset = $('#carouselExample5').offset(); 
+	        $('html').animate({scrollTop : offset.top-250}, 200);
+		});
 	};
 	$(document).ready(function() {
 		
@@ -472,27 +517,6 @@
 			novelLists(url);
 		});
 		
-
-		$('#nav-button1').click(function(){
-			let offset = $('#carouselExample1').offset(); 
-	        $('html').animate({scrollTop : offset.top-250}, 200);
-		});
-		$('#nav-button2').click(function(){
-			let offset = $('#carouselExample2').offset(); 
-	        $('html').animate({scrollTop : offset.top-250}, 200);
-		});
-		$('#nav-button3').click(function(){
-			let offset = $('#carouselExample3').offset(); 
-	        $('html').animate({scrollTop : offset.top-250}, 200);
-		});
-		$('#nav-button4').click(function(){
-			let offset = $('#carouselExample4').offset(); 
-	        $('html').animate({scrollTop : offset.top-250}, 200);
-		});
-		$('#nav-button5').click(function(){
-			let offset = $('#carouselExample5').offset(); 
-	        $('html').animate({scrollTop : offset.top-250}, 200);
-		});
 	});
 </script>
 </head>
@@ -504,25 +528,26 @@
 	<!-- 본문 -->
 
 	<div class="container w-90">
-		<div class="eventcontainer" style="margin-top:70px; margin-bottom:50px;">
-		<a><img class="eventimg" alt="" src="../images/mainimg2.png">
-		</a>
-		<a><img class="eventimg" alt="" src="../images/mainimg3-2.png">
-		</a>
-		<a href="./board_list.do">
-		<img class="eventimg" alt="" src="../images/mainimg1.png">
-		</a>
+		<div class="eventcontainer"
+			style="margin-top: 70px; margin-bottom: 50px;">
+			<a><img class="eventimg" alt="" src="../images/mainimg2.png">
+			</a> <a><img class="eventimg" alt="" src="../images/mainimg3-2.png">
+			</a> <a href="./board_list.do"> <img class="eventimg" alt=""
+				src="../images/mainimg1.png">
+			</a>
 		</div>
 	</div>
 
 	<div class="container w-75">
 		<!-- Nav pills -->
-		<ul class="nav nav-pills justify-content-center" role="tablists" id="tablists">
-			<li class="nav-item"><a class="nav-link active" data-link="platform"
-				data-bs-toggle="pill" href="#kakaopage" id="kakaonovelRank" style="background-color: #ffb26c; color: #fff;">카카오
+		<ul class="nav nav-pills justify-content-center" role="tablists"
+			id="tablists">
+			<li class="nav-item"><a class="nav-link active"
+				data-link="platform" data-bs-toggle="pill" href="#kakaopage"
+				id="kakaonovelRank" style="background-color: #ffb26c; color: #fff;">카카오
 					페이지</a></li>
-			<li class="nav-item"><a class="nav-link" data-link="platform" data-bs-toggle="pill"
-				href="#series" id="navernovelRank">네이버 시리즈</a>
+			<li class="nav-item"><a class="nav-link" data-link="platform"
+				data-bs-toggle="pill" href="#series" id="navernovelRank">네이버 시리즈</a>
 		</ul>
 	</div>
 	<div class="container w-75">
@@ -532,30 +557,30 @@
 				<!-- Nav pills -->
 				<ul class="nav justify-content-center" role="tablist">
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button1" href="carouselExample1">인기순</a></li>
+						id="nav-button11" href="carouselExample1">인기순</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button2" href="#carouselExample2">로맨스</a></li>
+						id="nav-button12" href="#carouselExample2">로맨스</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button3" href="#carouselExample3">로맨스판타지</a></li>
+						id="nav-button13" href="#carouselExample3">로맨스판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button4" href="#carouselExample4">판타지</a></li>
+						id="nav-button14" href="#carouselExample4">판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button5" href="#carouselExample5">이달의 신작</a></li>
+						id="nav-button15" href="#carouselExample5">이달의 신작</a></li>
 				</ul>
 			</div>
 
 			<div id="series" class="container tab-pane fade">
 				<ul class="nav justify-content-center" role="tablist">
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button1" href="carouselExample1">인기순</a></li>
+						id="nav-button21" href="carouselExample1">인기순</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button2" href="#carouselExample2">로맨스</a></li>
+						id="nav-button22" href="#carouselExample2">로맨스</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button3" href="#carouselExample3">로맨스판타지</a></li>
+						id="nav-button23" href="#carouselExample3">로맨스판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button4" href="#carouselExample4">판타지</a></li>
+						id="nav-button24" href="#carouselExample4">판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button5" href="#carouselExample5">이달의 신작</a></li>
+						id="nav-button25" href="#carouselExample5">이달의 신작</a></li>
 				</ul>
 			</div>
 

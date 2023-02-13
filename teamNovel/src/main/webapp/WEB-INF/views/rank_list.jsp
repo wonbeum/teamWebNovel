@@ -75,13 +75,34 @@
 					
 					listhtml +="	<div class='col'>";
 					listhtml +="		<div class='card shadow-sm'>";
-					listhtml +="			<a href='./novel_detail.do?novel_title=" + title + "'> <img src='"+ jsonData[i].novel_img +"' class='img' width='100%'";
+					
+					if( jsonData[i].novel_img == null ){
+						listhtml +="			<a href='./novel_detail.do?novel_title=" + title + "'> <img src='https://page.kakaocdn.net/pageweb/2.6.3/public/images/img_age19_static.svg' class='img' width='100%'";	
+					} else {
+						listhtml +="			<a href='./novel_detail.do?novel_title=" + title + "'> <img src='"+ jsonData[i].novel_img +"' class='img' width='100%'";
+					}
+					
 					listhtml +="				height='225' role='img' aria-label='Placeholder: Thumbnail'>";
 					listhtml +="			</a>";
 					listhtml +="			<div class='card-body'>";
-					listhtml +="				<p class='card-text'>장르</p>";
-					listhtml +="				<p class='card-text'>" + jsonData[i].novel_title + " 작가</p>";
-					listhtml +="				<p class='card-text'>별점 평균</p>";
+
+					if( jsonData[i].novel_genre == "romance" ){
+						listhtml += "<p class='card-text'>로맨스</p>";	
+					} else if( jsonData[i].novel_genre == "fantasy"  ){
+						listhtml += "<p class='card-text'>판타지</p>";	
+					} else if( jsonData[i].novel_genre == "romancefantasy" ){
+						listhtml += "<p class='card-text'>로맨스 판타지</p>";
+					}
+					listhtml +="				<p class='card-text'>" + jsonData[i].novel_title + "</p>";
+
+					if( jsonData[i].novel_writer != null ){
+						let star = parseFloat(jsonData[i].novel_avgstar).toFixed(2);
+						listhtml +="				<p class='card-text'>"+ jsonData[i].novel_writer + "</p>";
+					}
+					if( jsonData[i].novel_avgstar != null ){
+						let star = parseFloat(jsonData[i].novel_avgstar).toFixed(2);
+						listhtml +="				<p class='card-text'>별점 "+ star + "</p>";
+					}
 					listhtml +="			</div>";
 					listhtml +="		</div>";
 					listhtml +="	</div>";
@@ -158,8 +179,6 @@
 		<!-- Nav pills -->
 		<ul class="nav justify-content-center"
 			role="tablist" id="tablists">
-			<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-				href="#pop30" id="nav-button" data-link="platform">TOP 30</a>
 			<li class="nav-item"><a class="nav-link active"
 				data-bs-toggle="pill" href="#kakaopage" id="nav-button" data-link="platform"
 				style="background-color: #ffb26c; color: #fff;">카카오 페이지</a></li>

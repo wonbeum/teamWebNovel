@@ -110,8 +110,14 @@
 
 						listhtml += `		
 								<p class='card-text'>\${jsonData[0].novelLists[i].novel_title}</p>
-								<p class='card-text'>\${jsonData[0].novelLists[i].novel_writer}</p>
-								<p class='card-text'>별점 평균</p>
+								<p class='card-text'>\${jsonData[0].novelLists[i].novel_writer}</p>`;
+								
+							if( jsonData[0].novelLists[i].novel_avgstar != null ){
+								let star = parseFloat(jsonData[0].novelLists[i].novel_avgstar).toFixed(2);
+								listhtml += `<p class='card-text'>별점 \${star}</p>`;
+							}	
+								
+					listhtml += `
 							</div>
 						</div>`;
 					

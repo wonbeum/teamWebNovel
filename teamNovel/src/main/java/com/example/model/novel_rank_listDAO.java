@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.sql.DataSource;
@@ -25,6 +29,10 @@ public class novel_rank_listDAO {
 
 		ArrayList<novelInfoTO> ranklists = new ArrayList<novelInfoTO>();
 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
 		BufferedReader br = null;
 
 		try {
@@ -35,6 +43,11 @@ public class novel_rank_listDAO {
 
 			String strHtml = "";
 
+			conn = dataSource.getConnection();
+			String sql = "select n.novel_title novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n cross join novel_review_board using(novel_title) where novel_title = ? ";
+	
+			pstmt = conn.prepareStatement(sql);
+			
 			while ((line = br.readLine()) != null) {
 				strHtml += line.trim();
 			}
@@ -56,15 +69,35 @@ public class novel_rank_listDAO {
 						to.setNovel_img( img.attr( "src" ) );
 					}
 				}
+				
+				pstmt.setString( 1, to.getNovel_title() );
+
+				rs = pstmt.executeQuery();
+				
+				if( rs.next() ) {
+					to.setNovel_genre( rs.getString("novel_genre") );
+					to.setNovel_writer( rs.getString("novel_writer") );
+					to.setNovel_img( rs.getString("novel_img") );
+					to.setNovel_avgstar( rs.getString("avg") );
+				}
+				
 				ranklists.add(to);
+
 			}
+			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
 		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
 
@@ -72,6 +105,10 @@ public class novel_rank_listDAO {
 	}
 
 	public ArrayList<novelInfoTO> kakao_rank_fantasy() {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		ArrayList<novelInfoTO> ranklists = new ArrayList<novelInfoTO>();
 
@@ -85,6 +122,10 @@ public class novel_rank_listDAO {
 
 			String strHtml = "";
 
+			conn = dataSource.getConnection();
+			String sql = "select n.novel_title novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n cross join novel_review_board using(novel_title) where novel_title = ? ";
+			pstmt = conn.prepareStatement(sql);
+			
 			while ((line = br.readLine()) != null) {
 				strHtml += line.trim();
 			}
@@ -106,6 +147,17 @@ public class novel_rank_listDAO {
 						to.setNovel_img( img.attr( "src" ) );
 					}
 				}
+				pstmt.setString( 1, to.getNovel_title() );
+
+				rs = pstmt.executeQuery();
+				
+				if( rs.next() ) {
+					
+					to.setNovel_genre( rs.getString("novel_genre") );
+					to.setNovel_writer( rs.getString("novel_writer") );
+					to.setNovel_img( rs.getString("novel_img") );
+					to.setNovel_avgstar( rs.getString("avg") );
+				}
 				ranklists.add(to);
 			}
 		} catch (MalformedURLException e) {
@@ -114,14 +166,25 @@ public class novel_rank_listDAO {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
+		}  catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
 		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
+
 
 		return ranklists;
 	}
 
 	public ArrayList<novelInfoTO> kakao_rank_romancefantasy() {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		ArrayList<novelInfoTO> ranklists = new ArrayList<novelInfoTO>();
 
@@ -134,6 +197,10 @@ public class novel_rank_listDAO {
 			String line = null;
 
 			String strHtml = "";
+			
+			conn = dataSource.getConnection();
+			String sql = "select n.novel_title novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n cross join novel_review_board using(novel_title) where novel_title = ? ";
+			pstmt = conn.prepareStatement(sql);
 
 			while ((line = br.readLine()) != null) {
 				strHtml += line.trim();
@@ -156,6 +223,18 @@ public class novel_rank_listDAO {
 						to.setNovel_img( img.attr( "src" ) );
 					}
 				}
+
+				pstmt.setString( 1, to.getNovel_title() );
+
+				rs = pstmt.executeQuery();
+				
+				if( rs.next() ) {
+					
+					to.setNovel_genre( rs.getString("novel_genre") );
+					to.setNovel_writer( rs.getString("novel_writer") );
+					to.setNovel_img( rs.getString("novel_img") );
+					to.setNovel_avgstar( rs.getString("avg") );
+				}
 				ranklists.add(to);
 			}
 
@@ -165,14 +244,25 @@ public class novel_rank_listDAO {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
+		}  catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
 		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
+
 
 		return ranklists;
 	}
 
 	public ArrayList<novelInfoTO> naver_rank_romance() {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		ArrayList<novelInfoTO> ranklists = new ArrayList<novelInfoTO>();
 
@@ -186,6 +276,10 @@ public class novel_rank_listDAO {
 			String line = null;
 
 			String strHtml = "";
+
+			conn = dataSource.getConnection();
+			String sql = "select n.novel_title novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n cross join novel_review_board using(novel_title) where novel_title = ? ";
+			pstmt = conn.prepareStatement(sql);
 
 			while ((line = br.readLine()) != null) {
 				strHtml += line.trim();
@@ -211,8 +305,21 @@ public class novel_rank_listDAO {
 					String imgsrc = img.attr("src").replace("type=m79", "type=m260");
 					to.setNovel_img( imgsrc );
 					to.setNovel_title( img.attr( "alt" ) );
-					ranklists.add(to);
+					
 				}
+
+				pstmt.setString( 1, to.getNovel_title() );
+
+				rs = pstmt.executeQuery();
+				
+				if( rs.next() ) {
+					
+					to.setNovel_genre( rs.getString("novel_genre") );
+					to.setNovel_writer( rs.getString("novel_writer") );
+					to.setNovel_img( rs.getString("novel_img") );
+					to.setNovel_avgstar( rs.getString("avg") );
+				}
+				ranklists.add(to);
 				
 			}
 
@@ -222,7 +329,13 @@ public class novel_rank_listDAO {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
+		}  catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
 		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
 
@@ -230,6 +343,10 @@ public class novel_rank_listDAO {
 	}
 
 	public ArrayList<novelInfoTO> naver_rank_fantasy() {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		ArrayList<novelInfoTO> ranklists = new ArrayList<novelInfoTO>();
 
@@ -243,6 +360,10 @@ public class novel_rank_listDAO {
 			String line = null;
 
 			String strHtml = "";
+
+			conn = dataSource.getConnection();
+			String sql = "select n.novel_title novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n cross join novel_review_board using(novel_title) where novel_title = ? ";
+			pstmt = conn.prepareStatement(sql);
 
 			while ((line = br.readLine()) != null) {
 				strHtml += line.trim();
@@ -268,8 +389,20 @@ public class novel_rank_listDAO {
 					String imgsrc = img.attr("src").replace("type=m79", "type=m260");
 					to.setNovel_img( imgsrc );
 					to.setNovel_title( img.attr( "alt" ) );
-					ranklists.add(to);
 				}
+
+				pstmt.setString( 1, to.getNovel_title() );
+
+				rs = pstmt.executeQuery();
+				
+				if( rs.next() ) {
+					
+					to.setNovel_genre( rs.getString("novel_genre") );
+					to.setNovel_writer( rs.getString("novel_writer") );
+					to.setNovel_img( rs.getString("novel_img") );
+					to.setNovel_avgstar( rs.getString("avg") );
+				}
+				ranklists.add(to);
 				
 			}
 
@@ -279,15 +412,26 @@ public class novel_rank_listDAO {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
+		}  catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
 		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
+
 
 		return ranklists;
 	}
 
 
 	public ArrayList<novelInfoTO> naver_rank_romancefantasy() {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		ArrayList<novelInfoTO> ranklists = new ArrayList<novelInfoTO>();
 
@@ -301,6 +445,10 @@ public class novel_rank_listDAO {
 			String line = null;
 
 			String strHtml = "";
+
+			conn = dataSource.getConnection();
+			String sql = "select n.novel_title novel_title, novel_genre, novel_writer, novel_img, avg(review_star_grade) avg from novel_information n cross join novel_review_board using(novel_title) where novel_title = ? ";
+			pstmt = conn.prepareStatement(sql);
 
 			while ((line = br.readLine()) != null) {
 				strHtml += line.trim();
@@ -326,8 +474,20 @@ public class novel_rank_listDAO {
 					String imgsrc = img.attr("src").replace("type=m79", "type=m260");
 					to.setNovel_img( imgsrc );
 					to.setNovel_title( img.attr( "alt" ) );
-					ranklists.add(to);
 				}
+
+				pstmt.setString( 1, to.getNovel_title() );
+
+				rs = pstmt.executeQuery();
+				
+				if( rs.next() ) {
+					
+					to.setNovel_genre( rs.getString("novel_genre") );
+					to.setNovel_writer( rs.getString("novel_writer") );
+					to.setNovel_img( rs.getString("novel_img") );
+					to.setNovel_avgstar( rs.getString("avg") );
+				}
+				ranklists.add(to);
 				
 			}
 
@@ -337,9 +497,16 @@ public class novel_rank_listDAO {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("[에러] : " + e.getMessage());
+		}  catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
 		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 			if (br != null) try { br.close(); } catch (IOException e) {}
 		}
+
 
 		return ranklists;
 	}

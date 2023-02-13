@@ -8,7 +8,13 @@ public class novelInfoTO {
 	private String novel_content;
 	private String novel_series;
 	private String novel_kakao;
-	private String novel_ridi;
+	private String novel_avgstar;
+	public String getNovel_avgstar() {
+		return novel_avgstar;
+	}
+	public void setNovel_avgstar(String novel_avgstar) {
+		this.novel_avgstar = novel_avgstar;
+	}
 	public String getNovel_title() {
 		return novel_title;
 	}
@@ -50,12 +56,6 @@ public class novelInfoTO {
 	}
 	public void setNovel_kakao(String novel_kakao) {
 		this.novel_kakao = novel_kakao;
-	}
-	public String getNovel_ridi() {
-		return novel_ridi;
-	}
-	public void setNovel_ridi(String novel_ridi) {
-		this.novel_ridi = novel_ridi;
 	}
 	
 }
