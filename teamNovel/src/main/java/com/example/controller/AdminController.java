@@ -17,6 +17,7 @@ import com.example.model.admin_mainDAO;
 import com.example.model.admin_origin_requestDAO;
 import com.example.model.admin_origin_requestTO;
 import com.example.model.admin_reviewDAO;
+import com.example.model.admin_userPagingTO;
 import com.example.model.commentTO;
 import com.example.model.freeboardTO;
 import com.example.model.reviewDAO;
@@ -65,9 +66,17 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "admin_member_list" );
 		
-		ArrayList<userInfoTO > userLists = userdao.userLists();
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
 		
-		modelAndView.addObject( "userLists" , userLists );
+		admin_userPagingTO Lists = new admin_userPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = userdao.userLists(Lists);
+		
+		modelAndView.addObject( "Lists" , Lists );
 		
 		return modelAndView;
 	}

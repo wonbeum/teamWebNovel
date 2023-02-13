@@ -81,7 +81,7 @@
 				
 				$('#insertnovelList').html('');
 				let listhtml = '';
-				for( let i = 0; i < recordPerPage ; i++ ){
+				for( let i = 0; i < jsonData[0].novelLists.length ; i++ ){
 					
 					let title = encodeURI(jsonData[0].novelLists[i].novel_title);
 					
@@ -90,13 +90,6 @@
 					}
 					listhtml += `	<div class='col'>`;
 					
-					if( jsonData[0].novelLists[i] == null ){
-						listhtml += `										
-							<div class='card shadow-sm'>
-								<div class='card-body'>
-								</div>
-							</div>`;
-					} else {
 						listhtml += `										
 						<div class='card shadow-sm'>
 							<a href='./novel_detail.do?novel_title=\${title}'> <img src='\${jsonData[0].novelLists[i].novel_img}' class='img' width='100%'
@@ -121,13 +114,26 @@
 								<p class='card-text'>별점 평균</p>
 							</div>
 						</div>`;
-					}
+					
 					listhtml += `	</div>`;
 					
 					if( (i % 5) == 4 ){
 						listhtml += `</div>`;
 					}
 				}
+				
+				if( (jsonData[0].novelLists.length % 5)!= 0 ){
+					for( let i = 1 ; i <= ( 5 - (jsonData[0].novelLists.length % 5 ) ) ; i ++ ){
+						listhtml += `										
+							<div class='card shadow-sm'>
+								<div class='card-body'>
+								</div>
+							</div>
+							`;
+					}
+					listhtml += `</div>`;
+				}
+				
 				
 				listhtml += `
 					<nav aria-label="Page navigation example">
