@@ -113,7 +113,7 @@
 
 <!-- 본문 -->
 
-<div class="container d-flex justify-content-around" style="margin: 110px">
+<div class="container d-flex justify-content-around" style="margin-top: 110px">
         <!--회원리스트-->
         <div class="table-responsive" style="width:500px" id="MemberList">
             <table class="table table-sm caption-top">
@@ -167,7 +167,7 @@
         </div>
 </div>
 
-<div class="container d-flex justify-content-around" style="margin: 110px">
+<div class="container d-flex justify-content-around" style="margin-top: 110px; margin-bottom: 110px;">
         <!--리뷰리스트-->
         <div class="table-responsive" style="width:500px" id="ReviewList">
         <table class="table table-sm caption-top">

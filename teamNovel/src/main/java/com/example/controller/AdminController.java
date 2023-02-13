@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.model.CommentDAO;
 import com.example.model.FreeBoardDAO;
 import com.example.model.FreeBoardPagingTO;
+import com.example.model.admin_boardDAO;
 import com.example.model.admin_mainDAO;
 import com.example.model.admin_origin_requestDAO;
 import com.example.model.admin_origin_requestTO;
@@ -43,6 +44,8 @@ public class AdminController {
 	private admin_reviewDAO ad_rdao;
 	@Autowired
 	private admin_mainDAO adminDAO;
+	@Autowired
+	private admin_boardDAO ad_bdao;
 	
 	@RequestMapping("admin_main.do")
 	public ModelAndView admin_main(HttpServletRequest request) {
@@ -177,6 +180,9 @@ public class AdminController {
 		return modelAndView;
 	}
 	
+	
+	//-------------게시물 관리
+	
 	@RequestMapping("admin_board_list.do")
 	public ModelAndView admin_board_list( HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -186,6 +192,26 @@ public class AdminController {
 		modelAndView.addObject( "boardLists" , boardLists );
 
 		return modelAndView;
+	}
+	
+	// ajax admin의 전체 게시물리스트 가져오기 + pagination
+	@RequestMapping("AdminBoardListAjax.do")
+	public ArrayList<FreeBoardPagingTO> AdminBoardListAjax(HttpServletRequest request) {
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = ad_bdao.adminboardLists(Lists);
+		
+		ArrayList<FreeBoardPagingTO> boardlists = new ArrayList<FreeBoardPagingTO>();
+		boardlists.add(Lists);
+		
+		return boardlists;
 	}
 
 	@RequestMapping("admin_board_view.do")
@@ -250,6 +276,54 @@ public class AdminController {
 		modelAndView.addObject( "flag", flag );
 		return modelAndView;
 	}
+	
+	// 게시물 admin_board 제목 검색 리스트 + pagination
+	@RequestMapping("boardSearch_titleAjax.do")
+	public ArrayList<FreeBoardPagingTO> boardSearch_title(HttpServletRequest request) {
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		String category = request.getParameter("category");
+		String keyword = request.getParameter("keyword");
+		
+		Lists = ad_bdao.boardSearch_title(Lists, category, keyword);
+		
+		ArrayList<FreeBoardPagingTO> boardlists = new ArrayList<FreeBoardPagingTO>();
+		boardlists.add(Lists);
+		
+		return boardlists;
+	}
+	
+	
+	// 게시물 admin_board 제목+내용 검색 리스트 + pagination
+	@RequestMapping("boardSearch_contentAjax.do")
+	public ArrayList<FreeBoardPagingTO> boardSearch_content(HttpServletRequest request) {
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		FreeBoardPagingTO Lists = new FreeBoardPagingTO();
+		Lists.setCpage(cpage);
+		
+		String category = request.getParameter("category");
+		String keyword = request.getParameter("keyword");
+		
+		Lists = ad_bdao.boardSearch_content(Lists, category, keyword);
+		
+		ArrayList<FreeBoardPagingTO> boardlists = new ArrayList<FreeBoardPagingTO>();
+		boardlists.add(Lists);
+		
+		return boardlists;
+	}
+	
 	
 	
 	

@@ -1,27 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<%@page import="com.example.model.freeboardTO"%>
+<%@page import="javax.servlet.http.HttpSession"%>
 <%@page import="java.util.ArrayList"%>
-
-<%
-	ArrayList<freeboardTO> boardLists = (ArrayList<freeboardTO>)request.getAttribute("boardLists");
-
-	StringBuilder sbHtml = new StringBuilder();
-
-	for( freeboardTO to : boardLists ){
-		sbHtml.append("<tr>");
-		sbHtml.append("		<td><input type='checkbox' name='board_check'></td>");
-		sbHtml.append("		<td>"+ to.getFree_seq() +"</td>");
-		sbHtml.append("		<td>["+ to.getFree_category() +"]</td>");
-		sbHtml.append("		<td class='left'><a href='admin_board_view.do?seq="+ to.getFree_seq() + "'>"+ to.getFree_subject() +"</a>&nbsp;</td>");
-		sbHtml.append("		<td>"+ to.getUser_nickname() +"</td>");
-		sbHtml.append("		<td>"+ to.getFree_date()+"</td>");
-		sbHtml.append("		<td><input type='button' value='상세보기' class='btn_board_view' onClick=\"location.href='./admin_board_view.do?seq="+ to.getFree_seq() +"'\">&nbsp;<input");
-		sbHtml.append("			type='button' value='삭제' class='confirmStart'></td>");
-		sbHtml.append("	</tr>");
-	}    
-%>
 
 <!DOCTYPE html>
 <html>
@@ -57,42 +37,141 @@
 	.align_right { float:right; }
 
 </style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
+function AdminBoardListAjax(url, page, category, keyword){
+	$.ajax({
+		url : url,
+		type : 'get',
+		dataType : 'json',
+		data : {
+			'cpage' : page,
+			'category' : category,
+			'keyword' : keyword
+		},
+		success : function(jsonData){
+			//console.log("성공");
+			
+			let cpage = jsonData[0].cpage;
+			let recordPerPage = jsonData[0].recordPerPage;
+			let blockPerPage = jsonData[0].blockPerPage;
+			let totalPage = jsonData[0].totalPage;
+			let totalRecord = jsonData[0].totalRecord;
+			let startBlock = jsonData[0].startBlock;
+			let endBlock = jsonData[0].endBlock;
+				
+			$('#insert').html('');
+			
+			let ajaxHtml = '';
+			
+			for(let i=0; i<recordPerPage; i++){
+				if( jsonData[0].boardLists[i] == null ){
+					ajaxHtml += `
+						<tr> 
+						</tr>
+					`;
+					
+				} else {
+					ajaxHtml += `
+							<tr> 
+							<td><input type='checkbox' name='board_check'></td>
+							<td>\${jsonData[0].boardLists[i].free_seq}</td>
+							<td>[\${jsonData[0].boardLists[i].free_category}]</td>
+							<td class='left'><a href='admin_board_view.do?seq=\${jsonData[0].boardLists[i].free_seq}'>
+							\${jsonData[0].boardLists[i].free_subject}</a>&nbsp;</td>
+							<td>\${jsonData[0].boardLists[i].user_nickname}</td>
+							<td>\${jsonData[0].boardLists[i].free_date}</td>
+							<td>
+								<input type='button' value='상세보기' onclick="location.href='admin_board_view.do?seq=\${jsonData[0].boardLists[i].free_seq}';"/>
+								<input type='button' value='삭제' class='confirmStart'>
+							</td>
+							</tr>
+						`;
+				}
+			}
+			
+			$('#insert').append(ajaxHtml);
+			
+			$('#insertPagging').html('');
+			let page = '';
+			
+			page += `
+			<div style="display: inline-block;" id="pageGroup">
+			<ul class="pagination" id="pagging">`;
+			
+			if( cpage == 1 ){
+				page += `<li id="pageLi" class="page-item disabled"><a class="page-link"> <span aria-hidden="true">&laquo;</span>
+				</a></li>`;
+			} else {
+				page += `<li id="pageLi" class="page-item"><a class="goBackPage page-link"> <span aria-hidden="true">&laquo;</span>
+				</a></li>`;
+			}
+			
+			for( let i = startBlock ; i <= endBlock ; i ++ ){
+				if( cpage == i ){
+					page += '	<li id="pageLi" class="page-item disabled"><a class="page-link">' + i + '</a></li>';
+				} else {
+					page += '	<li id="pageLi" class="page-item"><a class="goPage page-link" data-page="' + i +  '">' + i + '</a></li>';
+				}
+			}
+			
+			if( cpage == totalPage ){
+				page += `<li id="pageLi" class="page-item disabled"><a class="page-link"><span aria-hidden="true">&raquo;</span></a></li>`;
+			} else {
+				page += `<li id="pageLi" class="page-item"><a class="goNextPage page-link"><span aria-hidden="true">&raquo;</span></a></li>`;
+			}
+			
+			page += `
+					</ul>
+				</div>`;
+				
+				$('#insertPagging').append(page);
+				
+				$(".goBackPage").click(function(){
+			      	page = (cpage - 1);
+			      	AdminBoardListAjax( url, page, category, keyword );
+		        });
+				
+				$(".goPage").click(function(){
+					page = $(this).attr("data-page");
+					AdminBoardListAjax( url, page, category, keyword );
+				});
+
+				$(".goNextPage").click(function(){
+			      	page = (cpage + 1);
+			      	AdminBoardListAjax( url, page, category, keyword );
+		        });
+		},
+		error : function(e) {
+			alert("error !");
+		}
+	});
+};
+
+
 $(document).ready(function() {
-	$("#cboxAll").click(function() {
-		if($("#cboxAll").is(":checked")) $("input[name=board_check]").prop("checked", true);
-		else $("input[name=board_check]").prop("checked", false);
+	
+	let url = 'AdminBoardListAjax.do';
+	let page = 1;
+	let insert = '#insertTotalList';
+	AdminBoardListAjax( url, page, insert );
+
+	
+	$('#searchbtn').click(function() {
+		let category = $('#serch_category').val().trim(); // 분류2
+		let target = $('#serch_target').val().trim(); // 제목 or 제목+내용
+		let keyword = $('#input_keyword').val().trim(); // 키워드
+	
+		if($('#serch_target').val()=='제목') {
+			AdminBoardListAjax('boardSearch_titleAjax.do', 1 , category, keyword);
+		} else if($('#serch_target').val()=='제목+내용') {
+			AdminBoardListAjax('boardSearch_contentAjax.do', 1 , category, keyword);
+		} else {
+			AdminBoardListAjax('AdminBoardListAjax.do', 1 , keyword);
+		}
 	});
 	
-	$("input[name=board_check]").click(function() {
-		var total = $("input[name=board_check]").length;
-		var checked = $("input[name=board_check]:checked").length;
-		
-		if(total != checked) $("#cboxAll").prop("checked", false);
-		else $("#cboxAll").prop("checked", true); 
-	});
-});
-
-$().ready(function () {
-    $(".confirmStart").click(function () {
-        Swal.fire({
-            title: '게시글 삭제',
-            text: "삭제된 게시글은 복구할 수 없습니다. 정말 삭제하시겠습니까?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: '확인',
-            cancelButtonText: '취소'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire(
-                    '삭제가 완료되었습니다.',
-                );
-                deleteServer( $())
-            }
-        })
-    });
+	
 });
 
 </script>
@@ -101,29 +180,41 @@ $().ready(function () {
 <body>
 
 <!-- header -->
-<jsp:include page="../include/header2.jsp"></jsp:include>
+	<%@ include file="../include/header2.jsp" %>
 
-<!-- 상단 디자인 -->
 
 <!-- 본문 -->
-	<div class="container w-75" id="con_title">
-		<h4>게시물 관리</h4>
-	    <p><strong>최신 게시물</strong></p>
-	</div>
-
+	<form class="row g-3 justify-content-md-center mt-4">
+		<div class="col-md-2"></div>
+			<div class="col-md-10">
+		    <h5>최신 게시물</h5>
+		    </div>
 <!-- 조건 검색 -->
- 	<div class="search_form">
-    <nav class="navbar navbar-light bg-light justify-content-center">
-	    <div class="search_form_boxes">조건 검색
-    		<select class="search_target">
-	  			<option value="title">제목</option>
-	  			<option value="title_content">제목+내용</option>
+		<div class="col-md-1">
+			<a>조건검색</a>
+		</div>
+		<div class="col-md-2">
+	    	<select class="form-select" id="serch_category">
+	    		<option selected disabled>카테고리를 선택하세요!</option>
+	    		<option>공지</option>
+	  			<option>질문</option>
+	  			<option>이슈</option>
+	  			<option>잡담</option>
 			</select>
-			<input type="search" name="search_keyword" placeholder="검색"/>
-  			<button type="submit" class="btn btn-sm btn-outline-secondary" onclick="getSearchList()">검색하기</button>
+		</div>
+		<div class="col-md-2">	
+    		<select class="form-select" id="serch_target">
+				<option selected>제목</option>
+	  			<option>제목+내용</option>
+			</select>
+		</div>	
+		<div class="col-md-4">
+			<input type="text" class="form-control" id="input_keyword"/>
+		</div>
+		<div class="col-md-2">	
+  			<button class="btn btn-sm btn-outline-secondary" type="button" id="searchbtn">검색하기</button>
 	    </div>
-	 </nav> 
-	 </div>
+	</form>
 
 <!-- 게시물 리스트 -->
 
@@ -131,7 +222,7 @@ $().ready(function () {
 		<table class="table table-sm">
             <thead class="table-light text-center">
 	            <tr>
-             		<th scope="col"><input type="checkbox" id="cboxAll"></th>
+             		<th scope="col"></th>
 	                <th scope="col">번호</th>
 	                <th scope="col">분류</th>
     	            <th scope="col">제목</th>
@@ -140,7 +231,7 @@ $().ready(function () {
                 	<th scope="col">기능</th>
                 </tr>
 			</thead>
-			<tbody class="text-center">
+			<tbody id="insert" class="text-center">
 <!--  게시판 반복되는 부분
             <tr>
 				<td><input type="checkbox" name="board_check"></td>
@@ -155,59 +246,23 @@ $().ready(function () {
                 </td>
 	        </tr>
 -->
-            <tr>
-				<td><input type="checkbox" name="board_check"></td>
-                <td>0</td>
-                <td>[카테고리]</td>
-                <td class="left"><a href="admin_board_view.do">테스트용 게시글</a>&nbsp;</td>
-                <td>tester1</td>
-                <td>23-01-25</td>
-                <td>
-					<input type="button" value="상세보기">
-					<input type="button" value="삭제" class="confirmStart">
-                </td>
-	        </tr>
 	        
-			<%= sbHtml %>
             </tbody>
             </table>
         </div>
 
 <!-- paging -->
-		<div class="container">
-				<nav aria-label="Page navigation example"
-					class="nav justify-content-center">
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
-					</ul>
-				</nav>
-			</div>
-			        
-        <!-- 버튼 -->
-       	<div class="container d-flex justify-content-around">
-				<div class="col-auto me-auto">
-					<div class="input-group mb-3">
-						<a class="btn btn-outline-dark confirmStart" id="addelbtn" role="button">선택 삭제</a>
-					</div>
-				</div>
-				<div class="col-auto">
-					<a class="btn btn-outline-dark" href="./admin_board_write.do" id="adwbtn" role="button">글쓰기</a>
-				</div>
-		</div>
+<div class="container d-flex justify-content-around">
+	<div class="container mb-4" id="insertPagging"></div>
+	<div class="col-auto">
+		<a class="btn btn-outline-dark" href="./admin_board_write.do" id="adwbtn" role="button">글쓰기</a>
+	</div>
+</div>
     
 
 <!-- footer -->
-<jsp:include page="../include/footer1.jsp"></jsp:include>
+	<%@ include file="../include/footer1.jsp" %>
 	
-
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
