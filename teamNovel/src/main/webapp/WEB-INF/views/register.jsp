@@ -163,45 +163,203 @@ label.form-check-label {
     padding-bottom: 10px;
 }
 
+#bCheckmsg, #eCheckmsg, #nCheckmsg, #p2Checkmsg {
+	font-family: AppleSDGothicNeoM;
+  	font-size: 14px;
+  	font-weight: 500;
+  	text-align: left;
+  	color: #af1515;
+  	padding-left: 20px;
+}
+
+#pCheckmsg {
+	font-family: AppleSDGothicNeoM;
+  	font-size: 14px;
+  	font-weight: 500;
+  	text-align: left;
+  	color: #af1515;
+}
 </style>
-
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
-	// 입력값 검사
-    window.addEventListener('load', () => {
-      const forms = document.getElementsByClassName('validation-form');
+// 입력값 검사
+window.addEventListener('load', () => {
 
+	// 이메일 중복검사
+	$('#email').keyup(function(){
+		let id = $('#email').val();
+		EmailCheck(id);
+	});
+	
+	// 닉네임 중복검사
+	$('#nickname').keyup(function(){
+		let nickname = $('#nickname').val();
+		NicknameCheck(nickname);
+	});
+	
+	// 비밀번호 입력검사
+	$('#password').keyup(function(){
+		let passwordCheck = /(?=.*\d)(?=.*[a-zA-ZS]).{8,20}/;
+		if(!passwordCheck.test($('#password').val())){
+			//console.log("생일아님");
+			$('#pCheckmsg').css("color","#af1515").text("8~20자의 문자,숫자를 포함한 비밀번호를 입력하세요.");
+			
+			$('#savebutton').click(function(){
+				$('#password').focus();
+				return false;
+			})
+			
+		} else {
+			$('#pCheckmsg').css("color","green").text("사용가능한 비밀번호입니다.");
+			$('#savebutton').click(function(){
+			});
+		}
+	});
+	
+	// 비밀번호 재확인
+	$('#password_check').keyup(function(){
+		if($('#password_check').val()!=$('#password').val()){
+			//console.log("생일아님");
+			$('#p2Checkmsg').css("color","#af1515").text("위 비밀번호와 동일하지 않음");
+			
+			$('#savebutton').click(function(){
+				$('#password_check').focus();
+				return false;
+			})
+			
+		} else if($('#password_check').val()==$('#password').val()) {
+			$('#p2Checkmsg').css("color","green").text("위 비밀번호와 동일함");
+			$('#savebutton').click(function(){
+				return true;
+			})
+		}
+	});
+	
+	// 생일 형식
+	$('#birth').keyup(function(){
+		// 8글자 생년월일 정규식
+		let birthCheck = RegExp(/^(19|20)[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/);
+		if(!birthCheck.test($('#birth').val())){
+			//console.log("생일아님");
+			$('#bCheckmsg').text("8글자 생일형식이 아닙니다");
+			
+			$('#savebutton').click(function(){
+				$('#birth').focus();
+				return false;
+			})
+			
+		} else {
+			$('#bCheckmsg').css("color","green").text("올바른 생일형식입니다");
+			$('#savebutton').click(function(){
+				$('#birth').focus();
+				return true;
+			})
+		}
+	});
+	  
+	
+	  
+	const forms = document.getElementsByClassName('validation-form');
    	Array.prototype.filter.call(forms, (form) => {
     	form.addEventListener('submit', function (event) {
-       
           if (form.checkValidity() === false) {
+        	form.focus();
             event.preventDefault();
             event.stopPropagation();
           }
-          
-          // 비밀번호 확인 다를때
-          if(document.mainform.password.value.trim() != document.mainform.password2.value.trim() ){
-        		alert( '입력한 두 비밀번호가 다릅니다.' );
-                event.preventDefault();
-                event.stopPropagation();
-				return false;
-          }
-			
           form.classList.add('was-validated');
         }, false);
-      });
-      
-      document.getElementById( 'nicknamebtn' ).onclick = function() {
-    	  if(document.getElementById('nickname').value.trim()!='중복'
-      			|| document.getElementById('nickname').value.trim()!=null){
-   	    	  alert('사용 가능한 닉네임 입니다.');
-    	  } else {
-   	    	  alert('사용 불가능한 닉네임 입니다.');    		  
-    	  }
-      }
-      
-      
-    }, false);
+	});
+     
+  
+
+});
 	
+	
+	// 이메일 중복검사
+	function EmailCheck(id){
+		$.ajax({
+			url : 'idCheckAjax.do',
+			type : 'get',
+			dataType : 'json',
+			data : {
+				'id' : id
+			},
+			success : function(jsonData){
+				//console.log("성공");
+				//console.log(jsonData);
+				if(jsonData==1){
+					$('#eCheckmsg').css("color","#af1515").text("이미 가입된 이메일 입니다.");
+					$('#savebutton').click(function(){
+						$('#email').focus();
+						return false;
+					});
+				} else {
+					// 이메일 정규식
+					let emailCheck = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+					if(emailCheck.test($('#email').val())){
+						$('#eCheckmsg').css("color","green").text("가입 가능한 이메일 입니다.");
+						
+						$('#savebutton').click(function(){
+						$('#email').focus();
+						});
+					} else {
+						$('#eCheckmsg').css("color","#af1515").text("이메일 형식을 맞추세요.");
+						$('#savebutton').click(function(){
+							$('#email').focus();
+							return false;
+						});
+					}
+				}
+			},
+			error : function(e) {
+				alert("error !");
+			}
+		});
+	}
+	
+	// 닉네임 중복검사
+	function NicknameCheck(nickname){
+		$.ajax({
+			url : 'nicknameCheckAjax.do',
+			type : 'get',
+			dataType : 'json',
+			data : {
+				'nickname' : nickname
+			},
+			success : function(jsonData){
+				//console.log("성공");
+				//console.log(jsonData);
+				if(jsonData==1){
+					$('#nCheckmsg').css("color","#af1515").text("이미 존재하는 닉네임입니다.");
+					$('#savebutton').click(function(){
+						$('#nickname').focus();
+						return false;
+					});
+				} else {
+					// 한글, 영문, 특수문자(-_.)포함한 2~10글자 닉네임
+					let nicknameCheck = /^[a-zA-Zㄱ-힣0-9-_.]{2,10}$/;
+					if(nicknameCheck.test($('#nickname').val())){
+						$('#nCheckmsg').css("color","green").text("사용가능한 닉네임 입니다.");
+						
+						$('#savebutton').click(function(){
+						$('#nickname').focus();
+						});
+					} else {
+						$('#nCheckmsg').css("color","#af1515").text("2~10자 사이의 올바른 형식의 닉네임을 입력하세요.");
+						$('#savebutton').click(function(){
+							$('#nickname').focus();
+							return false;
+						});
+					}
+				}
+			},
+			error : function(e) {
+				alert("error !");
+			}
+		});
+	}
 	
 </script>
 
@@ -220,34 +378,37 @@ label.form-check-label {
 					method="post" name="mainform"novalidate>
 					
 					<div class="mb-3">
-						<p id="labeltext" for="email">이메일*</p> <input type="email" name="user_email"
+						<span id="labeltext" for="email">이메일*</spab><span id="eCheckmsg"></span> 
+						<input type="email" name="user_email"
 							value="" class="form-control" id="email"
 							placeholder="you@example.com" required>
 						<div class="invalid-feedback">이메일을 입력해주세요.</div>
 					</div>
 					
-					<p id="labeltext" for="nickname">닉네임*</p>
+					<span id="labeltext" for="nickname">닉네임*</span><span id="nCheckmsg"></span>
 					<div class="mb-3">
 						<input type="text" name="user_nickname" value=""  class="form-control"
-							placeholder=""  aria-label="nickname"
+							placeholder=""  aria-label="nickname" id="nickname"
 							aria-describedby="button-addon2" required>
 						<div class="invalid-feedback">닉네임을 입력해주세요.</div>
-						<p id="nickname_label">나를 표현할 닉네임을 입력해주세요.</p>
+						<p id="nickname_label">나를 표현할 닉네임을 입력해주세요. (특수문자는 -_.만)</p>
 					</div>
 					
 					<div class="mb-3">
-						<p id="labeltext" for="password">비밀번호*</p> <input type="password"
+						<span id="labeltext" for="password">비밀번호*</span><p id="pCheckmsg"></p> 
+						<input type="password"
 							name="user_password" value="" class="form-control" id="password"
 							placeholder="" required>
 						<div class="invalid-feedback">비밀번호를 입력해주세요.</div>
 						<p id="pw_label">•다른 개인 정보와 유사한 비밀번호는 사용할 수 없습니다.<br/>
 							•비밀번호는 최소 8자 이상이어야 합니다.<br/>
 							•통상적으로 자주 사용되는 비밀번호는 사용할 수 없습니다.<br/>
-							•숫자로만 이루어진 비밀번호는 사용할 수 없습니다.</p>
+							•비밀번호는 문자와 숫자를 모두 포함해야 합니다.</p>
 					</div>
 					
 					<div class="mb-3">
-						<p id="labeltext" for="password_check">비밀번호 확인*</p> <input type="password"
+						<span id="labeltext" for="password_check">비밀번호 확인*</p><span id="p2Checkmsg"></span>
+						<input type="password"
 							name="password2" value="" class="form-control"
 							id="password_check" placeholder="" required>
 						<div class="invalid-feedback">비밀번호를 다시 입력해주세요.</div>
@@ -258,24 +419,25 @@ label.form-check-label {
 						<p id="labeltext" for="password_check">성별*</p>
 						<div class="form-check form-check-inline" >
 							<input class="form-check-input" type="radio" name="user_gender"
-								id="inlineRadio1" value="M"> <label
+								 value="M"> <label
 								class="form-check-label" for="inlineRadio1">남성</label>
 						</div>
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="user_gender"
-								id="inlineRadio2" value="F"> <label
+								 value="F"> <label
 								class="form-check-label" for="inlineRadio2">여성</label>
 						</div>
 						<div class="form-check form-check-inline">
 							<input class="form-check-input" type="radio" name="user_gender"
-								id="inlineRadio2" value="N" required> <label
+								ivalue="N" required> <label
 								class="form-check-label" for="inlineRadio2">비공개</label>
 						</div>
 						<p id="nickname_label">성별에 따른 취향을 분석하기 위해 꼭 입력해주세요.</p>
 					</div>
 
 					<div class="mb-3">
-						<p id="labeltext" for="birth">생년월일*</p> <input type="text" name="user_birth"
+						<span id="labeltext" for="birth">생년월일*</span><span id="bCheckmsg"></span>
+						<input type="text" name="user_birth"
 							value="" class="form-control" id="birth" placeholder="8자리를 입력"
 							required>
 						<div class="invalid-feedback">생년월일을 입력해주세요.</div>
