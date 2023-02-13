@@ -219,10 +219,25 @@
 	};
 	
 	$(document).ready(function() {
-		let url = 'novel_list_kakao_romance.do';
-		let page = 1;
-		novelLists( url, page );
+		
+		let urlStr = window.location.href;
+		let url = new URL(urlStr);
 
+		let urlParams = url.searchParams;
+
+		let tag = urlParams.get('search');
+		
+		if( tag != null && tag != "" ){
+			page=1;
+			url = 'novel_list_search.do';
+			novelLists( url, page, tag );
+			$("input[id=search]").attr('value', tag );
+		} else {
+			url = 'novel_list_kakao_romance.do';
+			let page = 1;
+			novelLists( url, page );
+		}
+		
 		$('#searchbtn').click(function(){
 			page=1;
 			url = 'novel_list_search.do';
