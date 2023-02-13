@@ -365,7 +365,7 @@ public class FreeBoardDAO {
 						+ "date_format(free_date,'%y-%m-%d') free_date, free_hit, "
 						+ "(select count(user_nickname) from novel_free_like where free_seq = f.free_seq) as free_like, "
 						+ "(select count(cmt_seq) from novel_free_comment where free_seq= f.free_seq and cmt_status='공개') as free_comment "
-						+ "from novel_free_board f where free_like>=10 order by free_seq desc";
+						+ "from novel_free_board f where order by free_like desc";
 				
 				pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY  );
 				
