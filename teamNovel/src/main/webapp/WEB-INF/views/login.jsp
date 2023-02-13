@@ -157,7 +157,7 @@
 						<div class="text-center mb-3">
 							<!-- Simple link -->
 							<p class="login-bottom">
-								비밀번호를 잊으셨나요?<a id="password-search" href="#!">비밀번호 찾기</a>
+								비밀번호를 잊으셨나요?<a id="password-search" href="./reset_password.do">비밀번호 찾기</a>
 							</p>
 						</div>
 					</div>

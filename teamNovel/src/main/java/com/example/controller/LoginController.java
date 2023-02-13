@@ -102,6 +102,27 @@ public class LoginController {
 		return modelAndView;
 	}
 	
-	
+
+	@RequestMapping("reset_password.do")
+	public ModelAndView reset_password() {
+		return new ModelAndView("reset_password");
+	}
+
+	@RequestMapping("reset_password_ok.do")
+	public ModelAndView reset_password_ok(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("reset_password_ok");
+
+		userInfoTO to = new userInfoTO();
+
+		to.setUser_email(request.getParameter("user_email"));
+		to.setUser_password(request.getParameter("user_birth"));
+
+		int flag = dao.user_reset_password(to);
+
+		modelAndView.addObject( "flag" , flag );
+		
+		return modelAndView;
+	}
 	
 }
