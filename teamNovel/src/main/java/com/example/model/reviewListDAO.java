@@ -25,13 +25,13 @@ public class reviewListDAO {
 		
 		ArrayList<reviewListTO> reviewlists = new ArrayList<reviewListTO>();
 		
-		try {
+		try {												
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
 					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
-					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname";
+					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname group by a.novel_title";
 			
 			pstmt = conn.prepareStatement( sql );
 			
@@ -42,9 +42,11 @@ public class reviewListDAO {
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_star_grade(rs.getString("average"));
 				
 				reviewlists.add( to );
 			}
@@ -73,8 +75,8 @@ public class reviewListDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
 					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
 					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname where a.novel_genre = 'romance' ";
 			
@@ -87,9 +89,11 @@ public class reviewListDAO {
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_star_grade(rs.getString("average"));
 				
 				reviewromance.add( to );
 			}
@@ -118,8 +122,8 @@ public class reviewListDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
 					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
 					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname where a.novel_genre = 'romancefantasy'";
 			
@@ -132,9 +136,11 @@ public class reviewListDAO {
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_date(rs.getString("average"));
 				
 				reviewromancefantasy.add( to );
 			}
@@ -163,8 +169,8 @@ public class reviewListDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
 					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
 					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname where a.novel_genre = 'fantasy'";
 			
@@ -177,9 +183,11 @@ public class reviewListDAO {
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_star_grade(rs.getString("average"));
 				
 				reviewfantasy.add( to );
 			}
@@ -208,8 +216,8 @@ public class reviewListDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
 					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
 					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname where a.novel_title like ?";
 			
@@ -223,9 +231,11 @@ public class reviewListDAO {
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_star_grade(rs.getString("average"));
 				
 				reviewsearch.add( to );
 				
@@ -259,10 +269,9 @@ public NovelPagingTO Paging_reviewall_list(NovelPagingTO novelTO) {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
-					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
-					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname";
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
+					+ "a left join novel_review_board b on a.novel_title = b.novel_title group by a.novel_title";
 			
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
@@ -285,9 +294,11 @@ public NovelPagingTO Paging_reviewall_list(NovelPagingTO novelTO) {
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_star_grade(rs.getString("average"));
 				
 				reviewall.add( to );
 			}
@@ -327,10 +338,9 @@ public NovelPagingTO Paging_reviewall_list(NovelPagingTO novelTO) {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
-					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
-					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname where a.novel_genre = 'romance' ";
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
+					+ "a left join novel_review_board b on a.novel_title = b.novel_title where a.novel_genre = 'romance' group by a.novel_title ";
 			
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
@@ -353,9 +363,11 @@ public NovelPagingTO Paging_reviewall_list(NovelPagingTO novelTO) {
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_star_grade(rs.getString("average"));
 				
 				reviewRomance.add( to );
 			}
@@ -396,10 +408,10 @@ public NovelPagingTO Paging_reviewall_list(NovelPagingTO novelTO) {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
-					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
-					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname where a.novel_genre = 'romancefantasy'";
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
+					+ "a left join novel_review_board b on a.novel_title = b.novel_title where a.novel_genre = 'romancefantasy' group by a.novel_title ";
+					
 			
 pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
@@ -422,9 +434,11 @@ pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_star_grade(rs.getString("average"));
 				
 				reviewromanceFantasy.add( to );
 			}
@@ -464,10 +478,10 @@ novelTO.setReviewList(reviewromanceFantasy);
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
-					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
-					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname where a.novel_genre = 'fantasy'";
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
+					+ "a left join novel_review_board b on a.novel_title = b.novel_title where a.novel_genre = 'fantasy' group by a.novel_title";
+
 			
 pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			
@@ -490,9 +504,11 @@ pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_star_grade(rs.getString("average"));
 				
 				reviewfantasy.add( to );
 			}
@@ -532,10 +548,10 @@ novelTO.setReviewList(reviewfantasy);
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,"
-					+ "b.user_nickname,b.review_content,b.review_date FROM novel_information "
-					+ "a left outer join novel_review_board b on a.novel_title = b.novel_title "
-					+ "left outer join novel_user_information c on b.user_nickname = c.user_nickname where a.novel_title like ?";
+			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
+					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
+					+ "a left join novel_review_board b on a.novel_title = b.novel_title where a.novel_genre = 'fantasy' group by a.novel_title";
+
 			
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
 			pstmt = conn.prepareStatement( sql );
@@ -560,9 +576,11 @@ rs = pstmt.executeQuery();
 				to.setNovel_title(rs.getString("novel_title"));
 				to.setNovel_writer(rs.getString("novel_writer"));
 				to.setNovel_img(rs.getString("novel_img"));
+				to.setNovel_content(rs.getString("novel_content"));
 				to.setUser_nickname(rs.getString("user_nickname"));
 				to.setReview_content(rs.getString("review_content"));
 				to.setReview_date(rs.getString("review_date"));
+				to.setReview_star_grade(rs.getString("average"));
 				
 				reviewsearch.add( to );
 				

@@ -24,30 +24,143 @@ String novel_title = to.getNovel_title();
 .nav-scroller {
 	border: 1px solid black;
 }
-
-.-\32 3 {
-	width: 530px;
-	height: 55px;
-	margin: 77px 473px 100px;
-	padding: 13px 30px;
-	border-radius: 25px;
-	border: solid 4px #ffb26b;
+#tab1, #tab2, #tab3, #tab4{
+	width: 120px;
+	height: 40px;
+	margin: 16px;
+	margin-top: 20px;
+	border-radius: 20px;
+	border: solid 2px #ffb26b;
 	background-color: #fff;
+	padding-top: 6px;
+	font-family: AppleSDGothicNeoR;
+	font-size: 15px;
+	font-weight: 800;
+	font-style: normal;
+	text-decoration-line: none;
+	text-align: center;
+	color: #ffb26c;
 }
 
-.-\32 5 {
-	width: 723px;
-	height: 533px;
-	margin: 100px 12px 51px 0;
-	padding: 28px 19.5px 31px 20.5px;
-	border-radius: 15px;
-	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
-	background-color: #fff;
+#review1 {
+  width: 100;
+  margin: 5px 10px 10px 1px;
+  padding: 40px 40px 40px 40px;
+  background-color: #f8f8fb;
+  overflow:hidden;
 }
+
+	.card-img img{
+	
+	  width: 70%;
+	height: 70%;
+	  border-radius: 10px;
+	  display: flex;
+	}
+#novelinfo{
+	 width: 200px;
+	  height: 50%;
+	  float: left;
+}
+#genre {
+  width: 200px;
+  height: 19px;
+  font-family: AppleSDGothicNeo;
+  font-size: 16px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #9b9b9b;
+}
+#writer  {
+  font-family: AppleSDGothicNeo;
+  width: 200px;
+  font-size: 14px;
+  font-weight: 300;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  float: left;
+  color: #707071;
+}
+#title {
+  
+  font-family: AppleSDGothicNeo;
+  font-size: 19px;
+  font-weight: 600;
+  text-align: left;
+  color: #000;
+}
+#novelcontent {
+margin: 19px 12px 8px 10px;
+  width: 230px;
+  height: 180px;
+  font-family: AppleSDGothicNeo;
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.47;
+  letter-spacing: normal;
+  text-align: left;
+  color: #5b5b5b;
+  overflow: hidden;
+}
+#userreeview {
+margin: 19px 12px 8px 10px;
+  width: 300px;
+  height: 23px;
+  font-family: AppleSDGothicNeo;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
+
+#nickname {
+  width: 80px;
+  height: 23px;
+  margin: 32px 11px 6px 5.5px;
+  font-family: AppleSDGothicNeo;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
+#novelcontent {
+  width: 250px;
+  height: 116px;
+  margin: 25px 4px 0 5.5px;
+  font-family: AppleSDGothicNeo;
+  font-size: 10px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.63;
+  letter-spacing: normal;
+  text-align: left;
+  color: #5b5b5b;
+}
+
+
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+
 function reviewList( url, page ) {
 	 console.log("성공");
        $.ajax({
@@ -59,7 +172,7 @@ function reviewList( url, page ) {
        	'cpage'  : page
          },
          success : function(jsonData){
-				console.log("성공");
+				console.log("성공"); 
 
 				let cpage = jsonData[0].cpage;
 				let recordPerPage = jsonData[0].recordPerPage;
@@ -70,41 +183,75 @@ function reviewList( url, page ) {
 				let endBlock = jsonData[0].endBlock;
 				
 				$('#reviewall').html('');
-				let div = ';'
+				let div = '';
 					for(let i=0; i<recordPerPage; i++){		
 						let title = encodeURI(jsonData[0].reviewList[i].novel_title);
 						if((i%2)==0){
 							div += `
+								<div id="review1">
 								<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
 							`;
 						}
 							div += `
 								<div class="row g-0">
+							
 									<div class="col">
-										<a href="./novel_detail.do?novel_title=\${title}"> <img src="\${jsonData[0].reviewList[i].novel_img}" class="img" width="100%"
-											height="225" role="img">
+									<div class="card-img">
+										<a href="./novel_detail.do?novel_title=\${title}"> <img src="\${jsonData[0].reviewList[i].novel_img}">
 										</a>
-										<div class="card-body">
-											<p class="card-text">\${jsonData[0].reviewList[i].user_nickname}</p>
-											<p class="card-text">\${jsonData[0].reviewList[i].review_date}</p>
-											<p class="card-text">\${jsonData[0].reviewList[i].review_content}</p>
+										</div>
+										<div class="card">
+										<p class="card-text"id="userreeview"> 사용자 리뷰</p>
+											<p class="card-text" id="nickname">\${jsonData[0].reviewList[i].user_nickname}</p>
+											<p class="card-text" id="reviewdate">\${jsonData[0].reviewList[i].review_date}</p>
+											<p class="card-text" id="novelcontent">\${jsonData[0].reviewList[i].review_content}</p>
 										</div>
 									</div>
-									<div class="col-md-4">
-											<div class="card-body">
-											<p class="card-text">\${jsonData[0].reviewList[i].novel_genre}</p>
-											<h5 class="card-text">\${jsonData[0].reviewList[i].novel_title}/</h5>
-											<p class="card-text">\${jsonData[0].reviewList[i].novel_writer}/</p>
-											<p class="card-text">\${jsonData[0].reviewList[i].novel_star_grade}/\${jsonData[0].reviewList[i].novel_star_grade}</p>
-											<p class="card-text">\${jsonData[0].reviewList[i].novel_content}</p>
+									<div class="col">
+									<div class="card">
+											<div class="card-body" id="novelinfo">
+											<span class="card-text" id="genre">\${jsonData[0].reviewList[i].novel_genre}</span>
+											<span class="card-text" id="writer">작가-\${jsonData[0].reviewList[i].novel_writer}</span>
+											<p class="card-text" id="title">\${jsonData[0].reviewList[i].novel_title}</p>
+											<p class="card-text" id="stargrade">
+									`;
+								let avg= parseInt(jsonData[0].reviewList[i].review_star_grade);
+							if( avg >= 4 ){
+								for( let j = 1 ; j <= avg ;  j++ ){
+								
+									div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
+									
+								}
+							} else if ( avg >= 3 ) {
+								for( let j = 1 ; j <= avg ;  j++ ){
+									
+									div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
+									
+								}
+							} else if ( avg >=2 ){
+								for( let j = 1 ; j <=  avg;  j++ ){
+									
+									div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
+									
+								}
+							} else if ( avg >=1 ) {
+								for( let j = 1 ; j <= avg ;  j++ ){
+								div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
+								}	
+							}
+											
+								div += `</p>
+											<p class="card-text" id="novelcontent">\${jsonData[0].reviewList[i].novel_content}</p>
 										</div>
-
+										</div>
+										</div>
 									</div>
-								</div>
+								
 								`;
 								
 								if((i%2)==1){
 									div += `
+									</div>
 									</div>
 									`;
 								}
@@ -160,16 +307,17 @@ function reviewList( url, page ) {
 				}
 			});
 		};
-$(document).ready(function() {
-		console.log("성공");
-		let url = 'ReviewListAll.do';
-		let page = 1;
-		reviewList( url, page );
-		 $("#searchbtn").click(function() {
-			 page = 1;
-			 url ='ReviewSearch.do';
-			 reviewList(url, page);
-		 });
+		$(document).ready(function() {
+			console.log("성공");
+			let url = 'ReviewListAll.do';
+			let page = 1;
+			reviewList( url, page );
+			 $("#searchbtn").click(function() {
+				 page = 1;
+				 url ='ReviewSearch.do';
+				 reviewList(url, page);
+			 });
+		
 	
 		$("#tab1").on('click', function() {	
 			page = 1;
@@ -196,7 +344,8 @@ $(document).ready(function() {
 			});	
 		
 	});
-
+	
+	
 </script>
 </head>
 <body>

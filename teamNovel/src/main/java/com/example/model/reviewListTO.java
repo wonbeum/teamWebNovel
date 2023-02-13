@@ -13,6 +13,7 @@ public class reviewListTO {
 	private String review_seq;
 	private String review_content;
 	private String review_date;
+	private String review_star_grade;
 
 	private String user_nickname;
 	private String user_email;
@@ -94,5 +95,11 @@ public class reviewListTO {
 	}
 	public void setUser_nickname(String user_nickname) {
 		this.user_nickname = user_nickname;
+	}
+	public String getReview_star_grade() {
+		return review_star_grade;
+	}
+	public void setReview_star_grade(String review_star_grade) {
+		this.review_star_grade = review_star_grade;
 	}
 }

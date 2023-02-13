@@ -17,7 +17,9 @@ public class novel_detailDAO {
 	private DataSource dataSource;
 	
 	// write_ok
-	public int novel_review_write_ok( novel_detailTO to ) {	 
+	
+	public int novel_review_write_ok( novel_detailTO to ) { 
+	
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -37,8 +39,10 @@ public class novel_detailDAO {
 			pstmt.setString( 5, to.getNovel_title() );		
 			pstmt.setString( 6, to.getUser_nickname() );		
 			
+			
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
+				System.out.println("리뷰쓰기 성공");
 				flag = 0;
 			}
 			
@@ -52,6 +56,47 @@ public class novel_detailDAO {
 		}	
 		
 		return flag;
+	}
+	
+	// review 리스트 가져오기
+	
+	public ArrayList<novel_detailTO> review_list(String novel_title) {
+		 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<novel_detailTO> reviewlists = new ArrayList<novel_detailTO>();
+		
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "select novel_title, user_nickname, review_content, date_format(review_date,'%y-%m-%d') review_date, review_star_grade from novel_review_board where novel_title = ? order by review_seq desc";
+			
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setString( 1,  novel_title );
+			
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				novel_detailTO to = new novel_detailTO();
+				to.setUser_nickname( rs.getString( "user_nickname" ) );
+				to.setReview_date( rs.getString( "review_date" ) );
+				to.setReview_content( rs.getString( "review_content" ) );
+				to.setReview_star_grade(rs.getString("review_star_grade"));
+				
+				reviewlists.add( to );
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}	
+		
+		return reviewlists;
 	}
 	
 	// novel_detail view 
@@ -90,6 +135,7 @@ public class novel_detailDAO {
 		
 		return to;
 	}
+
 
 	
 
