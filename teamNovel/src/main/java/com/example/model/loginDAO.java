@@ -36,7 +36,7 @@ public class loginDAO {
 		try {
 			conn = dataSource.getConnection();
 			
-			String sql = "select user_email, user_nickname, user_gender, user_birth from novel_user_information "
+			String sql = "select user_email, user_nickname, user_gender, user_birth, user_grade from novel_user_information "
 					+ "where user_email = ? and user_password = ?";
 			
 			pstmt = conn.prepareStatement( sql );
@@ -50,6 +50,7 @@ public class loginDAO {
 				to.setUser_nickname( rs.getString( "user_nickname" ) );
 				to.setUser_birth( rs.getString( "user_birth" ) );
 				to.setUser_gender( rs.getString( "user_gender" ) );
+				to.setUser_grade( rs.getString("user_grade") );
 			}
 			
 		} catch (SQLException e) {
@@ -73,8 +74,8 @@ public class loginDAO {
 		
 		try {
 			conn = dataSource.getConnection();
-			
-			String sql = "select user_email, user_nickname, user_gender, user_birth from novel_user_information "
+
+			String sql = "select user_email, user_nickname, user_gender, user_birth, user_grade from novel_user_information "
 					+ "where user_email = ? and user_password = ? and user_grade = 'master' ";
 			
 			pstmt = conn.prepareStatement( sql );
@@ -88,6 +89,7 @@ public class loginDAO {
 				to.setUser_nickname( rs.getString( "user_nickname" ) );
 				to.setUser_birth( rs.getString( "user_birth" ) );
 				to.setUser_gender( rs.getString( "user_gender" ) );
+				to.setUser_grade( rs.getString("user_grade") );
 			}
 			
 		} catch (SQLException e) {

@@ -40,7 +40,7 @@ public class LoginController {
 		to.setUser_password( request.getParameter("user_password") );
 		
 		userInfoTO signIn = dao.login(to);
-		System.out.println( signIn.getUser_nickname() );
+//		System.out.println( signIn.getUser_nickname() );
 		HttpSession session = request.getSession();
 		if( signIn.getUser_nickname() != null) {
 			session.setAttribute("signIn", signIn);
@@ -63,7 +63,8 @@ public class LoginController {
 		to.setUser_password( request.getParameter("user_password") );
 		
 		userInfoTO signIn = dao.adminlogin(to);
-		System.out.println( signIn.getUser_nickname() );
+//		System.out.println( signIn.getUser_nickname() );
+//		System.out.println( signIn.getUser_grade() );
 		HttpSession session = request.getSession();
 		if( signIn.getUser_nickname() != null) {
 			session.setAttribute("signIn", signIn);
@@ -102,23 +103,27 @@ public class LoginController {
 		return modelAndView;
 	}
 	
-	// 이메일 중복체크 ajax
-	@RequestMapping("idCheckAjax.do")
-	public int idCheckAjax(HttpServletRequest request) {
-		String id = request.getParameter("id");
-		
-		int result = rdao.IdCheck(id);
-		
-		return result;
+
+	@RequestMapping("reset_password.do")
+	public ModelAndView reset_password() {
+		return new ModelAndView("reset_password");
 	}
 
-	// 닉네임 중복체크 ajax
-	@RequestMapping("nicknameCheckAjax.do")
-	public int LikeResultAjax(HttpServletRequest request) {
-		String nickname = request.getParameter("nickname");
-			
-		int result = rdao.NicknameCheck(nickname);
-			
-		return result;
+	@RequestMapping("reset_password_ok.do")
+	public ModelAndView reset_password_ok(HttpServletRequest request) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("reset_password_ok");
+
+		userInfoTO to = new userInfoTO();
+
+		to.setUser_email(request.getParameter("user_email"));
+		to.setUser_password(request.getParameter("user_birth"));
+
+		int flag = dao.user_reset_password(to);
+
+		modelAndView.addObject( "flag" , flag );
+		
+		return modelAndView;
 	}
+	
 }
