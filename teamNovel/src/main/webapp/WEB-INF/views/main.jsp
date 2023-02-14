@@ -21,24 +21,6 @@
 	charset="utf-8"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- 
-<script type="text/javascript">
-	var naver_id_login = new naver_id_login("t_lypkaq8BrTPJcNpFhx",
-			"http://localhost:8080/main.do");
-	// 접근 토큰 값 출력
-	// alert(naver_id_login.oauthParams.access_token);
-	// 네이버 사용자 프로필 조회
-	naver_id_login.get_naver_userprofile("naverSignInCallback()");
-	// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-	function naverSignInCallback() {
-		alert(naver_id_login.getProfileData('email'));
-		alert(naver_id_login.getProfileData('nickname'));
-		// 요거 안됨
-		alert(naver_id_login.getProfileData('birthyear'));
-		alert(naver_id_login.getProfileData('birthday'));
-		alert(naver_id_login.getProfileData('gender'));
-	}
-</script> -->
 <style type="text/css">
 #kakaonovelRank, #navernovelRank, #nav-button11, #nav-button12,
 	#nav-button13, #nav-button14, #nav-button15, #nav-button21,
@@ -130,9 +112,10 @@
 			datatype : 'json',
 			success : function(jsonData) {
 				
-				let romance = jsonData[0].novelLists;
-				let fantasy = jsonData[1].novelLists;
-				let romancefantasy = jsonData[2].novelLists;
+				let pop = jsonData[0].novelLists;
+				let romance = jsonData[1].novelLists;
+				let fantasy = jsonData[2].novelLists;
+				let romancefantasy = jsonData[3].novelLists;
 				
 				$('#insertnovelList').html('');
 				let listhtml = '';
@@ -153,10 +136,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
-							let title = encodeURI(romance[i].novel_title);
+							let title = encodeURI(pop[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a class="card-a" href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
+								<a class="card-a" href="novel_detail.do?novel_title=\${title}"> <img src="\${pop[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -172,10 +155,10 @@
 							<div class="cards-wrapper">
 							`;
 						for( let k=0; k<5 ; k++, i++ ){
-							let title = encodeURI(romance[i].novel_title);
+							let title = encodeURI(pop[i].novel_title);
 							listhtml +=`
 								<div class="card">
-								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
+								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${pop[i].novel_img}"
 									class="card-img-top" alt="...">
 								</a>
 								</div>
@@ -379,67 +362,6 @@
 						data-bs-target="#carouselExample4" data-bs-slide="next">
 					</button>
 					`;
-				/* 이달의 신작 */
-				listhtml +=`
-					<div id="container">
-						<div id="contentname" align="center">이달의 신작</div>
-						<div id="carouselExample5" class="carousel slide">
-							<div class="carousel-inner">
-							`;
-				for(let i=0, j=1 ; j<=2 ; j++ ){
-					if( j==1 ){
-						listhtml +=`
-							<div class="carousel-item active">
-							<div class="cards-wrapper">
-							`;
-						for( let k=0; k<5 ; k++, i++ ){
-							let title = encodeURI(romance[i].novel_title);
-							listhtml +=`
-								<div class="card">
-								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
-									class="card-img-top" alt="...">
-								</a>
-								</div>
-								`;
-						}
-						listhtml +=`
-							</div>
-						</div>
-						`;
-					} else {
-						listhtml +=`
-							<div class="carousel-item">
-							<div class="cards-wrapper">
-							`;
-						for( let k=0; k<5 ; k++, i++ ){
-							let title = encodeURI(romance[i].novel_title);
-							listhtml +=`
-								<div class="card">
-								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
-									class="card-img-top" alt="...">
-								</a>
-								</div>
-								`;
-						}
-						listhtml +=`
-							</div>
-						</div>
-						`;
-					}
-				}
-				listhtml += `
-							</div>
-						</div>
-					</div>
-					<button class="button" type="button"
-						data-bs-target="#carouselExample5" data-bs-slide="prev">
-					</button>
-					<button class="button" type="button"
-						data-bs-target="#carouselExample5" data-bs-slide="next">
-					</button>
-					`;
-					
-					
 					
 				$('#insertnovelList').append(listhtml);
 			},
@@ -464,10 +386,6 @@
 			let offset = $('#carouselExample4').offset(); 
 	        $('html').animate({scrollTop : offset.top-250}, 200);
 		});
-		$('#nav-button15').click(function(){
-			let offset = $('#carouselExample5').offset(); 
-	        $('html').animate({scrollTop : offset.top-250}, 200);
-		});
 		$('#nav-button21').click(function(){
 			let offset = $('#carouselExample1').offset(); 
 	        $('html').animate({scrollTop : offset.top-250}, 200);
@@ -482,10 +400,6 @@
 		});
 		$('#nav-button24').click(function(){
 			let offset = $('#carouselExample4').offset(); 
-	        $('html').animate({scrollTop : offset.top-250}, 200);
-		});
-		$('#nav-button25').click(function(){
-			let offset = $('#carouselExample5').offset(); 
 	        $('html').animate({scrollTop : offset.top-250}, 200);
 		});
 	};
@@ -518,6 +432,24 @@
 		});
 		
 	});
+
+	
+	/* var naver_id_login = new naver_id_login("t_lypkaq8BrTPJcNpFhx",
+			"http://localhost:8080/main.do");
+	// 접근 토큰 값 출력
+	alert(naver_id_login.oauthParams.access_token);
+	// 네이버 사용자 프로필 조회
+	naver_id_login.get_naver_userprofile("naverSignInCallback()");
+	// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+	function naverSignInCallback() {
+		alert(naver_id_login.getProfileData('email'));
+		alert(naver_id_login.getProfileData('nickname'));
+		// 요거 안됨
+		alert(naver_id_login.getProfileData('birthyear'));
+		alert(naver_id_login.getProfileData('birthday'));
+		alert(naver_id_login.getProfileData('gender'));
+	 }
+	 */
 </script>
 </head>
 <body>
@@ -564,8 +496,6 @@
 						id="nav-button13" href="#carouselExample3">로맨스판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
 						id="nav-button14" href="#carouselExample4">판타지</a></li>
-					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button15" href="#carouselExample5">이달의 신작</a></li>
 				</ul>
 			</div>
 
@@ -579,8 +509,6 @@
 						id="nav-button23" href="#carouselExample3">로맨스판타지</a></li>
 					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
 						id="nav-button24" href="#carouselExample4">판타지</a></li>
-					<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-						id="nav-button25" href="#carouselExample5">이달의 신작</a></li>
 				</ul>
 			</div>
 

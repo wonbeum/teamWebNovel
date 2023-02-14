@@ -35,8 +35,10 @@ public class MainController {
 	public ArrayList<mainRankTO> novel_main_kakaolists( HttpServletRequest request ) {
 		
 		ArrayList<mainRankTO> result = new ArrayList<>();
-		
-		mainRankTO to = novel_rank.kakao_romance();
+
+		mainRankTO to = novel_rank.pop_list();
+		result.add(to);
+		to = novel_rank.kakao_romance();
 		result.add(to);
 		to = novel_rank.kakao_fantasy();
 		result.add(to);
@@ -50,8 +52,10 @@ public class MainController {
 	public ArrayList<mainRankTO> novel_main_naverlists( HttpServletRequest request ) {
 		
 		ArrayList<mainRankTO> result = new ArrayList<>();
-		
-		mainRankTO to = novel_rank.naver_romace();
+
+		mainRankTO to = novel_rank.pop_list();
+		result.add(to);
+		to = novel_rank.naver_romace();
 		result.add(to);
 		to = novel_rank.naver_fantasy();
 		result.add(to);

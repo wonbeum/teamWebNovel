@@ -68,19 +68,6 @@ public class AdminController {
 	public ModelAndView admiadmin_member_list( HttpServletRequest request ) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName( "admin_member_list" );
-		
-		int cpage = 1;
-		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
-			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
-		}
-		
-		admin_userPagingTO Lists = new admin_userPagingTO();
-		Lists.setCpage(cpage);
-		
-		Lists = userdao.userLists(Lists);
-		
-		modelAndView.addObject( "Lists" , Lists );
-		
 		return modelAndView;
 	}
 	
@@ -445,7 +432,66 @@ public class AdminController {
 		return modelAndView;
 	}
 	
-	
+	@RequestMapping("admin_member_lists")
+	public ArrayList<admin_userPagingTO> admin_member_lists( HttpServletRequest request ) {
 
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		admin_userPagingTO Lists = new admin_userPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = userdao.userLists(Lists);
+		
+		ArrayList<admin_userPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result;
+	}
+
+
+	@RequestMapping("adminsearch_nickname")
+	public ArrayList<admin_userPagingTO> adminsearch_nickname( HttpServletRequest request ) {
+
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+
+		String search = request.getParameter("search");
+		
+		admin_userPagingTO Lists = new admin_userPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = userdao.userListsNickname(Lists, search);
+		
+		ArrayList<admin_userPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result;
+	}
+
+	@RequestMapping("adminsearch_email")
+	public ArrayList<admin_userPagingTO> adminsearch_email( HttpServletRequest request ) {
+
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+
+		String search = request.getParameter("search");
+		
+		admin_userPagingTO Lists = new admin_userPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = userdao.userListsEmail(Lists, search);
+		
+		ArrayList<admin_userPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result;
+	}
 	
 }

@@ -5,17 +5,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.sql.DataSource;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class main_novel_rank {
 
+	@Autowired
+	private DataSource dataSource;
+	
 	public mainRankTO kakao_romance() {
 		
 		ArrayList<novelInfoTO> rank_img = new ArrayList<>();
@@ -331,4 +341,45 @@ public class main_novel_rank {
 		
 		return novelTO;
 	}
+
+	public mainRankTO pop_list(){
+
+		ArrayList<novelInfoTO> rank_img = new ArrayList<>();
+
+		mainRankTO novelTO = new mainRankTO();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "Select r.novel_title, avg(review_star_grade) avg, novel_img from novel_review_board r left join novel_information n on r.novel_title = n.novel_title group by novel_title order by avg desc limit 10";
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while( rs.next() ) {
+				novelInfoTO to = new novelInfoTO();
+				to.setNovel_img( rs.getString("novel_img") );
+				to.setNovel_title( rs.getString("novel_title") );
+				rank_img.add(to);
+			}
+
+			novelTO.setNovelLists(rank_img);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}
+		
+		
+		return novelTO;
+	}
+
 }
