@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.model.CommentDAO;
 import com.example.model.FreeBoardDAO;
 import com.example.model.FreeBoardPagingTO;
+import com.example.model.admin_RQPagingTO;
 import com.example.model.admin_boardDAO;
 import com.example.model.admin_mainDAO;
 import com.example.model.admin_origin_requestDAO;
@@ -64,6 +65,8 @@ public class AdminController {
 		return modelAndView;
 	}
 	
+	//---유저 관리
+	
 	@RequestMapping("admin_member_list.do")
 	public ModelAndView admiadmin_member_list( HttpServletRequest request ) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -82,30 +85,6 @@ public class AdminController {
 		
 		modelAndView.addObject( "to" , to );
 		
-		return modelAndView;
-	}
-	@RequestMapping("admin_origin_request_list.do")
-	public ModelAndView admin_orgin_request_list( HttpServletRequest request ) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "admin_origin_request_list" );
-		
-		ArrayList<admin_origin_requestTO> requestLists = aordao.origin_request_list();
-		modelAndView.addObject( "requestLists" , requestLists );
-		
-		return modelAndView;
-	}
-	
-	@RequestMapping("admin_origin_request_list_delete_ok.do")
-	public ModelAndView admin_orgin_request_list_delete_ok(HttpServletRequest request) {
-		
-		admin_origin_requestTO to = new admin_origin_requestTO();
-		to.setRequest_seq(request.getParameter("seq"));
-
-		int flag = aordao.origin_request_delete_Ok(to);
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName( "origin_request_delete_Ok" );
-		modelAndView.addObject( "flag", flag );
 		return modelAndView;
 	}
 	
@@ -492,6 +471,44 @@ public class AdminController {
 		result.add(Lists);
 		
 		return result;
+	}
+	
+	//---요청 관리
+	
+	@RequestMapping("admin_origin_request_list.do")
+	public ModelAndView adminpg_orgin_request_list( HttpServletRequest request ) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin_origin_request_list" );
+		
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		admin_RQPagingTO Lists = new admin_RQPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = aordao.requestLists(Lists);
+		
+		modelAndView.addObject( "Lists" , Lists );
+		
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping("admin_origin_request_delete_ok.do")
+	public ModelAndView admin_origin_request_delete_ok(HttpServletRequest request) {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName( "admin_origin_request_delete_ok" );
+		
+		admin_origin_requestTO to = new admin_origin_requestTO();
+		to.setRequest_seq(request.getParameter("seq"));
+
+		int flag = aordao.originRequestDeleteOk(to);
+		
+		modelAndView.addObject( "flag", flag );
+		return modelAndView;
 	}
 	
 }

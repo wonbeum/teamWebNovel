@@ -73,8 +73,7 @@ function AdminBoardListAjax(url, page, category, keyword){
 					
 				} else {
 					ajaxHtml += `
-							<tr> 
-							<td><input type='checkbox' name='board_check'></td>
+							<tr>
 							<td>\${jsonData[0].boardLists[i].free_seq}</td>
 							<td>[\${jsonData[0].boardLists[i].free_category}]</td>
 							<td class='left'><a href='admin_board_view.do?seq=\${jsonData[0].boardLists[i].free_seq}'>
@@ -83,7 +82,7 @@ function AdminBoardListAjax(url, page, category, keyword){
 							<td>\${jsonData[0].boardLists[i].free_date}</td>
 							<td>
 								<input type='button' value='상세보기' onclick="location.href='admin_board_view.do?seq=\${jsonData[0].boardLists[i].free_seq}';"/>
-								<input type='button' value='삭제' class='confirmStart'>
+								<input type='button' value='삭제' onclick="location.href='admin_board_delete_ok.do?seq=\${jsonData[0].boardLists[i].free_seq}'">
 							</td>
 							</tr>
 						`;
@@ -191,7 +190,6 @@ $(document).ready(function() {
 		    </div>
 <!-- 조건 검색 -->
 		<div class="col-md-1">
-			<a>조건검색</a>
 		</div>
 		<div class="col-md-2">
 	    	<select class="form-select" id="serch_category">
@@ -222,7 +220,6 @@ $(document).ready(function() {
 		<table class="table table-sm">
             <thead class="table-light text-center">
 	            <tr>
-             		<th scope="col"></th>
 	                <th scope="col">번호</th>
 	                <th scope="col">분류</th>
     	            <th scope="col">제목</th>

@@ -2,25 +2,74 @@
 	pageEncoding="UTF-8"%>
 
 <%@page import="com.example.model.admin_origin_requestTO"%>
+<%@page import="com.example.model.admin_RQPagingTO"%>
 <%@page import="java.util.ArrayList"%>
 
 <%
 
-ArrayList<admin_origin_requestTO> requestLists = (ArrayList<admin_origin_requestTO>)request.getAttribute("requestLists");
+admin_RQPagingTO Lists = (admin_RQPagingTO) request.getAttribute("Lists");
+
+int cpage = Lists.getCpage();
+int recordPerPage = Lists.getRecordPerPage();
+
+int totalPage = Lists.getTotalPage();
+int totalRecord = Lists.getTotalRecord();
+	
+int startBlock = Lists.getStartBlock();
+int endBlock = Lists.getEndBlock();
+int blockPerPage = Lists.getBlockPerPage();
+
+
+ArrayList<admin_origin_requestTO> requestLists = Lists.getRequestLists();
 
 StringBuilder sbHtml = new StringBuilder();
 	
 	for( admin_origin_requestTO to : requestLists ){
 		sbHtml.append("<tr>");
-		sbHtml.append("<td><input type='checkbox' name='user_check'></td>");
 		sbHtml.append("<td>" + to.getRequest_seq() + "</td>");
 		sbHtml.append("<td>" + to.getRequest_category() + "</td>");
 		sbHtml.append("<td>" + to.getRequest_title() + "</td>");
 		sbHtml.append("<td>" + to.getUser_email() + "</td>");
 		sbHtml.append("<td><input type='button' value='완료' onClick='#'>");
-		sbHtml.append("<input type='button' value='삭제'></td>");
+		sbHtml.append("<input type='button' value='삭제' onClick='location.href=\"admin_origin_request_delete_ok.do?seq=" + to.getRequest_seq() + "\"'></td>");
 		sbHtml.append("</tr>");
 		}
+
+
+	StringBuilder pagehtml = new StringBuilder();
+
+	String html = "";
+
+	html += "<nav aria-label='Page navigation example'>";
+	html += "<ul class='pagination justify-content-center'>";
+
+	if (cpage == 1) {
+		html += "<li class='page-item disabled'><a class='page-link'>Previous</a></li>";
+	} else {
+		html += "<li class='page-item'><a href='./admin_origin_request_list.do?cpage=" + (cpage - 1)
+		+ "' class='goBackPage page-link'>Previous</a></li>";
+	}
+
+	for (int i = startBlock; i <= endBlock; i++) {
+		if (cpage == i) {
+			html += "	<li class='page-item disabled'><a class='page-link'>" + i + "</a></li>";
+		} else {
+			html += "	<li class='page-item'><a href='./admin_origin_request_list.do?cpage=" + i
+			+ "' class='goPage page-link' data-page='' + i +  ''>" + i + "</a></li>";
+		}
+	}
+
+	if (cpage == totalPage) {
+		html += "<li class='page-item disabled'><a class='page-link'>Next</a></li>";
+	} else {
+		html += "<li class='page-item'><a href='./admin_origin_request_list.do?cpage=" + (cpage + 1)
+		+ "' class='goNextPage page-link'>Next</a></li>";
+	}
+
+	html += "</ul>";
+	html += "</nav>";
+
+	pagehtml.append(html);
 %>
 
 <!DOCTYPE html>
@@ -46,18 +95,7 @@ body {
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#cboxAll").click(function() {
-		if($("#cboxAll").is(":checked")) $("input[name=user_check]").prop("checked", true);
-		else $("input[name=user_check]").prop("checked", false);
-	});
-	
-	$("input[name=user_check]").click(function() {
-		var total = $("input[name=user_check]").length;
-		var checked = $("input[name=user_check]:checked").length;
-		
-		if(total != checked) $("#cboxAll").prop("checked", false);
-		else $("#cboxAll").prop("checked", true); 
-	});
+
 });
 
 $().ready(function () {
@@ -85,15 +123,15 @@ $().ready(function () {
 <body>
 
 <!-- header -->
-<jsp:include page="../include/header2.jsp"></jsp:include>
-
+	<%@ include file="../include/header2.jsp" %>
+	
 	<!-- 본문 -->
-	<h2>요청 리스트</h2>
-	<div class="table-responsive">
+	<div class="container w-75">
+		<h2>요청 리스트</h2>
+		<div class="table-responsive">
 		<table class="table table-striped table-sm  table-bordered">
-			<thead>
+			<thead class="text-center">
 				<tr>
-					<th scope="col"></th>
 					<th scope="col">번호</th>
 					<th scope="col">카테고리</th>
 					<th scope="col">작품명</th>
@@ -101,41 +139,18 @@ $().ready(function () {
 					<th scope="col">기능</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="text-center">
 			<%=sbHtml %>
-			<!--
-				<tr>
-					<td><input type="checkbox" name="user_check"></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><input type="button" value="완료"><input
-						type="button" value="삭제"></td>
-				</tr>
-			-->
 			</tbody>
 		</table>
+		</div>
+
+		<div>
+			<%=pagehtml%>
+		</div>
 	</div>
-
-	<input type="button" value="선택삭제">
-	<nav aria-label="Page navigation example">
-		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-			</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#"
-				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-			</a></li>
-		</ul>
-	</nav>
-
 	<!-- footer -->
-	<jsp:include page="../include/footer1.jsp"></jsp:include>
-	
+<%@ include file="../include/footer1.jsp" %>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

@@ -14,7 +14,6 @@
 	String date = to.getFree_date();
 	String wip = to.getFree_ip();
 	String hit = to.getFree_hit();
-	String like = to.getFree_like();
 	String content = to.getFree_content();
 	
 	commentTO cto = (commentTO)request.getAttribute("cto");
@@ -129,7 +128,7 @@ function cmt_delete(free_seq, cmt_seq){
 <div class="container w-75">
 	<div class="row mt-5">
 		<div class="col-auto me-auto">
-  		  <h5>커뮤니티 게시판 상세보기</h5>
+  		  <h5 style="font-family: AppleSDGothicNeoSB;">커뮤니티 게시판 상세보기</h5>
 		</div>
 		<div class="col-auto">
 			<a href="./admin_main.do">
@@ -141,8 +140,8 @@ function cmt_delete(free_seq, cmt_seq){
 </div>
 
 <!-- 게시판 내용 -->
+	<div class="container">
 	<div class="container w-75 mb-5">
-        <div class="container w-75">
  		<form action="./admin_board_delete_ok.do" method="post" name="AdminBoardDelete">
 		<input type="hidden" name="seq" value="<%=free_seq %>" />
 			<table class="table">
@@ -156,9 +155,9 @@ function cmt_delete(free_seq, cmt_seq){
 	            </tr>
 				<tr>
 	                <th>글쓴이</th>
-                	<td><%=nickname %>(<%=email %>)(<%=wip %>)</td>
-                	<th>추천</th>
-                	<td><%=like %></td>
+                	<td><%=nickname %>(<%=email %>)</td>
+                	<th>아이피</th>
+                	<td>(<%=wip %>)</td>
                 	<th>조회</th>
                 	<td><%=hit %></td>
          	   </tr>
@@ -177,18 +176,18 @@ function cmt_delete(free_seq, cmt_seq){
 					<table class="table">
 						<tbody>
 							<tr>
-								<th class="subject"><h4>댓글</h4></th>
+								<th class="subject" style="font-family: AppleSDGothicNeoSB;"><h4>댓글</h4></th>
 							</tr>
 						</tbody>
 					</table>
 					<ul class="list-unstyled" id="cmt_area">					 
 					</ul>
 			</div>
-		</div>
+	</div>
 
 
 <!-- 버튼 -->
-        <div class="container d-flex justify-content-around">
+        <div class="container w-75 mb-5 d-flex justify-content-around">
             <div class="col-auto me-auto">
             	<a class="btn btn-outline-secondary mt-3" href="./admin_board_list.do" role="button">목록</a>
             </div>
