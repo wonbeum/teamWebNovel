@@ -115,7 +115,7 @@
 								style=" margin-left: 20px;">
 								${signIn.user_nickname}</button>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">마이페이지</a></li>
+								<li><a class="dropdown-item" href="mypage.do">마이페이지</a></li>
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item" href="logout.do">로그아웃</a></li>
 							</ul>
