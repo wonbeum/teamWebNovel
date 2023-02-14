@@ -104,7 +104,7 @@ a:hover {
 <script type="text/javascript">
 
 function searchForm() {
-	window.location.href = ( 'novel_list.do' );
+	window.location.href = ( 'novel_list.do?search=' + document.getElementById('search').value );
 	
 		//function novelLists( url, page , search ) {
 		//	page=1;
@@ -135,7 +135,7 @@ function searchForm() {
 	
 	<div class="container justify-content-center">
 		<div class="wrapper">
-    		<input class="input" type="text" placeholder="찾으시는 웹소설이 있으신가요?" id="search" onkeyup="if(window.event.keyCode==13) {searchForm()}" />
+    		<input class="input" type="text" placeholder="찾으시는 웹소설이 있으신가요?" id="search" name="search" onkeyup="if(window.event.keyCode==13) {searchForm()}" />
 		    <span class="underline"></span>
 		</div>
 		<div class="container text-center">
