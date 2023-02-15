@@ -95,7 +95,7 @@ $().ready(function () {
 				</tbody>
 			</table>
 			<div>
-				<input type="button" class="btn btn-primary" value="돌아가기" /> <input
+				<input type="button" class="btn btn-primary" value="돌아가기" onClick="location.href='./admin_member_list.do'"/> <input
 					type="button" class="btn btn-primary float-right" value="수정"
 					onClick="location.href='./admin_member_modify.do?email=<%=email%>'" />
 				<input type="button"
