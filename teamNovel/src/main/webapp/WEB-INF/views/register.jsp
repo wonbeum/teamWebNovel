@@ -444,7 +444,7 @@ window.addEventListener('load', () => {
 					</div>
 					
 					<div class="mb-5">
-						<span id="labeltext"></span>비밀번호 확인*<span id="p2Checkmsg"></span>
+						<span id="labeltext">비밀번호 확인*</span><span id="p2Checkmsg"></span>
 						<input type="password"
 							name="password2" value="" class="form-control" id="password_check">
 						<p id="nickname_label">확인을 위해 이전과 동일한 비밀번호를 입력하세요.</p>

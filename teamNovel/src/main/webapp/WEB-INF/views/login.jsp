@@ -14,6 +14,31 @@
 	crossorigin="anonymous">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style type="text/css">
+@font-face {
+	src: url("/font/AppleSDGothicNeoB.ttf");
+	font-family: "AppleSDGothicNeoB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoM.ttf");
+	font-family: "AppleSDGothicNeoM";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoEB.ttf");
+	font-family: "AppleSDGothicNeoEB";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoR.ttf");
+	font-family: "AppleSDGothicNeoR";
+}
+
+@font-face {
+	src: url("/font/AppleSDGothicNeoM.ttf");
+	font-family: "AppleSDGothicNeoM";
+}
+
 #login_form {
 	margin-top: 60px;
 	margin-bottom: 60;
@@ -36,8 +61,14 @@
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: normal;
+	font-family: AppleSDGothicNeoM;
 	text-align: left;
 	color: #777;
+}
+
+#login_title {
+	font-family: AppleSDGothicNeoB;
+	color: #000;
 }
 
 #login-button, #adminlogin-button {
@@ -45,7 +76,7 @@
 	border: solid 2px #ffb26b;
 	background-color: #ffb26c;
 	padding-top: 6px;
-	font-family: AppleSDGothicNeoR;
+	font-family: AppleSDGothicNeoM;
 	font-size: 15px;
 	font-weight: 800;
 	font-style: normal;
@@ -62,6 +93,7 @@
 	font-size: 15px;
 	font-weight: 500;
 	font-stretch: normal;
+	font-family: AppleSDGothicNeoR;
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: normal;
@@ -116,7 +148,7 @@ function kakaoLogin() {
 					
 					 $.ajax({
 	    					type : "post",
-	    					url : 'kakaoCheck.do', // ID중복체크를 통해 회원가입 유무를 결정한다.
+	    					url : 'kakaoCheck.do', // ID중복체크를 통해 회원가입 유무를 결정
 	    					data : {
 								'user_email' :kakao_account.email
 								},
@@ -200,13 +232,14 @@ function kakaoLogin() {
 	<!-- 본문 -->
 
 
-	<div class="container" id="login_form">
+	<div class="container" id="login_form" style="width: 335px;">
 		<ul class="nav nav-pills nav-justified" role="tablists" id="tablists">
 			<li class="nav-item"><a class="nav-link active"
 				data-bs-toggle="pill" href="#login" data-link="logintab"
-				style="background-color: #ffb26c; color: #fff;">로그인</a></li>
+				style="background-color: #ffb26c; color: #fff; font-family: AppleSDGothicNeoM; font-size: 18px; font-weight: 400;">로그인</a></li>
 			<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
-				href="#admin" data-link="logintab" style="color: #ffb26c;">관리자
+				href="#admin" data-link="logintab"
+				style="color: #ffb26c; font-family: AppleSDGothicNeoM; font-size: 18px; font-weight: 400;">관리자
 					로그인</a></li>
 		</ul>
 
@@ -214,7 +247,7 @@ function kakaoLogin() {
 			<div id="login" class="tab-pane fade show active">
 				<form action="./login_ok.do" method="post">
 					<div class="login-ment mb-3">
-						<p>로그인</p>
+						<p id="login_title">로그인</p>
 					</div>
 
 					<!-- Email input -->
@@ -253,13 +286,10 @@ function kakaoLogin() {
 							</p>
 						</div>
 					</div>
-					<!-- 수정 필요 -->
-					<div class="row mb-4">
-
-		
+					<div class="row mb-5">
 						<div class="col-md-6 col-sm-12">
 							<a href="javascript:kakaoLogin();"><img
-								src="../images/kakao_login_button.png" /></a>
+								src="../images/kakao_login_button2.png" /></a>
 						</div>
 					</div>
 				</form>
