@@ -25,8 +25,39 @@
 #searchform{
 	margin-bottom: 20px;
 }
+
 body {
 	background-color: rgb(200, 200, 200);
+}
+
+#pageGroup > ul > li > a{
+	color: #999;
+	border: none;
+	font-family: AppleSDGothicNeoEB;
+  	font-size: 20px;
+	width: 40px;
+  	height: 40px;
+  	margin-right: 10px;
+  	margin-left: 10px;
+}
+
+#pagging {
+  	height: 69px;
+  	margin: 50px 64px 0 57px;
+  	padding: 15px 25px 14px;
+  	border-radius: 15px;
+  	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  	background-color: #fff;
+	max-width: 555px;
+ 	text-align: center;
+}
+
+li #pageli {
+	display: inline-block;
+}
+
+#pagehtml{
+	text-align: center;
 }
 </style>
 <script type="text/javascript">
@@ -72,32 +103,32 @@ function memberList( url , page, search ){
 			
 			let page = '';
 			page += `
-				<nav aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">`;
+				<div id="pageGroup" style="display: inline-block;">
+					<ul class="pagination" id="pagging">`;
 					
 			if( cpage == 1 ){
-				page += `<li class="page-item disabled"><a class="page-link">Previous</a></li>`;
+				page += `<li id="pageLi" class="page-item disabled"><a class="page-link">&laquo;</a></li>`;
 			} else {
-				page += `<li class="page-item"><a class="goBackPage page-link">Previous</a></li>`;
+				page += `<li id="pageLi" class="page-item"><a class="goBackPage page-link">&laquo;</a></li>`;
 			}
 			
 			for( let i = startBlock ; i <= endBlock ; i ++ ){
 				if( cpage == i ){
-					page += '	<li class="page-item disabled"><a class="page-link">' + i + '</a></li>';
+					page += '	<li id="pageLi" class="page-item disabled"><a class="page-link">' + i + '</a></li>';
 				} else {
-					page += '	<li class="page-item"><a class="goPage page-link" data-page="' + i +  '">' + i + '</a></li>';
+					page += '	<li id="pageLi" class="page-item"><a class="goPage page-link" data-page="' + i +  '">' + i + '</a></li>';
 				}
 			}
 			
 			if( cpage == totalPage ){
-				page += `<li class="page-item disabled"><a class="page-link">Next</a></li>`;
+				page += `<li id="pageLi" class="page-item disabled"><a class="page-link">&raquo;</a></li>`;
 			} else {
-				page += `<li class="page-item"><a class="goNextPage page-link">Next</a></li>`;
+				page += `<li id="pageLi" class="page-item"><a class="goNextPage page-link">&raquo;</a></li>`;
 			}
 			
 			page += `
 					</ul>
-				</nav>`;
+				</div>`;
 	
 			$('#pagehtml').html(page);		
 			

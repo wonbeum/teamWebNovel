@@ -12,6 +12,7 @@
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style type="text/css">
 #nav-button{
 	width: 120px;
@@ -48,6 +49,36 @@
 	text-align: center;
 	color: #ffb26c;
 }
+
+.img-wrapper{
+	max-width: 100%;
+	height: 17em;
+}
+
+.card-body{
+	height : 140px;
+	font-size: 10px;
+}
+
+#rowcard{
+	margin-bottom: 10px;
+}
+
+
+.card-text{
+	margin-bottom: 10px;
+}
+
+#novel-title{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+
 </style>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -73,8 +104,9 @@
 					}
  
 					
-					listhtml +="	<div class='col'>";
+					listhtml +="	<div class='col' id='rowcard'>";
 					listhtml +="		<div class='card shadow-sm'>";
+					listhtml +="		<div class='card-wrapper'>";
 					
 					if( jsonData[i].novel_img == null ){
 						listhtml +="			<a href='./novel_detail.do?novel_title=" + title + "'> <img src='https://page.kakaocdn.net/pageweb/2.6.3/public/images/img_age19_static.svg' class='img' width='100%'";	
@@ -84,24 +116,31 @@
 					
 					listhtml +="				height='225' role='img' aria-label='Placeholder: Thumbnail'>";
 					listhtml +="			</a>";
+					listhtml +="		</div>";
 					listhtml +="			<div class='card-body'>";
 
 					if( jsonData[i].novel_genre == "romance" ){
-						listhtml += "<p class='card-text'>로맨스</p>";	
+						listhtml += "<p class='card-text' >로맨스</p>";	
 					} else if( jsonData[i].novel_genre == "fantasy"  ){
-						listhtml += "<p class='card-text'>판타지</p>";	
+						listhtml += "<p class='card-text' >판타지</p>";	
 					} else if( jsonData[i].novel_genre == "romancefantasy" ){
-						listhtml += "<p class='card-text'>로맨스 판타지</p>";
+						listhtml += "<p class='card-text' >로맨스 판타지</p>";
+					} else {
+						listhtml += "<p class='card-text' > </p>";
 					}
-					listhtml +="				<p class='card-text'>" + jsonData[i].novel_title + "</p>";
+					listhtml +="				<p class='card-text' id='novel-title'>" + jsonData[i].novel_title + "</p>";
 
 					if( jsonData[i].novel_writer != null ){
 						let star = parseFloat(jsonData[i].novel_avgstar).toFixed(2);
 						listhtml +="				<p class='card-text'>"+ jsonData[i].novel_writer + "</p>";
+					} else {
+						listhtml +="				<p class='card-text'> </p>";
 					}
 					if( jsonData[i].novel_avgstar != null ){
 						let star = parseFloat(jsonData[i].novel_avgstar).toFixed(2);
-						listhtml +="				<p class='card-text'>별점 "+ star + "</p>";
+						listhtml +="				<p class='card-text'><i class='bi bi-star-fill'> "+ star + "</i></p>";
+					} else {
+						listhtml +="				<p class='card-text'><i class='bi bi-star-fill'> 0.0 </i></p>";
 					}
 					listhtml +="			</div>";
 					listhtml +="		</div>";
