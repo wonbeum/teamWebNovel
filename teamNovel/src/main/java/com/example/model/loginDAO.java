@@ -200,4 +200,77 @@ public class loginDAO {
 	        return sb.toString();
 		
 	}
+	
+	public int kakaoCheck( userInfoTO to ) {
+		 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int result = 2;
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "select count(user_email) from novel_user_information "
+					+ "where user_email = ? ";
+			
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setString( 1, to.getUser_email() );
+			
+			rs = pstmt.executeQuery();
+			
+			while( rs.next() ) {
+				result = rs.getInt("count(user_email)");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}	
+		
+		return result;
+		
+	}
+	
+	public userInfoTO kakaologin( userInfoTO to ) {
+		 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "select user_email, user_nickname, user_gender, user_birth, user_grade from novel_user_information "
+					+ "where user_email = ? ";
+			
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setString( 1, to.getUser_email() );
+			
+			rs = pstmt.executeQuery();
+			
+			if( rs.next() ) {
+				to.setUser_email( rs.getString( "user_email" ) );
+				to.setUser_nickname( rs.getString( "user_nickname" ) );
+				to.setUser_birth( rs.getString( "user_birth" ) );
+				to.setUser_gender( rs.getString( "user_gender" ) );
+				to.setUser_grade( rs.getString("user_grade") );
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}	
+		
+		return to;
+		
+	}
 }

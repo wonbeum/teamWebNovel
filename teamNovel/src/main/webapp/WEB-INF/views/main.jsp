@@ -434,22 +434,6 @@
 	});
 
 	
-	/* var naver_id_login = new naver_id_login("t_lypkaq8BrTPJcNpFhx",
-			"http://localhost:8080/main.do");
-	// 접근 토큰 값 출력
-	alert(naver_id_login.oauthParams.access_token);
-	// 네이버 사용자 프로필 조회
-	naver_id_login.get_naver_userprofile("naverSignInCallback()");
-	// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-	function naverSignInCallback() {
-		alert(naver_id_login.getProfileData('email'));
-		alert(naver_id_login.getProfileData('nickname'));
-		// 요거 안됨
-		alert(naver_id_login.getProfileData('birthyear'));
-		alert(naver_id_login.getProfileData('birthday'));
-		alert(naver_id_login.getProfileData('gender'));
-	 }
-	 */
 </script>
 </head>
 <body>

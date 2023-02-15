@@ -12,9 +12,6 @@
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
-<script type="text/javascript"
-	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-	charset="utf-8"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <style type="text/css">
 #login_form {
@@ -43,7 +40,7 @@
 	color: #777;
 }
 
-#login-button ,#adminlogin-button{
+#login-button, #adminlogin-button {
 	width: 100%;
 	border: solid 2px #ffb26b;
 	background-color: #ffb26c;
@@ -61,7 +58,7 @@
 	border: 1px solid black;
 }
 
-.login-bottom{
+.login-bottom {
 	font-size: 15px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -71,7 +68,7 @@
 	color: #777;
 }
 
-#register-link, #password-search{
+#register-link, #password-search {
 	font-size: 15px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -79,12 +76,101 @@
 	line-height: normal;
 	letter-spacing: normal;
 	color: #ffb26c;
- 	text-decoration: none;
+	text-decoration: none;
 }
 </style>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+window.Kakao.init("859ec84590f813c455534fba411212ba");
 
+function createHiddenLoginForm(email){
+	
+	let frm = document.createElement('form');
+	frm.setAttribute('method', 'post');
+	frm.setAttribute('action', './kakaologin.do');
+	let hiddenInput = document.createElement('input');
+	hiddenInput.setAttribute('type','hidden');
+	hiddenInput.setAttribute('name','user_email');
+	hiddenInput.setAttribute('value',email);
+	frm.appendChild(hiddenInput);
+	document.body.appendChild(frm);
+	frm.submit();
+	
+}
+
+function kakaoLogin() {
+	window.Kakao.Auth.login({
+		scope:'profile_nickname, account_email, gender, age_range, birthday',
+		success: function(authObj){
+			console.log(authObj);
+			window.Kakao.API.request({
+				url: '/v2/user/me',
+				success: res => {
+					const kakao_account = res.kakao_account;
+					//console.log(kakao_account);
+					//console.log(kakao_account.email);
+					//console.log(kakao_account.profile.nickname);
+					//console.log(kakao_account.gender);
+					//console.log(kakao_account.age_range);
+					//console.log(kakao_account.birthday);
+					
+					 $.ajax({
+	    					type : "post",
+	    					url : 'kakaoCheck.do', // ID중복체크를 통해 회원가입 유무를 결정한다.
+	    					data : {
+								'user_email' :kakao_account.email
+								},
+	    					dataType:"json",
+	    					success : function(json){   				
+	    						
+	    							console.log('성공');
+	    							console.log(json);
+	    							if(json==0){
+	    								//존재하지 않을 때 회원가입
+	    								$.ajax({
+	        								type : "post",
+	        		    					url : 'kakaoregister.do',
+	        		    					data : {
+	        		    						"user_email": kakao_account.email,
+	        		    						"user_nickname": kakao_account.profile.nickname,
+	        		    						"user_gender" : kakao_account.gender,
+	        		    						"user_birth" : kakao_account.birthday
+	        		    						},
+	        		    					dataType :"json",
+	        		    					success : function(json){
+	        		    						console.log(json);
+	        		    						if(json==1){
+	        		    							// 로그인
+	        		    							createHiddenLoginForm(kakao_account.email);		    							
+	        		    						} else {
+	        		    							alert('카카오 회원가입 실패. 일반계정으로 로그인하시기 바랍니다.');
+	        		    						}
+	        		    					},
+	        		    					error: function(request, status, error){
+	        		    		                   alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	        		    		                }
+	        							});
+	    							} else if(json==1){
+	    								// 존재할경우 자동로그인
+	    								createHiddenLoginForm(kakao_account.email);
+	    							}
+	    				
+	    											
+	    					},
+	    					error: function(request, status, error){
+	    		                   //alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	    		            }
+	    				});
+				}
+			});
+		}
+	})
+}
+
+	$(document).ready(function() {
+		//859ec84590f813c455534fba411212ba
+		
+		
 		$('#tablists').on('show.bs.tab', function(e) {
 			let Target1 = e.target;
 			Target1.style.background = "#ffb26b"
@@ -99,7 +185,11 @@
 			futureTarget.style.color = "#ffb26b";
 		});
 	});
+	
+	
+
 </script>
+
 </head>
 <body>
 
@@ -150,33 +240,27 @@
 					<div>
 						<div class="text-center">
 							<p class="login-bottom">
-								계정이 없으신가요?<a id="register-link" href="./register.do">회원가입</a>을 해보세요
+								계정이 없으신가요?<a id="register-link" href="./register.do">회원가입</a>을
+								해보세요
 							</p>
 						</div>
 
 						<div class="text-center mb-3">
 							<!-- Simple link -->
 							<p class="login-bottom">
-								비밀번호를 잊으셨나요?<a id="password-search" href="./reset_password.do">비밀번호 찾기</a>
+								비밀번호를 잊으셨나요?<a id="password-search" href="./reset_password.do">비밀번호
+									찾기</a>
 							</p>
 						</div>
 					</div>
 					<!-- 수정 필요 -->
 					<div class="row mb-4">
 
-						<div id="naver_id_login"></div>
-						<script type="text/javascript">
-							var naver_id_login = new naver_id_login(
-									"t_lypkaq8BrTPJcNpFhx",
-									"http://localhost:8080/main.do");
-							var state = naver_id_login.getUniqState();
-							naver_id_login.setButton("green", 3, 40);
-							naver_id_login
-									.setDomain("http://localhost:8080/login.do");
-							naver_id_login.setState(state);
-							naver_id_login.setPopup();
-							naver_id_login.init_naver_id_login();
-						</script>
+		
+						<div class="col-md-6 col-sm-12">
+							<a href="javascript:kakaoLogin();"><img
+								src="../images/kakao_login_button.png" /></a>
+						</div>
 					</div>
 				</form>
 			</div>

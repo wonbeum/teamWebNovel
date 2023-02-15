@@ -83,6 +83,23 @@
 	font-size: 20px;
 }
 </style>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript">
+function kakaoLogout() {
+	window.Kakao.init("859ec84590f813c455534fba411212ba");
+	window.Kakao.isInitialized();
+	
+    if (!Kakao.Auth.getAccessToken()) {
+    	console.log('Not logged in.');
+      return;
+    }
+    Kakao.Auth.logout(function() {
+    	console.log(Kakao.Auth.getAccessToken());
+    	location.href = "./logout.do"; // 로그아웃 처리
+	})
+}
+
+</script>
 </head>
 <body>
 	<!-- header -->
@@ -117,7 +134,7 @@
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="mypage.do">마이페이지</a></li>
 								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="logout.do">로그아웃</a></li>
+								<li><a class="dropdown-item" onclick="kakaoLogout()">로그아웃</a></li>
 							</ul>
 						</div>
 					</c:if>

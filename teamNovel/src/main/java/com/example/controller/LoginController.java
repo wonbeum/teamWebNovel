@@ -1,6 +1,5 @@
 package com.example.controller;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -227,4 +226,66 @@ public class LoginController {
 			
 			return modelAndView;
 		}
+		
+		
+		// 카카오 로그인 --------------------
+
+		
+		// 아아디 체크 
+		@RequestMapping("kakaoCheck.do")
+		public int kakaoCheck(HttpServletRequest request) {
+			String user_email = request.getParameter("user_email");
+			userInfoTO to = new userInfoTO();
+			to.setUser_email(user_email);
+			
+			int result = dao.kakaoCheck(to);
+	
+			return result;
+		}
+		
+		// 자동로그인
+		@RequestMapping("kakaologin.do")
+		public ModelAndView kakaosignIn(HttpServletRequest request) {
+			
+			ModelAndView modelAndView = new ModelAndView();
+			modelAndView.setViewName( "login_ok" );
+			
+			userInfoTO to = new userInfoTO();
+			
+			to.setUser_email( request.getParameter("user_email") );
+			
+			userInfoTO signIn = dao.kakaologin(to);
+			HttpSession session = request.getSession();
+			if( signIn.getUser_nickname() != null) {
+				session.setAttribute("signIn", signIn);
+				modelAndView.addObject("grade", "user");
+			} else {
+				session.setAttribute("signIn", null);
+			}
+			return modelAndView;
+		}
+		
+		// 회원가입
+		// 아아디 체크 
+		@RequestMapping("kakaoregister.do")
+		public int kakaoregister(HttpServletRequest request) {
+			userInfoTO to = new userInfoTO();
+			to.setUser_email(request.getParameter("user_email"));
+			to.setUser_nickname(request.getParameter("user_nickname"));
+			
+			if(request.getParameter("user_gender") =="male" ) {
+				to.setUser_gender("M");
+			} else if(request.getParameter("user_gender") =="female" ) {
+				to.setUser_gender("F");
+			} else {
+				to.setUser_gender("N");
+			}
+			to.setUser_birth(request.getParameter("user_birth"));
+
+			int flag = rdao.kakaoregisterOk(to);
+			
+			return flag;
+		}
+		
+		
 }

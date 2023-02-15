@@ -64,6 +64,54 @@ public class RegisterDAO {
 		return flag;
 	}
 
+	// 카카오 회원가입
+	public int kakaoregisterOk(userInfoTO to) {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int result = 2;
+
+		try {
+			conn = dataSource.getConnection();
+
+			String sql = "insert into novel_user_information values (?, ?, '0000', ?, ?, now(), '회원')";
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, to.getUser_email());
+			pstmt.setString(2, to.getUser_nickname());
+			pstmt.setString(3, to.getUser_gender());
+			pstmt.setString(4, to.getUser_birth());
+
+			result = pstmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("[에러] " + e.getMessage());
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+
+		return result;
+	}
+	
+	
 	// 아이디 중복체크
 	public int IdCheck(String id) {
 
