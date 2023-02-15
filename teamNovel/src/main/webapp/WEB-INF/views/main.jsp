@@ -96,10 +96,23 @@
 	text-align: center;
 }
 
-.card-a {
-	width: 100%;
-	height: 15%;
+.card-a{
+	height: 100%;
 }
+
+#rowcard{
+	margin-bottom: 10px;
+}
+
+#rankimg{
+	width: 100%;
+	height: 100%;
+}
+.img-wrapper{
+	max-width: 100%;
+	height: 100%;
+}
+
 </style>
 
 <script type="text/javascript"
@@ -139,9 +152,11 @@
 							let title = encodeURI(pop[i].novel_title);
 							listhtml +=`
 								<div class="card">
+								<div class="img-wrapper">
 								<a class="card-a" href="novel_detail.do?novel_title=\${title}"> <img src="\${pop[i].novel_img}"
-									class="card-img-top" alt="...">
+									class="card-img-top" alt="..." id="rankimg">
 								</a>
+								</div>
 								</div>
 								`;
 						}
@@ -158,9 +173,11 @@
 							let title = encodeURI(pop[i].novel_title);
 							listhtml +=`
 								<div class="card">
+								<div class="img-wrapper">
 								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${pop[i].novel_img}"
-									class="card-img-top" alt="...">
+									class="card-img-top" alt="..." id="rankimg">
 								</a>
+								</div>
 								</div>
 								`;
 						}
@@ -200,9 +217,11 @@
 							let title = encodeURI(romance[i].novel_title);
 							listhtml +=`
 								<div class="card">
+								<div class="img-wrapper">
 								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
-									class="card-img-top" alt="...">
+									class="card-img-top" alt="..." id="rankimg">
 								</a>
+								</div>
 								</div>
 								`;
 						}
@@ -219,9 +238,11 @@
 							let title = encodeURI(romance[i].novel_title);
 							listhtml +=`
 								<div class="card">
+								<div class="img-wrapper">
 								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romance[i].novel_img}"
-									class="card-img-top" alt="...">
+									class="card-img-top" alt="..." id="rankimg">
 								</a>
+								</div>
 								</div>
 								`;
 						}
@@ -261,9 +282,11 @@
 							let title = encodeURI(romancefantasy[i].novel_title);
 							listhtml +=`
 								<div class="card">
+								<div class="img-wrapper">
 								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romancefantasy[i].novel_img}"
-									class="card-img-top" alt="...">
+									class="card-img-top" alt="..." id="rankimg">
 								</a>
+								</div>
 								</div>
 								`;
 						}
@@ -280,9 +303,11 @@
 							let title = encodeURI(romancefantasy[i].novel_title);
 							listhtml +=`
 								<div class="card">
+								<div class="img-wrapper">
 								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${romancefantasy[i].novel_img}"
-									class="card-img-top" alt="...">
+									class="card-img-top" alt="..." id="rankimg">
 								</a>
+								</div>
 								</div>
 								`;
 						}
@@ -320,9 +345,11 @@
 							let title = encodeURI(fantasy[i].novel_title);
 							listhtml +=`
 								<div class="card">
+								<div class="img-wrapper">
 								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${fantasy[i].novel_img}"
-									class="card-img-top" alt="...">
+									class="card-img-top" alt="..." id="rankimg">
 								</a>
+								</div>
 								</div>
 								`;
 						}
@@ -339,9 +366,11 @@
 							let title = encodeURI(fantasy[i].novel_title);
 							listhtml +=`
 								<div class="card">
+								<div class="img-wrapper">
 								<a href="novel_detail.do?novel_title=\${title}"> <img src="\${fantasy[i].novel_img}"
-									class="card-img-top" alt="...">
+									class="card-img-top" alt="..." id="rankimg">
 								</a>
+								</div>
 								</div>
 								`;
 						}

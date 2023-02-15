@@ -15,9 +15,9 @@
 	rel="stylesheet"
 	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
 	crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style type="text/css">
-
-#nav-button{
+#nav-button {
 	width: 120px;
 	height: 40px;
 	margin: 16px;
@@ -35,8 +35,8 @@
 	color: #ffb26c;
 }
 
-#kromance, #kfantasy, #kromancefantasy,
-#nromance, #nfantasy, #nromancefantasy{
+#kromance, #kfantasy, #kromancefantasy, #nromance, #nfantasy,
+	#nromancefantasy {
 	width: 120px;
 	height: 40px;
 	margin: 16px;
@@ -53,6 +53,71 @@
 	text-align: center;
 	color: #ffb26c;
 }
+
+#pageGroup>ul>li>a {
+	color: #999;
+	border: none;
+	font-family: AppleSDGothicNeoEB;
+	font-size: 18px;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+#pagging {
+	height: 69px;
+	margin: 50px 64px 0 57px;
+	padding: 15px 25px 14px;
+	border-radius: 15px;
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+	background-color: #fff;
+	max-width: 555px;
+	text-align: center;
+}
+
+li #pageli {
+	display: inline-block;
+}
+
+#search {
+	width: 350px;
+	border: 1px solid;
+	border-color: black;
+	border-bottom-left-radius: 0.375rem;
+	border-top-left-radius: 0.375rem;
+}
+
+.input-group {
+	margin-bottom: 10px;
+	text-align: center;
+}
+.card-body{
+	height : 150px;
+	font-size: 10px;
+}
+
+#paginggroup{
+	text-align: center;
+}
+
+.card-text{
+	margin-bottom: 10px;
+}
+
+#rowcard{
+	margin-bottom: 10px;
+}
+
+#novel-title{
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+	font-size: 15px;
+	font-weight: bold;
+}
+
 </style>
 
 <script type="text/javascript"
@@ -91,7 +156,7 @@
 					listhtml += `	<div class='col'>`;
 					
 						listhtml += `										
-						<div class='card shadow-sm'>
+						<div class='card shadow-sm' id='rowcard'>
 							<a href='./novel_detail.do?novel_title=\${title}'> <img src='\${jsonData[0].novelLists[i].novel_img}' class='img' width='100%'
 							height='225' role='img' aria-label='Placeholder: Thumbnail'>
 							</a>
@@ -109,13 +174,15 @@
 							}
 
 						listhtml += `		
-								<p class='card-text'>\${jsonData[0].novelLists[i].novel_title}</p>
+								<p class='card-text' id='novel-title'>\${jsonData[0].novelLists[i].novel_title}</p>
 								<p class='card-text'>\${jsonData[0].novelLists[i].novel_writer}</p>`;
 								
 							if( jsonData[0].novelLists[i].novel_avgstar != null ){
 								let star = parseFloat(jsonData[0].novelLists[i].novel_avgstar).toFixed(2);
-								listhtml += `<p class='card-text'>별점 \${star}</p>`;
-							}	
+								listhtml += `<p class='card-text'><i class='bi bi-star-fill'> \${star}</i> </p>`;
+							} else {
+								listhtml += `<p class='card-text'><i class='bi bi-star-fill'> 0.0 </i> </p>`;
+							}
 								
 					listhtml += `
 							</div>
@@ -142,32 +209,34 @@
 				
 				
 				listhtml += `
-					<nav aria-label="Page navigation example">
-						<ul class="pagination justify-content-center">`;
+					<div id="paginggroup">
+					<div class="justify-content-center" id="pageGroup" style="display: inline-block;" >
+						<ul class="pagination " id="pagging">`;
 						
 				if( cpage == 1 ){
-					listhtml += `<li class="page-item disabled"><a class="page-link">Previous</a></li>`;
+					listhtml += `<li id="pageLi" class="page-item disabled"><a class="page-link">&laquo;</a></li>`;
 				} else {
-					listhtml += `<li class="page-item"><a class="goBackPage page-link">Previous</a></li>`;
+					listhtml += `<li id="pageLi" class="page-item"><a class="goBackPage page-link">&laquo;</a></li>`;
 				}
 				
 				for( let i = startBlock ; i <= endBlock ; i ++ ){
 					if( cpage == i ){
-						listhtml += '	<li class="page-item disabled"><a class="page-link">' + i + '</a></li>';
+						listhtml += '	<li id="pageLi" class="page-item disabled"><a class="page-link">' + i + '</a></li>';
 					} else {
-						listhtml += '	<li class="page-item"><a class="goPage page-link" data-page="' + i +  '">' + i + '</a></li>';
+						listhtml += '	<li id="pageLi" class="page-item"><a class="goPage page-link" data-page="' + i +  '">' + i + '</a></li>';
 					}
 				}
 				
 				if( cpage == totalPage ){
-					listhtml += `<li class="page-item disabled"><a class="page-link">Next</a></li>`;
+					listhtml += `<li id="pageLi" class="page-item disabled"><a class="page-link">&raquo;</a></li>`;
 				} else {
-					listhtml += `<li class="page-item"><a class="goNextPage page-link">Next</a></li>`;
+					listhtml += `<li id="pageLi" class="page-item"><a class="goNextPage page-link">&raquo;</a></li>`;
 				}
 				
 				listhtml += `
 						</ul>
-					</nav>`;
+					</div>
+					</div>`;
 					
 				$('#insertnovelList').append(listhtml);
 				
@@ -277,11 +346,11 @@
 
 
 	<div class="container w-75">
-		<ul class="nav justify-content-center"
-			role="tablist" id="tablists">
+		<ul class="nav justify-content-center" role="tablist" id="tablists">
 			<li class="nav-item"><a class="nav-link active"
-				data-bs-toggle="pill" href="#kakaopage" id="nav-button" data-link="platform"
-				style="background-color: #ffb26c; color: #fff;">카카오 페이지</a></li>
+				data-bs-toggle="pill" href="#kakaopage" id="nav-button"
+				data-link="platform" style="background-color: #ffb26c; color: #fff;">카카오
+					페이지</a></li>
 			<li class="nav-item"><a class="nav-link" data-bs-toggle="pill"
 				href="#series" id="nav-button" data-link="platform">네이버 시리즈</a>
 		</ul>
@@ -311,21 +380,21 @@
 				</ul>
 			</div>
 		</div>
- 
-	<div class="container" id="novellist">
-		<div class="row">
-			<div class="col">
-				<div class="col w-75 p-100" style="float: none; margin: 0 auto;">
-					<div class="input-group mb-3">
-						<input type="text" class="form-control center"
-							placeholder="검색어를 입력하세요" aria-describedby="button-addon" id="search">
-						<button class="btn btn-outline-secondary" type="button"
-							id="searchbtn">검색</button>
+
+		<div class="container" id="novellist">
+			<div class="row">
+				<div class="col" id="searchcol">
+					<div class="col w-75 p-100" style="float: none; margin: 0 auto;">
+						<div class="input-group justify-content-center">
+							<input type="text" placeholder="검색어를 입력하세요"
+								aria-describedby="button-addon" id="search">
+							<button class="btn btn-outline-secondary" type="button"
+								id="searchbtn">검색</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 		<div class="container" id="insertnovelList"></div>
 	</div>
