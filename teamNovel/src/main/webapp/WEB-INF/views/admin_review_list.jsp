@@ -22,8 +22,34 @@
 #td_link {
 	color: #000;
 }
-</style>
 
+#pageGroup > ul > li > a{
+	color: #999;
+	border: none;
+	font-family: AppleSDGothicNeoEB;
+  	font-size: 20px;
+	width: 40px;
+  	height: 40px;
+  	margin-right: 10px;
+  	margin-left: 10px;
+}
+
+#pagging {
+  	height: 69px;
+  	margin: 50px 64px 0 57px;
+  	padding: 15px 25px 14px;
+  	border-radius: 15px;
+  	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  	background-color: #fff;
+	max-width: 555px;
+ 	text-align: center;
+}
+
+li #pageli {
+	display: inline-block;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -68,7 +94,7 @@ function ReviewListAjax(url, page, keyword){
 								\${jsonData[0].reviewLists[i].review_content}</a></td>
 							<td>\${jsonData[0].reviewLists[i].review_star_grade}</td>
 							<td>\${jsonData[0].reviewLists[i].review_date}</td>
-							<td><input type="button" value="삭제" onclick="location.href='admin_review_delete_ok.do?seq=\${jsonData[0].reviewLists[i].review_seq}'"/></td>
+							<td><input type='submit' value='삭제' class='deletebutton' data-seq="\${jsonData[0].reviewLists[i].review_seq}"></td>
 							</tr>
 						`;
 				}
@@ -124,6 +150,24 @@ function ReviewListAjax(url, page, keyword){
 				      	page = (cpage + 1);
 				      	ReviewListAjax( url, page, keyword );
 			        });
+					
+					$(".deletebutton").click(function () {
+				        Swal.fire({
+				            title: '회원 정보 삭제',
+				            text: "삭제된 회원 정보는 복구할 수 없습니다. 정말 삭제하시겠습니까?",
+				            icon: 'warning',
+				            showCancelButton: true,
+				            confirmButtonColor: '#3085d6',
+				            cancelButtonColor: '#d33',
+				            confirmButtonText: '확인',
+				            cancelButtonText: '취소'
+				        }).then((result) => {
+				            if (result.isConfirmed) {
+				            	let seq = $(this).attr("data-seq");
+				                location.href = "./admin_review_delete_ok.do?seq="+seq;
+				            }
+				        })
+				    });
 		},
 		error : function(e) {
 			alert("error !");
@@ -242,7 +286,7 @@ function ReviewListAjax(url, page, keyword){
 
 
 	<!-- paging -->
-	<div class="container mb-4" id="insertPagging">
+	<div class="container mb-4 text-center" id="insertPagging">
 	</div>
 	<!-- 
 		<nav aria-label="Page navigation example"

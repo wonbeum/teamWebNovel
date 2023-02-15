@@ -273,9 +273,9 @@ public class LoginController {
 			to.setUser_email(request.getParameter("user_email"));
 			to.setUser_nickname(request.getParameter("user_nickname"));
 			
-			if(request.getParameter("user_gender") =="male" ) {
+			if(request.getParameter("user_gender").equals("male") ) {
 				to.setUser_gender("M");
-			} else if(request.getParameter("user_gender") =="female" ) {
+			} else if(request.getParameter("user_gender").equals("female") ) {
 				to.setUser_gender("F");
 			} else {
 				to.setUser_gender("N");

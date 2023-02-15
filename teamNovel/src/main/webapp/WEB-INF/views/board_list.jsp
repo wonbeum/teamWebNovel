@@ -312,7 +312,7 @@ $(document).ready(function(){
 		$('#searchbtn').click(function(){
 			let keyword = $('#input_keyword').val().trim();
 			if(keyword.length<2){
-				alert('두글자이상 입력해주세요');
+				alert('두 글자이상 입력해주세요');
 			} else {
 				BoardListAjax('SearchListAjax.do', 1 , '#insertTotalList',keyword);
 			}
@@ -431,7 +431,7 @@ $(document).ready(function(){
 			<div class="row" style="margin-bottom: 0px; padding-right: 0px; display: flex ">
 				<div class="col-auto col-md-6 me-auto col-sm-6">
 					<div id="searchbox" class="text-start">
-						<input type="text" placeholder="2자이상 작성자/내용 입력" id="input_keyword"
+						<input type="text" placeholder="2자 이상 작성자/제목 입력" id="input_keyword"
 							style="border: none; outline: none; max-width: 75%; font-family: AppleSDGothicNeoSB; font-size: 17px;">
 						<a type="button" id="searchbtn"
 							style="font-family: AppleSDGothicNeoB; font-size: 20px; color: #999; float: right;">검색</a>

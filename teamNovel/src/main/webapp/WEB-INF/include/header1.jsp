@@ -36,8 +36,9 @@
 }
 
 .logoimg {
-	width: 350px;
-	height: 75px;
+	width: 100%;
+	max-width: 350px;
+	height: auto;
 }
 
 #mag_tag {
@@ -60,6 +61,7 @@
 	font-size: 25px;
 	color: #fff;
 	text-decoration-line: none;
+	
 }
 
 #header_nav li a {
@@ -89,14 +91,7 @@ function kakaoLogout() {
 	window.Kakao.init("859ec84590f813c455534fba411212ba");
 	window.Kakao.isInitialized();
 	
-    if (!Kakao.Auth.getAccessToken()) {
-    	console.log('Not logged in.');
-      return;
-    }
-    Kakao.Auth.logout(function() {
-    	console.log(Kakao.Auth.getAccessToken());
-    	location.href = "./logout.do"; // 로그아웃 처리
-	})
+    location.href = "./logout.do"; // 로그아웃 처리
 }
 
 </script>
@@ -105,25 +100,24 @@ function kakaoLogout() {
 	<!-- header -->
 	<header>
 		<div class="row py-3"
-			style="height: 107px; padding-top: 15px; padding-bottom: 17px;">
+			style="height: 100%; padding-top: 15px; padding-bottom: 17px;">
 			<div class="col" style="padding-left: 39px; padding-right: 0px;">
 			</div>
-			<div class="col-6 text-center" style="height: 75px;">
+			<div class="col-lg-6 col-md-4 col-sm-12 text-center" style="height: 100%;">
 				<a href="./main.do"><img class="logoimg" src="../images/logo.png"
 					srcset="../images/logo@2x.png 2x, ../images/logo@3x.png 3x"></a>
 			</div>
-			<div class="col d-flex flex-row-reverse py-4"
-				style="padding-right: 39px; padding-left: 0px;">
-				<div class="justify-content-end">
+			<div class="col d-flex flex-row-reverse"
+				style="padding-right: 39px;padding-left: 0px;padding-top: 20px;">
+				<div class="mx-auto">
 					<a class="link-secondary" id="mag_tag" href="./novel_search.do">
 						<img src="../images/magnifier.png"
-						style="width: 48px; padding: 5px; padding-bottom: 7px">
+						style="max-width: 48px; width: 40%; padding: 5px; padding-bottom: 7px">
 					</a>
 
 					<!-- 로그인 -->
 					<c:if test="${signIn == null}">
-						<a class="login_btn" href="./login.do" role="button"
-							style="padding-top: 11px; height: 41px; margin-left: 20px;">로그인</a>
+						<a class="login_btn" href="./login.do" role="button">로그인</a>
 					</c:if>
 					<c:if test="${signIn != null}">
 						<div class="dropdown" id="dropdown">
@@ -146,7 +140,7 @@ function kakaoLogout() {
 
 			<ul id="header_nav"
 				class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0"
-				id="navbar" style="height: 64px;">
+				id="navbar" style="height: 100%; padding-bottom: 10px;">
 				<li><a href="./rank_list.do" class="nav-link px-4 link-dark"
 					style="padding-bottom: 0px; padding-top: 16px;">랭킹</a></li>
 				<li><a href="./review_list.do" class="nav-link px-4 link-dark"
