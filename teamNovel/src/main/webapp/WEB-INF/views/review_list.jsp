@@ -27,19 +27,17 @@ String novel_title = to.getNovel_title();
 #tab1, #tab2, #tab3, #tab4{
 	width: 120px;
 	height: 40px;
-	margin: 16px;
-	margin-top: 20px;
-	border-radius: 20px;
-	border: solid 2px #ffb26b;
-	background-color: #fff;
-	padding-top: 6px;
-	font-family: AppleSDGothicNeoR;
-	font-size: 15px;
+  	margin: 16px;
+  	border-radius: 20px;
+  	border: solid 2px #ffb26b;
+  	background-color: #fff;
+  	
+  	font-family: AppleSDGothicNeoR;
+	font-size: 18px;
 	font-weight: 800;
-	font-style: normal;
-	text-decoration-line: none;
-	text-align: center;
-	color: #ffb26c;
+  	font-style: normal;
+  	text-align: center;
+  	color: #ffb26c;
 }
 
 #review1 {
@@ -50,19 +48,21 @@ String novel_title = to.getNovel_title();
   overflow:hidden;
 }
 
-	.card-img img{
-	
-	  width: 70%;
-	height: 70%;
+#img{
+	margin: 5px 2px 2px 1px;
+  padding: 5px 5px 5px 5px;
+	 width: 80%;
+	height: 80%;
 	  border-radius: 10px;
 	  display: flex;
 	}
 #novelinfo{
-	 width: 200px;
-	  height: 50%;
+	 width: 300px;
+	  height: 90%;
+	  margin: 19px 12px 8px 10px;
 	  float: left;
 }
-#genre {
+#genre ,#writer {
   width: 200px;
   height: 19px;
   font-family: AppleSDGothicNeo;
@@ -75,18 +75,7 @@ String novel_title = to.getNovel_title();
   text-align: left;
   color: #9b9b9b;
 }
-#writer  {
-  font-family: AppleSDGothicNeo;
-  width: 200px;
-  font-size: 14px;
-  font-weight: 300;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  float: left;
-  color: #707071;
-}
+
 #title {
   
   font-family: AppleSDGothicNeo;
@@ -98,9 +87,9 @@ String novel_title = to.getNovel_title();
 #novelcontent {
 margin: 19px 12px 8px 10px;
   width: 230px;
-  height: 180px;
+  height: 500px;
   font-family: AppleSDGothicNeo;
-  font-size: 15px;
+  font-size: 30px;
   font-weight: 500;
   font-stretch: normal;
   font-style: normal;
@@ -112,8 +101,8 @@ margin: 19px 12px 8px 10px;
 }
 #userreeview {
 margin: 19px 12px 8px 10px;
-  width: 300px;
-  height: 23px;
+  width: 480px;
+  height: 290px;
   font-family: AppleSDGothicNeo;
   font-size: 15px;
   font-weight: 600;
@@ -126,7 +115,7 @@ margin: 19px 12px 8px 10px;
 }
 
 #nickname {
-  width: 80px;
+  width: 150px;
   height: 23px;
   margin: 32px 11px 6px 5.5px;
   font-family: AppleSDGothicNeo;
@@ -153,7 +142,13 @@ margin: 19px 12px 8px 10px;
   text-align: left;
   color: #5b5b5b;
 }
-
+.checked {
+	color: orange;
+}
+#reviewarea{
+width: 250px;
+  height: 500px;
+}
 
 </style>
 <script type="text/javascript"
@@ -161,6 +156,7 @@ margin: 19px 12px 8px 10px;
 <script type="text/javascript">
 
 
+	
 function reviewList( url, page ) {
 	 console.log("성공");
        $.ajax({
@@ -186,56 +182,52 @@ function reviewList( url, page ) {
 				let div = '';
 					for(let i=0; i<recordPerPage; i++){		
 						let title = encodeURI(jsonData[0].reviewList[i].novel_title);
-						if((i%2)==0){
+						
 							div += `
 								<div id="review1">
 								<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
 							`;
-						}
+						
 							div += `
 								<div class="row g-0">
 							
-									<div class="col">
+									<div class="col" >
 									<div class="card-img">
-										<a href="./novel_detail.do?novel_title=\${title}"> <img src="\${jsonData[0].reviewList[i].novel_img}">
+										<a href="./novel_detail.do?novel_title=\${title}"> <img src="\${jsonData[0].reviewList[i].novel_img}" id= "img">
 										</a>
 										</div>
-										<div class="card">
-										<p class="card-text"id="userreeview"> 사용자 리뷰</p>
-											<p class="card-text" id="nickname">\${jsonData[0].reviewList[i].user_nickname}</p>
-											<p class="card-text" id="reviewdate">\${jsonData[0].reviewList[i].review_date}</p>
-											<p class="card-text" id="novelcontent">\${jsonData[0].reviewList[i].review_content}</p>
-										</div>
+										
 									</div>
 									<div class="col">
-									<div class="card">
-											<div class="card-body" id="novelinfo">
+									<div class="card"id="novelinfo" >
+											<div class="card-body" >
 											<span class="card-text" id="genre">\${jsonData[0].reviewList[i].novel_genre}</span>
-											<span class="card-text" id="writer">작가-\${jsonData[0].reviewList[i].novel_writer}</span>
+											<span class="card-text" id="writer">작가: \${jsonData[0].reviewList[i].novel_writer}</span>
 											<p class="card-text" id="title">\${jsonData[0].reviewList[i].novel_title}</p>
+											
 											<p class="card-text" id="stargrade">
 									`;
 								let avg= parseInt(jsonData[0].reviewList[i].review_star_grade);
 							if( avg >= 4 ){
-								for( let j = 1 ; j <= avg ;  j++ ){
+								for( let i = 1 ; i <= avg ;  i++ ){
 								
 									div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
 									
 								}
 							} else if ( avg >= 3 ) {
-								for( let j = 1 ; j <= avg ;  j++ ){
+								for( let i = 1 ; i <= avg ;  i++ ){
 									
 									div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
 									
 								}
 							} else if ( avg >=2 ){
-								for( let j = 1 ; j <=  avg;  j++ ){
+								for( let j = i ; j <=  avg;  i++ ){
 									
 									div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
 									
 								}
 							} else if ( avg >=1 ) {
-								for( let j = 1 ; j <= avg ;  j++ ){
+								for( let i = 1 ; i <= avg ;  i++ ){
 								div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
 								}	
 							}
@@ -246,15 +238,36 @@ function reviewList( url, page ) {
 										</div>
 										</div>
 									</div>
+									
+									<div class="card" id="userreeview">
+									<p class="card-text"> 사용자 리뷰</p>
+									<p id="avgstar">평균리뷰점수 ★(\${avg})</p>
+									<div class="list-group w-auto" id="reviewarea">
+									<a href="#"
+										class="list-group-item list-group-item-action d-flex gap-3 py-3"
+										aria-current="true" id="insertsmall">
+									
+										<div class="d-flex gap-2 w-100 justify-content-between">
+											<div>
+												
+												<h6 class="mb-0">닉네임 : \${jsonData[0].reviewList[i].user_nickname}</h6>
+												<p class="mb-0 opacity-75">\${jsonData[0].reviewList[i].review_content}</p>
+											</div>
+											<small class="opacity-50 text-nowrap">\${jsonData[0].reviewList[i].review_date}</small>
+										</div>
+									</a>
+									</div>
+									
+									</div>
 								
 								`;
 								
-								if((i%2)==1){
+							
 									div += `
 									</div>
 									</div>
 									`;
-								}
+								
 						
 					}
 				
@@ -308,7 +321,23 @@ function reviewList( url, page ) {
 			});
 		};
 		$(document).ready(function() {
-			console.log("성공");
+			 $('#tablists').on('show.bs.tab', function(e){
+			    	var Target1 = e.target;
+			    	Target1.style.background ="#ffb26b"
+			    	var Target2 = e.relatedTarget;
+			    	Target2.style.background = "white";
+			    	//alert( $(e.target).text() );
+			        });
+			    
+			    $('a[data-bs-toggle="tab"]').on('show.bs.tab', function(e){
+			    	var myTarget = e.target;
+			    	myTarget.style.color = "white";
+			    	var futureTarget = e.relatedTarget;
+			    	futureTarget.style.color = "#ffb26b";
+			    	//alert( $(e.target).text() );
+			        });
+			    
+			//console.log("성공");
 			let url = 'ReviewListAll.do';
 			let page = 1;
 			reviewList( url, page );
@@ -362,15 +391,15 @@ function reviewList( url, page ) {
 			</a>
 			<div>
 				<ul
-					class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-					<li class="tabs"><a href="#tab-1"
-						class="nav-link px-2 link-secondary" id="tab1">전체</a></li>
+					class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" id="tablists">
+					<li class="tabs" ><a href="#tab-1"
+						class="nav-link px-2 link-secondary" data-bs-toggle="tab" data-bs-target="#all"id="tab1">전체</a></li>
 					<li class="tabs"><a href="#tab-2"
-						class="nav-link px-2 link-dark" id="tab2">로맨스</a></li>
+						class="nav-link px-2 link-dark" data-bs-toggle="tab" data-bs-target="#romance" id="tab2">로맨스</a></li>
 					<li class="tabs"><a href="#tab-3"
-						class="nav-link px-2 link-dark" id="tab3">로맨스 판타지</a></li>
+						class="nav-link px-2 link-dark" data-bs-toggle="tab" data-bs-target="#romancefantasy" id="tab3">로맨스 판타지</a></li>
 					<li class="tabs"><a href="#tab-4"
-						class="nav-link px-2 link-dark" id="tab4">판타지</a></li>
+						class="nav-link px-2 link-dark" data-bs-toggle="tab" data-bs-target="#fantasy" id="tab4">판타지</a></li>
 				</ul>
 			</div>
 		</header>

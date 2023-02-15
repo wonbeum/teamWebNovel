@@ -99,6 +99,262 @@ public class novel_detailDAO {
 		return reviewlists;
 	}
 	
+	public ReviewPagingTO review_listPaging( ReviewPagingTO reviewTO, String novel_title ) {
+		 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int cpage = reviewTO.getCpage();
+		int recordPerPage = reviewTO.getRecordPerPage();
+		int blockPerPage = reviewTO.getBlockPerPage();
+		
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "select novel_title, user_nickname, review_content, date_format(review_date,'%y-%m-%d') review_date, review_star_grade from novel_review_board where novel_title = ? order by review_seq desc";
+			
+			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
+			
+			pstmt.setString( 1, novel_title );
+			
+			rs = pstmt.executeQuery();
+
+			rs.last();
+			reviewTO.setTotalRecord( rs.getRow() );
+			rs.beforeFirst();
+
+			reviewTO.setTotalPage( ( ( reviewTO.getTotalRecord() - 1 ) / recordPerPage ) + 1 );
+			
+			int skip = ( cpage - 1 ) * recordPerPage;
+			if( skip != 0 ) rs.absolute( skip );
+			
+			ArrayList<novel_detailTO> lists = new ArrayList<>();
+			
+			for( int i = 0 ; i< recordPerPage && rs.next() ; i++ ) {
+				novel_detailTO to = new novel_detailTO();
+				to.setUser_nickname( rs.getString( "user_nickname" ) );
+				to.setReview_date( rs.getString( "review_date" ) );
+				to.setReview_content( rs.getString( "review_content" ) );
+				to.setReview_star_grade(rs.getString("review_star_grade"));
+				lists.add(to);
+				
+			}
+
+			reviewTO.setReviewdetail(lists);
+			
+
+			reviewTO.setStartBlock( ( ( cpage - 1 ) / blockPerPage ) * blockPerPage + 1 );
+			reviewTO.setEndBlock( ( ( cpage -1 ) / blockPerPage ) * blockPerPage + blockPerPage );
+			if( reviewTO.getEndBlock() >= reviewTO.getTotalPage() ) {
+				reviewTO.setEndBlock( reviewTO.getTotalPage() );
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}	
+		
+		return reviewTO;
+	}
+	
+
+	public ReviewPagingTO review_recent( ReviewPagingTO reviewTO, String novel_title ) {
+		 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int cpage = reviewTO.getCpage();
+		int recordPerPage = reviewTO.getRecordPerPage();
+		int blockPerPage = reviewTO.getBlockPerPage();
+		
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "select novel_title, user_nickname, review_content, date_format(review_date,'%y-%m-%d') review_date, review_star_grade from novel_review_board where novel_title = ? order by review_seq desc";
+			
+			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
+			
+			pstmt.setString( 1, novel_title );
+			
+			rs = pstmt.executeQuery();
+
+			rs.last();
+			reviewTO.setTotalRecord( rs.getRow() );
+			rs.beforeFirst();
+
+			reviewTO.setTotalPage( ( ( reviewTO.getTotalRecord() - 1 ) / recordPerPage ) + 1 );
+			
+			int skip = ( cpage - 1 ) * recordPerPage;
+			if( skip != 0 ) rs.absolute( skip );
+			
+			ArrayList<novel_detailTO> lists = new ArrayList<>();
+			
+			for( int i = 0 ; i< recordPerPage && rs.next() ; i++ ) {
+				novel_detailTO to = new novel_detailTO();
+				to.setUser_nickname( rs.getString( "user_nickname" ) );
+				to.setReview_date( rs.getString( "review_date" ) );
+				to.setReview_content( rs.getString( "review_content" ) );
+				to.setReview_star_grade(rs.getString("review_star_grade"));
+				lists.add(to);
+				
+			}
+
+			reviewTO.setReviewdetail(lists);
+			
+
+			reviewTO.setStartBlock( ( ( cpage - 1 ) / blockPerPage ) * blockPerPage + 1 );
+			reviewTO.setEndBlock( ( ( cpage -1 ) / blockPerPage ) * blockPerPage + blockPerPage );
+			if( reviewTO.getEndBlock() >= reviewTO.getTotalPage() ) {
+				reviewTO.setEndBlock( reviewTO.getTotalPage() );
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}	
+		
+		return reviewTO;
+	}
+	public ReviewPagingTO review_star_high( ReviewPagingTO reviewTO, String novel_title ) {
+		 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int cpage = reviewTO.getCpage();
+		int recordPerPage = reviewTO.getRecordPerPage();
+		int blockPerPage = reviewTO.getBlockPerPage();
+		
+		try {
+			conn = dataSource.getConnection();
+
+			String sql = "select novel_title, user_nickname, review_content, date_format(review_date,'%y-%m-%d') review_date, review_star_grade from novel_review_board where novel_title = ? order by review_star_grade desc";
+			
+			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
+			
+			pstmt.setString( 1, novel_title );
+			
+			rs = pstmt.executeQuery();
+
+			rs.last();
+			reviewTO.setTotalRecord( rs.getRow() );
+			rs.beforeFirst();
+
+			reviewTO.setTotalPage( ( ( reviewTO.getTotalRecord() - 1 ) / recordPerPage ) + 1 );
+			
+			int skip = ( cpage - 1 ) * recordPerPage;
+			if( skip != 0 ) rs.absolute( skip );
+			
+			ArrayList<novel_detailTO> lists = new ArrayList<>();
+			
+			for( int i = 0 ; i< recordPerPage && rs.next() ; i++ ) {
+				novel_detailTO to = new novel_detailTO();
+				to.setUser_nickname( rs.getString( "user_nickname" ) );
+				to.setReview_date( rs.getString( "review_date" ) );
+				to.setReview_content( rs.getString( "review_content" ) );
+				to.setReview_star_grade(rs.getString("review_star_grade"));
+				lists.add(to);
+				
+			}
+
+			reviewTO.setReviewdetail(lists);
+			
+
+			reviewTO.setStartBlock( ( ( cpage - 1 ) / blockPerPage ) * blockPerPage + 1 );
+			reviewTO.setEndBlock( ( ( cpage -1 ) / blockPerPage ) * blockPerPage + blockPerPage );
+			if( reviewTO.getEndBlock() >= reviewTO.getTotalPage() ) {
+				reviewTO.setEndBlock( reviewTO.getTotalPage() );
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}	
+		
+		return reviewTO;
+	}
+	public ReviewPagingTO review_star_low( ReviewPagingTO reviewTO, String novel_title ) {
+		 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		int cpage = reviewTO.getCpage();
+		int recordPerPage = reviewTO.getRecordPerPage();
+		int blockPerPage = reviewTO.getBlockPerPage();
+		
+		try {
+			conn = dataSource.getConnection();
+
+			String sql = "select novel_title, user_nickname, review_content, date_format(review_date,'%y-%m-%d') review_date, review_star_grade from novel_review_board where novel_title = ? order by review_star_grade";
+			
+			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
+			
+			pstmt.setString( 1, novel_title );
+			
+			rs = pstmt.executeQuery();
+
+			rs.last();
+			reviewTO.setTotalRecord( rs.getRow() );
+			rs.beforeFirst();
+
+			reviewTO.setTotalPage( ( ( reviewTO.getTotalRecord() - 1 ) / recordPerPage ) + 1 );
+			
+			int skip = ( cpage - 1 ) * recordPerPage;
+			if( skip != 0 ) rs.absolute( skip );
+			
+			ArrayList<novel_detailTO> lists = new ArrayList<>();
+			
+			for( int i = 0 ; i< recordPerPage && rs.next() ; i++ ) {
+				novel_detailTO to = new novel_detailTO();
+				to.setUser_nickname( rs.getString( "user_nickname" ) );
+				to.setReview_date( rs.getString( "review_date" ) );
+				to.setReview_content( rs.getString( "review_content" ) );
+				to.setReview_star_grade(rs.getString("review_star_grade"));
+				lists.add(to);
+				
+			}
+
+			reviewTO.setReviewdetail(lists);
+			
+
+			reviewTO.setStartBlock( ( ( cpage - 1 ) / blockPerPage ) * blockPerPage + 1 );
+			reviewTO.setEndBlock( ( ( cpage -1 ) / blockPerPage ) * blockPerPage + blockPerPage );
+			if( reviewTO.getEndBlock() >= reviewTO.getTotalPage() ) {
+				reviewTO.setEndBlock( reviewTO.getTotalPage() );
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}	
+		
+		return reviewTO;
+	}
+	
+	
 	// novel_detail view 
 	public novel_detailTO novel_detail_view(novel_detailTO to) {
 		Connection conn = null;
@@ -134,9 +390,6 @@ public class novel_detailDAO {
 		}
 		
 		return to;
-	}
-
-
-	
+	}	
 
 }

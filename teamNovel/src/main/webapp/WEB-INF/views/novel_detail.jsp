@@ -31,8 +31,6 @@ String seriese = to.getNovel_series();
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 @font-face {
 	src: url("/font/AppleSDGothicNeoB.ttf");
@@ -54,7 +52,7 @@ String seriese = to.getNovel_series();
 }
 
 .-\34 9 {
-	width: 465px;
+	width: 475px;
 	height: 872px;
 	margin: 0 41px 172px 0;
 	padding: 28px 26px 40px;
@@ -69,12 +67,12 @@ String seriese = to.getNovel_series();
 	background-color: #000;
 }
 
-.genre {
+#genre {
 	width: 200px;
 	height: 20px;
 	margin: 18px 304px 3px 3px;
 	font-family: AppleSDGothicNeo;
-	font-size: 17px;
+	font-size: 30px;
 	font-weight: 300;
 	font-stretch: normal;
 	font-style: normal;
@@ -84,27 +82,27 @@ String seriese = to.getNovel_series();
 	color: #9b9b9b;
 }
 
-.-\32 {
+#writer {
 	width: 100px;
 	height: 19px;
 	margin: 19px 0 3px 154px;
 	font-family: AppleSDGothicNeo;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 300;
 	font-stretch: normal;
 	font-style: normal;
 	line-height: normal;
 	letter-spacing: normal;
-	text-align: left;
+	text-align: right;
 	color: #707071;
 }
 
 #title {
-	width: 200px;
+	width: 500px;
 	height: 28px;
 	margin: 3px 253px 17.5px 3px;
 	font-family: AppleSDGothicNeo;
-	font-size: 23px;
+	font-size: 20px;
 	font-weight: 600;
 	font-stretch: normal;
 	font-style: normal;
@@ -131,7 +129,7 @@ String seriese = to.getNovel_series();
 }
 
 #novelinfo {
-	width: 300px;
+	width: 350px;
 	height: 100%;
 	margin: 0 41px 172px 50px;
 	padding: 28px 26px 40px;
@@ -159,16 +157,94 @@ String seriese = to.getNovel_series();
 	background-color: #fff;
 }
 
-#avrg {
-	width: 972px;
-	height: 227px;
-	margin: 0 0 30px 42px;
-	padding: 42px 1.5px 38px;
-	border-radius: 20px;
-	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
-	background-color: #fff;
+#avg {
+  width: 600px;
+  height: 120px;
+  margin: 0 0 30px 42px;
+  padding: 42px 1.5px 38px;
+  border-radius: 20px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
 }
 
+#avgstar {
+  width: 500px;
+  height: 31px;
+  margin: 0 13px 25px 36.5px;
+  font-family: AppleSDGothicNeo;
+  font-size: 25px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
+
+#star {
+  width: 500px;
+  height: 54px;
+  margin: 0px 3px 0 77px;
+}
+
+#insert {
+ width: 600px;
+  height: 200px;
+  margin: 0 0 30px 42px;
+  padding: 42px 1.5px 38px;
+  border-radius: 20px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+}
+
+#insertsmall {
+ width: 590px;
+  height: 100px;
+  margin:  1px 1px 1px 1px;
+  padding: 20px 1.5px 38px;
+  border-radius: 20px;
+  background-color: #fff;
+  font-family: AppleSDGothicNeo;
+  font-size: 15opx;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
+#reviewlist1 {
+ width: 600px;
+  height: 600px;
+  margin: 0 0 5px 42px;
+  padding: 20px 1.5px 38px;
+  border-radius: 20px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #fff;
+    font-family: AppleSDGothicNeo;
+  font-size: 25px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
+#reviewcontent {
+
+  font-family: AppleSDGothicNeo;
+  font-size: 16px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
 .checked {
 	color: orange;
 }
@@ -192,128 +268,244 @@ String seriese = to.getNovel_series();
 			
 		}
 	};
-
-	function result() {
-		alert("Rating : " + count + "\nReview : "
-				+ document.getElementById("comment").value);
-	};
-	
-	function reviewarea(novel_title) {
+function allreviewlist( novel_title ) {
 		
-		console.log(novel_title);
 		$.ajax({
-			url : 'reviewlist.do',
+			url : 'allreviewlist.do',
 			type : 'get',
 			data : {
-				"novel_title" : novel_title
+				"novel_title" : novel_title,
+			},
+			dataType : 'json',
+			success : function(jsonData){	
+
 				
+				
+				
+				$('#reviewarea').html('');
+				
+				let div = '';
+				
+				let avg = 0;
+				for(let i=0; i<jsonData.length; i++){
+					avg += parseInt(jsonData[i].review_star_grade);
+				}
+				avg = (avg/ parseInt(jsonData.length) ).toFixed(2);
+				
+					let div2 = '';
+					
+						div2+=`<p id="avgstar">평균별점★★★★★(\${avg})</p>
+						<div id="star">
+							`;
+							
+						
+							if( avg >= 4 ){
+								for( let j = 1 ; j <= avg ;  j++ ){
+								
+									div2+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
+									
+								}
+							} else if ( avg >= 3 ) {
+								for( let j = 1 ; j <= avg ;  j++ ){
+									
+									div2+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
+									
+								}
+							} else if ( avg >=2 ){
+								for( let j = 1 ; j <=  avg;  j++ ){
+									
+									div2+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
+									
+								}
+							} else if ( avg >=1 ) {
+								for( let j = 1 ; j <= avg ;  j++ ){
+								div2+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
+								}	
+								div+= `
+								</div>`;
+							}
+							
+
+							$('#avg').append(div2);
+				
+				
+					
+			},
+			error : function(e) {
+				alert(e.state(e) );
+			}
+		});
+};
+	function reviewarea( url, novel_title  , page ) {
+		
+		$.ajax({
+			url : url,
+			type : 'get',
+			data : {
+				'cpage' : page,
+				"novel_title" : novel_title
 			},
 			dataType : 'json',
 			success : function(jsonData){
-			
-				console.log(jsonData);
-			
-					$('#reviewarea').html('');
-					
-					let div = '';
-					
-					let avg = 0;
-					for(let i=0; i<jsonData.length; i++){
-						avg += parseInt(jsonData[i].review_star_grade);
-					}
-					avg = (avg/ parseInt(jsonData.length) ).toFixed(2);
-					
-					for(let i=0; i<jsonData.length; i++){
-						div+=`
-						<a href="#"
-							class="list-group-item list-group-item-action d-flex gap-3 py-3"
-							aria-current="true">
-							<div class="d-flex gap-2 w-100 justify-content-between">
-								<div>
-									<h6 class="mb-0">\${jsonData[i].user_nickname}</h6>
-									<p class="mb-0 opacity-75">\${jsonData[i].review_content}</p>
-								</div>
-								<small class="opacity-50 text-nowrap">\${jsonData[i].review_date}</small>
+
+				let cpage = jsonData[0].cpage;
+				let recordPerPage = jsonData[0].recordPerPage;
+				let blockPerPage = jsonData[0].blockPerPage;
+				let totalPage = jsonData[0].totalPage;
+				let totalRecord = jsonData[0].totalRecord;
+				let startBlock = jsonData[0].startBlock;
+				let endBlock = jsonData[0].endBlock;
+				
+				$('#reviewarea').html('');
+				
+				let div = '';
+				
+				let avg = 0;
+				for(let i=0; i<jsonData[0].reviewdetail.length; i++){
+					avg += parseInt(jsonData[0].reviewdetail[i].review_star_grade);
+				}
+				avg = (avg/ parseInt(jsonData[0].reviewdetail.length) ).toFixed(2);
+				
+				for(let i=0; i<jsonData[0].reviewdetail.length; i++){
+					div+=`
+					<a href="#"
+						class="list-group-item list-group-item-action d-flex gap-3 py-3"
+						aria-current="true" id="insertsmall">
+						<div class="d-flex gap-2 w-100 justify-content-between">
+							<div>
+								<h6 class="mb-0">닉네임 : \${jsonData[0].reviewdetail[i].user_nickname}</h6>
+								<p class="mb-0 opacity-75" id="reviewcontent">\${jsonData[0].reviewdetail[i].review_content}</p>
 							</div>
-						</a>
-							`;
-						$('#reviewarea').append(div);
+							<small class="opacity-50 text-nowrap">\${jsonData[0].reviewdetail[i].review_date}</small>
+						</div>
+					</a>
+						`;
+				}
+					
+					
+			
+				div += `
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">`;
 						
-						$('#avg').html('');
-						
-						let div2 = '';
-						
-							div2+=`\${avg}★ 평균별점
-								`;
-								
-							
-								if( avg >= 4 ){
-									for( let j = 1 ; j <= avg ;  j++ ){
-									
-										div2+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
-										
-									}
-								} else if ( avg >= 3 ) {
-									for( let j = 1 ; j <= avg ;  j++ ){
-										
-										div2+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
-										
-									}
-								} else if ( avg >=2 ){
-									for( let j = 1 ; j <=  avg;  j++ ){
-										
-										div2+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
-										
-									}
-								} else if ( avg >=1 ) {
-									for( let j = 1 ; j <= avg ;  j++ ){
-									div2+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
-									}	
-								}
-								
-						
-								
-							$('#avg').append(div2);
-						}
+				if( cpage == 1 ){
+					div += `<li class="page-item disabled"><a class="page-link">Previous</a></li>`;
+				} else {
+					div += `<li class="page-item"><a class="goBackPage page-link">Previous</a></li>`;
+				}
+				
+				for( let i = startBlock ; i <= endBlock ; i ++ ){
+					if( cpage == i ){
+						div += '	<li class="page-item disabled"><a class="page-link">' + i + '</a></li>';
+					} else {
+						div += '	<li class="page-item"><a class="goPage page-link" data-page="' + i +  '">' + i + '</a></li>';
+					}
+				}
+				
+				if( cpage == totalPage ){
+					div += `<li class="page-item disabled"><a class="page-link">Next</a></li>`;
+				} else {
+					div += `<li class="page-item"><a class="goNextPage page-link">Next</a></li>`;
+				}
+				
+				div += `
+						</ul>
+					</nav>`;
+			
+				
+				$('#reviewarea').append(div);
+				
+				$(".goBackPage").click(function(){
+			      	let page = cpage - 1;
+			      	reviewarea(url,novel_title , page);
+		        });
+				
+				$(".goPage").click(function(){
+					page = $(this).attr("data-page");
+					reviewarea(url,novel_title , page);
+				});
+
+				$(".goNextPage").click(function(){
+			      	let page = cpage + 1;
+			      	reviewarea(url,novel_title , page);
+		        });
+				
 			},
 			error : function(e) {
-				alert("error !");
+				alert(e.state() );
 			}
 		});
 };
 
 	$(document).ready(function() {
+		const novel_title = $('#title').attr('novel-title');
+		let url ='reviewlist.do';
 		
-		let novel_title = $('#title').attr('novel-title');
+		let page = 1;
+		
+		allreviewlist(novel_title);
+		reviewarea(url,novel_title , page);
+		
+			$('#recent').on('click', function() {	
+				page = 1;
+				url = 'review_recent.do';
+				reviewarea(url,novel_title, page);
+			});
+			
+			$('#high').on('click', function() {	
+				url = 'review_star_high.do';
+				reviewarea(url,novel_title, page);
+			});
+			
+			$('#low').on('click', function() {	
+				url = 'review_star_low.do';
+				reviewarea(url,novel_title, page);
+			});
+			
 		//리뷰 작성
 		$('#reviewbtn').click(function() {
-
-			let review_content = document.getElementById('comment').value;
-			let review_star_grade = count;
-
-			console.log(${novel_title});
-			console.log(review_content);
-			console.log(review_star_grade);
-
-			$.ajax({
-				url : 'review_write.do',
-				type : 'get',
-				data : {
-					"novel_title" : novel_title,
-					"review_content" : review_content,
-					"review_star_grade" : review_star_grade
-				},
-				dataType : 'json',
-				success : function(jsonData) {
-					$("#comment").val("");
-					reviewarea(novel_title);
-				},
-				error : function(e) {
-					alert("error !");
-				}
-			});
+			// 닉네임 없을 경우 
+			if(${signIn.user_nickname == null}){
+				alert('로그인후 댓글을 입력해주세요');
+			}
+			// 별점이 없을경우
+			else if(count == null){
+				alert('별점을 입력해주세요');
+			}
+			// 입력이 없을경우
+			
+			// 등록
+			
+	
+			else{
+				
+				let review_content = document.getElementById('comment').value;
+				let review_star_grade = count;
+	
+	
+				$.ajax({
+					url : 'review_write.do',
+					type : 'get',
+					data : {
+						"novel_title" : novel_title,
+						"review_content" : review_content,
+						"review_star_grade" : review_star_grade
+					},
+					dataType : 'json',
+					success : function(jsonData) {
+						$("#comment").val("");
+						reviewarea(url,novel_title);
+					},
+					error : function(e) {
+						alert("error !");
+					}
+				});
+			}
+			allreviewlist(novel_title);
 		});
-		reviewarea(novel_title);
+		reviewarea(url,novel_title);
+		
+	
 });
 
 </script>
@@ -325,15 +517,15 @@ String seriese = to.getNovel_series();
 	<!-- 본문 -->
 
 	<hr class="my-5">
-	<div class="row">
+	<div class="row justify-content-center">
 
 		<div class="col-sm-6 col-lg-4">
 			<div class="card p-3" id="novelinfo">
 				<img src="<%=novel_img%>" class="-\35 0" role="img" id="novelimg">
 
 				<div class="card-body">
-					<span class="genre"><%=novel_genre%></span> <span class="-\32 "><%=novel_writer%></span>
-					<span class="title" id="title" novel-title="<%=novel_title%>"><%=novel_title%></span>
+					<p class="genre"><%=novel_genre%></p><small class="opacity-50 text-nowrap" id="writer " >작가: <%=novel_writer%></small>
+					<p class="title" id="title" novel-title="<%=novel_title%>"><%=novel_title%></p>
 					<p class="\-"><%=novel_content%></p>
 					<div class="-\34 9">
 						<a href=""><button type="button" class="btn btn-warning">플랫폼
@@ -342,11 +534,11 @@ String seriese = to.getNovel_series();
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 col-4">
-			<div class="card p-3">
-				<div class="p-3 mb-0">
+		<div class="col-sm-6 col-lg-4">
+			<div class="card p-3"  id="avg">
+				<div class="p-3 mb-0" >
 
-					<p id="avg"></p>
+					<p></p>
 
 				</div>
 				<!-- 리뷰 별점 -->
@@ -354,8 +546,8 @@ String seriese = to.getNovel_series();
 
 
 			</div>
-			<div class="-\35 3">
-				<div class="card p-3">
+			<div>
+				<div class="card p-3"  id="insert">
 
 
 					<div class="mb-3">
@@ -381,7 +573,7 @@ String seriese = to.getNovel_series();
 									<textarea style="margin-top: 5px;" class="form-control"
 										rows="3" id="comment" placeholder="Enter your review"></textarea>
 
-									<button onclick="result()" type="button"
+									<button type="button"
 										style="margin-top: 10px; margin-left: 5px;"
 										class="btn btn-lg btn-warning" id="reviewbtn">리뷰등록</button>
 
@@ -391,9 +583,10 @@ String seriese = to.getNovel_series();
 					</div>
 				</div>
 			</div>
-			<a>ReviewList</a> <span class="btn rounded-pill text-bg-warning">최신순</span>
-			<span class="btn rounded-pill text-bg-warning">별점▲</span> <span
-				class="btn rounded-pill text-bg-warning">별점▼</span>
+			<div id="reviewlist1">
+			<a>ReviewList</a> <button class="btn rounded-pill text-bg-warning" id="recent" href="#recent">최신순</button>
+			<button class="btn rounded-pill text-bg-warning" id="high" href="#high">별점▲</button> <button
+				class="btn rounded-pill text-bg-warning" id="low" href="#low">별점▼</button>
 			<div class="list-group w-auto" id="reviewarea">
 				<!-- 
 				<a href="#"
@@ -420,6 +613,7 @@ String seriese = to.getNovel_series();
 				</a>
 				 -->
 			</div>
+		</div>
 		</div>
 
 

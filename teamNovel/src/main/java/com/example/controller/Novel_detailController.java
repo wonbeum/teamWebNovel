@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.model.ReviewPagingTO;
 import com.example.model.commentTO;
 import com.example.model.freeboardTO;
 import com.example.model.novel_detailDAO;
@@ -76,12 +77,95 @@ public class Novel_detailController {
 	 //리뷰 가져오기
 	
 	@RequestMapping("reviewlist.do")
-	public ArrayList<novel_detailTO> review_list(HttpServletRequest request) {
+	public ArrayList<ReviewPagingTO> review_list(HttpServletRequest request) {
+
+		String novel_title = request.getParameter("novel_title");
+
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		ReviewPagingTO Lists = new ReviewPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = ddao.review_listPaging(Lists , novel_title);
+		
+		ArrayList<ReviewPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result;
+	}
+	
+	@RequestMapping("review_recent.do")
+	public ArrayList<ReviewPagingTO> review_recent(HttpServletRequest request) {
+
+		String novel_title = request.getParameter("novel_title");
+
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		ReviewPagingTO Lists = new ReviewPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = ddao.review_recent(Lists , novel_title);
+		
+		ArrayList<ReviewPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result;
+	}
+	
+	@RequestMapping("review_star_high.do")
+	public ArrayList<ReviewPagingTO> review_star_high(HttpServletRequest request) {
+
+		String novel_title = request.getParameter("novel_title");
+
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		ReviewPagingTO Lists = new ReviewPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = ddao.review_star_high(Lists , novel_title);
+		
+		ArrayList<ReviewPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result;
+	}
+	
+	@RequestMapping("review_star_low.do")
+	public ArrayList<ReviewPagingTO> review_star_low(HttpServletRequest request) {
+
+		String novel_title = request.getParameter("novel_title");
+
+		int cpage = 1;
+		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( " ") ) {
+			cpage = Integer.parseInt( request.getParameter( "cpage" ) );
+		}
+		
+		ReviewPagingTO Lists = new ReviewPagingTO();
+		Lists.setCpage(cpage);
+		
+		Lists = ddao.review_star_low(Lists , novel_title);
+		
+		ArrayList<ReviewPagingTO> result = new ArrayList<>();
+		result.add(Lists);
+		
+		return result;
+	}
+	
+	@RequestMapping("allreviewlist.do")
+	public ArrayList<novel_detailTO> allreview_list(HttpServletRequest request) {
 		
 		String novel_title = request.getParameter("novel_title");
 		ArrayList<novel_detailTO> reviewlists = ddao.review_list(novel_title);
 		
 		return reviewlists;
 	}
-	
 }
