@@ -111,8 +111,8 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/ReviewSearch.do")
-	public ArrayList<NovelPagingTO> reviewsearch(HttpServletRequest request, String novel_title) {
-		
+	public ArrayList<NovelPagingTO> reviewsearch(HttpServletRequest request) {
+		String novel_title = request.getParameter("novel_title");
 		int cpage = 1;
 		if( request.getParameter( "cpage" ) != null && !request.getParameter( "cpage" ).equals( "" ) ) {
 			cpage = Integer.parseInt( request.getParameter( "cpage" ) );

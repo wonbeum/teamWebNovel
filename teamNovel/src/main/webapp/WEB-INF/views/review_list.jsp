@@ -62,10 +62,25 @@ String novel_title = to.getNovel_title();
 	  margin: 19px 12px 8px 10px;
 	  float: left;
 }
-#genre ,#writer {
+#genre {
   width: 200px;
   height: 19px;
-  font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeoR;
+  font-size: 16px;
+  font-weight: 400;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #9b9b9b;
+}
+
+#writer {
+  width: 200px;
+  height: 19px;
+  padding: 40px;
+  font-family: AppleSDGothicNeoR;
   font-size: 16px;
   font-weight: 300;
   font-stretch: normal;
@@ -78,7 +93,7 @@ String novel_title = to.getNovel_title();
 
 #title {
   
-  font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeoR;
   font-size: 19px;
   font-weight: 600;
   text-align: left;
@@ -88,7 +103,7 @@ String novel_title = to.getNovel_title();
 margin: 19px 12px 8px 10px;
   width: 230px;
   height: 500px;
-  font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeoR;
   font-size: 30px;
   font-weight: 500;
   font-stretch: normal;
@@ -103,7 +118,7 @@ margin: 19px 12px 8px 10px;
 margin: 19px 12px 8px 10px;
   width: 480px;
   height: 290px;
-  font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeoR;
   font-size: 15px;
   font-weight: 600;
   font-stretch: normal;
@@ -117,8 +132,7 @@ margin: 19px 12px 8px 10px;
 #nickname {
   width: 150px;
   height: 23px;
-  margin: 32px 11px 6px 5.5px;
-  font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeoR;
   font-size: 15px;
   font-weight: 600;
   font-stretch: normal;
@@ -132,7 +146,7 @@ margin: 19px 12px 8px 10px;
   width: 250px;
   height: 116px;
   margin: 25px 4px 0 5.5px;
-  font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeoR;
   font-size: 10px;
   font-weight: 500;
   font-stretch: normal;
@@ -157,14 +171,14 @@ width: 250px;
 
 
 	
-function reviewList( url, page ) {
+function reviewList( url, page, search ) {
 	 //console.log("성공");
        $.ajax({
          url : url,
          type : 'get',
          dataType : 'json',
          data : {
-       	'novel_title': document.getElementById('textinput').value,
+       	'novel_title': search,
        	'cpage'  : page
          },
          success : function(jsonData){
@@ -185,53 +199,26 @@ function reviewList( url, page ) {
 						
 							div += `
 								<div id="review1">
-								<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
-							`;
-						
-							div += `
-								<div class="row g-0">
-							
-									<div class="col" >
-									<div class="card-img">
-										<a href="./novel_detail.do?novel_title=\${title}"> <img src="\${jsonData[0].reviewList[i].novel_img}" id= "img">
-										</a>
-										</div>
-										
-									</div>
-									<div class="col">
-									<div class="card"id="novelinfo" >
-											<div class="card-body" >
-											<span class="card-text" id="genre">\${jsonData[0].reviewList[i].novel_genre}</span>
-											<span class="card-text" id="writer">작가: \${jsonData[0].reviewList[i].novel_writer}</span>
-											<p class="card-text" id="title">\${jsonData[0].reviewList[i].novel_title}</p>
-											
-											<p class="card-text" id="stargrade">
+									<div class="row row-cols-2 row-cols-sm-2 row-cols-md-2 g-2">
+										<div class="row g-0">						
+											<div class="col" >
+												<div class="card-img">
+													<a href="./novel_detail.do?novel_title=\${title}"> <img src="\${jsonData[0].reviewList[i].novel_img}" id= "img">
+													</a>
+												</div>								
+												</div>
+													<div class="col">
+														<div class="card"id="novelinfo" >
+															<div class="card-body" >
+																<span class="card-text" id="genre">\${jsonData[0].reviewList[i].novel_genre}</span>
+																<span class="card-text" id="writer">작가: \${jsonData[0].reviewList[i].novel_writer}</span>
+																<p class="card-text" id="title">\${jsonData[0].reviewList[i].novel_title}</p>																
+																<p class="card-text" id="stargrade">
 									`;
 								let avg= parseInt(jsonData[0].reviewList[i].review_star_grade);
-							if( avg >= 4 ){
-								for( let i = 1 ; i <= avg ;  i++ ){
 								
-									div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
-									
-								}
-							} else if ( avg >= 3 ) {
-								for( let i = 1 ; i <= avg ;  i++ ){
-									
-									div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
-									
-								}
-							} else if ( avg >=2 ){
-								for( let j = i ; j <=  avg;  i++ ){
-									
-									div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
-									
-								}
-							} else if ( avg >=1 ) {
-								for( let i = 1 ; i <= avg ;  i++ ){
-								div+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
-								}	
-							}
 											
+								
 								div += `</p>
 											<p class="card-text" id="novelcontent">\${jsonData[0].reviewList[i].novel_content}</p>
 										</div>
@@ -241,36 +228,52 @@ function reviewList( url, page ) {
 									
 									<div class="card" id="userreeview">
 									<p class="card-text"> 사용자 리뷰</p>
-									<p id="avgstar">평균리뷰점수 ★(\${avg})</p>
+									`;
+								if( jsonData[0].reviewList[i].review_star_grade == null ){
+									div += `
+										<p id="avgstar">평균리뷰점수 ★(0.00)</p>
+									`;
+								} else{
+									div += `
+										<p id="avgstar">평균리뷰점수 ★(\${avg})</p>
+									`;
+								}
+								
+								div += `
 									<div class="list-group w-auto" id="reviewarea">
 									<a href="#"
 										class="list-group-item list-group-item-action d-flex gap-3 py-3"
 										aria-current="true" id="insertsmall">
 									
 										<div class="d-flex gap-2 w-100 justify-content-between">
+										`;
+										if( jsonData[0].reviewList[i].review_star_grade == null ){
+											div += `
 											<div>
-												
-												<h6 class="mb-0">닉네임 : \${jsonData[0].reviewList[i].user_nickname}</h6>
+												<h6 class="mb-0">리뷰를 입력해주세요.</h6>
+											</div>
+											`;
+										} else{
+											div += `
+											<div>
+												<h6 class="mb-0" id="nickname">닉네임 : \${jsonData[0].reviewList[i].user_nickname}</h6>
 												<p class="mb-0 opacity-75">\${jsonData[0].reviewList[i].review_content}</p>
 											</div>
 											<small class="opacity-50 text-nowrap">\${jsonData[0].reviewList[i].review_date}</small>
+											`;
+										}
+										
+										div += `
 										</div>
 									</a>
 									</div>
 									
 									</div>
 								
-								`;
-								
-							
-									div += `
 									</div>
 									</div>
 									`;
-								
-						
 					}
-				
 				div += `
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">`;
@@ -320,6 +323,7 @@ function reviewList( url, page ) {
 				}
 			});
 		};
+		
 		$(document).ready(function() {
 			 $('#tablists').on('show.bs.tab', function(e){
 			    	var Target1 = e.target;
@@ -344,7 +348,8 @@ function reviewList( url, page ) {
 			 $("#searchbtn").click(function() {
 				 page = 1;
 				 url ='ReviewSearch.do';
-				 reviewList(url, page);
+				 let search = document.getElementById("textinput").value;
+				 reviewList(url, page, search);
 			 });
 		
 	

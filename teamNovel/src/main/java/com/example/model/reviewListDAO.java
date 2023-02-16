@@ -550,7 +550,7 @@ novelTO.setReviewList(reviewfantasy);
 			
 			String sql = "SELECT a.novel_genre,a.novel_title,a.novel_writer,a.novel_img,a.novel_content,"
 					+ "b.user_nickname,b.review_content,b.review_date,avg( b.review_star_grade ) as average FROM novel_information "
-					+ "a left join novel_review_board b on a.novel_title = b.novel_title where a.novel_genre = 'fantasy' group by a.novel_title";
+					+ "a left join novel_review_board b on a.novel_title = b.novel_title where a.novel_title like ? group by a.novel_title";
 
 			
 			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );

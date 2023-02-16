@@ -50,7 +50,19 @@ String seriese = to.getNovel_series();
 .nav-scroller {
 	border: 1px solid black;
 }
-
+#nickname {
+  width: 150px;
+  height: 23px;
+  font-family: AppleSDGothicNeoR;
+  font-size: 15px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
+}
 .-\34 9 {
 	width: 475px;
 	height: 872px;
@@ -71,7 +83,7 @@ String seriese = to.getNovel_series();
 	width: 200px;
 	height: 20px;
 	margin: 18px 304px 3px 3px;
-	font-family: AppleSDGothicNeo;
+	font-family: AppleSDGothicNeoR;
 	font-size: 30px;
 	font-weight: 300;
 	font-stretch: normal;
@@ -86,7 +98,8 @@ String seriese = to.getNovel_series();
 	width: 100px;
 	height: 19px;
 	margin: 19px 0 3px 154px;
-	font-family: AppleSDGothicNeo;
+	padding: 28px 26px 40px;
+	font-family: AppleSDGothicNeoR;
 	font-size: 18px;
 	font-weight: 300;
 	font-stretch: normal;
@@ -101,7 +114,7 @@ String seriese = to.getNovel_series();
 	width: 500px;
 	height: 28px;
 	margin: 3px 253px 17.5px 3px;
-	font-family: AppleSDGothicNeo;
+	font-family: AppleSDGothicNeoR;
 	font-size: 20px;
 	font-weight: 600;
 	font-stretch: normal;
@@ -117,7 +130,7 @@ String seriese = to.getNovel_series();
 	height: 23px;
 	margin: 38.5px 154px 40px 3px;
 	object-fit: contain;
-	font-family: AppleSDGothicNeo;
+	font-family: AppleSDGothicNeoR;
 	font-size: 19px;
 	font-weight: 500;
 	font-stretch: normal;
@@ -171,7 +184,7 @@ String seriese = to.getNovel_series();
   width: 500px;
   height: 31px;
   margin: 10px 10px 10px 35px;
-  font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeoR;
   font-size: 25px;
   font-weight: 600;
   font-stretch: normal;
@@ -205,7 +218,7 @@ String seriese = to.getNovel_series();
   padding: 20px 1.5px 38px;
   border-radius: 20px;
   background-color: #fff;
-  font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeoR;
   font-size: 15opx;
   font-weight: 600;
   font-stretch: normal;
@@ -223,7 +236,7 @@ String seriese = to.getNovel_series();
   border-radius: 20px;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #fff;
-    font-family: AppleSDGothicNeo;
+    font-family: AppleSDGothicNeoR;
   font-size: 25px;
   font-weight: 600;
   font-stretch: normal;
@@ -235,7 +248,7 @@ String seriese = to.getNovel_series();
 }
 #reviewcontent {
 
-  font-family: AppleSDGothicNeo;
+  font-family: AppleSDGothicNeoR;
   font-size: 16px;
   font-weight: 500;
   font-stretch: normal;
@@ -244,6 +257,13 @@ String seriese = to.getNovel_series();
   letter-spacing: normal;
   text-align: left;
   color: #000;
+}
+
+#button {
+    padding-bottom: 10px;
+    padding-top: 0px;
+    padding-right: 5px;
+    padding-left: 420px;
 }
 .checked {
 	color: orange;
@@ -375,7 +395,7 @@ function allreviewlist( novel_title ) {
 						aria-current="true" id="insertsmall">
 						<div class="d-flex gap-2 w-100 justify-content-between">
 							<div>
-								<h6 class="mb-0">닉네임 : \${jsonData[0].reviewdetail[i].user_nickname}</h6>
+								<h6 class="mb-0" id="nickname">닉네임 : \${jsonData[0].reviewdetail[i].user_nickname}</h6>
 								<p class="mb-0 opacity-75" id="reviewcontent">\${jsonData[0].reviewdetail[i].review_content}</p>
 							</div>
 							<small class="opacity-50 text-nowrap">\${jsonData[0].reviewdetail[i].review_date}</small>
@@ -526,7 +546,7 @@ function allreviewlist( novel_title ) {
 				<img src="<%=novel_img%>" class="-\35 0" role="img" id="novelimg">
 
 				<div class="card-body">
-					<p class="genre"><%=novel_genre%></p><small class="opacity-50 text-nowrap" id="writer " >작가: <%=novel_writer%></small>
+					<p id="genre"><%=novel_genre%></p><small class="opacity-50 text-nowrap" id="writer" >작가: <%=novel_writer%></small>
 					<p class="title" id="title" novel-title="<%=novel_title%>"><%=novel_title%></p>
 					<p class="\-"><%=novel_content%></p>
 					<div class="-\34 9">
@@ -581,9 +601,11 @@ function allreviewlist( novel_title ) {
 				</div>
 			</div>
 			<div id="reviewlist1">
-			<a>ReviewList</a> <button class="btn rounded-pill text-bg-warning" id="recent" href="#recent">최신순</button>
-			<button class="btn rounded-pill text-bg-warning" id="high" href="#high">별점▲</button> <button
+			<nav id="button">
+			<a></a> <button class="btn rounded-pill text-bg-warning" id="recent" href="#recent">최신순</button>
+			<button class="btn rounded-pill text-bg-warning id="high" href="#high">별점▲</button> <button
 				class="btn rounded-pill text-bg-warning" id="low" href="#low">별점▼</button>
+				</nav>
 			<div class="list-group w-auto" id="reviewarea">
 				<!-- 
 				<a href="#"
