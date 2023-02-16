@@ -84,7 +84,7 @@ const commentList =function() {
 		
 		},
 		error : function(e) {
-			alert("error !");
+			console.log( e.status );
 		}
 	});
 };
@@ -107,7 +107,11 @@ function cmt_delete(free_seq, cmt_seq){
 				
 				},
 				error : function(){
-					alert('댓글 삭제 실패');
+
+					Swal.fire({
+						  icon: 'error',
+						  text: '댓글 삭제 실패'
+					});
 				}
 			});
 		}

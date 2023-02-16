@@ -142,7 +142,7 @@ function AdminBoardListAjax(url, page, category, keyword){
 		        });
 		},
 		error : function(e) {
-			alert("error !");
+			console.log( e.status );
 		}
 	});
 };

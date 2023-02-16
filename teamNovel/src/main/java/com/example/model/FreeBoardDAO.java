@@ -648,4 +648,40 @@ public class FreeBoardDAO {
 		return flag;
 	}
 
+	//insert 
+	public int FreeBoard_Insert_Ok( ) {	 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int flag = 1;
+		
+		try {
+			conn = dataSource.getConnection();
+			
+			String sql = "insert into novel_free_board values (0, '잡담', ?, ?, now(), ?, 0, 0, 0, ?, ?)";
+			pstmt = conn.prepareStatement( sql );
+			
+			for(int i=1; i<=60; i++){
+				
+				pstmt.setString( 1, "제목"+i );
+				pstmt.setString( 2, "내용 : "+i );
+				pstmt.setString( 3, "000.000.000.000" );
+				pstmt.setString( 4, "qothwjd507@google.com" );
+				pstmt.setString( 5, "sjowo" );
+				
+				pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] " + e.getMessage() );
+		} finally {
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}	
+		
+		return flag;
+	}
 }

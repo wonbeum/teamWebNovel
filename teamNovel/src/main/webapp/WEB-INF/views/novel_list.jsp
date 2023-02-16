@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Gathervel</title>
+<title>Insert title here</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -288,7 +288,7 @@ li #pageli {
 				
 			},
 			error : function(err) {
-				alert('[에러] : ' + err.status);
+				console.log(err.status);
 			}
 		});
 	};

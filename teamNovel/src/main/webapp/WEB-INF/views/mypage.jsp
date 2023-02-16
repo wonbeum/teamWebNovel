@@ -244,7 +244,7 @@ window.addEventListener('load', () => {
 				return nicknameFlag;
 			},
 			error : function(e) {
-				alert("error !");
+				console.log(e.status);
 			}
 		});
 	}

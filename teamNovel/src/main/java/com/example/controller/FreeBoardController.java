@@ -330,4 +330,11 @@ public class FreeBoardController {
 		
 		return result;
 	}
+	
+	// insert
+	@RequestMapping("board_insert.do")
+	public ModelAndView board_insert() {
+		fdao.FreeBoard_Insert_Ok();
+		return new ModelAndView( "board_insert" );
+	}
 }
