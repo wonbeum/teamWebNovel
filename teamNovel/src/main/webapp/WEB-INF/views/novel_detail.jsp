@@ -170,7 +170,7 @@ String seriese = to.getNovel_series();
 #avgstar {
   width: 500px;
   height: 31px;
-  margin: 0 13px 25px 36.5px;
+  margin: 10px 10px 10px 35px;
   font-family: AppleSDGothicNeo;
   font-size: 25px;
   font-weight: 600;
@@ -185,7 +185,7 @@ String seriese = to.getNovel_series();
 #star {
   width: 500px;
   height: 54px;
-  margin: 0px 3px 0 77px;
+  margin: 0px 3px 0 30px;
 }
 
 #insert {
@@ -286,15 +286,17 @@ function allreviewlist( novel_title ) {
 				
 				let div = '';
 				
-				let avg = 0;
+				let avg = 0.00;
 				for(let i=0; i<jsonData.length; i++){
-					avg += parseInt(jsonData[i].review_star_grade);
+					avg += parseFloat(jsonData[i].review_star_grade);
 				}
-				avg = (avg/ parseInt(jsonData.length) ).toFixed(2);
+				if( avg != 0 ){
+					avg = (avg/ parseFloat(jsonData.length) ).toFixed(2);
+				}
 				
 					let div2 = '';
 					
-						div2+=`<p id="avgstar">평균별점★★★★★(\${avg})</p>
+						div2+=`<p id="avgstar">평균별점(\${avg})</p>
 						<div id="star">
 							`;
 							
@@ -321,9 +323,9 @@ function allreviewlist( novel_title ) {
 								for( let j = 1 ; j <= avg ;  j++ ){
 								div2+=`<span style="font-size: 40px;" class="fa fa-star checked"></span>`;
 								}	
+							}
 								div+= `
 								</div>`;
-							}
 							
 
 							$('#avg').append(div2);
@@ -536,11 +538,6 @@ function allreviewlist( novel_title ) {
 		</div>
 		<div class="col-sm-6 col-lg-4">
 			<div class="card p-3"  id="avg">
-				<div class="p-3 mb-0" >
-
-					<p></p>
-
-				</div>
 				<!-- 리뷰 별점 -->
 
 
