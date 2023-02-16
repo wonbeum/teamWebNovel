@@ -68,6 +68,7 @@ user_nickname varchar(30),
 foreign key (user_email, user_nickname) references novel_user_information(user_email, user_nickname) on delete cascade on update cascade,
 foreign key (free_seq) references novel_free_board(free_seq) on delete cascade
 );
+
 create table novel_origin_request(
 request_seq int auto_increment primary key,
 request_title varchar(100),
@@ -85,4 +86,4 @@ origin_movie char(2),
 foreign key (novel_title) references novel_information(novel_title)
 );
 
-insert into novel_user_information values ( 'root', '관리자', 'root', 'N' , '000000', now(), 'master' );
+insert into novel_user_information values ( 'root@root', '관리자', 'root', 'N' , '000000', now(), 'master' );

@@ -19,7 +19,7 @@ String seriese = to.getNovel_series();
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Gathervel</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
