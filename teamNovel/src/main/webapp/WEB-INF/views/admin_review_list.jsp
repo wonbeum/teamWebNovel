@@ -170,7 +170,7 @@ function ReviewListAjax(url, page, keyword){
 				    });
 		},
 		error : function(e) {
-			alert("error !");
+			console.log( e.status );
 		}
 	});
 };

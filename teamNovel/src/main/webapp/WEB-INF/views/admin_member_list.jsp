@@ -166,7 +166,7 @@ function memberList( url , page, search ){
 		    });
 		},
 		error : function(err) {
-			alert('[에러] : ' + err.status);
+			console.log( err.status );
 		}
 	});
 };
