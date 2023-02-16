@@ -11,9 +11,9 @@ String novel_content = to.getNovel_content();
 String novel_img = to.getNovel_img();
 String user_name = to.getUser_nickname();
 String review_star_grade = to.getReview_star_grade();
-String kakao = to.getNovel_kakao();
+String novel_kakao = to.getNovel_kakao();
 String ridi = to.getNovel_ridi();
-String seriese = to.getNovel_series();
+String novel_seriese = to.getNovel_series();
 %>
 <!DOCTYPE html>
 <html>
@@ -550,8 +550,18 @@ function allreviewlist( novel_title ) {
 					<p class="title" id="title" novel-title="<%=novel_title%>"><%=novel_title%></p>
 					<p class="\-"><%=novel_content%></p>
 					<div class="-\34 9">
-						<a href=""><button type="button" class="btn btn-warning">플랫폼
-								이동</button></a>
+				
+						<%
+						if(novel_kakao.equals("null")){
+					%>
+							<a href="<%=novel_seriese%>" target="_blank"><button type="button" class="btn btn-warning">플랫폼 이동</button></a>
+					<%
+						}else if(novel_seriese.equals("null")) {						
+					%>
+							<a href="<%=novel_kakao%>" target="_blank"><button type="button" class="btn btn-warning">플랫폼 이동</button></a>
+					<%
+						}
+					%>
 					</div>
 				</div>
 			</div>
@@ -559,7 +569,7 @@ function allreviewlist( novel_title ) {
 		<div class="col-sm-6 col-lg-4">
 			<div class="card p-3"  id="avg">
 				<!-- 리뷰 별점 -->
-
+					
 
 
 			</div>

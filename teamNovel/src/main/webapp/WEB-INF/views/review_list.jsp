@@ -227,7 +227,7 @@ function reviewList( url, page, search ) {
 									</div>
 									
 									<div class="card" id="userreeview">
-									<p class="card-text"> 사용자 리뷰</p>
+									<p class="card-text"></p>
 									`;
 								if( jsonData[0].reviewList[i].review_star_grade == null ){
 									div += `
