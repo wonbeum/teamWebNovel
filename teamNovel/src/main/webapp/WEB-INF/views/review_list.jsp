@@ -319,7 +319,7 @@ function reviewList( url, page, search ) {
 			        });
 				},
 				error : function(e) {
-					alert("error !");
+					console.log( e.status );
 				}
 			});
 		};

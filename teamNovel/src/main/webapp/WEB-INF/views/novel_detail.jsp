@@ -313,7 +313,7 @@ function allreviewlist( novel_title ) {
 				if( avg != 0 ){
 					avg = (avg/ parseFloat(jsonData.length) ).toFixed(2);
 				}
-				
+				$('#avg').html();
 					let div2 = '';
 					
 						div2+=`<p id="avgstar">평균별점(\${avg})</p>
@@ -354,7 +354,7 @@ function allreviewlist( novel_title ) {
 					
 			},
 			error : function(e) {
-				alert(e.state(e) );
+				console.log( e.status );
 			}
 		});
 };
@@ -398,7 +398,7 @@ function allreviewlist( novel_title ) {
 								<h6 class="mb-0" id="nickname">닉네임 : \${jsonData[0].reviewdetail[i].user_nickname}</h6>
 								<p class="mb-0 opacity-75" id="reviewcontent">\${jsonData[0].reviewdetail[i].review_content}</p>
 							</div>
-							<small class="opacity-50 text-nowrap">\${jsonData[0].reviewdetail[i].review_date}</small>
+							<span>별점★\${jsonData[0].reviewdetail[i].review_star_grade}</span><small class="opacity-50 text-nowrap">  작성일자:\${jsonData[0].reviewdetail[i].review_date}</small>
 						</div>
 					</a>
 						`;
@@ -454,7 +454,7 @@ function allreviewlist( novel_title ) {
 				
 			},
 			error : function(e) {
-				alert(e.state() );
+				console.log( e.status );
 			}
 		});
 };
@@ -488,11 +488,12 @@ function allreviewlist( novel_title ) {
 		$('#reviewbtn').click(function() {
 			// 닉네임 없을 경우 
 			if(${signIn.user_nickname == null}){
-				alert('로그인후 댓글을 입력해주세요');
+
+		        Swal.fire('로그인후 댓글을 입력해주세요');
 			}
 			// 별점이 없을경우
 			else if(count == null){
-				alert('별점을 입력해주세요');
+		        Swal.fire('별점을 입력해주세요');
 			}
 			// 입력이 없을경우
 			
@@ -519,7 +520,7 @@ function allreviewlist( novel_title ) {
 						reviewarea(url,novel_title);
 					},
 					error : function(e) {
-						alert("error !");
+						console.log( e.status );
 					}
 				});
 			}
