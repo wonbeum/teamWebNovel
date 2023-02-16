@@ -31,6 +31,7 @@ String novel_seriese = to.getNovel_series();
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <style type="text/css">
 @font-face {
 	src: url("/font/AppleSDGothicNeoB.ttf");
@@ -311,6 +312,8 @@ function allreviewlist( novel_title ) {
 				
 				
 				$('#reviewarea').html('');
+
+				$('#avg').html('');
 				
 				let div = '';
 				
@@ -321,7 +324,6 @@ function allreviewlist( novel_title ) {
 				if( avg != 0 ){
 					avg = (avg/ parseFloat(jsonData.length) ).toFixed(2);
 				}
-				$('#avg').html();
 					let div2 = '';
 					
 						div2+=`<p id="avgstar">평균별점(\${avg})</p>
@@ -507,7 +509,7 @@ function allreviewlist( novel_title ) {
 			
 			// 등록
 			
-	
+			
 			else{
 				
 				let review_content = document.getElementById('comment').value;
