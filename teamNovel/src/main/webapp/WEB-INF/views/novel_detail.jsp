@@ -94,6 +94,14 @@ String novel_seriese = to.getNovel_series();
 	color: #9b9b9b;
 }
 
+#starstar {
+	font-family: AppleSDGothicNeoR;
+	font-size: 15px;
+	padding-top: 5px;
+    padding-bottom: 50px;
+    padding-left: 180px;
+}
+
 #writer {
 	width: 100px;
 	height: 19px;
@@ -398,7 +406,7 @@ function allreviewlist( novel_title ) {
 								<h6 class="mb-0" id="nickname">닉네임 : \${jsonData[0].reviewdetail[i].user_nickname}</h6>
 								<p class="mb-0 opacity-75" id="reviewcontent">\${jsonData[0].reviewdetail[i].review_content}</p>
 							</div>
-							<span>별점★\${jsonData[0].reviewdetail[i].review_star_grade}</span><small class="opacity-50 text-nowrap">  작성일자:\${jsonData[0].reviewdetail[i].review_date}</small>
+							<span id="starstar">별점★(\${jsonData[0].reviewdetail[i].review_star_grade})</span><small class="opacity-50 text-nowrap">  작성일자:\${jsonData[0].reviewdetail[i].review_date}</small>
 						</div>
 					</a>
 						`;
