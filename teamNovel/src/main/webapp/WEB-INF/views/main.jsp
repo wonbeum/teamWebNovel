@@ -395,7 +395,7 @@
 				$('#insertnovelList').append(listhtml);
 			},
 			error : function(err) {
-				alert('[에러] : ' + err.status);
+				console.log(err.status);
 			}
 		});
 

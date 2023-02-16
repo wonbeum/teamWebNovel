@@ -222,12 +222,18 @@ function clickModi(formName) {
 	        // 입력값 검사
 	        if(content == "" || content == null || content == '&nbsp;' || 
 					content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
-				alert("내용을 입력해주세요.");
+					Swal.fire({
+						  icon: 'info',
+						  text: '내용을 입력해주세요.'
+					});
 				return false;
 			}
 	        
 	        if (title == null || title == "") {
-				alert("제목을 입력해주세요.");
+					Swal.fire({
+						  icon: 'info',
+						  text: '제목을 입력해주세요.'
+					});
 				//$("#title").focus();
 				return false;
 			}

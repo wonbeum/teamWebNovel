@@ -355,7 +355,7 @@ window.addEventListener('load', () => {
 				return emailFlag;
 			},
 			error : function(e) {
-				alert("error !");
+				console.log(e.status);
 			}
 		});
 	}
@@ -389,7 +389,10 @@ window.addEventListener('load', () => {
 				return nicknameFlag;
 			},
 			error : function(e) {
-				alert("error !");
+				Swal.fire({
+					  icon: 'error',
+					  text: '[에러] : ' + e.status
+					});
 			}
 		});
 	}

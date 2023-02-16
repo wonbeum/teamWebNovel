@@ -271,7 +271,7 @@ function BoardListAjax(url, page, insert, keyword){
 			        });
 		},
 		error : function(e) {
-			alert("error !");
+			console.log( e.status );
 		}
 	});
 };
@@ -281,7 +281,7 @@ function BoardListAjax(url, page, insert, keyword){
 $(document).ready(function(){
 		$('#wbtn').click(function(){
 			if(${signIn == null}) {
-				alert("로그인후 글쓰기가 가능합니다.");
+				Swal.fire("로그인후 글쓰기가 가능합니다.");
 				return false;
 			}
 		});	
@@ -312,7 +312,10 @@ $(document).ready(function(){
 		$('#searchbtn').click(function(){
 			let keyword = $('#input_keyword').val().trim();
 			if(keyword.length<2){
-				alert('두 글자이상 입력해주세요');
+				Swal.fire({
+					  icon: 'info',
+					  text: '두 글자이상 입력해주세요.'
+				});
 			} else {
 				BoardListAjax('SearchListAjax.do', 1 , '#insertTotalList',keyword);
 			}

@@ -134,7 +134,7 @@ window.addEventListener('load', () => {
 
 		$('#rqbtn').click(function handler(event){
 			if(${signIn == null}) {
-				alert("로그인 후 요청이 가능합니다!");
+				Swal.fire("로그인 후 요청이 가능합니다!");
 			} else {
 				$("#RequestModal").modal("show");
 			}
@@ -151,7 +151,7 @@ window.addEventListener('load', () => {
         // 입력값 검사
 
         if (request_title == null || request_title == "") {
-			alert("작품명을 입력해주세요!");
+			Swal.fire("작품명을 입력해주세요!");
 			return false;
 		} else {
         
@@ -168,12 +168,12 @@ window.addEventListener('load', () => {
 			dataType: 'json',
 			success: function(jsonData){
 				if(jsonData.flag==0){
-				alert( "요청 성공! 해당 작품 추가 소식을 메일을 통해 확인하세요.");
+					Swal.fire("요청 성공! 해당 작품 추가 소식을 메일을 통해 확인하세요");
 				$("#RequestModal").modal("hide");
 				}
 			},
 			error: function(err) {
-				alert( "회원 정보를 정확히 입력해주세요." );
+				Swal.fire("회원 정보를 정확히 입력해주세요.");
 			}
 		})
 		}

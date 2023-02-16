@@ -175,11 +175,15 @@ function kakaoLogin() {
 	        		    							// 로그인
 	        		    							createHiddenLoginForm(kakao_account.email);		    							
 	        		    						} else {
-	        		    							alert('카카오 회원가입 실패. 일반계정으로 로그인하시기 바랍니다.');
+	        		    							
+	        										Swal.fire({
+	        											  icon: 'error',
+	        											  text: '카카오 회원가입 실패. 일반계정으로 로그인하시기 바랍니다.'
+	        											});
 	        		    						}
 	        		    					},
 	        		    					error: function(request, status, error){
-	        		    		                   alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+	        		    		                   console.log("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
 	        		    		                }
 	        							});
 	    							} else if(json==1){

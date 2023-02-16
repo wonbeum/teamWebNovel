@@ -351,7 +351,7 @@ display: none;
 						CommentNum();
 					},
 					error : function(e) {
-						alert("error !");
+						console.log(e.status);
 					}
 				});
 				
@@ -406,7 +406,7 @@ display: none;
 			
 			},
 			error : function(e) {
-				alert("error !");
+				console.log(e.status);
 			}
 		});
 	}
@@ -430,7 +430,10 @@ display: none;
 				
 				},
 				error : function(){
-					alert('댓글 삭제 실패');
+					Swal.fire({
+						  icon: 'error',
+						  text: '댓글 삭제 실패'
+					});
 				}
 			});
 		}
@@ -456,7 +459,10 @@ display: none;
 				}
 			},
 			error : function(e) {
-				alert("좋아요 가져오기 에러");
+				Swal.fire({
+					  icon: 'error',
+					  text: "좋아요 가져오기 에러"
+				});
 			}
 		});
 		}
@@ -479,12 +485,15 @@ display: none;
 						//alert("좋아요 완료");
 					},
 					error : function(e) {
-						alert("error !");
+						console.log(e.status);
 					}
 				});
 				
 			} else {
-				alert('로그인후 좋아요를 눌러주세요');
+				Swal.fire({
+					  icon: 'error',
+					  text: '로그인후 좋아요를 눌러주세요'
+				});
 			}
 		}
 	
@@ -503,7 +512,10 @@ display: none;
 				$('#likenum').text(Data);
 			},
 			error : function(e) {
-				alert("좋아요 수 가져오기 에러");
+				Swal.fire({
+					  icon: 'error',
+					  text: '좋아요 수 가져오기 에러'
+				});
 			}
 		});
 	}
@@ -523,7 +535,10 @@ display: none;
 				$('#commentnum').text(Data);
 			},
 			error : function(e) {
-				alert("좋아요 수 가져오기 에러");
+				Swal.fire({
+					  icon: 'error',
+					  text: '댓글 수 가져오기 에러'
+				});
 			}
 		});
 	}
