@@ -37,7 +37,7 @@ public class CommentDAO {
 			
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
-				System.out.println("insert 성공");
+				//System.out.println("insert 성공");
 				flag = 0;
 			}
 			

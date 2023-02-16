@@ -157,7 +157,7 @@ public class loginDAO {
 			
 			javamailsender.send( mimeMessage );
 			
-			System.out.println( "전송이 완료되었습니다." );
+			//System.out.println( "전송이 완료되었습니다." );
 
 			
 			

@@ -245,7 +245,7 @@ window.addEventListener('load', () => {
 			birthFlag = true;
 		}
 		return birthFlag;
-		console.log(birthFlag);
+		//console.log(birthFlag);
 	});
 	
    	// 버튼 실행

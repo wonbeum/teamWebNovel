@@ -134,7 +134,7 @@ function kakaoLogin() {
 	window.Kakao.Auth.login({
 		scope:'profile_nickname, account_email, gender, age_range, birthday',
 		success: function(authObj){
-			console.log(authObj);
+			//console.log(authObj);
 			window.Kakao.API.request({
 				url: '/v2/user/me',
 				success: res => {
@@ -155,8 +155,8 @@ function kakaoLogin() {
 	    					dataType:"json",
 	    					success : function(json){   				
 	    						
-	    							console.log('성공');
-	    							console.log(json);
+	    							//console.log('성공');
+	    							//console.log(json);
 	    							if(json==0){
 	    								//존재하지 않을 때 회원가입
 	    								$.ajax({
@@ -170,7 +170,7 @@ function kakaoLogin() {
 	        		    						},
 	        		    					dataType :"json",
 	        		    					success : function(json){
-	        		    						console.log(json);
+	        		    						//console.log(json);
 	        		    						if(json==1){
 	        		    							// 로그인
 	        		    							createHiddenLoginForm(kakao_account.email);		    							

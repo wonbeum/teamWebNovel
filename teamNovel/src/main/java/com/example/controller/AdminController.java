@@ -114,11 +114,11 @@ public class AdminController {
 		to.setUser_birth( request.getParameter( "birth" ) );
 		to.setUser_cdate( request.getParameter( "cdate" ) );
 		
-		System.out.println( to.getUser_nickname() );
-		System.out.println( to.getUser_email() );
-		System.out.println( to.getUser_gender() );
-		System.out.println( to.getUser_birth() );
-		System.out.println( to.getUser_cdate() );
+//		System.out.println( to.getUser_nickname() );
+//		System.out.println( to.getUser_email() );
+//		System.out.println( to.getUser_gender() );
+//		System.out.println( to.getUser_birth() );
+//		System.out.println( to.getUser_cdate() );
 		
 		int flag = userdao.userModify_ok(to);
 		

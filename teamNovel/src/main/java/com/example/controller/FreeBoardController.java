@@ -314,7 +314,7 @@ public class FreeBoardController {
 		} else if(result == 1){
 			flag = ldao.Delete_Like_Ok(lto);
 		} else {
-			System.out.println("좋아요 설정 에러");
+//			System.out.println("좋아요 설정 에러");
 		}
 	
 	

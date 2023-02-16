@@ -158,7 +158,7 @@ width: 250px;
 
 	
 function reviewList( url, page ) {
-	 console.log("성공");
+	 //console.log("성공");
        $.ajax({
          url : url,
          type : 'get',
@@ -168,7 +168,7 @@ function reviewList( url, page ) {
        	'cpage'  : page
          },
          success : function(jsonData){
-				console.log("성공"); 
+				//console.log("성공"); 
 
 				let cpage = jsonData[0].cpage;
 				let recordPerPage = jsonData[0].recordPerPage;

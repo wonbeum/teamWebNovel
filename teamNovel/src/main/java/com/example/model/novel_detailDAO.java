@@ -42,7 +42,7 @@ public class novel_detailDAO {
 			
 			int result = pstmt.executeUpdate();
 			if(result == 1) {
-				System.out.println("리뷰쓰기 성공");
+				//System.out.println("리뷰쓰기 성공");
 				flag = 0;
 			}
 			

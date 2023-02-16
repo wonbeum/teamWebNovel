@@ -186,8 +186,8 @@ window.addEventListener('load', () => {
 	$("input[name='user_gender'][value=${signIn.user_gender}]").prop("checked",true);
   	
 	$('#savebutton').click(function(){
-		console.log(nicknameFlag);
-		console.log(birthFlag);
+		//console.log(nicknameFlag);
+		//console.log(birthFlag);
 		submitForm();
 	});
    	
