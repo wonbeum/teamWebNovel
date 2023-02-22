@@ -158,6 +158,7 @@
 
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	
@@ -165,27 +166,6 @@
 <script type="text/javascript" src="smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
-
-function clickModi(formName) {
-	formName.action = "/board_modify_ok.do";
-	formName.method = "post";
-	
-	   oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
-       let content = document.getElementById("editorTxt").value;
-	
-    if(content == "" || content == null || content == '&nbsp;' || 
-			content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
-		//alert("내용을 입력해주세요.");
-		return false;
-	}
-    
-    if (title == null || title == "") {
-		//alert("제목을 입력해주세요.");
-		//$("#title").focus();
-		return false;
-	}
-	formName.submit();
-}
 
 
 <!-- SmartEditor2 -->
@@ -212,36 +192,55 @@ function clickModi(formName) {
 	
 
 	// 입력값 검사
-	$(document).ready(function(){
+	$(document).ready( function() {
 		smartEditor();
-		$("#savebutton").click(function(){
-	        //id가 smarteditor인 textarea에 에디터에서 대입
-	        oEditors.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
-	        let content = document.getElementById("editorTxt").value;
-	        let title = $("#free_subject").val();
-	        // 입력값 검사
-	        if(content == "" || content == null || content == '&nbsp;' || 
-					content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
-					Swal.fire({
+		$("#savebutton").click(function() {
+					//id가 smarteditor인 textarea에 에디터에서 대입
+					oEditors.getById["editorTxt"].exec(
+							"UPDATE_CONTENTS_FIELD", []);
+					let content = document
+							.getElementById("editorTxt").value;
+					let title = $("#free_subject").val();
+					// 입력값 검사
+					if (content == "" || content == null
+							|| content == '&nbsp;'
+							|| content == '<br>'
+							|| content == '<br/>'
+							|| content == '<p>&nbsp;</p>') {					
+						Swal.fire({
 						  icon: 'info',
 						  text: '내용을 입력해주세요.'
-					});
-				return false;
-			}
-	        
-	        if (title == null || title == "") {
-					Swal.fire({
-						  icon: 'info',
-						  text: '제목을 입력해주세요.'
-					});
-				//$("#title").focus();
-				return false;
-			}
-	        
-	        //폼 submit
-	        $("#frm").submit();
-	    });
-		
+						});
+						return false;
+					}
+
+					if (title == null || title == "") {					
+						Swal.fire({
+							  icon: 'info',
+							  text: '제목을 입력해주세요.'
+							});
+						//$("#title").focus();
+						return false;
+					}
+					
+					if(title !=null && content!=null){
+				        Swal.fire({
+				            title: '글 수정하기',
+				            text: "글 수정을 완료하시겠습니까?",
+				            icon: 'question',
+				            showCancelButton: true,
+				            confirmButtonColor: '#3085d6',
+				            cancelButtonColor: '#d33',
+				            confirmButtonText: '확인',
+				            cancelButtonText: '취소'
+				        }).then((result) => {
+				            if (result.isConfirmed) {
+								$("#frm").submit();
+				            }
+				        })
+					}
+				});
+
 	});
 	
 </script>
@@ -257,7 +256,8 @@ function clickModi(formName) {
 				수정하기</p>
 			<hr style="color: #e5e8eb;" />
 			<div class="form">
-				<form class="validation-form" name="userInfo" id="frm" novalidate>
+				<form class="validation-form" action="./board_modify_ok.do"
+					method="post" id="frm" >
 				<input type="hidden" name="seq" value=<%=free_seq %>>
 					<div class="form-floating">
 						<select class="form-select" id="floatingSelect"
@@ -288,36 +288,15 @@ function clickModi(formName) {
 							<a class="btn btn-outline-secondary" id="backbtn" href="./board_view.do?seq=<%=free_seq%>"
 							role="button">돌아가기</a>
 						</div>
-					<div class="col-auto">
-						<button type="button" id="mbtn" class="btn btn-secondary"
-							data-bs-toggle="modal" data-bs-target="#myModal">
-							수정하기</button>
-					</div>
-
+						<div class="col-auto">
+							<button type="button" id="savebutton" class="btn btn-secondary">수정하기</button>
+						</div>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="ModiModalLabel">수정하기</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body" id="ModalContent">수정을 완료하시겠습니까?</div>
-				<div class="modal-footer">
-					<button type="button" id="modalbtn" class="btn btn-secondary"
-						data-bs-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" id="savebutton" onclick=clickModi(userInfo)>수정하기</button>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 	<!-- footer -->
 	<jsp:include page="../include/footer1.jsp" />

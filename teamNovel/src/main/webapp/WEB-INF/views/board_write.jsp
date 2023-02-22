@@ -118,7 +118,7 @@
     padding-bottom: 10px;
 }
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- SmartEditor2 라이브러리  -->
 <script type="text/javascript" src="smarteditor/js/HuskyEZCreator.js"
 	charset="utf-8"></script>
