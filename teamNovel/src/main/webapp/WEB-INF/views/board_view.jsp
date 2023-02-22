@@ -172,7 +172,7 @@ display: none;
 }
 
 #cmt_content {
-  	height: 54px;
+  	height: auto;
   	padding: 17px 20px 16px 25px;
   	border-radius: 14px;
   	border: solid 1px #e5e8eb;
@@ -290,6 +290,7 @@ display: none;
   	text-align: center;
   	color: #000;
 }
+
 
 </style>
 <!-- Jquery -->
@@ -610,7 +611,8 @@ display: none;
 						<div class="col-xxl-9 col-xl-8 col-lg-7 col-md-6 col-sm-12">
 							<div class="row">
 								<textarea class="col form-control pr-5" name="cmt_content"
-									id="cmt_content" rows="3" placeholder="댓글을 입력해보세요"></textarea>
+									id="cmt_content" rows="3" placeholder="댓글을 입력해보세요"
+									style="height: 60px;"></textarea>
 								<button type="submit" id="cmtbtn"
 									class="col-2 btn btn-outline-secondary">댓글 작성하기</button>
 							</div>
