@@ -272,7 +272,7 @@ function clickModi(formName) {
 					</div>
 					<div class="form-floating">
 						<input type="text" class="form-control" id="free_subject"
-							placeholder="제목을 입력하세요" name="free_subject" value=<%=free_subject %>> <label
+							placeholder="제목을 입력하세요" name="free_subject" value="<%=free_subject %>"> <label
 							for="floatingPassword" 
 							style="padding-left: 25px; font-family: AppleSDGothicNeoM;">제목 입력</label>
 					</div>

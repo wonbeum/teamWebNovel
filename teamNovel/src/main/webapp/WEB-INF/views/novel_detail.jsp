@@ -48,6 +48,11 @@ String novel_seriese = to.getNovel_series();
 	font-family: "AppleSDGothicNeoR";
 }
 
+@font-face {
+	src: url("/font/AppleSDGothicNeoM.ttf");
+	font-family: "AppleSDGothicNeoM";
+}
+
 .nav-scroller {
 	border: 1px solid black;
 }
@@ -81,11 +86,8 @@ String novel_seriese = to.getNovel_series();
 }
 
 #genre {
-	width: 200px;
-	height: 20px;
-	margin: 18px 304px 3px 3px;
 	font-family: AppleSDGothicNeoR;
-	font-size: 30px;
+	font-size: 28px;
 	font-weight: 300;
 	font-stretch: normal;
 	font-style: normal;
@@ -98,16 +100,20 @@ String novel_seriese = to.getNovel_series();
 #starstar {
 	font-family: AppleSDGothicNeoR;
 	font-size: 15px;
-	padding-top: 5px;
+	padding-top: 0px;
     padding-bottom: 50px;
-    padding-left: 180px;
+    padding-left: 0px;
+}
+
+#date {
+	font-family: AppleSDGothicNeoR;
+	font-size: 15px;
+	padding-top: 0px;
+    padding-bottom: 50px;
+    padding-left: 5px;
 }
 
 #writer {
-	width: 100px;
-	height: 19px;
-	margin: 19px 0 3px 154px;
-	padding: 28px 26px 40px;
 	font-family: AppleSDGothicNeoR;
 	font-size: 18px;
 	font-weight: 300;
@@ -120,9 +126,6 @@ String novel_seriese = to.getNovel_series();
 }
 
 #title {
-	width: 500px;
-	height: 28px;
-	margin: 3px 253px 17.5px 3px;
 	font-family: AppleSDGothicNeoR;
 	font-size: 20px;
 	font-weight: 600;
@@ -151,8 +154,8 @@ String novel_seriese = to.getNovel_series();
 }
 
 #novelinfo {
-	width: 350px;
-	height: 100%;
+	width: 100%;
+	height: auto;
 	margin: 0 41px 172px 50px;
 	padding: 28px 26px 40px;
 	border-radius: 20px;
@@ -180,7 +183,7 @@ String novel_seriese = to.getNovel_series();
 }
 
 #avg {
-  width: 600px;
+  width: 100%;
   height: 120px;
   margin: 0 0 30px 42px;
   padding: 42px 1.5px 38px;
@@ -207,12 +210,13 @@ String novel_seriese = to.getNovel_series();
 #star {
   width: 500px;
   height: 54px;
-  margin: 0px 3px 0 30px;
+  margin: 0px 3px 0 0px;
+  text-align: center;
 }
 
 #insert {
- width: 600px;
-  height: 200px;
+ width: 100%;
+  height: auto;
   margin: 0 0 30px 42px;
   padding: 42px 1.5px 38px;
   border-radius: 20px;
@@ -221,7 +225,7 @@ String novel_seriese = to.getNovel_series();
 }
 
 #insertsmall {
- width: 590px;
+ width: 100%;
   height: 100px;
   margin:  1px 1px 1px 1px;
   padding: 20px 1.5px 38px;
@@ -238,22 +242,22 @@ String novel_seriese = to.getNovel_series();
   color: #000;
 }
 #reviewlist1 {
- width: 600px;
-  height: 600px;
-  margin: 0 0 5px 42px;
-  padding: 20px 1.5px 38px;
-  border-radius: 20px;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
-  background-color: #fff;
+	width: 100%;
+  	height: auto;
+  	margin: 0 0 5px 42px;
+  	padding: 20px 1.5px 0px;
+  	border-radius: 20px;
+  	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  	background-color: #fff;
     font-family: AppleSDGothicNeoR;
-  font-size: 25px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #000;
+  	font-size: 25px;
+  	font-weight: 600;
+  	font-stretch: normal;
+  	font-style: normal;
+  	line-height: normal;
+  	letter-spacing: normal;
+  	text-align: left;
+  	color: #000;
 }
 #reviewcontent {
 
@@ -272,8 +276,18 @@ String novel_seriese = to.getNovel_series();
     padding-bottom: 10px;
     padding-top: 0px;
     padding-right: 5px;
-    padding-left: 420px;
+    padding-left: 0px;
+    text-align: right;
+    
 }
+
+#comment {
+	width: 100%;
+	font-family: AppleSDGothicNeoM;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
 .checked {
 	color: orange;
 }
@@ -401,14 +415,16 @@ function allreviewlist( novel_title ) {
 				for(let i=0; i<jsonData[0].reviewdetail.length; i++){
 					div+=`
 					<a href="#"
-						class="list-group-item list-group-item-action d-flex gap-3 py-3"
+						class="list-group-item list-group-item-action d-flex gap-3 py-4 px-4"
 						aria-current="true" id="insertsmall">
 						<div class="d-flex gap-2 w-100 justify-content-between">
 							<div>
 								<h6 class="mb-0" id="nickname">닉네임 : \${jsonData[0].reviewdetail[i].user_nickname}</h6>
 								<p class="mb-0 opacity-75" id="reviewcontent">\${jsonData[0].reviewdetail[i].review_content}</p>
 							</div>
-							<span id="starstar">별점★(\${jsonData[0].reviewdetail[i].review_star_grade})</span><small class="opacity-50 text-nowrap">  작성일자:\${jsonData[0].reviewdetail[i].review_date}</small>
+							<div>
+							<span id="starstar">별점★(\${jsonData[0].reviewdetail[i].review_star_grade})</span><span id="date" class="opacity-50 text-nowrap">  작성일자:\${jsonData[0].reviewdetail[i].review_date}</span>
+							</div>
 						</div>
 					</a>
 						`;
@@ -421,9 +437,9 @@ function allreviewlist( novel_title ) {
 						<ul class="pagination justify-content-center">`;
 						
 				if( cpage == 1 ){
-					div += `<li class="page-item disabled"><a class="page-link">Previous</a></li>`;
+					div += `<li class="page-item disabled"><a class="page-link">이전</a></li>`;
 				} else {
-					div += `<li class="page-item"><a class="goBackPage page-link">Previous</a></li>`;
+					div += `<li class="page-item"><a class="goBackPage page-link">이전</a></li>`;
 				}
 				
 				for( let i = startBlock ; i <= endBlock ; i ++ ){
@@ -435,9 +451,9 @@ function allreviewlist( novel_title ) {
 				}
 				
 				if( cpage == totalPage ){
-					div += `<li class="page-item disabled"><a class="page-link">Next</a></li>`;
+					div += `<li class="page-item disabled"><a class="page-link">다음</a></li>`;
 				} else {
-					div += `<li class="page-item"><a class="goNextPage page-link">Next</a></li>`;
+					div += `<li class="page-item"><a class="goNextPage page-link">다음</a></li>`;
 				}
 				
 				div += `
@@ -546,18 +562,24 @@ function allreviewlist( novel_title ) {
 <body>
 
 	<jsp:include page="../include/header1.jsp"></jsp:include>
-<body>
+
+
 	<!-- 본문 -->
+	<div class="row justify-content-center" style="margin: 80px 0px 60px 0px;">
 
-	<hr class="my-5">
-	<div class="row justify-content-center">
-
-		<div class="col-sm-6 col-lg-4">
-			<div class="card p-3" id="novelinfo">
+		<div class="col-lg-3 col-md-4 col-sm-8">
+			<div class="card p-3 text-end" id="novelinfo">
 				<img src="<%=novel_img%>" class="-\35 0" role="img" id="novelimg">
 
 				<div class="card-body">
-					<p id="genre"><%=novel_genre%></p><small class="opacity-50 text-nowrap" id="writer" >작가: <%=novel_writer%></small>
+					<div class="d-flex gap-2 w-100 justify-content-between">
+						<div>
+							<p id="genre"><%=novel_genre%></p>
+						</div>
+						<div>
+							<small class="opacity-50 text-nowrap" id="writer" >작가: <%=novel_writer%></small>
+						</div>
+					</div>
 					<p class="title" id="title" novel-title="<%=novel_title%>"><%=novel_title%></p>
 					<p class="\-"><%=novel_content%></p>
 					<div class="-\34 9">
@@ -577,20 +599,20 @@ function allreviewlist( novel_title ) {
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-6 col-lg-4">
+		<!-- 리뷰 별점 -->
+		<div class="col-lg-5 col-md-4" style="margin-left: 15px;" >
+		
+			<!-- 평균 별점 -->
 			<div class="card p-3"  id="avg">
-				<!-- 리뷰 별점 -->
-					
-
-
 			</div>
+			
+			<!-- 별점 / 리뷰 쓰기 -->
 			<div>
 				<div class="card p-3"  id="insert">
-
-
 					<div class="mb-3">
-						<label for="exampleFormControlTextarea1" class="form-label">별점을
-							선택해주세요</label>
+						<label for="exampleFormControlTextarea1" class="form-label"
+						style="font-size: 15px;padding: 5px 10px;font-family: 'AppleSDGothicNeoM';"
+						>별점을 선택해주세요</label>
 						<div class="container">
 							<div class="rating-wrap">
 								<div class="center">
@@ -621,6 +643,8 @@ function allreviewlist( novel_title ) {
 					</div>
 				</div>
 			</div>
+			
+			<!-- 리뷰리스트 -->
 			<div id="reviewlist1">
 			<nav id="button">
 			<a></a> <button class="btn rounded-pill text-bg-warning" id="recent" href="#recent">최신순</button>
