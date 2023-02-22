@@ -202,7 +202,7 @@
 			<hr style="color: #e5e8eb;" />
 			<div class="form">
 				<form class="validation-form" action="./board_write_ok.do"
-					method="get" id="frm" novalidate>
+					method="post" id="frm" >
 					<div class="form-floating">
 						<select class="form-select" id="floatingSelect"
 							style="color: #000000; margin-bottom: 20px;"

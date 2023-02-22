@@ -279,12 +279,12 @@ function BoardListAjax(url, page, insert, keyword){
 
 //실행
 $(document).ready(function(){
-		$('#wbtn').click(function(){
-			if(${signIn == null}) {
-				Swal.fire("로그인후 글쓰기가 가능합니다.");
-				return false;
-			}
-		});	
+	$('#wbtn').click(function(){
+		if(${signIn == null}) {
+			alert("로그인후 글쓰기가 가능합니다.");
+			return false;
+		}
+	});	
 		
 	
 		// 가져오기
