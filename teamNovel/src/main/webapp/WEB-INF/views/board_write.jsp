@@ -234,7 +234,6 @@
 						</div>
 						<div class="col-auto">
 							<button type="submit" id="savebutton" class="btn btn-secondary">작성하기</button>
-
 						</div>
 
 					</div>
