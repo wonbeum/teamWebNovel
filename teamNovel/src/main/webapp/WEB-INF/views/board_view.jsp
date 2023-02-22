@@ -291,9 +291,13 @@ display: none;
   	color: #000;
 }
 
+.swal2-content {
+    font-family: AppleSDGothicNeoR;
+}
 
 </style>
 <!-- Jquery -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -357,15 +361,25 @@ display: none;
 				});
 				
 			} else {
-				alert('로그인후 댓글을 입력해주세요');
+				Swal.fire({
+					  icon: 'info',
+					  text: '로그인후 댓글을 작성할 수 있습니다.'
+				});
 			}
 		});
 		
 		
 		// 좋아요 버튼 눌렀을 때
 		$('#likebtn').click(function(){
-			LikeClick();
-			LikeResult();
+			if(${signIn.user_nickname != null}){
+				LikeClick();
+				LikeResult();
+			} else if(${signIn.user_nickname == null}){
+				Swal.fire({
+					  icon: 'info',
+					  text: '로그인후 좋아요를 누를수 있습니다.'
+				});
+			}
 		});
 		
 		

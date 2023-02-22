@@ -174,7 +174,13 @@ li #pageli {
 	display: inline-block;
 }
 
+#swal2-title {
+	font-family: AppleSDGothicNeoR;
+    font-size: 20px;
+}
+
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -281,7 +287,7 @@ function BoardListAjax(url, page, insert, keyword){
 $(document).ready(function(){
 	$('#wbtn').click(function(){
 		if(${signIn == null}) {
-			alert("로그인후 글쓰기가 가능합니다.");
+			Swal.fire("로그인후 글쓰기가 가능합니다.");
 			return false;
 		}
 	});	
